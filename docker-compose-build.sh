@@ -69,8 +69,8 @@ else
     sleep 10
   done
 
-  echo "Initialize your superuser account..."
-  docker compose -f "${DOCKER_COMPOSE_FILE}" exec -T backend python manage.py createsuperuser
+  echo "Initialize your administrator account..."
+  docker compose -f "${DOCKER_COMPOSE_FILE}" exec -T backend python manage.py bootstrap_admin
 
   echo "🚀 Suricatoos CISO is ready!"
   echo "Connect to Suricatoos CISO on https://localhost:8443"

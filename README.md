@@ -47,13 +47,25 @@ Com _Docker_ e _Docker Compose_ instalados (>= 27.0):
 
 ```sh
 git clone --single-branch -b main <URL-DO-SEU-FORK>.git
-cd suricatoos-platform
+cd suricatoos-ciso
 ./docker-compose.sh     # Linux/macOS
 ./docker-compose.ps1    # Windows
 ```
 
-Informe e-mail e senha do superusuário quando solicitado, depois acesse
-[https://localhost:8443/](https://localhost:8443/).
+Ao final, a instalação cria o administrador inicial e **exibe uma senha aleatória na tela**:
+
+```
+Administrador criado.
+
+  Usuario: admin@suricatoos.local
+  Senha:   <gerada aleatoriamente a cada instalação>
+```
+
+Anote a senha — ela não é exibida novamente. Acesse
+[https://localhost:8443/](https://localhost:8443/) e troque-a no primeiro acesso.
+
+Para usar outro e-mail, defina `CISO_ASSISTANT_SUPERUSER_EMAIL` antes de instalar, ou rode
+`python manage.py bootstrap_admin --email voce@exemplo.com`.
 
 Para outras opções de self-hosting, veja o [config builder](./config/).
 
@@ -67,7 +79,7 @@ Requisitos: Python 3.14+, uv 0.9+, Node 24+, pnpm 10.30+ (`apt install libyaml-c
 cd backend
 uv sync
 uv run python manage.py migrate
-uv run python manage.py createsuperuser
+uv run python manage.py bootstrap_admin   # cria o admin e mostra a senha aleatória
 uv run python manage.py runserver
 ```
 

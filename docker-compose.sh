@@ -46,8 +46,8 @@ until docker compose -f "${DOCKER_COMPOSE_FILE}" exec -T backend curl -f http://
 done
 
 echo "Backend is ready!"
-echo "Creating superuser..."
-docker compose -f "${DOCKER_COMPOSE_FILE}" exec backend python manage.py createsuperuser
+echo "Creating the initial administrator..."
+docker compose -f "${DOCKER_COMPOSE_FILE}" exec -T backend python manage.py bootstrap_admin
 
 echo "Initialization complete!"
 echo "You can now access Suricatoos CISO at https://localhost:8443 (or the host:port you've specified)"

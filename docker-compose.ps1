@@ -31,8 +31,8 @@ do {
 Write-Host "Backend is ready!" -ForegroundColor Green
 
 Write-Host ""
-Write-Host "Creating superuser..." -ForegroundColor Cyan
-docker compose exec backend uv run python manage.py createsuperuser
+Write-Host "Creating the initial administrator..." -ForegroundColor Cyan
+docker compose exec -T backend python manage.py bootstrap_admin
 
 Write-Host ""
 Write-Host "Initialization complete!" -ForegroundColor Green

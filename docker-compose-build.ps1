@@ -106,9 +106,8 @@ try {
     Wait-ForMigrations
 
     Write-Host ""
-    Write-Host "Initialize your superuser account..." -ForegroundColor Cyan
-    # Keep TTY allocation for the interactive Django prompts in Windows terminals.
-    Invoke-DockerCompose exec backend uv run python manage.py createsuperuser
+    Write-Host "Initialize your administrator account..." -ForegroundColor Cyan
+    Invoke-DockerCompose exec -T backend python manage.py bootstrap_admin
 
     Write-Host ""
     Write-Host "Suricatoos CISO is ready!" -ForegroundColor Green
