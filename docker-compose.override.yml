@@ -1,0 +1,42 @@
+# Acesso por QUALQUER IP / hostname / rede, sem reconfigurar ao trocar de rede.
+#
+# Como funciona:
+#   - Caddy escuta em ":8443" (catch-all: aceita qualquer Host/SNI, inclusive IP puro,
+#     que nao envia SNI) e apresenta sempre o mesmo certificado self-signed de ./certs.
+#   - Django aceita qualquer Host (ALLOWED_HOSTS=*).
+#   - O frontend usa a URL RELATIVA "/api", entao o browser chama a mesma origem que
+#     ele ja esta acessando -- funciona em 192.168.x.x, 10.x.x.x, tailscale, etc.
+#
+# Carregado automaticamente pelo `docker compose up`.
+services:
+  backend:
+    environment:
+      - ALLOWED_HOSTS=*
+
+  huey:
+    environment:
+      - ALLOWED_HOSTS=*
+
+  frontend:
+    environment:
+      # RELATIVA de proposito: o browser resolve contra a origem atual.
+      - PUBLIC_BACKEND_API_EXPOSED_URL=/api
+
+  caddy:
+    volumes:
+      - ./db/caddy:/data/caddy
+      - ./certs:/certs:ro
+    # ":8443" = catch-all. Certificado fixo -> nao depende de SNI nem do IP atual.
+    # HSTS removido de proposito: com certificado self-signed ele impede o browser
+    # de oferecer a opcao "prosseguir mesmo assim".
+    command: |
+      sh -c 'echo ":8443 {
+      header {
+      X-Content-Type-Options nosniff
+      X-Frame-Options DENY
+      Referrer-Policy strict-origin-when-cross-origin
+      }
+      reverse_proxy /api/* backend:8000
+      reverse_proxy /* frontend:3000
+      tls /certs/suricatoos-cert.pem /certs/suricatoos-key.pem
+      }" > Caddyfile && caddy run'
