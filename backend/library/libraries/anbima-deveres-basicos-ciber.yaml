@@ -1,0 +1,253 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:anbima-deveres-basicos-ciber
+locale: pt
+ref_id: ANBIMA-DB-CIBER
+name: ANBIMA — Deveres Básicos e Cibersegurança (Administração de Recursos)
+description: Requisitos estruturais VINCULANTES das Regras e Procedimentos ANBIMA de Deveres Básicos das Instituições Participantes (controles internos, segregação, privacidade/LGPD, continuidade, segurança da informação e segurança cibernética) — transversais e aplicáveis à Administração de Recursos de Terceiros — somados ao detalhamento RECOMENDADO (não vinculante) do Guia ANBIMA de Cibersegurança 4ª edição. Requer validação de compliance e confirmação de versão vigente antes de uso regulatório.
+copyright: Construido a partir de conteudo publico oficial (Suricatoos). Requer validacao de compliance antes de uso regulatorio.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:anbima-deveres-basicos-ciber
+    ref_id: ANBIMA-DB-CIBER
+    name: ANBIMA — Deveres Básicos e Cibersegurança (Administração de Recursos)
+    description: Requisitos estruturais VINCULANTES das Regras e Procedimentos ANBIMA de Deveres Básicos das Instituições Participantes (controles internos, segregação, privacidade/LGPD, continuidade, segurança da informação e segurança cibernética) — transversais e aplicáveis à Administração de Recursos de Terceiros — somados ao detalhamento RECOMENDADO (não vinculante) do Guia ANBIMA de Cibersegurança 4ª edição. Requer validação de compliance e confirmação de versão vigente antes de uso regulatório.
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+      assessable: false
+      depth: 1
+      ref_id: DB
+      name: A. Deveres Básicos (VINCULANTE — Regras Estruturais)
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-1
+      assessable: false
+      depth: 2
+      ref_id: DB-I
+      name: Seção I — Ambientes de Controles
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-2
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 5
+      name: Estrutura de controles internos e compliance
+      description: Manter estrutura de controles internos e compliance efetiva, consistente e proporcional à natureza, porte, complexidade, perfil de risco e modelo de negócio da instituição.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-1
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-3
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 5, §2
+      name: Independência da área de compliance
+      description: A área de controles/compliance deve ser independente das áreas que assumem risco, com livre acesso a informações, pessoal suficiente e qualificado, comunicação direta com a diretoria e acesso a capacitação.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-1
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-4
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 6
+      name: Documento escrito de controles internos
+      description: 'Manter documento escrito de controles internos/compliance com, no mínimo: objetivo e escopo; acessibilidade das políticas; divisão clara de responsabilidades evitando conflito; e medidas que garantam independência e autoridade dos responsáveis.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-1
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-5
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 7
+      name: Diretor responsável por compliance
+      description: Atribuir a responsabilidade por controles internos/compliance a diretor estatutário, vedada sua atuação em funções que gerem conflito de interesse.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-1
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-6
+      assessable: false
+      depth: 2
+      ref_id: DB-II
+      name: Seção II — Segregação de Atividades
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-7
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 8
+      name: Segregação de atividades e conflitos
+      description: Segregar as atividades dos Códigos ANBIMA das demais atividades da instituição e do grupo que possam gerar conflito; documento escrito descrevendo segregação de funções e segregação funcional, lógica e física, e como se identifica/controla/monitora áreas de conflito.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-6
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-8
+      assessable: false
+      depth: 2
+      ref_id: DB-III
+      name: Seção III — Privacidade e Proteção de Dados
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-9
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 9
+      name: Documento de privacidade e proteção de dados
+      description: 'Manter documento de privacidade com, no mínimo: aderência aos princípios da LGPD; localização da política; boas práticas de SI contra acesso indevido/vazamento; gestão de riscos e governança do tema; mapeamento (controlador/operador/bases legais/finalidade/compartilhamento); proteção de integridade/confidencialidade/disponibilidade em todo o ciclo do dado; e gestão de identidade e acesso (admissão a desligamento e mudança de função).'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-8
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-10
+      assessable: false
+      depth: 2
+      ref_id: DB-IV
+      name: Seção IV — Plano de Continuidade de Negócios
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-11
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 10
+      name: Plano de continuidade de negócios
+      description: 'Manter PCN escrito com, no mínimo: formas alternativas de processamento em contingência para continuidade tempestiva; análise dos riscos potenciais com a respectiva medida de contingência; e procedimentos de ativação, prazos de implementação e designação das equipes responsáveis.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-10
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-12
+      assessable: false
+      depth: 2
+      ref_id: DB-V
+      name: Seção V — Segurança da Informação
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-13
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 11
+      name: Documento de segurança da informação
+      description: 'Manter documento de SI com, no mínimo: definição de informações confidenciais/privilegiadas; processo de preservação e quem (incl. terceiros) pode acessá-las; testes do programa de SI e periodicidade; ações de proteção/prevenção/controle contra vazamento; mecanismos de controle e monitoramento por risco; e plano de ação e resposta a incidentes de SI com continuidade/recuperação.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-12
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-14
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 12
+      name: Termo de confidencialidade
+      description: Exigir que profissionais e terceiros contratados assinem termo de confidencialidade (dispensado se o contrato de prestação já contiver cláusula de confidencialidade).
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-12
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-15
+      assessable: false
+      depth: 2
+      ref_id: DB-VI
+      name: Seção VI — Segurança Cibernética
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-16
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 13
+      name: Documento de segurança cibernética
+      description: 'Manter documento de segurança cibernética com, no mínimo: identificação e avaliação de riscos (ativos relevantes, vulnerabilidades internas/externas, probabilidade × impacto); ações de proteção/prevenção/controle contra vazamento e ataques; mecanismos de controle e monitoramento por risco; plano de ação e resposta a incidentes cibernéticos com continuidade/recuperação; e testes do programa e periodicidade.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-15
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-17
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 14
+      name: Contratação de nuvem e serviços críticos
+      description: 'As regras de cyber devem cobrir a contratação de processamento/armazenamento de dados e computação em nuvem críticos, verificando no prestador: acesso da instituição aos dados; confidencialidade/integridade/disponibilidade/recuperação; certificações; monitoramento do serviço; segregação física/lógica dos dados; e controles de acesso (recomendado o questionário de due diligence ANBIMA).'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-15
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-18
+      assessable: false
+      depth: 2
+      ref_id: DB-VII
+      name: Seção VII — Regras Gerais (Monitoramento, Testes e Capacitação)
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-0
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-19
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 4, pu
+      name: Revisão periódica dos documentos
+      description: Revisar os documentos escritos, regras, procedimentos, controles internos e monitoramentos em prazo não superior a 24 meses (ou menor, se a regulação exigir).
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-18
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-20
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 15
+      name: Mecanismos de acompanhamento e efetividade
+      description: 'Manter mecanismos que assegurem a implementação e a efetividade das regras das Seções III (dados), V (SI) e VI (cyber): processos e controles usados; metodologias, métricas, critérios e indicadores; e identificação/correção de deficiências.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-18
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-21
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 16
+      name: Validação e testes anuais
+      description: Incluir mecanismos de validação e testes no mínimo anuais (ou menor prazo, se exigido), avaliando se as medidas de sigilo, proteção de dados e segurança cibernética suportam os processos, sistemas e bancos de dados críticos e se os planos podem ser ativados tempestivamente.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-18
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-22
+      assessable: true
+      depth: 3
+      ref_id: DB Art. 17
+      name: Capacitação e conscientização
+      description: Conceder capacitação e conscientização regulares sobre proteção de dados, segurança da informação e segurança cibernética a todos os profissionais, incluindo terceiros.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-18
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-23
+      assessable: false
+      depth: 1
+      ref_id: GUIA
+      name: B. Guia ANBIMA de Cibersegurança 4ª ed. (RECOMENDAÇÃO — não vinculante)
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-24
+      assessable: false
+      depth: 2
+      ref_id: GUIA-1
+      name: Função 1 — Identificação e Avaliação de Riscos
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-23
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-25
+      assessable: true
+      depth: 3
+      ref_id: Guia 1.1-1.6
+      name: Inventário, vulnerabilidades e avaliação de risco
+      description: Manter inventário atualizado de ativos críticos; avaliar vulnerabilidades e exposição; avaliar os riscos cibernéticos incluindo terceiros e nuvem; classificar a informação; e mensurar probabilidade e impacto financeiro/operacional/reputacional.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-24
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-26
+      assessable: false
+      depth: 2
+      ref_id: GUIA-2
+      name: Função 2 — Prevenção e Proteção
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-23
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-27
+      assessable: true
+      depth: 3
+      ref_id: Guia 2.1
+      name: Controle de acesso (IAM)
+      description: Identificação/autenticação/autorização; menor privilégio e revogação rápida; política de senhas (mín. 12 caracteres, troca periódica, sem reuso); MFA; logs de login auditáveis; zero trust; e regras de BYOD, acesso remoto/VPN e acesso físico.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-26
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-28
+      assessable: true
+      depth: 3
+      ref_id: Guia 2.2-2.3
+      name: Proteção técnica e desenvolvimento seguro
+      description: Hardening e configuração segura; homologação antes de produção; trilhas de auditoria; SAST/DAST e DevSecOps; firewall/segurança de borda; anti-malware; allowlist; backup apartado da rede; segregação de serviços; e criptografia (Privacy by Design).
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-26
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-29
+      assessable: true
+      depth: 3
+      ref_id: Guia 2.4
+      name: Due diligence de terceiros e nuvem
+      description: 'Due diligence na contratação de terceiros/nuvem: aderência legal/regulatória; cláusulas de confidencialidade e exigência de controles; questionário de due diligence ANBIMA; segurança na migração e uso de nuvem; CASB; sanitização de dados; e criptografia junto ao provedor.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-26
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-30
+      assessable: false
+      depth: 2
+      ref_id: GUIA-3
+      name: Função 3 — Controle, Monitoramento e Testes
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-23
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-31
+      assessable: true
+      depth: 3
+      ref_id: Guia 3.1-3.8
+      name: Monitoramento, testes e SIEM
+      description: Monitorar cada controle; manter inventários de HW/SW; patching tempestivo; monitorar backups e testar restauração; simulações (tabletop, pentest, phishing, teste do plano de resposta); análises de vulnerabilidade periódicas; gestão de logs/SIEM; e compartilhamento de informações de incidentes.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-30
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-32
+      assessable: false
+      depth: 2
+      ref_id: GUIA-4
+      name: Função 4 — Plano de Resposta
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-23
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-33
+      assessable: true
+      depth: 3
+      ref_id: Guia 4.1-4.3
+      name: Resposta a incidentes cibernéticos
+      description: Plano de resposta com mapeamento de vulnerabilidades/impactos; táticas de contingência por ativo crítico; critérios de ativação e responsáveis; comitê multidisciplinar de crise; erradicação/preservação de evidências e comunicação a autoridades (LGPD/ANPD); documentação pós-incidente; e exercícios e treinamento de comunicação.
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-32
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-34
+      assessable: false
+      depth: 2
+      ref_id: GUIA-5
+      name: Função 5 — Governança
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-23
+    - urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-35
+      assessable: true
+      depth: 3
+      ref_id: Guia 5.1-5.4
+      name: Governança do programa de cibersegurança
+      description: 'Revisar o programa em periodicidade inferior a 1 ano; política de uso da estrutura tecnológica e de tecnologias emergentes; nomear responsável dedicado (ex.: CISO) com poder de decisão; equipe de SI com certificações e SLAs; comitê multidisciplinar; KPIs reportados ao conselho; programa de treinamento/conscientização; e avaliar a contratação de seguro cibernético.'
+      parent_urn: urn:intuitem:risk:req_node:anbima-deveres-basicos-ciber:node-34

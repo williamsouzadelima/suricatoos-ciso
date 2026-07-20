@@ -1,0 +1,367 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:cvm-21-2021
+locale: pt
+ref_id: CVM-21-2021
+name: Resolução CVM nº 21/2021 — Controles, Segurança e Governança (Administração de Carteiras)
+description: Requisitos avaliáveis de estrutura, controles internos, gestão de riscos, segregação de atividades, segurança da informação, continuidade e guarda de documentos extraídos da Resolução CVM nº 21/2021 (administração de carteiras de valores mobiliários). Recorte voltado a gap-assessment de segurança e governança para gestoras, corretoras/DTVM e administradores fiduciários.
+copyright: Construido a partir de conteudo publico oficial (Suricatoos). Requer validacao de compliance antes de uso regulatorio.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:cvm-21-2021
+    ref_id: CVM-21-2021
+    name: Resolução CVM nº 21/2021 — Controles, Segurança e Governança (Administração de Carteiras)
+    description: Requisitos avaliáveis de estrutura, controles internos, gestão de riscos, segregação de atividades, segurança da informação, continuidade e guarda de documentos extraídos da Resolução CVM nº 21/2021 (administração de carteiras de valores mobiliários). Recorte voltado a gap-assessment de segurança e governança para gestoras, corretoras/DTVM e administradores fiduciários.
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+      assessable: false
+      depth: 1
+      ref_id: CAP-II
+      name: Cap. II — Estrutura, Responsáveis e Recursos
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-1
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, IV
+      name: Diretor de compliance
+      description: Atribuir a um diretor estatutário a responsabilidade pelo cumprimento de regras, políticas, procedimentos e controles internos e da Resolução.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-2
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, V
+      name: Diretor de gestão de risco
+      description: Se registrado como gestor de recursos, atribuir a responsabilidade pela gestão de risco a um diretor estatutário (que pode acumular a função de compliance).
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-3
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, VII
+      name: Recursos humanos e computacionais
+      description: Constituir e manter recursos humanos e computacionais adequados ao porte e à área de atuação da pessoa jurídica.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-4
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, §2
+      name: Dedicação do diretor de carteiras
+      description: O diretor responsável pela administração de carteiras não pode ser responsável por nenhuma outra atividade no mercado de capitais, dentro ou fora da instituição.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-5
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, §3
+      name: Independência dos diretores de risco/compliance
+      description: Os diretores de gestão de risco e de compliance devem exercer suas funções com independência e não atuar em administração de carteiras, distribuição, intermediação ou consultoria que limite essa independência.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-6
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, §6
+      name: Diretor exclusivo de administração fiduciária
+      description: Se registrado concomitantemente como gestor de recursos e administrador fiduciário, indicar diretor responsável exclusivamente pela administração fiduciária.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-7
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, §7
+      name: Formalização das responsabilidades
+      description: As atribuições de responsabilidade devem constar do contrato ou estatuto social ou de ata de reunião do conselho de administração.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-8
+      assessable: true
+      depth: 2
+      ref_id: Art. 4, §8
+      name: Proteção e auditabilidade dos recursos computacionais
+      description: Os recursos computacionais devem ser protegidos contra adulterações e manter registros que permitam a realização de auditorias e inspeções.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-9
+      assessable: true
+      depth: 2
+      ref_id: Art. 5
+      name: Substituição de diretor impedido
+      description: Havendo impedimento de diretor responsável por prazo superior a 30 dias, o substituto assume a responsabilidade, comunicando-se a CVM por escrito em até 7 dias úteis.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-0
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+      assessable: false
+      depth: 1
+      ref_id: CAP-IV
+      name: Cap. IV — Informações e Transparência
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-11
+      assessable: true
+      depth: 2
+      ref_id: Art. 13
+      name: Qualidade da informação divulgada
+      description: As informações divulgadas devem ser verdadeiras, completas, consistentes, não induzir o investidor a erro e ser escritas em linguagem simples, clara, objetiva e concisa.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-12
+      assessable: true
+      depth: 2
+      ref_id: Art. 16, II
+      name: Código de ética publicado
+      description: Manter na página na internet o código de ética que concretiza os deveres de conduta do art. 18.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-13
+      assessable: true
+      depth: 2
+      ref_id: Art. 16, III
+      name: Controles internos publicados
+      description: Manter na internet, atualizadas, as regras, procedimentos e a descrição dos controles internos elaborados para o cumprimento da Resolução.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-14
+      assessable: true
+      depth: 2
+      ref_id: Art. 16, IV
+      name: Política de gestão de risco publicada
+      description: Manter na internet a política de gestão de risco (dispensado o administrador fiduciário exclusivo).
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-15
+      assessable: true
+      depth: 2
+      ref_id: Art. 16, V
+      name: Política de negociação de valores mobiliários
+      description: Manter na internet a política de negociação de valores mobiliários por administradores, empregados, colaboradores e pela própria empresa.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-16
+      assessable: true
+      depth: 2
+      ref_id: Art. 16, VI-VII
+      name: Manual de precificação e política de rateio
+      description: Manter na internet o manual de precificação dos ativos e a política de rateio e divisão de ordens entre as carteiras.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-17
+      assessable: true
+      depth: 2
+      ref_id: Art. 17
+      name: Formulário de referência anual
+      description: Enviar à CVM, até 31 de março de cada ano, por sistema eletrônico, o formulário de referência (Anexo E, pessoa jurídica).
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-10
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+      assessable: false
+      depth: 1
+      ref_id: CAP-V
+      name: Cap. V — Conduta e Sistemas Automatizados
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-19
+      assessable: true
+      depth: 2
+      ref_id: Art. 18, I-II
+      name: Deveres fiduciários de conduta
+      description: Exercer as atividades com boa-fé, transparência, diligência e lealdade, buscando os objetivos de investimento do cliente e evitando práticas que firam a relação fiduciária.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-20
+      assessable: true
+      depth: 2
+      ref_id: Art. 18, IV
+      name: Documentação à disposição do cliente
+      description: Manter atualizada, em perfeita ordem e à disposição do cliente, toda a documentação relativa às operações das carteiras administradas.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-21
+      assessable: true
+      depth: 2
+      ref_id: Art. 18, V
+      name: Custódia dos ativos
+      description: Contratar serviço de custódia ou certificar que os ativos das carteiras sejam mantidos em custódia em entidade devidamente autorizada.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-22
+      assessable: true
+      depth: 2
+      ref_id: Art. 18, VIII
+      name: Comunicação de violações à CVM
+      description: Informar à CVM, em até 10 dias úteis, sempre que verificar ocorrência ou indícios de violação da legislação que incumbe à CVM fiscalizar.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-23
+      assessable: true
+      depth: 2
+      ref_id: Art. 19
+      name: Sistemas automatizados e algoritmos
+      description: O uso de sistemas automatizados/algoritmos não mitiga as responsabilidades do administrador; o código-fonte deve estar disponível para inspeção da CVM, na sede, em versão não compilada.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-24
+      assessable: true
+      depth: 2
+      ref_id: Art. 20
+      name: Vedações
+      description: 'Observar as vedações: atuar como contraparte (salvo exceções), prometer/garantir rentabilidade, contrair empréstimos em nome de clientes, prestar fiança/aval, negociar para gerar corretagem/rebate e negligenciar os interesses do cliente.'
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-18
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+      assessable: false
+      depth: 1
+      ref_id: CAP-VI
+      name: Cap. VI — Controles Internos, Gestão de Riscos e Segregação
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-26
+      assessable: true
+      depth: 2
+      ref_id: Art. 22
+      name: Atendimento permanente às normas
+      description: Garantir, por controles internos adequados, o permanente atendimento às normas, políticas e regulamentações vigentes; os controles devem ser efetivos e consistentes com a natureza, complexidade e risco das operações.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-27
+      assessable: true
+      depth: 2
+      ref_id: Art. 23
+      name: Imparcialidade, conflitos e controles escritos
+      description: Assegurar que os profissionais atuem com imparcialidade e conheçam o código de ética e as políticas; identificar, administrar e eliminar conflitos de interesse; e implementar regras, procedimentos e controles internos por escrito.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-28
+      assessable: true
+      depth: 2
+      ref_id: Art. 24, I
+      name: Controle de informações confidenciais
+      description: Estabelecer mecanismos para assegurar o controle de informações confidenciais acessadas por administradores, empregados e colaboradores.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-29
+      assessable: true
+      depth: 2
+      ref_id: Art. 24, II
+      name: Testes periódicos de segurança
+      description: Estabelecer mecanismos que assegurem a existência de testes periódicos de segurança dos sistemas de informações, em especial os mantidos em meio eletrônico.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-30
+      assessable: true
+      depth: 2
+      ref_id: Art. 24, III
+      name: Programa de treinamento
+      description: Implantar e manter programa de treinamento de administradores, empregados e colaboradores com acesso a informações confidenciais ou envolvidos em decisão de investimento/distribuição.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-31
+      assessable: true
+      depth: 2
+      ref_id: Art. 25
+      name: Relatório anual de compliance
+      description: O diretor de compliance encaminha aos órgãos de administração, até o último dia útil de abril, relatório anual com conclusões dos exames, recomendações e cronograma de saneamento das deficiências; disponível à CVM na sede.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-32
+      assessable: true
+      depth: 2
+      ref_id: Art. 26
+      name: Política de gestão de riscos
+      description: O gestor de recursos deve implementar e manter política escrita de gestão de riscos que permita monitorar, mensurar e ajustar permanentemente os riscos (mercado, liquidez, concentração, contraparte, operacional e crédito) de cada carteira.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-33
+      assessable: true
+      depth: 2
+      ref_id: Art. 26, §2
+      name: Verificação e reporte de risco
+      description: O diretor de gestão de risco verifica o cumprimento da política, encaminha relatório de exposição a risco no mínimo mensalmente e supervisiona diligentemente eventual terceiro contratado.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-34
+      assessable: true
+      depth: 2
+      ref_id: Art. 27
+      name: Segregação e restrição de acesso
+      description: Garantir a segregação física de instalações entre administração de carteiras e intermediação/distribuição, o bom uso de recursos comuns e a restrição de acesso a arquivos e informações confidenciais, com identificação de quem acessa.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-35
+      assessable: true
+      depth: 2
+      ref_id: Art. 28
+      name: Manuais de segregação e confidencialidade
+      description: Manter manual escrito de segregação de atividades (instalações, equipamentos e informações) e manual escrito de confidencialidade com regras de sigilo e conduta para sócios, administradores, colaboradores e empregados.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-36
+      assessable: true
+      depth: 2
+      ref_id: Art. 29
+      name: Contratação de terceiros
+      description: Submeter a contratação de terceiros a consentimento prévio do cliente quando a remuneração correr por conta dele ou o prestador for responsável por gestão, custódia ou controladoria, com justificativa, escopo, qualificação e remuneração.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-25
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-37
+      assessable: false
+      depth: 1
+      ref_id: CAP-VII
+      name: Cap. VII — Administrador Fiduciário e Fiscalização de Terceiros
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-38
+      assessable: true
+      depth: 2
+      ref_id: Art. 30
+      name: Segregação da custódia/controladoria
+      description: As atividades de custódia e de controladoria de ativos e passivos devem estar totalmente segregadas das atividades de gestão de recursos.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-37
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-39
+      assessable: true
+      depth: 2
+      ref_id: Art. 31
+      name: Fatores de risco e acesso à informação
+      description: O administrador fiduciário deve identificar e avaliar fatores internos e externos que afetem adversamente a política de investimentos e assegurar acesso a informações relevantes, confiáveis, tempestivas e compreensíveis.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-37
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-40
+      assessable: true
+      depth: 2
+      ref_id: Art. 32
+      name: Fiscalização de prestadores
+      description: 'Fiscalizar os serviços de terceiros, verificando no mínimo: cumprimento de limites/condições; adequação de recursos humanos/computacionais do prestador; política de riscos consistente do gestor; e que o custodiante tenha sistemas de liquidação, validação, controle, conciliação e monitoramento adequados, consistentes e seguros.'
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-37
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-41
+      assessable: false
+      depth: 1
+      ref_id: CAP-VIII-IX
+      name: Cap. VIII/IX — Distribuição e Guarda de Documentos
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-42
+      assessable: true
+      depth: 2
+      ref_id: Art. 33
+      name: Distribuição de cotas
+      description: Ao distribuir cotas de fundos que administre/gerencie, observar normas de cadastro/conduta, suitability, prevenção à lavagem de dinheiro e troca de informações, e indicar diretor responsável pelo cumprimento.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-41
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-43
+      assessable: true
+      depth: 2
+      ref_id: Art. 34
+      name: Guarda de documentos (5 anos)
+      description: Manter, por no mínimo 5 anos (ou prazo superior por determinação da CVM), todos os documentos, correspondências, papéis de trabalho, relatórios e pareceres relacionados ao exercício das funções.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-41
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-44
+      assessable: true
+      depth: 2
+      ref_id: Art. 34, §1
+      name: Arquivo segregado de contraparte
+      description: Manter, por 5 anos, arquivo segregado documentando as operações em que tenha sido contraparte dos fundos ou carteiras administradas.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-41
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
+      assessable: false
+      depth: 1
+      ref_id: ANEXO-E
+      name: Anexo E — Evidências de Estrutura, Controles e Continuidade
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-46
+      assessable: true
+      depth: 2
+      ref_id: Anexo E, 8.9
+      name: Estrutura de compliance
+      description: 'Descrever a estrutura de compliance (verificação do atendimento às normas e fiscalização de terceiros): profissionais, natureza, sistemas/rotinas/procedimentos e como garante a independência do setor.'
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-47
+      assessable: true
+      depth: 2
+      ref_id: Anexo E, 8.10
+      name: Estrutura de gestão de riscos
+      description: 'Descrever a estrutura de gestão de riscos: profissionais, natureza, sistemas/rotinas/procedimentos e como garante a independência do setor.'
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-48
+      assessable: true
+      depth: 2
+      ref_id: Anexo E, 8.11
+      name: Estrutura de tesouraria/controle de ativos
+      description: Descrever a estrutura para tesouraria, controle e processamento de ativos e escrituração de cotas (profissionais, sistemas/rotinas/procedimentos e responsável).
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-49
+      assessable: true
+      depth: 2
+      ref_id: Anexo E, 10.1
+      name: Seleção e supervisão de prestadores
+      description: Descrever a política de seleção, contratação e supervisão de prestadores de serviços.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-50
+      assessable: true
+      depth: 2
+      ref_id: Anexo E, 10.4
+      name: Continuidade e recuperação de desastres
+      description: Descrever os planos de contingência, continuidade de negócios e recuperação de desastres adotados.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
+    - urn: urn:intuitem:risk:req_node:cvm-21-2021:node-51
+      assessable: true
+      depth: 2
+      ref_id: Anexo E, 10.5
+      name: Gestão do risco de liquidez
+      description: Descrever as políticas, práticas e controles internos para a gestão do risco de liquidez das carteiras.
+      parent_urn: urn:intuitem:risk:req_node:cvm-21-2021:node-45
