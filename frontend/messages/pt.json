@@ -5295,5 +5295,13 @@
 	"assetManager": "Gestora de recursos (ANBIMA)",
 	"broker": "Corretora / DTVM (CVM)",
 	"bank": "Banco / instituição de crédito",
-	"provisioned": "Provisionado"
+	"provisioned": "Provisionado",
+	"deliveryTeam": "Time de entrega",
+	"clientResources": "Recursos do cliente",
+	"manageAccess": "Gerenciar acesso",
+	"manageAssets": "Gerenciar ativos",
+	"noTeamYet": "Nenhum time atribuído a este cliente ainda",
+	"addTeamMember": "atribuir acesso",
+	"noResourcesYet": "Nenhum recurso cadastrado ainda",
+	"addResource": "adicionar recurso"
 }

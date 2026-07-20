@@ -8,6 +8,7 @@
 	const cap = $derived(data.capacity);
 	const dash = $derived(data.dashboard);
 	const folderId = $derived(eng?.folder?.id ?? '');
+	const tr = $derived(data.teamResources);
 
 	const utilization = $derived(Math.round(cap?.utilization_pct ?? 0));
 	const barWidth = $derived(Math.min(utilization, 100));
@@ -110,5 +111,58 @@
 				</div>
 			{/each}
 		</div>
+	</section>
+
+	<!-- time de entrega -->
+	<section class="space-y-3">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-semibold">{safeTranslate('deliveryTeam')}</h2>
+			<a class="text-sm text-primary-500 hover:underline" href="/role-assignments">{safeTranslate('manageAccess')} →</a>
+		</div>
+		{#if tr?.team?.length}
+			<div class="overflow-x-auto rounded-lg border border-surface-200-800">
+				<table class="w-full text-sm">
+					<tbody>
+						{#each tr.team as m}
+							<tr class="border-t border-surface-200-800 first:border-t-0">
+								<td class="p-3">
+									<i class="fa-solid {m.kind === 'group' ? 'fa-users' : 'fa-user'} mr-2 text-surface-500"></i>{m.name}
+								</td>
+								<td class="p-3 text-right text-surface-600-400">{m.role}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{:else}
+			<div class="rounded-lg border border-dashed border-surface-300-700 p-4 text-sm text-surface-600-400">
+				{safeTranslate('noTeamYet')} · <a class="text-primary-500 hover:underline" href="/role-assignments">{safeTranslate('addTeamMember')}</a>
+			</div>
+		{/if}
+	</section>
+
+	<!-- recursos do cliente -->
+	<section class="space-y-3">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-semibold">{safeTranslate('clientResources')}</h2>
+			<a class="text-sm text-primary-500 hover:underline" href="/assets">{safeTranslate('manageAssets')} →</a>
+		</div>
+		{#if tr?.resources?.length}
+			<div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+				{#each tr.resources as r (r.id)}
+					<div class="rounded-lg border border-surface-200-800 p-4">
+						<div class="flex items-center justify-between gap-2">
+							<span class="font-medium">{r.name}</span>
+							<span class="whitespace-nowrap rounded-full bg-surface-200-800 px-2 py-0.5 text-xs">{r.type}</span>
+						</div>
+						{#if r.description}<p class="mt-1 text-xs text-surface-600-400">{r.description}</p>{/if}
+					</div>
+				{/each}
+			</div>
+		{:else}
+			<div class="rounded-lg border border-dashed border-surface-300-700 p-4 text-sm text-surface-600-400">
+				{safeTranslate('noResourcesYet')} · <a class="text-primary-500 hover:underline" href="/assets">{safeTranslate('addResource')}</a>
+			</div>
+		{/if}
 	</section>
 </div>

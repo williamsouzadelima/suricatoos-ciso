@@ -8,12 +8,25 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from core.views import BaseModelViewSet as AbstractBaseModelViewSet
+from iam.models import RoleAssignment
+from core.models import Asset
 
 from .models import Engagement, ClientIntake, EngagementPhase, PlanTask, TimeEntry
 from .serializers import PlanTaskReadSerializer
 from .services.seeding import seed_engagement_plan
 from .services.provisioning import create_client_folder
 from .services.eisenhower import derive_eisenhower
+
+# rótulos amigáveis das roles builtin (codename -> pt-BR)
+ROLE_LABELS = {
+    "BI-RL-ADM": "Administrador",
+    "BI-RL-DMA": "Gestor do domínio",
+    "BI-RL-ANA": "Analista",
+    "BI-RL-APP": "Aprovador",
+    "BI-RL-AUD": "Leitor",
+    "BI-RL-TPR": "Terceiro",
+    "BI-RL-ADE": "Auditado",
+}
 
 
 class BaseModelViewSet(AbstractBaseModelViewSet):
@@ -114,6 +127,45 @@ class EngagementViewSet(BaseModelViewSet):
                 "kanban_status": dict(status_counter),
                 "eisenhower": dict(quad_counter),
                 "phases": phases,
+            }
+        )
+
+    @action(detail=True, methods=["get"], name="Team and resources")
+    def team_resources(self, request, pk):
+        eng = self.get_object()
+        folder = eng.folder
+        team = []
+        ras = (
+            RoleAssignment.objects.filter(perimeter_folders=folder)
+            .select_related("user", "user_group", "role")
+            .distinct()
+        )
+        for ra in ras:
+            role_label = ROLE_LABELS.get(ra.role.name, ra.role.name) if ra.role_id else "—"
+            if ra.user_id:
+                team.append(
+                    {"kind": "user", "name": ra.user.email, "role": role_label}
+                )
+            elif ra.user_group_id:
+                team.append(
+                    {"kind": "group", "name": ra.user_group.name, "role": role_label}
+                )
+        resources = [
+            {
+                "id": str(a.id),
+                "name": a.name,
+                "type": a.get_type_display(),
+                "description": a.description or "",
+            }
+            for a in Asset.objects.filter(folder=folder).order_by("name")
+        ]
+        return Response(
+            {
+                "folder_id": str(folder.id),
+                "team": team,
+                "team_count": len(team),
+                "resources": resources,
+                "resources_count": len(resources),
             }
         )
 

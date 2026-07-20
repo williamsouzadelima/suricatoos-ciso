@@ -5295,5 +5295,13 @@
 	"assetManager": "Asset manager (ANBIMA)",
 	"broker": "Broker / DTVM (CVM)",
 	"bank": "Bank / credit institution",
-	"provisioned": "Provisioned"
+	"provisioned": "Provisioned",
+	"deliveryTeam": "Delivery team",
+	"clientResources": "Client resources",
+	"manageAccess": "Manage access",
+	"manageAssets": "Manage assets",
+	"noTeamYet": "No team assigned to this client yet",
+	"addTeamMember": "assign access",
+	"noResourcesYet": "No resources registered yet",
+	"addResource": "add resource"
 }
