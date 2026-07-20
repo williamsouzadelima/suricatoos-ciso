@@ -1,0 +1,30 @@
+key: mod-lgpd
+name: "Módulo regulatório — LGPD"
+tasks:
+  - phase_key: p1_diagnostico
+    key: lgpd_ropa
+    name: "Registro de operações de tratamento (RoPA)"
+    description: "Mapear os tratamentos de dados pessoais, finalidades e fluxos."
+    priority: 2
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 8
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: lgpd_bases_legais
+    name: "Avaliação de bases legais e direitos do titular"
+    description: "Revisar bases legais dos tratamentos e o fluxo de atendimento a titulares."
+    priority: 2
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 40
+    duration_days: 12
+  - phase_key: p3_execucao
+    key: lgpd_dpo_governanca
+    name: "Governança de privacidade (DPO e ritos)"
+    description: "Estruturar o papel do DPO/encarregado e os ritos de privacidade."
+    priority: 3
+    effort: S
+    estimated_hours: 6
+    offset_start_days: 70
+    duration_days: 12

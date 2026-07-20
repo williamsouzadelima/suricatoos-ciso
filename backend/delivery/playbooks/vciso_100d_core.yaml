@@ -1,0 +1,209 @@
+key: vciso-100d
+name: "Plano de Onboarding vCISO — 100 dias"
+description: "Playbook curado Suricatoos: 3 fases (30/60/100). Núcleo sub-setor-agnóstico; módulos regulatórios se somam pelo intake."
+phases:
+  - key: p1_diagnostico
+    name: "Fase 1 (0-30) · Diagnóstico & Descoberta"
+    order: 1
+    day_start: 0
+    day_end: 30
+    objective: "Entender ambiente, ativos, riscos e obrigações regulatórias antes de agir."
+    tasks:
+      - key: kickoff_governanca
+        name: "Kickoff e governança do engajamento"
+        description: "Definir sponsor, comitê, cadência de reuniões, RACI e canais de comunicação."
+        priority: 1
+        effort: S
+        estimated_hours: 6
+        offset_start_days: 0
+        duration_days: 5
+      - key: inventario_ativos
+        name: "Inventário de ativos e dados"
+        description: "Levantar sistemas, dados sensíveis, fornecedores e ativos críticos do cliente."
+        priority: 2
+        effort: M
+        estimated_hours: 16
+        offset_start_days: 3
+        duration_days: 12
+      - key: mapa_stakeholders
+        name: "Mapa de stakeholders"
+        description: "Identificar donos de processo, sponsors e contatos técnicos."
+        priority: 3
+        effort: S
+        estimated_hours: 4
+        offset_start_days: 3
+        duration_days: 7
+      - key: mapeamento_regulatorio
+        name: "Mapeamento regulatório aplicável"
+        description: "Identificar normas incidentes (BACEN/CVM/ANBIMA/LGPD/ISO/NIST) e obrigações concretas."
+        priority: 1
+        effort: M
+        estimated_hours: 12
+        offset_start_days: 5
+        duration_days: 10
+      - key: gap_assessment
+        name: "Gap assessment inicial (ISO 27001 + NIST CSF)"
+        description: "Avaliação de maturidade e lacunas contra os frameworks-alvo."
+        priority: 1
+        effort: L
+        estimated_hours: 24
+        offset_start_days: 7
+        duration_days: 18
+      - key: top_riscos
+        name: "Levantamento dos principais riscos"
+        description: "Identificar e classificar os top-risks iniciais do cliente."
+        priority: 2
+        effort: M
+        estimated_hours: 12
+        offset_start_days: 10
+        duration_days: 14
+      - key: postura_tecnica
+        name: "Avaliação de postura técnica"
+        description: "Identidade/MFA, endpoints, rede, backup, logging e monitoramento."
+        priority: 2
+        effort: M
+        estimated_hours: 16
+        offset_start_days: 10
+        duration_days: 15
+      - key: relatorio_diagnostico
+        name: "Relatório de diagnóstico + apresentação ao sponsor"
+        description: "Consolidar achados e apresentar ao patrocinador (marco da Fase 1)."
+        priority: 1
+        effort: M
+        estimated_hours: 10
+        offset_start_days: 24
+        duration_days: 6
+  - key: p2_quickwins
+    name: "Fase 2 (31-60) · Quick Wins & Roadmap"
+    order: 2
+    day_start: 31
+    day_end: 60
+    objective: "Estancar os riscos evidentes e desenhar o roadmap aprovado pelo comitê."
+    tasks:
+      - key: priorizacao_gaps
+        name: "Priorização dos gaps (risco × esforço)"
+        description: "Ranquear os gaps para o roadmap usando risco e esforço."
+        priority: 1
+        effort: S
+        estimated_hours: 8
+        offset_start_days: 31
+        duration_days: 7
+      - key: quickwins_higiene
+        name: "Quick wins de higiene de segurança"
+        description: "MFA, patch crítico, backup validado/testado, hardening básico, revisão de acessos."
+        priority: 1
+        effort: L
+        estimated_hours: 28
+        offset_start_days: 33
+        duration_days: 20
+      - key: plano_tratamento_riscos
+        name: "Plano de tratamento de riscos (roadmap 12 meses)"
+        description: "Definir o tratamento dos riscos e o roadmap priorizado de 12 meses."
+        priority: 1
+        effort: M
+        estimated_hours: 16
+        offset_start_days: 38
+        duration_days: 14
+      - key: estrutura_politicas
+        name: "Estrutura de políticas de segurança"
+        description: "PSI, gestão de incidentes (com reporte regulatório), controle de acesso, continuidade."
+        priority: 2
+        effort: L
+        estimated_hours: 24
+        offset_start_days: 40
+        duration_days: 18
+      - key: kpis_metricas
+        name: "Definição de KPIs e métricas de segurança"
+        description: "Definir as métricas e a forma de reporte executivo."
+        priority: 3
+        effort: S
+        estimated_hours: 6
+        offset_start_days: 45
+        duration_days: 10
+      - key: plano_resposta_incidentes
+        name: "Plano de resposta a incidentes"
+        description: "Playbook de resposta a incidentes com requisitos de notificação regulatória."
+        priority: 1
+        effort: M
+        estimated_hours: 14
+        offset_start_days: 45
+        duration_days: 12
+      - key: roadmap_aprovado
+        name: "Roadmap aprovado pelo comitê"
+        description: "Apresentar e obter aprovação do roadmap (marco da Fase 2)."
+        priority: 1
+        effort: S
+        estimated_hours: 6
+        offset_start_days: 55
+        duration_days: 5
+  - key: p3_execucao
+    name: "Fase 3 (61-100) · Execução & Governança"
+    order: 3
+    day_start: 61
+    day_end: 100
+    objective: "Operar o programa: implementar os controles prioritários e instituir a governança."
+    tasks:
+      - key: implementar_controles
+        name: "Implementar controles prioritários do roadmap"
+        description: "Executar as iniciativas P1 do roadmap aprovado."
+        priority: 1
+        effort: XL
+        estimated_hours: 40
+        offset_start_days: 61
+        duration_days: 35
+      - key: ritual_governanca
+        name: "Instituir rituais de governança"
+        description: "Comitê de segurança periódico e reporte executivo recorrente."
+        priority: 2
+        effort: S
+        estimated_hours: 8
+        offset_start_days: 61
+        duration_days: 10
+      - key: publicar_politicas
+        name: "Publicar e aprovar políticas"
+        description: "Aprovar formalmente e comunicar as políticas de segurança."
+        priority: 2
+        effort: M
+        estimated_hours: 10
+        offset_start_days: 65
+        duration_days: 15
+      - key: continuidade_dr
+        name: "Continuidade e DR (PCN + teste)"
+        description: "Plano de continuidade de negócios e teste de recuperação."
+        priority: 2
+        effort: L
+        estimated_hours: 20
+        offset_start_days: 70
+        duration_days: 20
+      - key: gestao_terceiros
+        name: "Gestão de terceiros/fornecedores"
+        description: "Due diligence e monitoramento de fornecedores críticos (BACEN/DORA-like)."
+        priority: 2
+        effort: M
+        estimated_hours: 14
+        offset_start_days: 72
+        duration_days: 18
+      - key: metricas_operacao
+        name: "Métricas em operação + dashboard"
+        description: "Colocar as métricas de segurança em operação com dashboard executivo."
+        priority: 3
+        effort: M
+        estimated_hours: 10
+        offset_start_days: 78
+        duration_days: 15
+      - key: tabletop
+        name: "Simulação de incidente (tabletop)"
+        description: "Exercício de mesa para validar o plano de resposta a incidentes."
+        priority: 2
+        effort: S
+        estimated_hours: 8
+        offset_start_days: 85
+        duration_days: 8
+      - key: fechamento_100d
+        name: "Relatório de fechamento dos 100 dias + plano de continuidade vCISO"
+        description: "Consolidar resultados e definir o programa contínuo de segurança (marco final)."
+        priority: 1
+        effort: M
+        estimated_hours: 12
+        offset_start_days: 92
+        duration_days: 8
