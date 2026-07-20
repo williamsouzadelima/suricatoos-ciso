@@ -1368,6 +1368,28 @@ export const listViewFields = {
 			filtering_labels: LABELS_FILTER
 		}
 	},
+	// --- vCISO delivery ---
+	'plan-tasks': {
+		head: ['name', 'phase', 'estimatedHours', 'domain'],
+		body: ['str', 'phase', 'estimated_hours', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'plan-phases': {
+		head: ['name', 'order', 'domain'],
+		body: ['name', 'order', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'client-intakes': {
+		head: ['name', 'subsector', 'provisioningStatus', 'domain'],
+		body: ['company_name', 'subsector', 'provisioning_status', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
 	perimeters: {
 		head: ['ref_id', 'name', 'description', 'defaultAssignee', 'domain'],
 		body: ['ref_id', 'name', 'description', 'default_assignee', 'folder'],

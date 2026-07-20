@@ -1810,7 +1810,40 @@ export const IdPGroupSchema = z.object({
 	user_groups: z.array(z.string().uuid().optional()).optional()
 });
 
+// --- vCISO delivery schemas ---
+export const PlanTaskSchema = z.object({
+	engagement: z.string(),
+	phase: z.string(),
+	applied_control: z.string().optional().nullable(),
+	task_template: z.string().optional().nullable(),
+	estimated_hours: z.number().optional().nullable(),
+	order: z.number().optional().default(0),
+	template_key: z.string().optional()
+});
+
+export const PlanPhaseSchema = z.object({
+	...NameDescriptionMixin,
+	engagement: z.string(),
+	order: z.number().optional().default(0),
+	day_start: z.number().optional().default(0),
+	day_end: z.number().optional().default(30),
+	objective: z.string().optional()
+});
+
+export const ClientIntakeSchema = z.object({
+	...NameDescriptionMixin,
+	folder: z.string(),
+	company_name: z.string().optional(),
+	subsector: z.string().optional(),
+	industry: z.string().optional(),
+	country: z.string().optional(),
+	primary_frameworks: z.string().uuid().optional().array().optional()
+});
+
 const SCHEMA_MAP: Record<string, ZodSchema> = {
+	'plan-tasks': PlanTaskSchema,
+	'plan-phases': PlanPhaseSchema,
+	'client-intakes': ClientIntakeSchema,
 	folders: FolderSchema,
 	'folders-import': FolderImportSchema,
 	perimeters: PerimeterSchema,

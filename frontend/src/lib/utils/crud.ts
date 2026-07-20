@@ -176,6 +176,49 @@ type ModelMap = {
 };
 
 export const URL_MODEL_MAP: ModelMap = {
+	// --- vCISO delivery ---
+	'plan-tasks': {
+		endpointUrl: 'delivery/plan-tasks',
+		name: 'plantask',
+		localName: 'planTask',
+		localNamePlural: 'planTasks',
+		verboseName: 'Plan task',
+		verboseNamePlural: 'Plan tasks',
+		foreignKeyFields: [
+			{ field: 'engagement', urlModel: 'engagements', endpointUrl: 'delivery/engagements' },
+			{ field: 'phase', urlModel: 'plan-phases', endpointUrl: 'delivery/plan-phases' },
+			{ field: 'applied_control', urlModel: 'applied-controls' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }]
+	},
+	'plan-phases': {
+		endpointUrl: 'delivery/plan-phases',
+		name: 'engagementphase',
+		localName: 'planPhase',
+		localNamePlural: 'planPhases',
+		verboseName: 'Plan phase',
+		verboseNamePlural: 'Plan phases',
+		foreignKeyFields: [
+			{ field: 'engagement', urlModel: 'engagements', endpointUrl: 'delivery/engagements' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }]
+	},
+	'client-intakes': {
+		endpointUrl: 'delivery/client-intakes',
+		name: 'clientintake',
+		localName: 'clientIntake',
+		localNamePlural: 'clientIntakes',
+		verboseName: 'Client intake',
+		verboseNamePlural: 'Client intakes',
+		foreignKeyFields: [
+			{ field: 'folder', urlModel: 'folders', urlParams: 'content_type=DO&content_type=GL' },
+			{ field: 'primary_frameworks', urlModel: 'frameworks' }
+		],
+		selectFields: [{ field: 'subsector' }],
+		filters: [{ field: 'folder' }, { field: 'subsector' }]
+	},
 	folders: {
 		name: 'folder',
 		localName: 'domain',

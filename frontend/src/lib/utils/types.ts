@@ -158,7 +158,12 @@ export const URL_MODEL = [
 	'document-revisions',
 	// presets/journeys
 	'presets',
-	'journeys'
+	'journeys',
+	// vCISO delivery
+	'plan-tasks',
+	'plan-phases',
+	'client-intakes',
+	'time-entries',
 ] as const;
 
 export const THIRD_PARTY_URL_MODEL = [

@@ -66,6 +66,29 @@ export const navData = {
 			]
 		},
 		{
+			name: 'vcisoDelivery',
+			items: [
+				{
+					name: 'clientOnboarding',
+					fa_icon: 'fa-solid fa-user-plus',
+					href: '/client-intakes',
+					permissions: ['view_clientintake']
+				},
+				{
+					name: 'engagements',
+					fa_icon: 'fa-solid fa-handshake',
+					href: '/engagements',
+					permissions: ['view_engagement']
+				},
+				{
+					name: 'planTasks',
+					fa_icon: 'fa-solid fa-list-check',
+					href: '/plan-tasks',
+					permissions: ['view_plantask']
+				}
+			]
+		},
+		{
 			name: 'organization',
 			items: [
 				{

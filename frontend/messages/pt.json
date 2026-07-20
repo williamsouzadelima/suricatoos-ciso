@@ -2735,8 +2735,14 @@
 	"associatedFindingsAssessments": "Acompanhamentos associados",
 	"hourCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Hora",
 				"countPlural=other": "{count} Horas"
@@ -2745,8 +2751,13 @@
 	],
 	"minuteCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Minuto",
 				"countPlural=other": "{count} Minutos"
@@ -2755,8 +2766,13 @@
 	],
 	"dayCount": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} Dia",
 				"countPlural=other": "{count} Dias"
@@ -2765,8 +2781,13 @@
 	],
 	"objectsNotVisible": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} objeto não visível.",
 				"countPlural=other": "{count} objetos não visíveis."
@@ -4322,8 +4343,14 @@
 	"errorFetching": "Não foi possível carregar as informações de cascata. Por favor, tente novamente.",
 	"cascadeAffectedNotice": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["count", "countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"count",
+				"countPlural"
+			],
 			"match": {
 				"count=0": "Nenhum outro objeto será impactado.",
 				"countPlural=one": "{count} objeto relacionado não será excluído, mas perderá um ou mais relacionamentos.",
@@ -4589,7 +4616,6 @@
 	"generateReport": "Gerar Relatório",
 	"aboutReports": "Sobre os Relatórios",
 	"aboutReportsDescription": "Os relatórios oferecem ferramentas simples para gerar relatórios especializados, úteis para obter insights essenciais ou exigidos pelas autoridades para padrões específicos.\nRecursos mais especializados serão adicionados à medida que identificarmos casos específicos.",
-
 	"exportByAssessment": "Exportar por Assessment",
 	"exportByAssessmentDesc": "Para exportar relatórios específicos, abra o assessment e use o menu de exportar.",
 	"complianceAssessmentExports": "Assessments de Conformidade",
@@ -4700,8 +4726,13 @@
 	"builderPublishModalDescription": "Esta ação atualizará o framework em produção. Revise as alterações abaixo.",
 	"builderRequirementAdded": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} requisitos adicionados",
 				"countPlural=other": "{count} requisitos adicionados"
@@ -4710,8 +4741,13 @@
 	],
 	"builderQuestionsAddedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} perguntas",
 				"countPlural=other": "{count} perguntas"
@@ -4720,8 +4756,13 @@
 	],
 	"builderRequirementRemoved": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} requisitos removidos",
 				"countPlural=other": "{count} requisitos removidos"
@@ -4730,8 +4771,13 @@
 	],
 	"builderQuestionsRemovedSuffix": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} perguntas",
 				"countPlural=other": "{count} perguntas"
@@ -4741,8 +4787,13 @@
 	"builderNoStructuralChanges": "Nenhuma alteração estrutural detectada (apenas metadados).",
 	"builderBreakingChangesDetected": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} alterações incompatíveis detectadas",
 				"countPlural=other": "{count} alterações incompatíveis detectadas"
@@ -4766,8 +4817,13 @@
 	"builderFieldLabelSelectImplementationGroups": "Seleciona grupos de implementação",
 	"builderAffectedAudits": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} auditorias existentes serão afetadas",
 				"countPlural=other": "{count} auditorias existentes serão afetadas"
@@ -4805,8 +4861,13 @@
 	"builderNoRulesOrGroupsConfigured": "Nenhuma regra ou grupo configurado",
 	"builderOutcomeRuleSummary": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} regras de resultado",
 				"countPlural=other": "{count} regras de resultado"
@@ -4815,8 +4876,13 @@
 	],
 	"builderImplementationGroupsSummaryShort": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} grupos",
 				"countPlural=other": "{count} grupos"
@@ -4829,8 +4895,13 @@
 	"builderScoreScale": "Escala de pontuação",
 	"builderScaleLevel": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} níveis",
 				"countPlural=other": "{count} níveis"
@@ -4900,8 +4971,13 @@
 	"builderAssessableLeaf": "Folha avaliável",
 	"builderAssessableWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Avaliável · {count} filho",
 				"countPlural=other": "Avaliável · {count} filhos"
@@ -4910,8 +4986,13 @@
 	],
 	"builderGroupWithChildren": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Grupo · {count} filho",
 				"countPlural=other": "Grupo · {count} filhos"
@@ -4938,8 +5019,13 @@
 	"builderAddQuestion": "Adicionar pergunta",
 	"builderChildrenHidden": [
 		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "{count} filho oculto",
 				"countPlural=other": "{count} filhos ocultos"
@@ -4967,8 +5053,14 @@
 	"builderChangeTypeWarning": "Alterar o tipo excluirá as opções existentes. Continuar?",
 	"builderShownWhenAnswers": [
 		{
-			"declarations": ["input count", "input ref", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
+			"declarations": [
+				"input count",
+				"input ref",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
 			"match": {
 				"countPlural=one": "Exibido quando {ref} = {count} respostas",
 				"countPlural=other": "Exibido quando {ref} = {count} respostas"
@@ -5154,5 +5246,54 @@
 	"scoreScale": "Escala de pontuação",
 	"downloadExcelTemplate": "Baixar modelo Excel",
 	"frameworkActionsHelp": "O modelo Excel destina-se a terceiros ou entidades externas para preenchimento off-line e posterior reimportação dos resultados via {dataWizard}.",
-	"decisionNotes": "Notas de decisão"
+	"decisionNotes": "Notas de decisão",
+	"vcisoDelivery": "Entrega vCISO",
+	"clientOnboarding": "Onboarding de cliente",
+	"engagements": "Engajamentos",
+	"engagement": "Engajamento",
+	"planTasks": "Tarefas do plano",
+	"planTask": "Tarefa do plano",
+	"planPhases": "Fases do plano",
+	"planPhase": "Fase do plano",
+	"clientIntakes": "Intakes de cliente",
+	"clientIntake": "Intake de cliente",
+	"hoursModel": "Modelo de horas",
+	"contractedHours": "Horas contratadas",
+	"estimatedHours": "Horas estimadas",
+	"loggedHours": "Horas lançadas",
+	"provisioningStatus": "Status de provisionamento",
+	"subsector": "Sub-setor",
+	"hundredDayPlan": "Plano de 100 dias",
+	"eisenhowerMatrix": "Matriz de Eisenhower",
+	"capacity": "Capacidade",
+	"utilization": "Utilização",
+	"overBudget": "Acima do orçamento",
+	"withinBudget": "Dentro do orçamento",
+	"byPhase": "Por fase",
+	"quadrantDo": "Fazer (urgente + importante)",
+	"quadrantSchedule": "Agendar (importante)",
+	"quadrantDelegate": "Delegar (urgente)",
+	"quadrantEliminate": "Eliminar",
+	"urgent": "Urgente",
+	"notUrgent": "Não urgente",
+	"notImportant": "Não importante",
+	"dayZero": "Dia zero",
+	"horizonDays": "Horizonte (dias)",
+	"noEngagementsYet": "Nenhum engajamento ainda",
+	"noTasksYet": "Nenhuma tarefa ainda",
+	"viewPlan": "Ver plano de 100 dias",
+	"viewEisenhower": "Ver matriz",
+	"openClientKanban": "Kanban do cliente",
+	"addPlanTask": "Adicionar tarefa do plano",
+	"addPlanPhase": "Adicionar fase do plano",
+	"addClientIntake": "Adicionar intake de cliente",
+	"onboarding": "Onboarding",
+	"prospect": "Prospecção",
+	"offboarding": "Encerramento",
+	"timelog": "Registro de horas",
+	"hybrid": "Híbrido",
+	"assetManager": "Gestora de recursos (ANBIMA)",
+	"broker": "Corretora / DTVM (CVM)",
+	"bank": "Banco / instituição de crédito",
+	"provisioned": "Provisionado"
 }
