@@ -1,0 +1,42 @@
+key: mod-bacen
+name: "Módulo regulatório — BACEN (banco / instituição financeira)"
+# Obrigações no nível de plano ancoradas na Res. CMN 4.893/2021 (política de segurança
+# cibernética) e Res. BCB 85/2021. Conteúdo de planejamento; o gap-assessment cláusula-a-
+# cláusula é a library de framework (item separado).
+tasks:
+  - phase_key: p1_diagnostico
+    key: bacen_diagnostico
+    name: "Diagnóstico de aderência à Res. CMN 4.893/BCB 85"
+    description: "Avaliar a política de segurança cibernética existente e a aderência às normas de cibersegurança do BACEN (Res. CMN 4.893/2021 e Res. BCB 85/2021), incluindo requisitos de nuvem e reporte."
+    priority: 1
+    effort: M
+    estimated_hours: 14
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: bacen_politica_ciber
+    name: "Política de Segurança Cibernética (PSC) BACEN"
+    description: "Elaborar/revisar a Política de Segurança Cibernética exigida pela Res. CMN 4.893, com diretrizes, papéis e responsabilidades e aprovação pela alta administração."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 36
+    duration_days: 16
+  - phase_key: p2_quickwins
+    key: bacen_incidentes_nuvem
+    name: "Resposta a incidentes reportáveis + requisitos de nuvem"
+    description: "Estruturar o plano de ação e resposta a incidentes relevantes (com comunicação ao BACEN quando aplicável) e os requisitos para contratação de serviços relevantes de processamento/armazenamento de dados e computação em nuvem."
+    priority: 1
+    effort: L
+    estimated_hours: 20
+    offset_start_days: 44
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: bacen_testes_reporte
+    name: "Programa de testes + reporte anual BACEN"
+    description: "Instituir o programa de testes/cenários de segurança cibernética e o ciclo de reporte (relatório anual e comunicações) previsto na regulação do BACEN."
+    priority: 2
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 74
+    duration_days: 18

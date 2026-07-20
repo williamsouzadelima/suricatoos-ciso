@@ -1,0 +1,32 @@
+key: mod-anbima
+name: "Módulo regulatório — ANBIMA (gestora / asset)"
+# Obrigações no nível de plano ancoradas no Código ANBIMA de Administração de Recursos de
+# Terceiros (segurança da informação, continuidade, segregação de atividades).
+tasks:
+  - phase_key: p1_diagnostico
+    key: anbima_diagnostico
+    name: "Diagnóstico de aderência ao Código ANBIMA (Adm. de Recursos)"
+    description: "Avaliar a aderência às regras do Código ANBIMA de Administração de Recursos de Terceiros: segurança da informação, continuidade de negócios e segregação de atividades."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: anbima_seg_segregacao
+    name: "Política de Segurança da Informação + segregação de atividades"
+    description: "Estruturar/revisar a política de segurança da informação e cibernética e formalizar a segregação de atividades (ex. gestão vs. distribuição/back-office) exigida pelo Código ANBIMA."
+    priority: 2
+    effort: M
+    estimated_hours: 14
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: anbima_pcn
+    name: "Plano de Continuidade de Negócios (PCN) + teste"
+    description: "Elaborar e testar o Plano de Continuidade de Negócios alinhado ao Código ANBIMA, cobrindo cenários de indisponibilidade e recuperação das atividades de administração de recursos."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20

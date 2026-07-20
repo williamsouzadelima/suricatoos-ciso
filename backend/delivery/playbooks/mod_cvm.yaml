@@ -1,0 +1,32 @@
+key: mod-cvm
+name: "Módulo regulatório — CVM (corretora / DTVM / administrador de carteiras)"
+# Obrigações no nível de plano ancoradas nas regras da CVM (ex. Res. CVM 21/2021 para
+# administradores de carteira), controles internos, gestão de riscos e continuidade.
+tasks:
+  - phase_key: p1_diagnostico
+    key: cvm_diagnostico
+    name: "Diagnóstico de controles internos e cibersegurança (CVM)"
+    description: "Avaliar a aderência às regras da CVM aplicáveis (ex. Res. CVM 21/2021), com foco em controles internos, gestão de riscos e requisitos de segurança da informação/cibersegurança."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: cvm_controles_riscos
+    name: "Estrutura de controles internos + política de cibersegurança"
+    description: "Formalizar/revisar a estrutura de controles internos, a gestão de riscos e a política de cibersegurança exigidas pela regulação da CVM para a atividade."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: cvm_continuidade_custodia
+    name: "Continuidade + controles de mercado/custódia"
+    description: "Elaborar e testar o plano de continuidade e endereçar os controles de mercado/custódia e suitability quando aplicáveis à atividade regulada pela CVM."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20
