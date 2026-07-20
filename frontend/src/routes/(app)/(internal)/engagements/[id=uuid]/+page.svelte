@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { safeTranslate } from '$lib/utils/i18n';
+	import BurndownChart from '$lib/components/Chart/BurndownChart.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -9,6 +10,7 @@
 	const dash = $derived(data.dashboard);
 	const folderId = $derived(eng?.folder?.id ?? '');
 	const tr = $derived(data.teamResources);
+	const bd = $derived(data.burnDown);
 
 	const utilization = $derived(Math.round(cap?.utilization_pct ?? 0));
 	const barWidth = $derived(Math.min(utilization, 100));
@@ -77,6 +79,32 @@
 			<div><div class="text-surface-600-400">{safeTranslate('loggedHours')}</div><div class="text-lg font-semibold">{cap?.logged_hours ?? 0}</div></div>
 			<div><div class="text-surface-600-400">{safeTranslate('hoursModel')}</div><div class="text-lg font-semibold">{safeTranslate(cap?.hours_model)}</div></div>
 		</div>
+	</section>
+
+	<!-- burn-down de horas -->
+	<section class="rounded-lg border border-surface-200-800 p-4 space-y-3">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-semibold">{safeTranslate('burnDown')}</h2>
+			<a class="text-sm text-primary-500 hover:underline" href="/time-entries">{safeTranslate('logHours')} →</a>
+		</div>
+		{#if bd && bd.logged_total > 0}
+			<BurndownChart
+				name={eng?.id}
+				actual={bd.actual}
+				ideal={bd.ideal}
+				labelActual={safeTranslate('actualBurn')}
+				labelIdeal={safeTranslate('idealBurn')}
+			/>
+			<div class="grid grid-cols-3 gap-3 text-sm">
+				<div><div class="text-surface-600-400">{safeTranslate('budgetHours')}</div><div class="text-lg font-semibold">{bd.budget ?? '—'}</div></div>
+				<div><div class="text-surface-600-400">{safeTranslate('hoursLogged')}</div><div class="text-lg font-semibold">{bd.logged_total}</div></div>
+				<div><div class="text-surface-600-400">{safeTranslate('remainingHours')}</div><div class="text-lg font-semibold">{bd.budget != null ? Math.max(bd.budget - bd.logged_total, 0) : '—'}</div></div>
+			</div>
+		{:else}
+			<div class="rounded-lg border border-dashed border-surface-300-700 p-4 text-sm text-surface-600-400">
+				{safeTranslate('noTimeLogged')} · <a class="text-primary-500 hover:underline" href="/time-entries">{safeTranslate('logHours')}</a>
+			</div>
+		{/if}
 	</section>
 
 	<!-- fases -->

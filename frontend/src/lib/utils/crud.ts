@@ -176,6 +176,22 @@ type ModelMap = {
 };
 
 export const URL_MODEL_MAP: ModelMap = {
+	'time-entries': {
+		endpointUrl: 'delivery/time-entries',
+		name: 'timeentry',
+		localName: 'timeEntry',
+		localNamePlural: 'timeEntries',
+		verboseName: 'Time entry',
+		verboseNamePlural: 'Time entries',
+		foreignKeyFields: [
+			{ field: 'engagement', urlModel: 'engagements', endpointUrl: 'delivery/engagements' },
+			{ field: 'plan_task', urlModel: 'plan-tasks', endpointUrl: 'delivery/plan-tasks' },
+			{ field: 'applied_control', urlModel: 'applied-controls' },
+			{ field: 'user', urlModel: 'users' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }, { field: 'engagement' }]
+	},
 	// --- vCISO delivery ---
 	'plan-tasks': {
 		endpointUrl: 'delivery/plan-tasks',

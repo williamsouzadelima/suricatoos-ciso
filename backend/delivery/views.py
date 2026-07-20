@@ -1,6 +1,7 @@
 """ViewSets do app delivery. Herdam BaseModelViewSet (filtro RBAC por folder de graça).
 O shim local aponta serializers_module para 'delivery.serializers'."""
 from collections import Counter
+from datetime import timedelta
 from wsgiref.util import FileWrapper
 
 from django.db.models import Sum, Count
@@ -129,6 +130,41 @@ class EngagementViewSet(BaseModelViewSet):
                 "kanban_status": dict(status_counter),
                 "eisenhower": dict(quad_counter),
                 "phases": phases,
+            }
+        )
+
+    @action(detail=True, methods=["get"], name="Burn-down of logged hours")
+    def burn_down(self, request, pk):
+        eng = self.get_object()
+        budget = float(eng.contracted_hours) if eng.contracted_hours is not None else None
+        day_zero = eng.day_zero
+        day_end = (day_zero + timedelta(days=100)) if day_zero else None
+        entries = (
+            TimeEntry.objects.filter(engagement=eng)
+            .order_by("date")
+            .values("date", "hours")
+        )
+        actual = []
+        cum = 0.0
+        if budget is not None and day_zero:
+            actual.append([day_zero.isoformat(), budget])  # início: orçamento cheio restante
+        for e in entries:
+            cum += float(e["hours"])
+            d = e["date"].isoformat()
+            actual.append([d, max(budget - cum, 0) if budget is not None else cum])
+        ideal = None
+        if budget is not None and day_zero and day_end:
+            ideal = [[day_zero.isoformat(), budget], [day_end.isoformat(), 0]]
+        return Response(
+            {
+                "budget": budget,
+                "hours_model": eng.hours_model,
+                "day_zero": day_zero.isoformat() if day_zero else None,
+                "day_end": day_end.isoformat() if day_end else None,
+                "logged_total": float(eng.logged_hours_total),
+                "actual": actual,
+                "ideal": ideal,
+                "mode": "burndown" if budget is not None else "burnup",
             }
         )
 

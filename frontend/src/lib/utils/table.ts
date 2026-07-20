@@ -1390,6 +1390,13 @@ export const listViewFields = {
 			folder: DOMAIN_FILTER
 		}
 	},
+	'time-entries': {
+		head: ['date', 'hours', 'engagement', 'domain'],
+		body: ['date', 'hours', 'engagement', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
 	perimeters: {
 		head: ['ref_id', 'name', 'description', 'defaultAssignee', 'domain'],
 		body: ['ref_id', 'name', 'description', 'default_assignee', 'folder'],

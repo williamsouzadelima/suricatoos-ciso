@@ -1840,7 +1840,18 @@ export const ClientIntakeSchema = z.object({
 	primary_frameworks: z.string().uuid().optional().array().optional()
 });
 
+export const TimeEntrySchema = z.object({
+	engagement: z.string(),
+	plan_task: z.string().optional().nullable(),
+	applied_control: z.string().optional().nullable(),
+	user: z.string().uuid().optional().nullable(),
+	hours: z.number(),
+	date: z.string(),
+	billable: z.boolean().optional().default(true),
+	note: z.string().optional()
+});
 const SCHEMA_MAP: Record<string, ZodSchema> = {
+	'time-entries': TimeEntrySchema,
 	'plan-tasks': PlanTaskSchema,
 	'plan-phases': PlanPhaseSchema,
 	'client-intakes': ClientIntakeSchema,

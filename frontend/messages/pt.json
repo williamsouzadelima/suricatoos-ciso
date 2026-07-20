@@ -5304,5 +5304,16 @@
 	"addTeamMember": "atribuir acesso",
 	"noResourcesYet": "Nenhum recurso cadastrado ainda",
 	"addResource": "adicionar recurso",
-	"exportPptx": "Exportar PPTX"
+	"exportPptx": "Exportar PPTX",
+	"timeEntry": "Lançamento de horas",
+	"timeEntries": "Lançamentos de horas",
+	"addTimeEntry": "Adicionar lançamento",
+	"logHours": "Lançar horas",
+	"burnDown": "Burn-down de horas",
+	"hoursLogged": "Horas lançadas",
+	"budgetHours": "Orçamento",
+	"remainingHours": "Restante",
+	"noTimeLogged": "Nenhuma hora lançada ainda",
+	"idealBurn": "Ideal",
+	"actualBurn": "Realizado"
 }
