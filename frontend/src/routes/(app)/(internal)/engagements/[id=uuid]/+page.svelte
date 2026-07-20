@@ -54,6 +54,9 @@
 			<a class="rounded-md border border-surface-300-700 px-3 py-2 text-sm font-medium hover:bg-surface-100-900" href="/my-assignments">
 				<i class="fa-solid fa-list-check mr-1"></i>{safeTranslate('myAssignments')}
 			</a>
+			<a class="rounded-md border border-surface-300-700 px-3 py-2 text-sm font-medium hover:bg-surface-100-900" href="/engagements/{eng?.id}/export/pptx">
+				<i class="fa-solid fa-file-powerpoint mr-1 text-orange-600"></i>{safeTranslate('exportPptx')}
+			</a>
 		</div>
 	</header>
 

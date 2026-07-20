@@ -5303,5 +5303,6 @@
 	"noTeamYet": "Nenhum time atribuído a este cliente ainda",
 	"addTeamMember": "atribuir acesso",
 	"noResourcesYet": "Nenhum recurso cadastrado ainda",
-	"addResource": "adicionar recurso"
+	"addResource": "adicionar recurso",
+	"exportPptx": "Exportar PPTX"
 }

@@ -5303,5 +5303,6 @@
 	"noTeamYet": "No team assigned to this client yet",
 	"addTeamMember": "assign access",
 	"noResourcesYet": "No resources registered yet",
-	"addResource": "add resource"
+	"addResource": "add resource",
+	"exportPptx": "Export PPTX"
 }

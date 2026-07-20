@@ -1,8 +1,10 @@
 """ViewSets do app delivery. Herdam BaseModelViewSet (filtro RBAC por folder de graça).
 O shim local aponta serializers_module para 'delivery.serializers'."""
 from collections import Counter
+from wsgiref.util import FileWrapper
 
 from django.db.models import Sum, Count
+from django.http import StreamingHttpResponse
 from django.utils import timezone
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -168,6 +170,29 @@ class EngagementViewSet(BaseModelViewSet):
                 "resources_count": len(resources),
             }
         )
+
+    @action(detail=True, methods=["get"], name="Engagement PPTX report")
+    def report_pptx(self, request, pk):
+        from .pptx_engagement import build_engagement_pptx
+
+        eng = self.get_object()
+        prefs = getattr(request.user, "preferences", None) or {}
+        lang = prefs.get("lang", "pt") if isinstance(prefs, dict) else "pt"
+        if lang not in ("pt", "en", "fr"):
+            lang = "pt"
+        buf = build_engagement_pptx(eng, lang)
+        safe = "".join(
+            c if c.isalnum() or c in ".-_" else "_" for c in (eng.folder.name or "engajamento")
+        )
+        resp = StreamingHttpResponse(
+            FileWrapper(buf),
+            content_type=(
+                "application/vnd.openxmlformats-officedocument"
+                ".presentationml.presentation"
+            ),
+        )
+        resp["Content-Disposition"] = f'attachment; filename="engajamento-{safe}.pptx"'
+        return resp
 
     @action(detail=True, methods=["post"], name="Seed the 100-day plan")
     def seed_plan(self, request, pk):
