@@ -9,6 +9,12 @@ from core.utils import RoleCodename, UserGroupCodename
 logger = get_logger(__name__)
 
 READER_PERMISSIONS_LIST = [
+    # vCISO delivery (Suricatoos, aditivo)
+    "view_engagement",
+    "view_clientintake",
+    "view_engagementphase",
+    "view_plantask",
+    "view_timeentry",
     "view_customfielddefinition",
     "view_compliance_assessment_full",
     "view_object_audittrail",
@@ -136,6 +142,12 @@ READER_PERMISSIONS_LIST = [
 ]
 
 APPROVER_PERMISSIONS_LIST = [
+    # vCISO delivery (Suricatoos, aditivo)
+    "view_engagement",
+    "view_clientintake",
+    "view_engagementphase",
+    "view_plantask",
+    "view_timeentry",
     "view_customfielddefinition",
     "view_compliance_assessment_full",
     "view_perimeter",
@@ -249,6 +261,27 @@ APPROVER_PERMISSIONS_LIST = [
 ]
 
 ANALYST_PERMISSIONS_LIST = [
+    # vCISO delivery (Suricatoos, aditivo)
+    "add_engagement",
+    "view_engagement",
+    "change_engagement",
+    "delete_engagement",
+    "add_clientintake",
+    "view_clientintake",
+    "change_clientintake",
+    "delete_clientintake",
+    "add_engagementphase",
+    "view_engagementphase",
+    "change_engagementphase",
+    "delete_engagementphase",
+    "add_plantask",
+    "view_plantask",
+    "change_plantask",
+    "delete_plantask",
+    "add_timeentry",
+    "view_timeentry",
+    "change_timeentry",
+    "delete_timeentry",
     "view_customfielddefinition",
     "view_compliance_assessment_full",
     "view_object_audittrail",
@@ -615,6 +648,27 @@ ANALYST_PERMISSIONS_LIST = [
 ]
 
 DOMAIN_MANAGER_PERMISSIONS_LIST = [
+    # vCISO delivery (Suricatoos, aditivo)
+    "add_engagement",
+    "view_engagement",
+    "change_engagement",
+    "delete_engagement",
+    "add_clientintake",
+    "view_clientintake",
+    "change_clientintake",
+    "delete_clientintake",
+    "add_engagementphase",
+    "view_engagementphase",
+    "change_engagementphase",
+    "delete_engagementphase",
+    "add_plantask",
+    "view_plantask",
+    "change_plantask",
+    "delete_plantask",
+    "add_timeentry",
+    "view_timeentry",
+    "change_timeentry",
+    "delete_timeentry",
     "add_customfielddefinition",
     "view_customfielddefinition",
     "change_customfielddefinition",
@@ -1029,6 +1083,27 @@ DOMAIN_MANAGER_PERMISSIONS_LIST = [
 ]
 
 ADMINISTRATOR_PERMISSIONS_LIST = [
+    # vCISO delivery (Suricatoos, aditivo)
+    "add_engagement",
+    "view_engagement",
+    "change_engagement",
+    "delete_engagement",
+    "add_clientintake",
+    "view_clientintake",
+    "change_clientintake",
+    "delete_clientintake",
+    "add_engagementphase",
+    "view_engagementphase",
+    "change_engagementphase",
+    "delete_engagementphase",
+    "add_plantask",
+    "view_plantask",
+    "change_plantask",
+    "delete_plantask",
+    "add_timeentry",
+    "view_timeentry",
+    "change_timeentry",
+    "delete_timeentry",
     "add_customfielddefinition",
     "view_customfielddefinition",
     "change_customfielddefinition",

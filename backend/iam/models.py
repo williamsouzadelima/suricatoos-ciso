@@ -76,6 +76,7 @@ ALLOWED_PERMISSION_APPS = (
     "pmbok",
     "iam",
     "global_settings",
+    "delivery",
 )
 
 IGNORED_PERMISSION_MODELS = (
