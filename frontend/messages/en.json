@@ -5315,5 +5315,14 @@
 	"remainingHours": "Remaining",
 	"noTimeLogged": "No hours logged yet",
 	"idealBurn": "Ideal",
-	"actualBurn": "Actual"
+	"actualBurn": "Actual",
+	"onboardingWizardHint": "Provision a new client and seed the 100-day plan",
+	"stepClient": "Client",
+	"stepContract": "Contract",
+	"stepReview": "Review",
+	"companyName": "Company name",
+	"regulatoryModules": "Regulatory modules",
+	"createGapAssessments": "Create CVM/ANBIMA gap-assessments",
+	"onboardingReviewNote": "This creates the client domain, the engagement and the 100-day plan (tasks land in the Kanban).",
+	"provisionClient": "Provision client"
 }

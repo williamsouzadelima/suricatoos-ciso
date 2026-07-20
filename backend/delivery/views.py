@@ -1,7 +1,7 @@
 """ViewSets do app delivery. Herdam BaseModelViewSet (filtro RBAC por folder de graça).
 O shim local aponta serializers_module para 'delivery.serializers'."""
 from collections import Counter
-from datetime import timedelta
+from datetime import date, timedelta
 from wsgiref.util import FileWrapper
 
 from django.db.models import Sum, Count
@@ -229,6 +229,102 @@ class EngagementViewSet(BaseModelViewSet):
         )
         resp["Content-Disposition"] = f'attachment; filename="engajamento-{safe}.pptx"'
         return resp
+
+    # slug do framework por módulo regulatório (para gap-assessment opcional)
+    _FRAMEWORK_SLUGS = {
+        "bacen": "bacen-cmn-4893-2021",
+        "anbima": "anbima-deveres-basicos-ciber",
+        "cvm": "cvm-21-2021",
+        "lgpd": "lgpd",
+    }
+
+    @action(detail=False, methods=["post"], name="Onboard a new client")
+    def onboard(self, request):
+        from core.models import Perimeter, Framework, ComplianceAssessment
+
+        data = request.data
+        name = (data.get("company_name") or data.get("name") or "").strip()
+        if not name:
+            return Response({"detail": "company_name é obrigatório."}, status=400)
+        dz = data.get("day_zero")
+        if not dz:
+            return Response({"detail": "day_zero é obrigatório."}, status=400)
+        try:
+            day_zero = date.fromisoformat(str(dz)[:10])
+        except ValueError:
+            return Response({"detail": "day_zero inválido (use AAAA-MM-DD)."}, status=400)
+
+        modules = data.get("modules") or []
+        if isinstance(modules, str):
+            modules = [m.strip() for m in modules.split(",") if m.strip()]
+        raw_hours = data.get("contracted_hours")
+        hours = float(raw_hours) if raw_hours not in (None, "") else None
+        hours_model = data.get("hours_model") or Engagement.HoursModel.BUDGET
+        subsector = data.get("subsector") or ""
+
+        folder, _ = create_client_folder(name)
+        eng, created = Engagement.objects.get_or_create(
+            folder=folder,
+            status=Engagement.Status.ONBOARDING,
+            defaults={
+                "name": f"Engajamento vCISO — {name}",
+                "hours_model": hours_model,
+                "contracted_hours": hours,
+                "day_zero": day_zero,
+            },
+        )
+        if eng.day_zero is None:
+            eng.day_zero = day_zero
+        if hours is not None:
+            eng.contracted_hours = hours
+        eng.hours_model = hours_model
+        eng.save()
+
+        result = seed_engagement_plan(eng, modules=modules)
+
+        ClientIntake.objects.get_or_create(
+            engagement=eng,
+            folder=folder,
+            defaults={
+                "name": name,
+                "company_name": name,
+                "subsector": subsector,
+                "provisioning_status": ClientIntake.Provisioning.PROVISIONED,
+            },
+        )
+
+        assessments = []
+        if data.get("create_assessments"):
+            per, _ = Perimeter.objects.get_or_create(
+                name=f"Escopo vCISO — {name}", folder=folder
+            )
+            for m in modules:
+                slug = self._FRAMEWORK_SLUGS.get(m)
+                if not slug:
+                    continue
+                fw = Framework.objects.filter(urn__endswith=":" + slug).first()
+                if not fw:
+                    continue
+                ca, made = ComplianceAssessment.objects.get_or_create(
+                    name=f"Gap Assessment {m.upper()} — {name}",
+                    framework=fw,
+                    perimeter=per,
+                    folder=folder,
+                )
+                if made:
+                    ca.create_requirement_assessments()
+                assessments.append(m)
+
+        return Response(
+            {
+                "engagement": str(eng.id),
+                "folder": str(folder.id),
+                "created": created,
+                "applied_controls": result["applied_controls"],
+                "plan_tasks": result["plan_tasks"],
+                "assessments": assessments,
+            }
+        )
 
     @action(detail=True, methods=["post"], name="Seed the 100-day plan")
     def seed_plan(self, request, pk):

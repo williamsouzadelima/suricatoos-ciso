@@ -71,7 +71,7 @@ export const navData = {
 				{
 					name: 'clientOnboarding',
 					fa_icon: 'fa-solid fa-user-plus',
-					href: '/client-intakes',
+					href: '/client-onboarding',
 					permissions: ['view_clientintake']
 				},
 				{
