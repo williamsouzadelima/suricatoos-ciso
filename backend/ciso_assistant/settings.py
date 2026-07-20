@@ -427,6 +427,7 @@ INSTALLED_APPS = [
     "tprm",
     "privacy",
     "resilience",
+    "delivery",
     "crq",
     "custom_fields",
     "metrology",
