@@ -260,8 +260,7 @@ export const URL_MODEL_MAP: ModelMap = {
 		verboseName: 'Client intake',
 		verboseNamePlural: 'Client intakes',
 		foreignKeyFields: [
-			{ field: 'folder', urlModel: 'folders', urlParams: 'content_type=DO&content_type=GL' },
-			{ field: 'primary_frameworks', urlModel: 'frameworks' }
+			{ field: 'folder', urlModel: 'folders', urlParams: 'content_type=DO&content_type=GL' }
 		],
 		selectFields: [{ field: 'subsector' }],
 		filters: [{ field: 'folder' }, { field: 'subsector' }]

@@ -44,7 +44,6 @@ class ClientIntakeReadSerializer(BaseModelSerializer):
     str = serializers.CharField(source="__str__")
     folder = FieldsRelatedField()
     engagement = FieldsRelatedField()
-    primary_frameworks = FieldsRelatedField(many=True)
 
     class Meta:
         model = ClientIntake
@@ -62,7 +61,6 @@ class EngagementPhaseReadSerializer(BaseModelSerializer):
     str = serializers.CharField(source="__str__")
     folder = FieldsRelatedField()
     engagement = FieldsRelatedField()
-    organisation_objective = FieldsRelatedField()
     date_start = serializers.DateField(read_only=True)
     date_end = serializers.DateField(read_only=True)
     tasks_count = serializers.SerializerMethodField()
@@ -88,7 +86,6 @@ class PlanTaskReadSerializer(BaseModelSerializer):
     engagement = FieldsRelatedField()
     phase = FieldsRelatedField(["id", "name", "order"])
     applied_control = FieldsRelatedField(_AC_FIELDS)
-    task_template = FieldsRelatedField()
     eisenhower = serializers.SerializerMethodField()
 
     class Meta:

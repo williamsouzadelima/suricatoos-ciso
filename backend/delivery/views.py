@@ -525,7 +525,6 @@ class PlanTaskViewSet(BaseModelViewSet):
         "phase",
         "folder",
         "applied_control",
-        "task_template",
     ]
     search_fields = ["template_key"]
 

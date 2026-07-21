@@ -15,10 +15,7 @@ from iam.models import FolderMixin, User
 from core.base_models import AbstractBaseModel, NameDescriptionMixin
 from core.models import (
     AppliedControl,
-    TaskTemplate,
     Perimeter,
-    OrganisationObjective,
-    Framework,
     Asset,
 )
 
@@ -49,9 +46,6 @@ class Engagement(NameDescriptionMixin, FolderMixin):
         related_name="delivery_engagements",
         verbose_name=_("Perimeter"),
     )
-    reference = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Contract reference")
-    )
     hours_model = models.CharField(
         max_length=20,
         choices=HoursModel.choices,
@@ -65,18 +59,9 @@ class Engagement(NameDescriptionMixin, FolderMixin):
         blank=True,
         verbose_name=_("Contracted hours"),
     )
-    hourly_rate = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        null=True,
-        blank=True,
-        verbose_name=_("Hourly rate (override of global daily rate / 8)"),
-    )
     day_zero = models.DateField(
         null=True, blank=True, verbose_name=_("Day zero (plan anchor)")
     )
-    start_date = models.DateField(null=True, blank=True, verbose_name=_("Start date"))
-    end_date = models.DateField(null=True, blank=True, verbose_name=_("End date"))
     sla = models.JSONField(default=dict, blank=True, verbose_name=_("SLA"))
     status = models.CharField(
         max_length=20,
@@ -143,15 +128,6 @@ class ClientIntake(NameDescriptionMixin, FolderMixin):
     subsector = models.CharField(
         max_length=30, choices=Subsector.choices, blank=True
     )
-    industry = models.CharField(max_length=120, blank=True)
-    country = models.CharField(max_length=100, blank=True)
-    employee_count = models.PositiveIntegerField(null=True, blank=True)
-    primary_frameworks = models.ManyToManyField(
-        Framework, blank=True, related_name="delivery_intakes"
-    )
-    contacts = models.JSONField(default=dict, blank=True)
-    answers = models.JSONField(default=dict, blank=True)
-    assets_seed = models.JSONField(default=list, blank=True)
     provisioning_status = models.CharField(
         max_length=20, choices=Provisioning.choices, default=Provisioning.DRAFT
     )
@@ -175,13 +151,6 @@ class EngagementPhase(NameDescriptionMixin, FolderMixin):
     day_start = models.PositiveSmallIntegerField(default=0)
     day_end = models.PositiveSmallIntegerField(default=30)
     objective = models.TextField(blank=True)
-    organisation_objective = models.ForeignKey(
-        OrganisationObjective,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="delivery_phases",
-    )
 
     class Meta:
         ordering = ["order"]
@@ -211,8 +180,7 @@ class EngagementPhase(NameDescriptionMixin, FolderMixin):
 
 
 class PlanTask(AbstractBaseModel, FolderMixin):
-    """Ponte (o coração do design): camada fase/horas/Eisenhower sobre a tarefa real
-    (AppliedControl para tarefas de board, ou TaskTemplate para recorrentes)."""
+    """Ponte: camada fase/horas/Eisenhower sobre a tarefa real (AppliedControl)."""
 
     engagement = models.ForeignKey(
         Engagement, on_delete=models.CASCADE, related_name="plan_tasks"
@@ -222,13 +190,6 @@ class PlanTask(AbstractBaseModel, FolderMixin):
     )
     applied_control = models.ForeignKey(
         AppliedControl,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name="delivery_plan_task",
-    )
-    task_template = models.ForeignKey(
-        TaskTemplate,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
@@ -247,17 +208,6 @@ class PlanTask(AbstractBaseModel, FolderMixin):
         verbose_name = _("Plan task")
         verbose_name_plural = _("Plan tasks")
         constraints = [
-            models.CheckConstraint(
-                name="plantask_exactly_one_target",
-                condition=(
-                    models.Q(
-                        applied_control__isnull=False, task_template__isnull=True
-                    )
-                    | models.Q(
-                        applied_control__isnull=True, task_template__isnull=False
-                    )
-                ),
-            ),
             models.UniqueConstraint(
                 fields=["engagement", "template_key"],
                 condition=~models.Q(template_key=""),
@@ -273,8 +223,6 @@ class PlanTask(AbstractBaseModel, FolderMixin):
     def __str__(self):
         if self.applied_control_id:
             return self.applied_control.name
-        if self.task_template_id:
-            return self.task_template.name
         return str(self.id)
 
 
