@@ -13,7 +13,7 @@
 			name: t.applied_control?.name ?? t.str ?? '',
 			startDate: t.applied_control?.start_date ? new Date(t.applied_control.start_date) : null,
 			endDate: t.applied_control?.eta ? new Date(t.applied_control.eta) : null,
-			progress: -1,
+			progress: t.applied_control?.progress_field ?? -1,
 			type: 'bar' as const,
 			category: `phase-${t.phase?.order ?? 0}`,
 			categoryLabel: t.phase?.name ?? '',

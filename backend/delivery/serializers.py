@@ -17,7 +17,7 @@ from .models import (
 from .services.eisenhower import derive_eisenhower
 
 # campos "seguros" do AppliedControl que o seed sempre popula
-_AC_FIELDS = ["id", "name", "status", "priority", "effort", "start_date", "eta", "folder"]
+_AC_FIELDS = ["id", "name", "status", "priority", "effort", "start_date", "eta", "folder", "progress_field"]
 
 
 # ---------- Engagement ----------
