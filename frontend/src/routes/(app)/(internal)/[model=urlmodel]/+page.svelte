@@ -42,6 +42,18 @@
 			}
 		}
 	});
+
+	let depHero = $state<{ count: number; catalogs: number; withAsset: number } | null>(null);
+	onMount(async () => {
+		if (data.URLModel === 'catalog-dependencies') {
+			try {
+				const r = await fetch('/catalog-dependencies/summary');
+				if (r.ok) depHero = await r.json();
+			} catch (e) {
+				/* hero é decorativo — ignora falha */
+			}
+		}
+	});
 	const toastStore = getToastStore();
 	let URLModel = $derived(data.URLModel);
 	// Static (per-model) filters merged with dynamic custom-field filters.
@@ -263,6 +275,64 @@
 						<div class="text-xs uppercase tracking-wide text-white/70">{lbl}</div>
 					</div>
 				{/each}
+			</div>
+		</div>
+	</section>
+{/if}
+
+{#if URLModel === 'catalog-dependencies'}
+	<section
+		class="mb-4 overflow-hidden rounded-2xl text-white shadow-xl"
+		style="background: linear-gradient(135deg, oklch(47% 0.19 268deg), oklch(44% 0.19 292deg) 55%, oklch(48% 0.18 315deg));"
+	>
+		<div class="relative p-6 sm:p-8">
+			<div
+				class="pointer-events-none absolute inset-0"
+				style="background: radial-gradient(520px 240px at 88% -10%, rgba(255,255,255,.16), transparent 60%), radial-gradient(420px 220px at -5% 115%, rgba(129,127,245,.30), transparent 55%);"
+			></div>
+			<div class="relative flex flex-wrap items-center justify-between gap-6">
+				<div class="min-w-0">
+					<div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/70">
+						<i class="fa-solid fa-diagram-project"></i> Módulo · Entrega vCISO
+					</div>
+					<h1
+						class="mt-2 text-3xl font-bold leading-tight sm:text-4xl"
+						style="font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
+					>
+						Dependências tecnológicas
+					</h1>
+					<p class="mt-2 max-w-2xl text-sm text-white/80">
+						As tecnologias que sustentam cada catálogo de negócio e o custo anual de mantê-las.
+					</p>
+					<div class="mt-4 flex flex-wrap gap-2">
+						<a
+							href="/business-catalogs"
+							class="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/[0.12] px-3.5 py-2 text-sm font-semibold transition-colors hover:bg-white/[0.24]"
+						>
+							<i class="fa-solid fa-boxes-stacked"></i>Catálogos de negócio
+						</a>
+					</div>
+				</div>
+				<div class="text-center">
+					<div class="text-5xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+						{depHero?.count ?? '—'}
+					</div>
+					<div class="text-xs uppercase tracking-wide text-white/70">Dependências</div>
+				</div>
+			</div>
+			<div class="relative mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-3">
+				<div class="bg-white/[0.04] px-4 py-3">
+					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{depHero?.catalogs ?? 0}</div>
+					<div class="text-xs uppercase tracking-wide text-white/70">Catálogos cobertos</div>
+				</div>
+				<div class="bg-white/[0.04] px-4 py-3">
+					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{depHero?.withAsset ?? 0}</div>
+					<div class="text-xs uppercase tracking-wide text-white/70">Com ativo vinculado</div>
+				</div>
+				<div class="bg-white/[0.04] px-4 py-3">
+					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{(depHero?.count ?? 0) - (depHero?.withAsset ?? 0)}</div>
+					<div class="text-xs uppercase tracking-wide text-white/70">Sem ativo</div>
+				</div>
 			</div>
 		</div>
 	</section>
