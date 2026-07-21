@@ -3,12 +3,12 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
-	const [ssRes, hmRes] = await Promise.all([
-		fetch(`${BASE_API_URL}/delivery/client-intakes/subsector/`),
+	const [txRes, hmRes] = await Promise.all([
+		fetch(`${BASE_API_URL}/delivery/client-intakes/taxonomy/`),
 		fetch(`${BASE_API_URL}/delivery/engagements/hours_model/`)
 	]);
 	return {
-		subsectors: ssRes.ok ? await ssRes.json() : {},
+		taxonomy: txRes.ok ? await txRes.json() : {},
 		hoursModels: hmRes.ok ? await hmRes.json() : {}
 	};
 };
@@ -19,6 +19,7 @@ export const actions: Actions = {
 		const body = {
 			company_name: String(fd.get('company_name') ?? '').trim(),
 			website: String(fd.get('website') ?? '').trim(),
+			sector: String(fd.get('sector') ?? ''),
 			subsector: String(fd.get('subsector') ?? ''),
 			day_zero: String(fd.get('day_zero') ?? ''),
 			contracted_hours: fd.get('contracted_hours') ? Number(fd.get('contracted_hours')) : null,

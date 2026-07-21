@@ -29,6 +29,7 @@ from .models import (
 )
 from .serializers import PlanTaskReadSerializer
 from .services.seeding import seed_engagement_plan
+from .taxonomy import subsector_choices, taxonomy_payload
 from .services.provisioning import create_client_folder
 from .services.eisenhower import derive_eisenhower
 
@@ -310,6 +311,7 @@ class EngagementViewSet(BaseModelViewSet):
         hours = float(raw_hours) if raw_hours not in (None, "") else None
         hours_model = data.get("hours_model") or Engagement.HoursModel.BUDGET
         subsector = data.get("subsector") or ""
+        sector = data.get("sector") or ""
 
         folder, _ = create_client_folder(name)
         eng, created = Engagement.objects.get_or_create(
@@ -337,6 +339,7 @@ class EngagementViewSet(BaseModelViewSet):
             defaults={
                 "name": name,
                 "company_name": name,
+                "sector": sector,
                 "subsector": subsector,
                 "provisioning_status": ClientIntake.Provisioning.PROVISIONED,
             },
@@ -491,7 +494,11 @@ class ClientIntakeViewSet(BaseModelViewSet):
 
     @action(detail=False, name="Get subsector choices")
     def subsector(self, request):
-        return Response(dict(ClientIntake.Subsector.choices))
+        return Response(dict(subsector_choices()))
+
+    @action(detail=False, name="Get sector taxonomy")
+    def taxonomy(self, request):
+        return Response(taxonomy_payload())
 
     @action(detail=True, methods=["post"], name="Provision client structure")
     def provision(self, request, pk):

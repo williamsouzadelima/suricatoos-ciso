@@ -13,6 +13,7 @@ from auditlog.registry import auditlog
 
 from iam.models import FolderMixin, User
 from core.base_models import AbstractBaseModel, NameDescriptionMixin
+from .taxonomy import sector_choices, subsector_choices
 from core.models import (
     AppliedControl,
     Perimeter,
@@ -111,12 +112,6 @@ class ClientIntake(NameDescriptionMixin, FolderMixin):
         SUBMITTED = "submitted", _("Submitted")
         PROVISIONED = "provisioned", _("Provisioned")
 
-    class Subsector(models.TextChoices):
-        BANK = "bank", _("Bank / credit institution")
-        ASSET_MANAGER = "asset_manager", _("Asset manager (ANBIMA)")
-        BROKER = "broker", _("Broker / DTVM (CVM)")
-        OTHER = "other", _("Other / hybrid")
-
     engagement = models.ForeignKey(
         Engagement,
         on_delete=models.SET_NULL,
@@ -125,8 +120,9 @@ class ClientIntake(NameDescriptionMixin, FolderMixin):
         related_name="intakes",
     )
     company_name = models.CharField(max_length=255, blank=True)
+    sector = models.CharField(max_length=40, choices=sector_choices(), blank=True)
     subsector = models.CharField(
-        max_length=30, choices=Subsector.choices, blank=True
+        max_length=60, choices=subsector_choices(), blank=True
     )
     provisioning_status = models.CharField(
         max_length=20, choices=Provisioning.choices, default=Provisioning.DRAFT
