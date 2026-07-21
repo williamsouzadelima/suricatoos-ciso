@@ -189,7 +189,18 @@ def build_engagement_pptx(engagement, lang="pt"):
 
     intake = ClientIntake.objects.filter(folder=folder).first()
     subsector = intake.subsector if (intake and intake.subsector) else ""
-    sector_label = SUBSECTOR.get(subsector, "Setor financeiro — mercado de capitais")
+    if subsector:
+        sector_label = SUBSECTOR.get(subsector, "Setor financeiro — mercado de capitais")
+    else:
+        fwset = " ".join(f[0] for f in fw_info).upper()
+        if "ANBIMA" in fwset and "CVM" in fwset:
+            sector_label = "Gestora de recursos · valores mobiliários (ANBIMA · CVM)"
+        elif "ANBIMA" in fwset:
+            sector_label = SUBSECTOR["asset_manager"]
+        elif "CVM" in fwset:
+            sector_label = SUBSECTOR["broker"]
+        else:
+            sector_label = "Setor financeiro — mercado de capitais"
     fw_chips = [f[0].replace("Resolução CVM nº 21/2021", "CVM 21") for f in fw_info] or ["—"]
     fw_chips = [c.replace("ANBIMA", "ANBIMA")[:22] for c in fw_chips]
 
@@ -245,7 +256,7 @@ def build_engagement_pptx(engagement, lang="pt"):
 
     # ---------- S3 Sumário executivo ----------
     sl = new_slide(prs)
-    fase_atual = phases[0].name.split("·")[-1].strip() if phases else "Diagnóstico"
+    fase_atual = (phases[0].name.split("·")[-1].split("&")[0].strip() if phases else "Diagnóstico")
     header(sl, "Visão geral", "Sumário executivo",
            "Plano estabelecido; execução guiada por prioridade dentro do retainer.")
     ky = Inches(2.5)
@@ -342,9 +353,9 @@ def build_engagement_pptx(engagement, lang="pt"):
         ("delegate", "Delegar", "urgente", AMBER),
         ("eliminate", "Eliminar", "nem urgente nem importante", S500),
     ]
-    gx, gy = MX, Inches(2.35)
+    gx, gy = MX, Inches(2.2)
     qcw = (CW - Inches(0.4)) / 2
-    qch = Inches(2.2)
+    qch = Inches(2.0)
     pos = [(gx, gy), (gx + qcw + Inches(0.4), gy),
            (gx, gy + qch + Inches(0.3)), (gx + qcw + Inches(0.4), gy + qch + Inches(0.3))]
     for (key, title, sub, acc), (x, y) in zip(quads, pos):
@@ -359,7 +370,7 @@ def build_engagement_pptx(engagement, lang="pt"):
     if p1:
         sl = new_slide(prs)
         header(sl, "Foco", "Prioridades imediatas (P1)",
-               f"As {len(p1)} tarefas P1 são o que as {monthly}h/mês atacam primeiro.")
+               f"As {len(p1)} tarefas P1 guiam o retainer — as primeiras por prazo abaixo.")
         y = Inches(2.35)
         for i, pt in enumerate(p1[:9]):
             ac = pt.applied_control
@@ -372,7 +383,8 @@ def build_engagement_pptx(engagement, lang="pt"):
             text(sl, MX + Inches(8.5), y, Inches(2.6), Inches(0.46), ph_nm[:26], 10.5,
                  color=S500, anchor=MSO_ANCHOR.MIDDLE)
             text(sl, W - MX - Inches(1.3), y, Inches(1.3), Inches(0.46),
-                 str(ac.eta or ""), 10.5, color=S500, align=PP_ALIGN.RIGHT, anchor=MSO_ANCHOR.MIDDLE)
+                 ac.eta.strftime("%d/%m/%Y") if ac.eta else "", 10.5, color=S500,
+                 align=PP_ALIGN.RIGHT, anchor=MSO_ANCHOR.MIDDLE)
             y += Inches(0.5)
         footer(sl, 7)
 
@@ -401,20 +413,21 @@ def build_engagement_pptx(engagement, lang="pt"):
     sl = new_slide(prs)
     header(sl, "Ativos", "Ativos & superfície mapeada",
            "Superfície pública identificada; o inventário interno é a primeira entrega do diagnóstico.")
-    y = Inches(2.35)
+    y = Inches(2.4)
     colw = (CW - Inches(0.4)) / 2
-    card(sl, MX, y, colw, Inches(3.2), INDIGO)
-    text(sl, MX + Inches(0.3), y + Inches(0.25), colw - Inches(0.6), Inches(0.3),
+    ah = Inches(2.7)
+    card(sl, MX, y, colw, ah, INDIGO)
+    text(sl, MX + Inches(0.3), y + Inches(0.28), colw - Inches(0.6), Inches(0.3),
          "FUNÇÕES DE NEGÓCIO (PRIMARY)", 10, bold=True, color=S500)
-    text(sl, MX + Inches(0.3), y + Inches(0.65), colw - Inches(0.6), Inches(2.3),
-         "\n".join(f"•  {a.name}" for a in primary) or "—", 13, color=S700, spacing=1.35)
+    text(sl, MX + Inches(0.3), y + Inches(0.75), colw - Inches(0.6), Inches(1.8),
+         "\n".join(f"•  {a.name}" for a in primary) or "—", 13, color=S700, spacing=1.4)
     x2 = MX + colw + Inches(0.4)
-    card(sl, x2, y, colw, Inches(3.2), SKY)
-    text(sl, x2 + Inches(0.3), y + Inches(0.25), colw - Inches(0.6), Inches(0.3),
+    card(sl, x2, y, colw, ah, SKY)
+    text(sl, x2 + Inches(0.3), y + Inches(0.28), colw - Inches(0.6), Inches(0.3),
          "SUPERFÍCIE PÚBLICA (SUPPORT)", 10, bold=True, color=S500)
-    text(sl, x2 + Inches(0.3), y + Inches(0.65), colw - Inches(0.6), Inches(2.3),
-         "\n".join(f"•  {a.name}" for a in support) or "—", 13, color=S700, spacing=1.35)
-    text(sl, MX, y + Inches(3.35), CW, Inches(0.4),
+    text(sl, x2 + Inches(0.3), y + Inches(0.75), colw - Inches(0.6), Inches(1.8),
+         "\n".join(f"•  {a.name}" for a in support) or "—", 13, color=S700, spacing=1.4)
+    text(sl, MX, y + ah + Inches(0.3), CW, Inches(0.4),
          "Sistemas internos, bases de dados sensíveis e fornecedores críticos serão inventariados "
          "na Fase 1 (Inventário de ativos e dados).", 11, color=S500, spacing=1.2)
     footer(sl, 9)
