@@ -214,3 +214,117 @@ aside nav {
 .dark .card {
 	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 0 0 1px oklch(22% 0.025 278deg);
 }
+
+
+/* ═══ Suricatoos motion system ══════════════════════════════════════════════
+   Transições de página, animações de entrada e micro-interações.
+   Tudo é desligado sob prefers-reduced-motion (fim do bloco).
+   ──────────────────────────────────────────────────────────────────────── */
+@keyframes st-fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes st-fade-out { from { opacity: 1 } to { opacity: 0 } }
+@keyframes st-fade-up {
+	from { opacity: 0; transform: translateY(10px) }
+	to { opacity: 1; transform: none }
+}
+
+/* conserta a utilitária .animate-fade-in que estava órfã (usada x3) */
+.animate-fade-in { animation: st-fade-in 0.4s ease both }
+.animate-fade-up { animation: st-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both }
+
+/* Cards: containers ganham transição suave de sombra; cards CLICÁVEIS elevam */
+.card {
+	transition: box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease;
+}
+a.card:hover,
+button.card:hover,
+.card.cursor-pointer:hover,
+.card[role='button']:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 26px -10px oklch(59% 0.245 280deg / 0.30);
+}
+.dark a.card:hover,
+.dark button.card:hover,
+.dark .card.cursor-pointer:hover,
+.dark .card[role='button']:hover {
+	box-shadow: 0 12px 30px -8px oklch(0% 0 0 / 0.55), 0 0 0 1px oklch(60% 0.18 280deg / 0.40);
+}
+
+/* Botões: press tátil + hover suave */
+.btn { transition: transform 140ms ease, filter 140ms ease, box-shadow 140ms ease; }
+.btn:active { transform: scale(0.97); }
+
+/* Linhas de tabela + inputs: transições suaves */
+tbody tr { transition: background-color 150ms ease; }
+input, select, textarea { transition: box-shadow 150ms ease, border-color 150ms ease; }
+
+/* ═══ Transições de página (View Transitions API) ══════════════════════════ */
+@keyframes st-vt-out { to { opacity: 0 } }
+@keyframes st-vt-in { from { opacity: 0 } to { opacity: 1 } }
+::view-transition-old(root) { animation: 140ms ease both st-vt-out; }
+::view-transition-new(root) { animation: 260ms cubic-bezier(0.22, 1, 0.36, 1) both st-vt-in; }
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-fade-in, .animate-fade-up,
+	a.card:hover, button.card:hover, .card.cursor-pointer:hover, .card[role='button']:hover,
+	.btn:active {
+		animation: none !important;
+		transform: none !important;
+	}
+	::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+}
+
+
+/* ═══ Chrome polish (Suricatoos) ═══════════════════════════════════════════ */
+/* Separador de breadcrumb (antes sem estilo) */
+.crumb-separator { color: var(--color-surface-400); margin-inline: -0.375rem; user-select: none; }
+
+/* Transição de tela: o CONTEÚDO desliza; o chrome (sidebar/topbar) fica estático */
+@keyframes st-vt-up { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
+::view-transition-old(page-content) { animation: 120ms ease both st-vt-out; }
+::view-transition-new(page-content) { animation: 300ms cubic-bezier(0.22, 1, 0.36, 1) both st-vt-up; }
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(page-content), ::view-transition-new(page-content) { animation: none !important; }
+}
+
+
+/* ═══ Auth premium background (Suricatoos) ═════════════════════════════════ */
+.st-auth-bg {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	overflow: hidden;
+	background:
+		radial-gradient(1200px 600px at 15% -10%, oklch(93% 0.045 280deg), transparent 60%),
+		radial-gradient(900px 520px at 100% 105%, oklch(92% 0.05 315deg), transparent 55%),
+		linear-gradient(160deg, var(--color-surface-100), var(--color-surface-200));
+}
+.dark .st-auth-bg {
+	background:
+		radial-gradient(1000px 620px at 12% -6%, oklch(32% 0.12 280deg), transparent 55%),
+		radial-gradient(820px 520px at 100% 106%, oklch(30% 0.14 312deg), transparent 50%),
+		linear-gradient(160deg, oklch(15% 0.04 278deg), oklch(9% 0.02 275deg));
+}
+.st-auth-orb {
+	position: absolute;
+	border-radius: 9999px;
+	filter: blur(64px);
+	opacity: 0.55;
+	animation: st-orb-float 20s ease-in-out infinite;
+}
+.st-auth-orb-1 {
+	width: 44vw; height: 44vw; left: -8vw; top: -12vw;
+	background: radial-gradient(circle, oklch(60% 0.22 280deg / 0.55), transparent 70%);
+}
+.st-auth-orb-2 {
+	width: 40vw; height: 40vw; right: -12vw; bottom: -14vw;
+	background: radial-gradient(circle, oklch(62% 0.20 320deg / 0.50), transparent 70%);
+	animation-delay: -10s;
+}
+@keyframes st-orb-float {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	50% { transform: translate(3vw, 4vh) scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.st-auth-orb { animation: none; }
+}

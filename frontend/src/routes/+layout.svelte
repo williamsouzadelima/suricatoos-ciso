@@ -7,6 +7,18 @@
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
 	import { browser } from '$app/environment';
+	import { onNavigate } from '$app/navigation';
+
+	// Transições suaves entre páginas via View Transitions API (progressivo; no-op onde não há suporte)
+	onNavigate((navigation) => {
+		if (typeof document === 'undefined' || !document.startViewTransition) return;
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 
 	onMount(() => {
 		document.body.dataset.hydrated = 'true';

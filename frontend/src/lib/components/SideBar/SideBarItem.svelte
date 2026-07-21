@@ -10,10 +10,14 @@
 
 	let { item = [], sideBarVisibleItems }: Props = $props();
 
+	function isActive(href: string) {
+		const p = page.url.pathname;
+		return p === href || (href !== '/' && p.startsWith(href + '/'));
+	}
 	let classesActive = $derived((href: string) =>
-		href === page.url.pathname
-			? 'bg-primary-100-900 text-primary-800-200'
-			: 'hover:bg-primary-50-950 text-surface-950-50 '
+		isActive(href)
+			? 'border-primary-500 bg-primary-100-900 text-primary-800-200 font-medium'
+			: 'border-transparent hover:bg-primary-50-950 text-surface-950-50 '
 	);
 </script>
 
@@ -23,7 +27,7 @@
 		<Anchor
 			href={item.href}
 			breadcrumbAction="replace"
-			class="unstyled flex whitespace-nowrap items-center py-2 text-sm font-normal rounded-base {classesActive(
+			class="unstyled flex whitespace-nowrap items-center py-2 text-sm font-normal rounded-base border-l-2 transition-colors duration-150 {classesActive(
 				item.href ?? ''
 			)}"
 			data-testid={'accordion-item-' + item.href.substring(1)}

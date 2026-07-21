@@ -157,7 +157,7 @@
 <div class="overflow-x-clip">
 	<SideBar bind:open={sidebarOpen} {sideBarVisibleItems} />
 	<AppBar
-		class="sticky top-0 z-50 border-b border-surface-200-800 transition-all duration-300 bg-surface-50-950 w-auto pb-2 px-4 {classesSidebarOpen(
+		class="sticky top-0 z-50 border-b border-surface-200-800 transition-all duration-300 bg-surface-50-950/80 backdrop-blur-lg w-auto pb-2 px-4 {classesSidebarOpen(
 			sidebarOpen
 		)}"
 	>
@@ -228,6 +228,7 @@
 		class="min-h-screen p-8 bg-linear-to-br from-surface-200-800 to-surface-150-850 transition-all duration-300 {classesSidebarOpen(
 			sidebarOpen
 		)}"
+		style="view-transition-name: page-content"
 	>
 		{@render children?.()}
 	</main>

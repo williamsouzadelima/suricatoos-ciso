@@ -85,22 +85,22 @@
 		transitions = true,
 		transitionIn = fly as TransitionIn,
 		transitionInParams = {
-			duration: 150,
+			duration: 200,
 			opacity: 0,
 			x: 0,
-			y: 100
+			y: 16
 		},
 		transitionOut = fly as TransitionOut,
 		transitionOutParams = {
-			duration: 150,
+			duration: 200,
 			opacity: 0,
 			x: 0,
-			y: 100
+			y: 16
 		}
 	}: Props = $props();
 
 	// Base Styles
-	const cBackdrop = 'fixed top-0 left-0 right-0 bottom-0 bg-surface-950/50 p-4';
+	const cBackdrop = 'fixed top-0 left-0 right-0 bottom-0 bg-surface-950/50 backdrop-blur-sm p-4';
 	const cTransitionLayer = 'w-full h-fit min-h-full flex justify-center';
 	const cModal = 'block overflow-y-auto';
 	const cModalImage = 'w-full h-auto';

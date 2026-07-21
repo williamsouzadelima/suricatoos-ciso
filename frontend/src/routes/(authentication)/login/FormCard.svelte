@@ -63,7 +63,7 @@
 </script>
 
 <div
-	class="flex flex-col w-7/8 lg:w-3/4 p-10 rounded-lg shadow-lg bg-surface-50-950 bg-opacity-[.90]"
+	class="flex flex-col w-7/8 lg:w-3/4 p-10 rounded-xl shadow-2xl bg-surface-50-950/85 backdrop-blur-xl ring-1 ring-surface-200-800/40"
 >
 	<div data-testid="login" class="flex flex-col w-full items-center space-y-4">
 		<div class="bg-primary-300 px-6 py-5 rounded-full text-3xl">
