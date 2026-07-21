@@ -30,6 +30,18 @@
 	}
 
 	let { data, form }: Props = $props();
+
+	let catHero = $state<{ count: number; byCrit: Record<string, number>; maintenance: number } | null>(null);
+	onMount(async () => {
+		if (data.URLModel === 'business-catalogs') {
+			try {
+				const r = await fetch('/business-catalogs/summary');
+				if (r.ok) catHero = await r.json();
+			} catch (e) {
+				/* hero é decorativo — ignora falha */
+			}
+		}
+	});
 	const toastStore = getToastStore();
 	let URLModel = $derived(data.URLModel);
 	// Static (per-model) filters merged with dynamic custom-field filters.
@@ -200,6 +212,61 @@
 		};
 	});
 </script>
+
+{#if URLModel === 'business-catalogs'}
+	<section
+		class="mb-4 overflow-hidden rounded-2xl text-white shadow-xl"
+		style="background: linear-gradient(135deg, oklch(49% 0.20 283deg), oklch(43% 0.19 302deg) 58%, oklch(47% 0.17 328deg));"
+	>
+		<div class="relative p-6 sm:p-8">
+			<div
+				class="pointer-events-none absolute inset-0"
+				style="background: radial-gradient(520px 240px at 88% -10%, rgba(255,255,255,.18), transparent 60%), radial-gradient(420px 220px at -5% 115%, rgba(236,132,205,.26), transparent 55%);"
+			></div>
+			<div class="relative flex flex-wrap items-center justify-between gap-6">
+				<div class="min-w-0">
+					<div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-white/70">
+						<i class="fa-solid fa-boxes-stacked"></i> Módulo · Entrega vCISO
+					</div>
+					<h1
+						class="mt-2 text-3xl font-bold leading-tight sm:text-4xl"
+						style="font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
+					>
+						Catálogos de negócio
+					</h1>
+					<p class="mt-2 max-w-2xl text-sm text-white/80">
+						Mapeie as capacidades de negócio do cliente, suas dependências tecnológicas e o custo de
+						mantê-las — e calcule o prejuízo de indisponibilidade por hora.
+					</p>
+					<div class="mt-4 flex flex-wrap gap-2">
+						<a
+							href="/catalog-dependencies"
+							class="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/[0.12] px-3.5 py-2 text-sm font-semibold transition-colors hover:bg-white/[0.24]"
+						>
+							<i class="fa-solid fa-diagram-project"></i>Dependências tecnológicas
+						</a>
+					</div>
+				</div>
+				<div class="text-center">
+					<div class="text-5xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+						{catHero?.count ?? '—'}
+					</div>
+					<div class="text-xs uppercase tracking-wide text-white/70">Catálogos</div>
+				</div>
+			</div>
+			<div class="relative mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-4">
+				{#each [['critical', 'Crítico'], ['high', 'Alto'], ['medium', 'Médio'], ['low', 'Baixo']] as [k, lbl]}
+					<div class="bg-white/[0.04] px-4 py-3">
+						<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+							{catHero?.byCrit?.[k] ?? 0}
+						</div>
+						<div class="text-xs uppercase tracking-wide text-white/70">{lbl}</div>
+					</div>
+				{/each}
+			</div>
+		</div>
+	</section>
+{/if}
 
 {#if data?.table}
 	<div class="shadow-lg">
