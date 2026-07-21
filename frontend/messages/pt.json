@@ -5378,5 +5378,11 @@
 	"totalMaintenanceAnnual": "Manutenção anual total",
 	"viewImpact": "Ver impacto",
 	"noCatalogsYet": "Nenhum catálogo de negócio vinculado ainda.",
-	"addCatalog": "Adicionar catálogo"
+	"addCatalog": "Adicionar catálogo",
+	"regulatoryModulesHint": "Adiciona as tarefas de um módulo regulatório ao plano de 100 dias (ou semeia o plano base). Idempotente — reaplicar não duplica.",
+	"addToPlan": "Aplicar ao plano",
+	"seeding": "Aplicando…",
+	"modulesAdded": "Plano atualizado",
+	"seedFailed": "Falha ao aplicar.",
+	"planUpToDate": "Plano já estava atualizado."
 }

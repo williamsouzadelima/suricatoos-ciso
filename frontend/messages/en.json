@@ -5378,5 +5378,11 @@
 	"totalMaintenanceAnnual": "Total annual maintenance",
 	"viewImpact": "View impact",
 	"noCatalogsYet": "No business catalogs linked yet.",
-	"addCatalog": "Add catalog"
+	"addCatalog": "Add catalog",
+	"regulatoryModulesHint": "Add a regulatory module's tasks to the 100-day plan (or seed the base plan). Idempotent — re-applying won't duplicate.",
+	"addToPlan": "Apply to plan",
+	"seeding": "Applying…",
+	"modulesAdded": "Plan updated",
+	"seedFailed": "Failed to apply.",
+	"planUpToDate": "Plan already up to date."
 }

@@ -54,6 +54,35 @@
 	const bd = $derived(data.burnDown);
 	const catSummary = $derived(data.catalogsSummary);
 
+	const PLAN_MODULES = [
+		{ key: 'anbima', label: 'ANBIMA — Gestora / Asset' },
+		{ key: 'cvm', label: 'CVM — Corretora / DTVM / Adm. de carteiras' },
+		{ key: 'bacen', label: 'BACEN — Banco / Instituição financeira' },
+		{ key: 'lgpd', label: 'LGPD — Privacidade' }
+	];
+	let selectedModules = $state<string[]>([]);
+	let seeding = $state(false);
+	let seedMsg = $state('');
+	async function applyModules(engId: string) {
+		seeding = true;
+		seedMsg = safeTranslate('seeding');
+		const r = await fetch(`/engagements/${engId}/seed-plan`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ modules: selectedModules })
+		});
+		if (r.ok) {
+			const d = await r.json();
+			const n = (d?.plan_tasks ?? 0) as number;
+			seedMsg = n ? safeTranslate('modulesAdded') + ` (+${n})` : safeTranslate('planUpToDate');
+			selectedModules = [];
+			await invalidateAll();
+		} else {
+			seedMsg = safeTranslate('seedFailed');
+		}
+		seeding = false;
+	}
+
 	const utilization = $derived(Math.round(cap?.utilization_pct ?? 0));
 	const barWidth = $derived(Math.min(utilization, 100));
 	const overBudget = $derived(cap?.over_budget ?? false);
@@ -168,6 +197,31 @@
 				</div>
 			{/each}
 		</div>
+	</section>
+
+	<!-- módulos regulatórios / plano -->
+	<section class="rounded-lg border border-surface-200-800 p-4 space-y-3">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-semibold">{safeTranslate('regulatoryModules')}</h2>
+			{#if seedMsg}<span class="text-xs text-primary-500">{seedMsg}</span>{/if}
+		</div>
+		<p class="text-sm text-surface-600-400">{safeTranslate('regulatoryModulesHint')}</p>
+		<div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+			{#each PLAN_MODULES as mod}
+				<label class="flex items-center gap-2 rounded-md border border-surface-200-800 p-2 text-sm">
+					<input type="checkbox" bind:group={selectedModules} value={mod.key} />
+					{mod.label}
+				</label>
+			{/each}
+		</div>
+		<button
+			type="button"
+			disabled={seeding}
+			class="rounded-md bg-primary-500 px-3 py-2 text-sm font-medium text-white hover:bg-primary-600 disabled:opacity-50"
+			onclick={() => applyModules(eng?.id)}
+		>
+			<i class="fa-solid fa-layer-group mr-1"></i>{safeTranslate('addToPlan')}
+		</button>
 	</section>
 
 	<!-- eisenhower resumo -->
