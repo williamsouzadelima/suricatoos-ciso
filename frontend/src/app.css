@@ -15,7 +15,7 @@
    pink/*   → Warm Amber 72° (matches tertiary) — turns gradient headers from pink→violet into amber→indigo. */
 @theme {
 	--font-sans:
-		'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+		'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
 	/* Remap Tailwind violet → Electric Indigo (affects ~46 hardcoded components) */
@@ -393,4 +393,13 @@ aside nav {
 aside nav {
 	background: linear-gradient(176deg, oklch(96% 0.03 283deg), oklch(90.5% 0.06 285deg));
 	border-right: 1px solid color-mix(in oklch, var(--color-primary-500) 24%, var(--color-surface-200));
+}
+
+
+/* ═══ Suricatoos — display headings (Bricolage Grotesque) ══════════════════ */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+#page-title {
+	font-family: 'Bricolage Grotesque', 'Geist', ui-sans-serif, sans-serif;
+	letter-spacing: -0.015em;
 }

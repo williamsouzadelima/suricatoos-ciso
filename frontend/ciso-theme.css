@@ -9,7 +9,7 @@
 	--base-font-color: var(--color-surface-950);
 	--base-font-color-dark: var(--color-surface-50);
 	--base-font-family:
-		'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+		'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 	--base-font-size: inherit;
 	--base-line-height: inherit;
 	--base-font-weight: normal;
@@ -17,7 +17,7 @@
 	--base-letter-spacing: 0em;
 	--heading-font-color: inherit;
 	--heading-font-color-dark: inherit;
-	--heading-font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+	--heading-font-family: 'Bricolage Grotesque', 'Geist', ui-sans-serif, sans-serif;
 	--heading-font-weight: bold;
 	--heading-font-style: normal;
 	--heading-letter-spacing: -0.02em;
