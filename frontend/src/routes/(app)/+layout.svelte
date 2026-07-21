@@ -155,6 +155,7 @@
 
 <!-- App Shell -->
 <div class="overflow-x-clip">
+	<div class="st-ribbon" aria-hidden="true"></div>
 	<SideBar bind:open={sidebarOpen} {sideBarVisibleItems} />
 	<AppBar
 		class="sticky top-0 z-50 border-b border-surface-200-800 transition-all duration-300 bg-surface-50-950/80 backdrop-blur-lg w-auto pb-2 px-4 {classesSidebarOpen(
@@ -164,7 +165,7 @@
 		<div class="flex items-start justify-between px-4">
 			<div>
 				<div
-					class="text-2xl font-bold pb-1 bg-linear-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent"
+					class="text-3xl font-bold tracking-tight pb-1 bg-linear-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent"
 					id="page-title"
 				>
 					{safeTranslate(displayTitle)}

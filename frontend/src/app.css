@@ -23,8 +23,8 @@
 	--color-violet-100: oklch(92.0% 0.050 280deg);
 	--color-violet-200: oklch(86.0% 0.090 280deg);
 	--color-violet-300: oklch(79.0% 0.135 280deg);
-	--color-violet-400: oklch(70.5% 0.195 280deg);
-	--color-violet-500: oklch(59.0% 0.245 280deg);
+	--color-violet-400: oklch(71.5% 0.210 283deg);
+	--color-violet-500: oklch(60.0% 0.262 283deg);
 	--color-violet-600: oklch(52.0% 0.225 280deg);
 	--color-violet-700: oklch(44.5% 0.195 280deg);
 	--color-violet-800: oklch(38.0% 0.165 280deg);
@@ -327,4 +327,70 @@ input, select, textarea { transition: box-shadow 150ms ease, border-color 150ms 
 }
 @media (prefers-reduced-motion: reduce) {
 	.st-auth-orb { animation: none; }
+}
+
+
+/* ═══ Suricatoos — superficies ousadas (pancada visual) ════════════════════ */
+:root { --st-brand: linear-gradient(120deg, oklch(75% 0.17 72deg), oklch(62% 0.262 285deg) 55%, oklch(60% 0.25 320deg)); }
+
+/* Cartões: superfície com gradiente sutil + borda tingida de indigo + elevação com glow */
+.card {
+	background-image: linear-gradient(180deg, oklch(100% 0 0 / 0.55), oklch(100% 0 0 / 0));
+	border-color: color-mix(in oklch, var(--color-primary-500) 15%, var(--color-surface-200));
+	box-shadow: 0 1px 2px oklch(30% 0.05 282deg / 0.06), 0 16px 34px -24px oklch(55% 0.22 282deg / 0.5);
+}
+.dark .card {
+	background-image: linear-gradient(180deg, oklch(45% 0.09 282deg / 0.16), oklch(45% 0.09 282deg / 0));
+	border-color: oklch(33% 0.055 281deg);
+	box-shadow: inset 0 1px 0 0 oklch(50% 0.09 282deg / 0.22), 0 20px 44px -26px #000;
+}
+
+/* Sidebar: gradiente indigo MARCANTE nos dois modos */
+aside nav {
+	background: linear-gradient(176deg, oklch(97.5% 0.018 283deg), oklch(93.5% 0.04 285deg));
+	border-right: 1px solid color-mix(in oklch, var(--color-primary-500) 20%, var(--color-surface-200));
+}
+.dark aside nav {
+	background: linear-gradient(168deg, oklch(21% 0.095 283deg) 0%, oklch(13% 0.055 279deg) 55%, oklch(9.5% 0.032 276deg) 100%);
+	border-right: 1px solid oklch(30% 0.065 281deg);
+}
+
+/* Botões primários preenchidos: gradiente da marca + glow */
+.preset-filled-primary-500 {
+	background-image: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600)) !important;
+	box-shadow: 0 8px 20px -8px oklch(55% 0.24 282deg / 0.5);
+}
+.preset-filled-primary-500:hover { filter: brightness(1.06); }
+
+
+/* ═══ Suricatoos — pancada visual v2 ═══════════════════════════════════════ */
+/* Faixa de marca no topo de TODA a aplicacao (assinatura sempre visivel) */
+.st-ribbon {
+	position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100; pointer-events: none;
+	background: linear-gradient(90deg,
+		oklch(76% 0.17 72deg) 0%,
+		oklch(62% 0.262 285deg) 42%,
+		oklch(60% 0.25 320deg) 78%,
+		oklch(70% 0.20 300deg) 100%);
+	box-shadow: 0 1px 8px -1px oklch(60% 0.24 300deg / 0.5);
+}
+
+/* Acento de marca no topo de cada card (linha de gradiente, sem shift de layout) */
+.card {
+	box-shadow:
+		inset 0 2px 0 0 color-mix(in oklch, var(--color-primary-500) 34%, transparent),
+		0 1px 2px oklch(30% 0.05 282deg / 0.06),
+		0 16px 34px -24px oklch(55% 0.22 282deg / 0.5);
+}
+.dark .card {
+	box-shadow:
+		inset 0 2px 0 0 color-mix(in oklch, var(--color-primary-500) 48%, transparent),
+		inset 0 0 0 1px oklch(50% 0.09 282deg / 0.10),
+		0 20px 44px -26px #000;
+}
+
+/* Sidebar light: indigo claramente perceptivel (ainda claro p/ texto escuro) */
+aside nav {
+	background: linear-gradient(176deg, oklch(96% 0.03 283deg), oklch(90.5% 0.06 285deg));
+	border-right: 1px solid color-mix(in oklch, var(--color-primary-500) 24%, var(--color-surface-200));
 }
