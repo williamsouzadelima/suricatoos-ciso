@@ -8,8 +8,10 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 		fetch(`${BASE_API_URL}/delivery/business-catalogs/${params.id}/impact/`)
 	]);
 	if (!catRes.ok) throw error(catRes.status, 'Catálogo não encontrado');
+	const catalog = await catRes.json();
 	return {
-		catalog: await catRes.json(),
-		impact: impRes.ok ? await impRes.json() : null
+		catalog,
+		impact: impRes.ok ? await impRes.json() : null,
+		title: catalog?.name
 	};
 };
