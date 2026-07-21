@@ -23,6 +23,28 @@
 			await invalidateAll();
 		}
 	}
+	let domainInput = $state(data.engagement?.website ?? '');
+	async function fetchLogoByDomain(engId: string) {
+		if (!domainInput.trim()) return;
+		brandingMsg = safeTranslate('fetchingLogo');
+		const r = await fetch(`/engagements/${engId}/fetch-logo`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ domain: domainInput.trim() })
+		});
+		if (r.ok) {
+			const d = await r.json();
+			if (d.found) {
+				brandingMsg =
+					safeTranslate('logoFound') + (d.low_res ? ` — ${safeTranslate('lowRes')}` : '');
+				await invalidateAll();
+			} else {
+				brandingMsg = safeTranslate('logoNotFound');
+			}
+		} else {
+			brandingMsg = safeTranslate('logoNotFound');
+		}
+	}
 
 	const eng = $derived(data.engagement);
 	const cap = $derived(data.capacity);
@@ -229,6 +251,22 @@
 				<div class="text-xs text-surface-600-400">
 					{eng?.logo ? safeTranslate('logoSet') : safeTranslate('logoNone')}
 				</div>
+				<div class="flex gap-2 pt-1">
+					<input
+						type="url"
+						bind:value={domainInput}
+						placeholder="ex.: galapagoscapital.com"
+						class="min-w-0 flex-1 rounded-md border border-surface-300-700 bg-transparent p-1.5 text-sm"
+					/>
+					<button
+						type="button"
+						class="whitespace-nowrap rounded-md bg-primary-500 px-3 py-1.5 text-sm font-medium text-white hover:bg-primary-600"
+						onclick={() => fetchLogoByDomain(eng?.id)}
+					>
+						{safeTranslate('searchByDomain')}
+					</button>
+				</div>
+				<div class="pt-1 text-xs text-surface-600-400">{safeTranslate('orUploadManually')}</div>
 				<input
 					type="file"
 					accept="image/png,image/jpeg"

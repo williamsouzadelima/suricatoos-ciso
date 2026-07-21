@@ -18,6 +18,7 @@ export const actions: Actions = {
 		const fd = await request.formData();
 		const body = {
 			company_name: String(fd.get('company_name') ?? '').trim(),
+			website: String(fd.get('website') ?? '').trim(),
 			subsector: String(fd.get('subsector') ?? ''),
 			day_zero: String(fd.get('day_zero') ?? ''),
 			contracted_hours: fd.get('contracted_hours') ? Number(fd.get('contracted_hours')) : null,

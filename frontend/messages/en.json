@@ -5333,5 +5333,13 @@
 	"logoSet": "Logo set",
 	"logoNone": "No logo (client name is shown)",
 	"clientLogoUpdated": "Client logo updated.",
-	"providerLogoUpdated": "Provider logo updated."
+	"providerLogoUpdated": "Provider logo updated.",
+	"searchByDomain": "Search by domain",
+	"orUploadManually": "or upload manually:",
+	"fetchingLogo": "Searching…",
+	"logoFound": "Logo captured.",
+	"logoNotFound": "No logo found for this domain.",
+	"lowRes": "low resolution (consider uploading a better one)",
+	"website": "Website / domain",
+	"websiteHint": "Used to auto-fetch the client logo on provisioning."
 }

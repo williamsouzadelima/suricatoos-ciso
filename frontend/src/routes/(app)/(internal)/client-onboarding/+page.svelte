@@ -9,6 +9,7 @@
 	let submitting = $state(false);
 
 	let companyName = $state('');
+	let website = $state('');
 	let subsector = $state('');
 	let dayZero = $state('');
 	let hours = $state('');
@@ -83,6 +84,7 @@
 	>
 		<!-- carriers ocultos (submetem independentemente do passo visível) -->
 		<input type="hidden" name="company_name" value={companyName} />
+		<input type="hidden" name="website" value={website} />
 		<input type="hidden" name="subsector" value={subsector} />
 		<input type="hidden" name="day_zero" value={dayZero} />
 		<input type="hidden" name="contracted_hours" value={hours} />
@@ -95,6 +97,11 @@
 				<label class="block space-y-1">
 					<span class="text-sm font-medium">{safeTranslate('companyName')} *</span>
 					<input class="w-full rounded-md border border-surface-300-700 bg-transparent p-2" bind:value={companyName} placeholder="Razão social" />
+				</label>
+				<label class="block space-y-1">
+					<span class="text-sm font-medium">{safeTranslate('website')}</span>
+					<input class="w-full rounded-md border border-surface-300-700 bg-transparent p-2" bind:value={website} placeholder="ex.: cliente.com.br" />
+					<span class="block text-xs text-surface-600-400">{safeTranslate('websiteHint')}</span>
 				</label>
 				<div class="space-y-1">
 					<span class="text-sm font-medium">{safeTranslate('subsector')} *</span>

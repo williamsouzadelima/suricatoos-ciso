@@ -87,6 +87,10 @@ class Engagement(NameDescriptionMixin, FolderMixin):
         upload_to="branding/clients/", null=True, blank=True,
         verbose_name=_("Client logo"),
     )
+    website = models.CharField(
+        max_length=255, blank=True,
+        verbose_name=_("Client website/domain"),
+    )
 
     class Meta:
         verbose_name = _("Engagement")

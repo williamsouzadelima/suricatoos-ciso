@@ -6,9 +6,11 @@ from datetime import date, timedelta
 from wsgiref.util import FileWrapper
 
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.db.models import Sum, Count
 from django.http import StreamingHttpResponse
 from django.utils import timezone
+from django.utils.text import slugify
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -295,6 +297,26 @@ class EngagementViewSet(BaseModelViewSet):
             },
         )
 
+        website = (data.get("website") or "").strip()
+        if website:
+            from .services.logo_fetch import fetch_client_logo, normalize_domain
+
+            norm = normalize_domain(website)
+            if norm:
+                eng.website = norm
+                eng.save(update_fields=["website"])
+                try:
+                    logo_res = fetch_client_logo(norm)
+                    if logo_res:
+                        _content, _ext, _src = logo_res
+                        eng.logo.save(
+                            f"{slugify(folder.name) or 'cliente'}-logo.{_ext}",
+                            ContentFile(_content),
+                            save=True,
+                        )
+                except Exception:
+                    pass  # best-effort: nunca falha o onboarding
+
         assessments = []
         if data.get("create_assessments"):
             per, _ = Perimeter.objects.get_or_create(
@@ -343,6 +365,48 @@ class EngagementViewSet(BaseModelViewSet):
         if eng.logo:
             eng.logo.delete(save=True)
         return Response({"logo": None})
+
+    @action(detail=True, methods=["post"], name="Fetch client logo by domain")
+    def fetch_logo(self, request, pk):
+        from .services.logo_fetch import fetch_client_logo, normalize_domain
+
+        eng = self.get_object()
+        domain = (request.data.get("domain") or eng.website or "").strip()
+        if not domain:
+            return Response({"detail": "domínio ausente."}, status=400)
+        norm = normalize_domain(domain)
+        if not norm:
+            return Response({"detail": "domínio inválido."}, status=400)
+        if eng.website != norm:
+            eng.website = norm
+            eng.save(update_fields=["website"])
+        res = fetch_client_logo(norm)
+        if not res:
+            return Response({"found": False, "domain": norm})
+        content, ext, source = res
+        base = slugify(eng.folder.name) or "cliente"
+        eng.logo.save(f"{base}-logo.{ext}", ContentFile(content), save=True)
+        w = h = None
+        low_res = False
+        try:
+            import io as _io
+            from PIL import Image
+
+            w, h = Image.open(_io.BytesIO(content)).size
+            low_res = max(w, h) < 96
+        except Exception:
+            pass
+        return Response(
+            {
+                "found": True,
+                "domain": norm,
+                "source": source,
+                "logo": eng.logo.url if eng.logo else None,
+                "width": w,
+                "height": h,
+                "low_res": low_res,
+            }
+        )
 
     @action(detail=False, methods=["post"], name="Set provider (executor) logo")
     def provider_logo(self, request):

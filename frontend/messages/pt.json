@@ -5333,5 +5333,13 @@
 	"logoSet": "Logo definido",
 	"logoNone": "Sem logo (mostra o nome do cliente)",
 	"clientLogoUpdated": "Logo do cliente atualizado.",
-	"providerLogoUpdated": "Logo do provedor atualizado."
+	"providerLogoUpdated": "Logo do provedor atualizado.",
+	"searchByDomain": "Buscar pelo domínio",
+	"orUploadManually": "ou envie manualmente:",
+	"fetchingLogo": "Buscando…",
+	"logoFound": "Logo capturado.",
+	"logoNotFound": "Nenhum logo encontrado para este domínio.",
+	"lowRes": "baixa resolução (considere enviar um melhor)",
+	"website": "Website / domínio",
+	"websiteHint": "Usado para buscar o logo do cliente automaticamente ao provisionar."
 }
