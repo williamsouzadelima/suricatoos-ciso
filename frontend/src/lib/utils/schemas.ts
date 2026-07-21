@@ -1852,6 +1852,7 @@ export const BusinessCatalogSchema = z.object({
 	engagement: z.string().optional().nullable(),
 	ref_id: z.string().optional(),
 	criticality: z.string().optional().default('medium'),
+	currency: z.string().optional(),
 	collaborators: z.number().optional().default(0),
 	collaborator_hourly_cost: z.number().optional().nullable(),
 	hourly_revenue: z.number().optional().nullable(),

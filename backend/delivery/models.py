@@ -278,6 +278,18 @@ class BusinessCatalog(NameDescriptionMixin, FolderMixin):
         HIGH = "high", _("High")
         CRITICAL = "critical", _("Critical")
 
+    class Currency(models.TextChoices):
+        EUR = "€", "Euro (€)"
+        BRL = "R$", "Real (R$)"
+        USD = "$", "Dólar (US$)"
+        GBP = "£", "Libra (£)"
+        CHF = "CHF", "Franco suíço (CHF)"
+        AUD = "A$", "Dólar australiano (A$)"
+        CAD = "C$", "Dólar canadense (C$)"
+        JPY = "¥", "Iene (¥)"
+        MXN = "MX$", "Peso mexicano (MX$)"
+        ZAR = "ZAR", "Rand (ZAR)"
+
     engagement = models.ForeignKey(
         Engagement,
         on_delete=models.SET_NULL,
@@ -291,6 +303,13 @@ class BusinessCatalog(NameDescriptionMixin, FolderMixin):
         choices=Criticality.choices,
         default=Criticality.MEDIUM,
         verbose_name=_("Criticality"),
+    )
+    currency = models.CharField(
+        max_length=8,
+        blank=True,
+        default="",
+        choices=Currency.choices,
+        verbose_name=_("Currency (blank = global default)"),
     )
     collaborators = models.PositiveIntegerField(
         default=0, verbose_name=_("Collaborators using the catalog")

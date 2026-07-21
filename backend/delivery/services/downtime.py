@@ -15,7 +15,7 @@ def _f(v):
 
 
 def compute_catalog_impact(catalog, hours=1, hours_series=None):
-    currency = get_global_currency()
+    currency = catalog.currency or get_global_currency()
 
     def fmt(v):
         return format_currency(v, currency)

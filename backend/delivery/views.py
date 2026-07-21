@@ -584,6 +584,10 @@ class BusinessCatalogViewSet(BaseModelViewSet):
     def criticality(self, request):
         return Response(dict(BusinessCatalog.Criticality.choices))
 
+    @action(detail=False, name="Get currency choices")
+    def currency(self, request):
+        return Response(dict(BusinessCatalog.Currency.choices))
+
     @action(detail=True, methods=["get"], name="Downtime impact")
     def impact(self, request, pk):
         from .services.downtime import compute_catalog_impact

@@ -187,7 +187,7 @@ export const URL_MODEL_MAP: ModelMap = {
 			{ field: 'folder', urlModel: 'folders', urlParams: 'content_type=DO&content_type=GL' },
 			{ field: 'engagement', urlModel: 'engagements', endpointUrl: 'delivery/engagements' }
 		],
-		selectFields: [{ field: 'criticality' }],
+		selectFields: [{ field: 'criticality' }, { field: 'currency' }],
 		reverseForeignKeyFields: [
 			{ field: 'catalog', urlModel: 'catalog-dependencies', endpointUrl: 'delivery/catalog-dependencies' }
 		],

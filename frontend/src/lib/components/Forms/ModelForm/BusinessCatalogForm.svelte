@@ -35,6 +35,14 @@
 />
 <AutocompleteSelect
 	{form}
+	field="currency"
+	options={model.selectOptions?.['currency']}
+	cacheLock={cacheLocks['currency']}
+	bind:cachedValue={formDataCache['currency']}
+	label={m.currency()}
+/>
+<AutocompleteSelect
+	{form}
 	optionsEndpoint="engagements"
 	field="engagement"
 	cacheLock={cacheLocks['engagement']}
