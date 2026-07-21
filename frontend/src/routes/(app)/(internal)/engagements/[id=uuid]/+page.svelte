@@ -100,55 +100,42 @@
 </script>
 
 <div class="p-4 space-y-6">
-	<!-- header -->
-	<header class="flex flex-wrap items-center justify-between gap-3">
-		<div class="flex items-center gap-3">
-			<i class="fa-solid fa-gauge-high text-2xl text-primary-500"></i>
-			<div>
-				<h1 class="text-2xl font-bold">{eng?.name}</h1>
-				<p class="text-sm text-surface-600-400">
-					{safeTranslate(eng?.status)} · {eng?.folder?.str ?? ''}
-					{#if eng?.day_zero}· {safeTranslate('dayZero')}: {eng.day_zero}{/if}
-				</p>
+	<!-- HERO redesenhado -->
+	<section class="st-hero">
+		<div class="st-hero-glow" aria-hidden="true"></div>
+		<div class="st-hero-top">
+			<div class="st-hero-id">
+				<div class="st-eyebrow"><i class="fa-solid fa-shield-halved"></i> Engajamento vCISO</div>
+				<h1 class="st-hero-title">{eng?.name}</h1>
+				<div class="st-hero-sub">
+					<span class="st-pill">{safeTranslate(eng?.status)}</span>
+					{#if eng?.folder?.str}<span class="st-dot">·</span><span>{eng.folder.str}</span>{/if}
+					{#if eng?.day_zero}<span class="st-dot">·</span><span>{safeTranslate('dayZero')} {eng.day_zero}</span>{/if}
+				</div>
+				<div class="st-hero-actions">
+					<a class="st-btn st-btn-primary" href="/engagements/{eng?.id}/plan"><i class="fa-solid fa-diagram-project"></i>{safeTranslate('viewPlan')}</a>
+					<a class="st-btn" href="/engagements/{eng?.id}/eisenhower"><i class="fa-solid fa-table-cells-large"></i>{safeTranslate('eisenhowerMatrix')}</a>
+					{#if folderId}<a class="st-btn" href={kanbanHref}><i class="fa-solid fa-columns"></i>{safeTranslate('openClientKanban')}</a>{/if}
+					<a class="st-btn" href="/my-assignments"><i class="fa-solid fa-list-check"></i>{safeTranslate('myAssignments')}</a>
+					<a class="st-btn" href="/engagements/{eng?.id}/export/pptx"><i class="fa-solid fa-file-powerpoint"></i>{safeTranslate('exportPptx')}</a>
+				</div>
+			</div>
+			<div class="st-gauge" class:over={overBudget}>
+				<svg viewBox="0 0 120 120">
+					<circle class="st-gauge-track" cx="60" cy="60" r="52" />
+					<circle class="st-gauge-arc" cx="60" cy="60" r="52" style="stroke-dasharray: {2 * Math.PI * 52}; stroke-dashoffset: {2 * Math.PI * 52 * (1 - barWidth / 100)};" />
+				</svg>
+				<div class="st-gauge-center">
+					<div class="st-gauge-num">{utilization}%</div>
+					<div class="st-gauge-cap">{overBudget ? safeTranslate('overBudget') : safeTranslate('capacity')}</div>
+				</div>
 			</div>
 		</div>
-		<div class="flex flex-wrap gap-2">
-			<a class="rounded-md bg-primary-500 px-3 py-2 text-sm font-medium text-white hover:bg-primary-600" href="/engagements/{eng?.id}/plan">
-				<i class="fa-solid fa-diagram-project mr-1"></i>{safeTranslate('viewPlan')}
-			</a>
-			<a class="rounded-md border border-surface-300-700 px-3 py-2 text-sm font-medium hover:bg-surface-100-900" href="/engagements/{eng?.id}/eisenhower">
-				<i class="fa-solid fa-table-cells-large mr-1"></i>{safeTranslate('eisenhowerMatrix')}
-			</a>
-			{#if folderId}
-				<a class="rounded-md border border-surface-300-700 px-3 py-2 text-sm font-medium hover:bg-surface-100-900" href={kanbanHref}>
-					<i class="fa-solid fa-columns mr-1"></i>{safeTranslate('openClientKanban')}
-				</a>
-			{/if}
-			<a class="rounded-md border border-surface-300-700 px-3 py-2 text-sm font-medium hover:bg-surface-100-900" href="/my-assignments">
-				<i class="fa-solid fa-list-check mr-1"></i>{safeTranslate('myAssignments')}
-			</a>
-			<a class="rounded-md border border-surface-300-700 px-3 py-2 text-sm font-medium hover:bg-surface-100-900" href="/engagements/{eng?.id}/export/pptx">
-				<i class="fa-solid fa-file-powerpoint mr-1 text-orange-600"></i>{safeTranslate('exportPptx')}
-			</a>
-		</div>
-	</header>
-
-	<!-- capacidade -->
-	<section class="rounded-lg border border-surface-200-800 p-4 space-y-3">
-		<div class="flex items-center justify-between">
-			<h2 class="text-lg font-semibold">{safeTranslate('capacity')}</h2>
-			<span class="rounded-full px-3 py-1 text-xs font-semibold {overBudget ? 'bg-red-500/15 text-red-600 dark:text-red-400' : 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'}">
-				{overBudget ? safeTranslate('overBudget') : safeTranslate('withinBudget')} · {utilization}%
-			</span>
-		</div>
-		<div class="h-3 w-full overflow-hidden rounded-full bg-surface-200-800">
-			<div class="h-full rounded-full {overBudget ? 'bg-red-500' : 'bg-emerald-500'}" style="width: {barWidth}%"></div>
-		</div>
-		<div class="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
-			<div><div class="text-surface-600-400">{safeTranslate('contractedHours')}</div><div class="text-lg font-semibold">{cap?.contracted_hours ?? '—'}</div></div>
-			<div><div class="text-surface-600-400">{safeTranslate('estimatedHours')}</div><div class="text-lg font-semibold">{cap?.estimated_hours ?? 0}</div></div>
-			<div><div class="text-surface-600-400">{safeTranslate('loggedHours')}</div><div class="text-lg font-semibold">{cap?.logged_hours ?? 0}</div></div>
-			<div><div class="text-surface-600-400">{safeTranslate('hoursModel')}</div><div class="text-lg font-semibold">{safeTranslate(cap?.hours_model)}</div></div>
+		<div class="st-kpis">
+			<div class="st-kpi"><div class="st-kpi-num">{cap?.contracted_hours ?? '—'}</div><div class="st-kpi-lbl">{safeTranslate('contractedHours')}</div></div>
+			<div class="st-kpi"><div class="st-kpi-num">{cap?.estimated_hours ?? 0}</div><div class="st-kpi-lbl">{safeTranslate('estimatedHours')}</div></div>
+			<div class="st-kpi"><div class="st-kpi-num">{cap?.logged_hours ?? 0}</div><div class="st-kpi-lbl">{safeTranslate('loggedHours')}</div></div>
+			<div class="st-kpi"><div class="st-kpi-num">{(dash?.phases ?? []).reduce((sum, ph) => sum + (ph.task_count || 0), 0)}</div><div class="st-kpi-lbl">{safeTranslate('tasks')}</div></div>
 		</div>
 	</section>
 
@@ -403,3 +390,170 @@
 		</div>
 	</section>
 </div>
+
+
+<style>
+	.st-hero {
+		position: relative;
+		overflow: hidden;
+		border-radius: 1.1rem;
+		color: #fff;
+		background: linear-gradient(135deg, oklch(49% 0.20 283deg), oklch(43% 0.19 302deg) 58%, oklch(47% 0.17 328deg));
+		box-shadow: 0 24px 52px -26px oklch(45% 0.2 285deg / 0.75);
+	}
+	.st-hero-glow {
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(520px 260px at 88% -10%, rgba(255, 255, 255, 0.22), transparent 60%),
+			radial-gradient(420px 240px at -5% 115%, rgba(236, 132, 205, 0.28), transparent 55%);
+		pointer-events: none;
+	}
+	.st-hero-top {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.75rem;
+		padding: 1.9rem 2rem;
+	}
+	.st-eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.72);
+	}
+	.st-hero-title {
+		font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+		font-size: clamp(1.9rem, 4vw, 2.7rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1.05;
+		margin: 0.55rem 0 0;
+	}
+	.st-hero-sub {
+		margin-top: 0.6rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.9rem;
+		color: rgba(255, 255, 255, 0.82);
+	}
+	.st-dot { color: rgba(255, 255, 255, 0.4); }
+	.st-pill {
+		background: rgba(255, 255, 255, 0.16);
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		padding: 0.15rem 0.7rem;
+		border-radius: 999px;
+		font-size: 0.76rem;
+		font-weight: 600;
+	}
+	.st-hero-actions {
+		margin-top: 1.3rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+	.st-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		padding: 0.5rem 0.9rem;
+		border-radius: 0.65rem;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: #fff;
+		background: rgba(255, 255, 255, 0.12);
+		border: 1px solid rgba(255, 255, 255, 0.22);
+		transition: background 0.15s ease, transform 0.15s ease;
+	}
+	.st-btn:hover {
+		background: rgba(255, 255, 255, 0.24);
+		transform: translateY(-1px);
+	}
+	.st-btn-primary {
+		background: #fff;
+		color: oklch(46% 0.2 285deg);
+		border-color: #fff;
+	}
+	.st-btn-primary:hover { background: rgba(255, 255, 255, 0.9); }
+	.st-gauge {
+		position: relative;
+		width: 132px;
+		height: 132px;
+		flex-shrink: 0;
+	}
+	.st-gauge svg {
+		width: 100%;
+		height: 100%;
+		transform: rotate(-90deg);
+	}
+	.st-gauge-track { fill: none; stroke: rgba(255, 255, 255, 0.16); stroke-width: 10; }
+	.st-gauge-arc {
+		fill: none;
+		stroke: #fff;
+		stroke-width: 10;
+		stroke-linecap: round;
+		transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+	.st-gauge.over .st-gauge-arc { stroke: oklch(74% 0.17 22deg); }
+	.st-gauge-center {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-content: center;
+		text-align: center;
+	}
+	.st-gauge-num {
+		font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+		font-size: 1.7rem;
+		font-weight: 700;
+		line-height: 1;
+	}
+	.st-gauge-cap {
+		margin-top: 0.2rem;
+		font-size: 0.64rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: rgba(255, 255, 255, 0.72);
+	}
+	.st-kpis {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1px;
+		background: rgba(255, 255, 255, 0.14);
+		border-top: 1px solid rgba(255, 255, 255, 0.14);
+	}
+	.st-kpi {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+		padding: 1.05rem 1.3rem;
+	}
+	.st-kpi-num {
+		font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+		font-size: 1.65rem;
+		font-weight: 700;
+		line-height: 1;
+	}
+	.st-kpi-lbl {
+		margin-top: 0.35rem;
+		font-size: 0.72rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: rgba(255, 255, 255, 0.72);
+	}
+	@media (max-width: 640px) {
+		.st-kpis { grid-template-columns: repeat(2, 1fr); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.st-gauge-arc, .st-btn { transition: none; }
+	}
+</style>
