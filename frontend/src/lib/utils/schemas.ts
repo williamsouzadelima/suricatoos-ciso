@@ -1850,7 +1850,32 @@ export const TimeEntrySchema = z.object({
 	billable: z.boolean().optional().default(true),
 	note: z.string().optional()
 });
+export const BusinessCatalogSchema = z.object({
+	...NameDescriptionMixin,
+	folder: z.string(),
+	engagement: z.string().optional().nullable(),
+	ref_id: z.string().optional(),
+	criticality: z.string().optional().default('medium'),
+	collaborators: z.number().optional().default(0),
+	collaborator_hourly_cost: z.number().optional().nullable(),
+	hourly_revenue: z.number().optional().nullable(),
+	profit_margin: z.number().optional().default(0),
+	regulatory_hourly: z.number().optional().nullable(),
+	regulatory_fixed: z.number().optional().nullable(),
+	maintenance_extra_annual: z.number().optional().nullable()
+});
+
+export const CatalogDependencySchema = z.object({
+	catalog: z.string(),
+	name: z.string(),
+	asset: z.string().uuid().optional().nullable(),
+	annual_cost: z.number().optional().default(0),
+	observation: z.string().optional()
+});
+
 const SCHEMA_MAP: Record<string, ZodSchema> = {
+	'business-catalogs': BusinessCatalogSchema,
+	'catalog-dependencies': CatalogDependencySchema,
 	'time-entries': TimeEntrySchema,
 	'plan-tasks': PlanTaskSchema,
 	'plan-phases': PlanPhaseSchema,

@@ -52,6 +52,7 @@
 	const folderId = $derived(eng?.folder?.id ?? '');
 	const tr = $derived(data.teamResources);
 	const bd = $derived(data.burnDown);
+	const catSummary = $derived(data.catalogsSummary);
 
 	const utilization = $derived(Math.round(cap?.utilization_pct ?? 0));
 	const barWidth = $derived(Math.min(utilization, 100));
@@ -234,6 +235,60 @@
 		{:else}
 			<div class="rounded-lg border border-dashed border-surface-300-700 p-4 text-sm text-surface-600-400">
 				{safeTranslate('noResourcesYet')} · <a class="text-primary-500 hover:underline" href="/assets">{safeTranslate('addResource')}</a>
+			</div>
+		{/if}
+	</section>
+
+	<!-- catálogos de negócio -->
+	<section class="space-y-3">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-semibold">{safeTranslate('businessCatalogs')}</h2>
+			<a class="text-sm text-primary-500 hover:underline" href="/business-catalogs">{safeTranslate('manageCatalogs')} →</a>
+		</div>
+		{#if catSummary?.count}
+			<div class="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+				<div class="rounded-lg border border-surface-200-800 p-4">
+					<div class="text-surface-600-400">{safeTranslate('catalogsCount')}</div>
+					<div class="text-2xl font-bold">{catSummary.count}</div>
+				</div>
+				<div class="rounded-lg border border-surface-200-800 p-4">
+					<div class="text-surface-600-400">{safeTranslate('totalMaintenanceAnnual')}</div>
+					<div class="text-2xl font-bold">{catSummary.total_maintenance_annual_fmt}</div>
+				</div>
+				<div class="rounded-lg border border-surface-200-800 p-4">
+					<div class="text-surface-600-400">{safeTranslate('totalLossPerHour')}</div>
+					<div class="text-2xl font-bold text-red-600 dark:text-red-400">{catSummary.total_loss_hourly_fmt}</div>
+				</div>
+			</div>
+			<div class="overflow-x-auto rounded-lg border border-surface-200-800">
+				<table class="w-full text-sm">
+					<thead>
+						<tr class="border-b border-surface-200-800 text-left text-surface-600-400">
+							<th class="p-3 font-medium">{safeTranslate('name')}</th>
+							<th class="p-3 font-medium">{safeTranslate('criticality')}</th>
+							<th class="p-3 text-right font-medium">{safeTranslate('maintenanceCost')}</th>
+							<th class="p-3 text-right font-medium">{safeTranslate('totalLossPerHour')}</th>
+							<th class="p-3"></th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each catSummary.catalogs as c (c.id)}
+							<tr class="border-t border-surface-200-800 first:border-t-0">
+								<td class="p-3 font-medium">{c.name}</td>
+								<td class="p-3">{safeTranslate(c.criticality)}</td>
+								<td class="p-3 text-right">{c.maintenance_annual_fmt}</td>
+								<td class="p-3 text-right font-semibold text-red-600 dark:text-red-400">{c.total_hourly_fmt}</td>
+								<td class="p-3 text-right">
+									<a class="text-primary-500 hover:underline" href="/catalog-impact/{c.id}">{safeTranslate('viewImpact')} →</a>
+								</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{:else}
+			<div class="rounded-lg border border-dashed border-surface-300-700 p-4 text-sm text-surface-600-400">
+				{safeTranslate('noCatalogsYet')} · <a class="text-primary-500 hover:underline" href="/business-catalogs">{safeTranslate('addCatalog')}</a>
 			</div>
 		{/if}
 	</section>

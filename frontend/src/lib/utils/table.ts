@@ -1397,6 +1397,20 @@ export const listViewFields = {
 			folder: DOMAIN_FILTER
 		}
 	},
+	'business-catalogs': {
+		head: ['name', 'criticality', 'collaborators', 'domain'],
+		body: ['name', 'criticality', 'collaborators', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'catalog-dependencies': {
+		head: ['name', 'catalog', 'annualCost', 'domain'],
+		body: ['name', 'catalog', 'annual_cost', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
 	perimeters: {
 		head: ['ref_id', 'name', 'description', 'defaultAssignee', 'domain'],
 		body: ['ref_id', 'name', 'description', 'default_assignee', 'folder'],

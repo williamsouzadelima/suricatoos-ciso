@@ -19,6 +19,7 @@ from core.models import (
     Perimeter,
     OrganisationObjective,
     Framework,
+    Asset,
 )
 
 
@@ -319,8 +320,130 @@ class TimeEntry(AbstractBaseModel, FolderMixin):
         super().save(*args, **kwargs)
 
 
+class BusinessCatalog(NameDescriptionMixin, FolderMixin):
+    """Catálogo de negócio (capacidade/serviço) do cliente, com parâmetros para calcular o
+    prejuízo de indisponibilidade. Dependências tecnológicas + custos: ver CatalogDependency."""
+
+    class Criticality(models.TextChoices):
+        LOW = "low", _("Low")
+        MEDIUM = "medium", _("Medium")
+        HIGH = "high", _("High")
+        CRITICAL = "critical", _("Critical")
+
+    engagement = models.ForeignKey(
+        Engagement,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="catalogs",
+    )
+    ref_id = models.CharField(max_length=100, blank=True)
+    criticality = models.CharField(
+        max_length=20,
+        choices=Criticality.choices,
+        default=Criticality.MEDIUM,
+        verbose_name=_("Criticality"),
+    )
+    collaborators = models.PositiveIntegerField(
+        default=0, verbose_name=_("Collaborators using the catalog")
+    )
+    collaborator_hourly_cost = models.DecimalField(
+        max_digits=19,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Collaborator hourly cost (fallback: global daily rate / 8)"),
+    )
+    hourly_revenue = models.DecimalField(
+        max_digits=19,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Hourly revenue generated"),
+    )
+    profit_margin = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=0,
+        verbose_name=_("Profit margin (%) for lost profit"),
+    )
+    regulatory_hourly = models.DecimalField(
+        max_digits=19,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Regulatory penalty per hour"),
+    )
+    regulatory_fixed = models.DecimalField(
+        max_digits=19,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Fixed regulatory penalty per incident"),
+    )
+    maintenance_extra_annual = models.DecimalField(
+        max_digits=19,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name=_("Extra annual maintenance cost (beyond dependencies)"),
+    )
+
+    class Meta:
+        verbose_name = _("Business catalog")
+        verbose_name_plural = _("Business catalogs")
+
+    def save(self, *args, **kwargs):
+        if self.engagement_id and self.engagement.folder_id:
+            self.folder = self.engagement.folder
+        super().save(*args, **kwargs)
+
+    @property
+    def maintenance_annual_total(self):
+        deps = self.dependencies.aggregate(total=models.Sum("annual_cost"))["total"] or 0
+        return float(deps) + float(self.maintenance_extra_annual or 0)
+
+
+class CatalogDependency(AbstractBaseModel, FolderMixin):
+    """Dependência tecnológica de um catálogo + seu custo anual de manutenção."""
+
+    catalog = models.ForeignKey(
+        BusinessCatalog, on_delete=models.CASCADE, related_name="dependencies"
+    )
+    name = models.CharField(max_length=255, verbose_name=_("Dependency name"))
+    asset = models.ForeignKey(
+        Asset,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="delivery_catalog_deps",
+    )
+    annual_cost = models.DecimalField(
+        max_digits=19,
+        decimal_places=2,
+        default=0,
+        verbose_name=_("Annual maintenance cost"),
+    )
+    observation = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = _("Catalog dependency")
+        verbose_name_plural = _("Catalog dependencies")
+
+    def save(self, *args, **kwargs):
+        if self.catalog_id and self.catalog.folder_id:
+            self.folder = self.catalog.folder
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+
+
 auditlog.register(Engagement)
 auditlog.register(ClientIntake)
 auditlog.register(EngagementPhase)
 auditlog.register(PlanTask)
 auditlog.register(TimeEntry)
+auditlog.register(BusinessCatalog)
+auditlog.register(CatalogDependency)

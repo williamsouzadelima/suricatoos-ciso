@@ -19,6 +19,8 @@
 	import VulnerabilitiesForm from './ModelForm/VulnerabilitiesForm.svelte';
 	import RiskAcceptancesForm from './ModelForm/RiskAcceptanceForm.svelte';
 	import ValidationFlowForm from './ModelForm/ValidationFlowForm.svelte';
+	import BusinessCatalogForm from './ModelForm/BusinessCatalogForm.svelte';
+	import CatalogDependencyForm from './ModelForm/CatalogDependencyForm.svelte';
 	import ReferenceControlsForm from './ModelForm/ReferenceControlForm.svelte';
 	import EvidencesForm from './ModelForm/EvidenceForm.svelte';
 	import ComplianceAssessmentsForm from './ModelForm/ComplianceAssessmentForm.svelte';
@@ -1045,6 +1047,10 @@
 				{object}
 				{...rest}
 			/>
+		{:else if URLModel === 'business-catalogs'}
+			<BusinessCatalogForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
+		{:else if URLModel === 'catalog-dependencies'}
+			<CatalogDependencyForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
 		{/if}
 		<div
 			class="flex flex-row justify-between space-x-4 sticky bottom-0 backdrop-blur-sm pt-4 pb-2 border-t border-surface-200-800"

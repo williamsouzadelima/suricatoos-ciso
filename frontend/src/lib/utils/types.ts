@@ -164,6 +164,8 @@ export const URL_MODEL = [
 	'plan-phases',
 	'client-intakes',
 	'time-entries',
+	'business-catalogs',
+	'catalog-dependencies',
 ] as const;
 
 export const THIRD_PARTY_URL_MODEL = [

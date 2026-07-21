@@ -11,6 +11,8 @@ from .models import (
     EngagementPhase,
     PlanTask,
     TimeEntry,
+    BusinessCatalog,
+    CatalogDependency,
 )
 from .services.eisenhower import derive_eisenhower
 
@@ -121,4 +123,39 @@ class TimeEntryReadSerializer(BaseModelSerializer):
 class TimeEntryWriteSerializer(BaseModelSerializer):
     class Meta:
         model = TimeEntry
+        fields = "__all__"
+
+
+# ---------- Catálogos de negócio ----------
+class BusinessCatalogReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    engagement = FieldsRelatedField()
+    maintenance_annual_total = serializers.ReadOnlyField()
+
+    class Meta:
+        model = BusinessCatalog
+        fields = "__all__"
+
+
+class BusinessCatalogWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = BusinessCatalog
+        fields = "__all__"
+
+
+class CatalogDependencyReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    catalog = FieldsRelatedField()
+    asset = FieldsRelatedField()
+
+    class Meta:
+        model = CatalogDependency
+        fields = "__all__"
+
+
+class CatalogDependencyWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = CatalogDependency
         fields = "__all__"

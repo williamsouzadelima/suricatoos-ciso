@@ -18,7 +18,15 @@ from core.views import BaseModelViewSet as AbstractBaseModelViewSet
 from iam.models import RoleAssignment
 from core.models import Asset
 
-from .models import Engagement, ClientIntake, EngagementPhase, PlanTask, TimeEntry
+from .models import (
+    Engagement,
+    ClientIntake,
+    EngagementPhase,
+    PlanTask,
+    TimeEntry,
+    BusinessCatalog,
+    CatalogDependency,
+)
 from .serializers import PlanTaskReadSerializer
 from .services.seeding import seed_engagement_plan
 from .services.provisioning import create_client_folder
@@ -169,6 +177,43 @@ class EngagementViewSet(BaseModelViewSet):
                 "actual": actual,
                 "ideal": ideal,
                 "mode": "burndown" if budget is not None else "burnup",
+            }
+        )
+
+    @action(detail=True, methods=["get"], name="Business catalogs summary")
+    def catalogs_summary(self, request, pk):
+        from core.utils import get_global_currency, format_currency
+        from .services.downtime import compute_catalog_impact
+
+        eng = self.get_object()
+        currency = get_global_currency()
+        total_maint = 0.0
+        total_hourly = 0.0
+        items = []
+        for c in eng.catalogs.all().order_by("name"):
+            imp = compute_catalog_impact(c, hours=1)
+            total_maint += imp["maintenance_annual"]
+            total_hourly += imp["total_hourly"]
+            items.append(
+                {
+                    "id": str(c.id),
+                    "name": c.name,
+                    "criticality": c.criticality,
+                    "total_hourly": imp["total_hourly"],
+                    "total_hourly_fmt": imp["total_hourly_fmt"],
+                    "maintenance_annual": imp["maintenance_annual"],
+                    "maintenance_annual_fmt": imp["maintenance_annual_fmt"],
+                }
+            )
+        return Response(
+            {
+                "currency": currency,
+                "count": len(items),
+                "total_maintenance_annual": total_maint,
+                "total_maintenance_annual_fmt": format_currency(total_maint, currency),
+                "total_loss_hourly": total_hourly,
+                "total_loss_hourly_fmt": format_currency(total_hourly, currency),
+                "catalogs": items,
             }
         )
 
@@ -530,3 +575,28 @@ class PlanTaskViewSet(BaseModelViewSet):
 class TimeEntryViewSet(BaseModelViewSet):
     model = TimeEntry
     filterset_fields = ["folder", "engagement", "plan_task", "applied_control", "user", "billable"]
+
+
+class BusinessCatalogViewSet(BaseModelViewSet):
+    model = BusinessCatalog
+    filterset_fields = ["folder", "engagement", "criticality"]
+
+    @action(detail=False, name="Get criticality choices")
+    def criticality(self, request):
+        return Response(dict(BusinessCatalog.Criticality.choices))
+
+    @action(detail=True, methods=["get"], name="Downtime impact")
+    def impact(self, request, pk):
+        from .services.downtime import compute_catalog_impact
+
+        cat = self.get_object()
+        try:
+            hours = int(request.query_params.get("hours") or 1)
+        except (TypeError, ValueError):
+            hours = 1
+        return Response(compute_catalog_impact(cat, hours=hours))
+
+
+class CatalogDependencyViewSet(BaseModelViewSet):
+    model = CatalogDependency
+    filterset_fields = ["folder", "catalog", "asset"]

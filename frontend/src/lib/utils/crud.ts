@@ -176,6 +176,37 @@ type ModelMap = {
 };
 
 export const URL_MODEL_MAP: ModelMap = {
+	'business-catalogs': {
+		endpointUrl: 'delivery/business-catalogs',
+		name: 'businesscatalog',
+		localName: 'businessCatalog',
+		localNamePlural: 'businessCatalogs',
+		verboseName: 'Business catalog',
+		verboseNamePlural: 'Business catalogs',
+		foreignKeyFields: [
+			{ field: 'folder', urlModel: 'folders', urlParams: 'content_type=DO&content_type=GL' },
+			{ field: 'engagement', urlModel: 'engagements', endpointUrl: 'delivery/engagements' }
+		],
+		selectFields: [{ field: 'criticality' }],
+		reverseForeignKeyFields: [
+			{ field: 'catalog', urlModel: 'catalog-dependencies', endpointUrl: 'delivery/catalog-dependencies' }
+		],
+		filters: [{ field: 'folder' }, { field: 'criticality' }]
+	},
+	'catalog-dependencies': {
+		endpointUrl: 'delivery/catalog-dependencies',
+		name: 'catalogdependency',
+		localName: 'catalogDependency',
+		localNamePlural: 'catalogDependencies',
+		verboseName: 'Catalog dependency',
+		verboseNamePlural: 'Catalog dependencies',
+		foreignKeyFields: [
+			{ field: 'catalog', urlModel: 'business-catalogs', endpointUrl: 'delivery/business-catalogs' },
+			{ field: 'asset', urlModel: 'assets' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }, { field: 'catalog' }]
+	},
 	'time-entries': {
 		endpointUrl: 'delivery/time-entries',
 		name: 'timeentry',

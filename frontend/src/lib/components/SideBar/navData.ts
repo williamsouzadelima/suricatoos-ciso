@@ -66,6 +66,23 @@ export const navData = {
 			]
 		},
 		{
+			name: 'businessCatalogs',
+			items: [
+				{
+					name: 'businessCatalogs',
+					fa_icon: 'fa-solid fa-boxes-stacked',
+					href: '/business-catalogs',
+					permissions: ['view_businesscatalog']
+				},
+				{
+					name: 'catalogDependencies',
+					fa_icon: 'fa-solid fa-diagram-project',
+					href: '/catalog-dependencies',
+					permissions: ['view_catalogdependency']
+				}
+			]
+		},
+		{
 			name: 'vcisoDelivery',
 			items: [
 				{

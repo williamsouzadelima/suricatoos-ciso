@@ -11,6 +11,8 @@ logger = get_logger(__name__)
 READER_PERMISSIONS_LIST = [
     # vCISO delivery (Suricatoos, aditivo)
     "view_engagement",
+    "view_businesscatalog",
+    "view_catalogdependency",
     "view_clientintake",
     "view_engagementphase",
     "view_plantask",
@@ -144,6 +146,8 @@ READER_PERMISSIONS_LIST = [
 APPROVER_PERMISSIONS_LIST = [
     # vCISO delivery (Suricatoos, aditivo)
     "view_engagement",
+    "view_businesscatalog",
+    "view_catalogdependency",
     "view_clientintake",
     "view_engagementphase",
     "view_plantask",
@@ -263,9 +267,17 @@ APPROVER_PERMISSIONS_LIST = [
 ANALYST_PERMISSIONS_LIST = [
     # vCISO delivery (Suricatoos, aditivo)
     "add_engagement",
+    "add_businesscatalog",
+    "add_catalogdependency",
     "view_engagement",
+    "view_businesscatalog",
+    "view_catalogdependency",
     "change_engagement",
+    "change_businesscatalog",
+    "change_catalogdependency",
     "delete_engagement",
+    "delete_businesscatalog",
+    "delete_catalogdependency",
     "add_clientintake",
     "view_clientintake",
     "change_clientintake",
@@ -650,9 +662,17 @@ ANALYST_PERMISSIONS_LIST = [
 DOMAIN_MANAGER_PERMISSIONS_LIST = [
     # vCISO delivery (Suricatoos, aditivo)
     "add_engagement",
+    "add_businesscatalog",
+    "add_catalogdependency",
     "view_engagement",
+    "view_businesscatalog",
+    "view_catalogdependency",
     "change_engagement",
+    "change_businesscatalog",
+    "change_catalogdependency",
     "delete_engagement",
+    "delete_businesscatalog",
+    "delete_catalogdependency",
     "add_clientintake",
     "view_clientintake",
     "change_clientintake",
@@ -1085,9 +1105,17 @@ DOMAIN_MANAGER_PERMISSIONS_LIST = [
 ADMINISTRATOR_PERMISSIONS_LIST = [
     # vCISO delivery (Suricatoos, aditivo)
     "add_engagement",
+    "add_businesscatalog",
+    "add_catalogdependency",
     "view_engagement",
+    "view_businesscatalog",
+    "view_catalogdependency",
     "change_engagement",
+    "change_businesscatalog",
+    "change_catalogdependency",
     "delete_engagement",
+    "delete_businesscatalog",
+    "delete_catalogdependency",
     "add_clientintake",
     "view_clientintake",
     "change_clientintake",
