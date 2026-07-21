@@ -1,9 +1,11 @@
 """ViewSets do app delivery. Herdam BaseModelViewSet (filtro RBAC por folder de graça).
 O shim local aponta serializers_module para 'delivery.serializers'."""
+import os
 from collections import Counter
 from datetime import date, timedelta
 from wsgiref.util import FileWrapper
 
+from django.conf import settings
 from django.db.models import Sum, Count
 from django.http import StreamingHttpResponse
 from django.utils import timezone
@@ -325,6 +327,35 @@ class EngagementViewSet(BaseModelViewSet):
                 "assessments": assessments,
             }
         )
+
+    @action(detail=True, methods=["post"], name="Upload client logo")
+    def upload_logo(self, request, pk):
+        eng = self.get_object()
+        f = request.FILES.get("logo") or request.FILES.get("file")
+        if not f:
+            return Response({"detail": "arquivo 'logo' ausente."}, status=400)
+        eng.logo.save(f.name, f, save=True)
+        return Response({"logo": eng.logo.url if eng.logo else None})
+
+    @action(detail=True, methods=["post"], name="Remove client logo")
+    def remove_logo(self, request, pk):
+        eng = self.get_object()
+        if eng.logo:
+            eng.logo.delete(save=True)
+        return Response({"logo": None})
+
+    @action(detail=False, methods=["post"], name="Set provider (executor) logo")
+    def provider_logo(self, request):
+        f = request.FILES.get("logo") or request.FILES.get("file")
+        if not f:
+            return Response({"detail": "arquivo 'logo' ausente."}, status=400)
+        base = getattr(settings, "LOCAL_STORAGE_DIRECTORY", ".")
+        d = os.path.join(str(base), "branding")
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "provider.png"), "wb") as out:
+            for chunk in f.chunks():
+                out.write(chunk)
+        return Response({"ok": True})
 
     @action(detail=True, methods=["post"], name="Seed the 100-day plan")
     def seed_plan(self, request, pk):

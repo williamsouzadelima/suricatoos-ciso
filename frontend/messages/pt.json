@@ -5324,5 +5324,14 @@
 	"regulatoryModules": "Módulos regulatórios",
 	"createGapAssessments": "Criar gap-assessments CVM/ANBIMA",
 	"onboardingReviewNote": "Isto cria o domínio do cliente, o engajamento e o plano de 100 dias (as tarefas caem no Kanban).",
-	"provisionClient": "Provisionar cliente"
+	"provisionClient": "Provisionar cliente",
+	"branding": "Identidade visual",
+	"brandingHint": "Logos usados no relatório do engajamento (PNG/JPG).",
+	"clientLogo": "Logo do cliente",
+	"providerLogo": "Logo do provedor (sua empresa)",
+	"providerLogoHint": "Global — usa Suricatoos se nenhum for enviado.",
+	"logoSet": "Logo definido",
+	"logoNone": "Sem logo (mostra o nome do cliente)",
+	"clientLogoUpdated": "Logo do cliente atualizado.",
+	"providerLogoUpdated": "Logo do provedor atualizado."
 }

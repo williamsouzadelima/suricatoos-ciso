@@ -1,9 +1,11 @@
 """Relatório PPTX de engajamento vCISO — deck executivo (tema Midnight Indigo).
 Design system próprio (fonte sans, cards arredondados, narrativa). Retorna io.BytesIO."""
 import io
+import os
 from collections import Counter
 from datetime import timedelta
 
+from django.conf import settings
 from django.utils.timezone import now
 
 from pptx import Presentation
@@ -48,6 +50,53 @@ SUBSECTOR = {
     "broker": "Corretora / DTVM (CVM)",
     "other": "Grupo financeiro (híbrido)",
 }
+
+
+def _provider_logo():
+    """Logo da empresa executora: override global se upado, senão o default Suricatoos."""
+    base = getattr(settings, "LOCAL_STORAGE_DIRECTORY", None) or "."
+    override = os.path.join(str(base), "branding", "provider.png")
+    if os.path.exists(override):
+        return override
+    bundled = os.path.join(os.path.dirname(__file__), "branding", "suricatoos.png")
+    return bundled if os.path.exists(bundled) else None
+
+
+def _client_logo(eng):
+    try:
+        if eng.logo and eng.logo.path and os.path.exists(eng.logo.path):
+            return eng.logo.path
+    except Exception:
+        pass
+    return None
+
+
+def _fit(path, max_w, max_h):
+    """Retorna (w, h) em EMU preservando aspecto, cabendo em max_w x max_h."""
+    try:
+        from PIL import Image
+
+        iw, ih = Image.open(path).size
+        h = max_h
+        w = int(h * iw / ih)
+        if w > max_w:
+            w = max_w
+            h = int(w * ih / iw)
+        return w, h
+    except Exception:
+        return max_w, max_h
+
+
+def _picture(sl, path, l, t, max_w, max_h, center_in=None):
+    w, h = _fit(path, max_w, max_h)
+    if center_in is not None:
+        cl, ct, cw, ch = center_in
+        l = cl + (cw - w) // 2
+        t = ct + (ch - h) // 2
+    try:
+        sl.shapes.add_picture(path, l, t, width=w, height=h)
+    except Exception:
+        pass
 
 
 def _noshadow(sp):
@@ -210,11 +259,21 @@ def build_engagement_pptx(engagement, lang="pt"):
     today = now().strftime("%d/%m/%Y")
 
     # ---------- S1 Capa ----------
+    plogo = _provider_logo()
+    clogo = _client_logo(eng)
     sl = new_slide(prs, INK)
     rect(sl, Inches(0), Inches(0), Inches(0.28), H, INDIGO)
     rrect(sl, W - Inches(3.05), Inches(0.55), Inches(2.3), Inches(0.5), INK2, radius=0.5, line=INDIGO)
     text(sl, W - Inches(3.05), Inches(0.55), Inches(2.3), Inches(0.5), "CONFIDENCIAL", 11,
          bold=True, color=INDIGO, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    # logo da empresa executora (top-left)
+    if plogo:
+        _picture(sl, plogo, MX, Inches(0.5), Inches(2.4), Inches(0.62))
+    # logo do cliente em card branco (visível em qualquer cor); senão, só o nome
+    if clogo:
+        rrect(sl, MX, Inches(1.35), Inches(3.0), Inches(1.15), WHITE, radius=0.1)
+        _picture(sl, clogo, 0, 0, Inches(2.6), Inches(0.85),
+                 center_in=(MX, Inches(1.35), Inches(3.0), Inches(1.15)))
     text(sl, MX, Inches(2.55), CW, Inches(0.35), "RELATÓRIO DE ENGAJAMENTO vCISO", 13,
          bold=True, color=INDIGO)
     text(sl, MX, Inches(2.95), CW, Inches(1.1), client, 42, bold=True, color=WHITE)
@@ -455,6 +514,8 @@ def build_engagement_pptx(engagement, lang="pt"):
     # ---------- S11 Encerramento ----------
     sl = new_slide(prs, INK)
     rect(sl, Inches(0), Inches(0), Inches(0.28), H, INDIGO)
+    if plogo:
+        _picture(sl, plogo, MX, Inches(1.9), Inches(2.6), Inches(0.7))
     text(sl, MX, Inches(2.9), CW, Inches(1.0), "Obrigado", 46, bold=True, color=WHITE)
     text(sl, MX, Inches(4.0), CW, Inches(0.5),
          "Programa vCISO · Suricatoos", 16, color=S300)

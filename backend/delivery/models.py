@@ -83,6 +83,10 @@ class Engagement(NameDescriptionMixin, FolderMixin):
         default=Status.ONBOARDING,
         verbose_name=_("Status"),
     )
+    logo = models.FileField(
+        upload_to="branding/clients/", null=True, blank=True,
+        verbose_name=_("Client logo"),
+    )
 
     class Meta:
         verbose_name = _("Engagement")

@@ -5324,5 +5324,14 @@
 	"regulatoryModules": "Regulatory modules",
 	"createGapAssessments": "Create CVM/ANBIMA gap-assessments",
 	"onboardingReviewNote": "This creates the client domain, the engagement and the 100-day plan (tasks land in the Kanban).",
-	"provisionClient": "Provision client"
+	"provisionClient": "Provision client",
+	"branding": "Branding",
+	"brandingHint": "Logos used in the engagement report (PNG/JPG).",
+	"clientLogo": "Client logo",
+	"providerLogo": "Provider logo (your firm)",
+	"providerLogoHint": "Global — falls back to Suricatoos if none.",
+	"logoSet": "Logo set",
+	"logoNone": "No logo (client name is shown)",
+	"clientLogoUpdated": "Client logo updated.",
+	"providerLogoUpdated": "Provider logo updated."
 }

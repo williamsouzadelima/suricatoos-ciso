@@ -1,9 +1,28 @@
 <script lang="ts">
 	import { safeTranslate } from '$lib/utils/i18n';
+	import { invalidateAll } from '$app/navigation';
 	import BurndownChart from '$lib/components/Chart/BurndownChart.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+
+	let brandingMsg = $state('');
+	async function uploadLogo(url: string, file: File | undefined, okMsg: string) {
+		if (!file) return;
+		const fd = new FormData();
+		fd.append('logo', file);
+		brandingMsg = 'Enviando…';
+		const r = await fetch(url, { method: 'POST', body: fd });
+		brandingMsg = r.ok ? okMsg : 'Falha no envio.';
+		if (r.ok) await invalidateAll();
+	}
+	async function removeClientLogo(engId: string) {
+		const r = await fetch(`/engagements/${engId}/logo`, { method: 'DELETE' });
+		if (r.ok) {
+			brandingMsg = 'Logo do cliente removido.';
+			await invalidateAll();
+		}
+	}
 
 	const eng = $derived(data.engagement);
 	const cap = $derived(data.capacity);
@@ -195,5 +214,45 @@
 				{safeTranslate('noResourcesYet')} · <a class="text-primary-500 hover:underline" href="/assets">{safeTranslate('addResource')}</a>
 			</div>
 		{/if}
+	</section>
+
+	<!-- branding / identidade visual -->
+	<section class="rounded-lg border border-surface-200-800 p-4 space-y-3">
+		<div class="flex items-center justify-between">
+			<h2 class="text-lg font-semibold">{safeTranslate('branding')}</h2>
+			{#if brandingMsg}<span class="text-xs text-primary-500">{brandingMsg}</span>{/if}
+		</div>
+		<p class="text-sm text-surface-600-400">{safeTranslate('brandingHint')}</p>
+		<div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+			<div class="space-y-1">
+				<div class="text-sm font-medium">{safeTranslate('clientLogo')}</div>
+				<div class="text-xs text-surface-600-400">
+					{eng?.logo ? safeTranslate('logoSet') : safeTranslate('logoNone')}
+				</div>
+				<input
+					type="file"
+					accept="image/png,image/jpeg"
+					class="block text-sm"
+					onchange={(e) =>
+						uploadLogo(`/engagements/${eng?.id}/logo`, e.currentTarget.files?.[0], safeTranslate('clientLogoUpdated'))}
+				/>
+				{#if eng?.logo}
+					<button type="button" class="text-xs text-red-500 hover:underline" onclick={() => removeClientLogo(eng?.id)}>
+						{safeTranslate('remove')}
+					</button>
+				{/if}
+			</div>
+			<div class="space-y-1">
+				<div class="text-sm font-medium">{safeTranslate('providerLogo')}</div>
+				<div class="text-xs text-surface-600-400">{safeTranslate('providerLogoHint')}</div>
+				<input
+					type="file"
+					accept="image/png,image/jpeg"
+					class="block text-sm"
+					onchange={(e) =>
+						uploadLogo(`/engagements/provider-logo`, e.currentTarget.files?.[0], safeTranslate('providerLogoUpdated'))}
+				/>
+			</div>
+		</div>
 	</section>
 </div>
