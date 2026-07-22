@@ -22,7 +22,8 @@
 		{ key: 'lgpd', label: 'LGPD' },
 		{ key: 'bacen', label: 'BACEN' },
 		{ key: 'anbima', label: 'ANBIMA (Deveres Básicos)' },
-		{ key: 'cvm', label: 'CVM 21' }
+		{ key: 'cvm', label: 'CVM 21' },
+		{ key: 'susep', label: 'SUSEP 638' }
 	];
 
 	const taxonomy = $derived((data.taxonomy ?? {}) as Record<string, any>);

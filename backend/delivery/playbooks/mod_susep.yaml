@@ -1,0 +1,34 @@
+key: mod-susep
+name: "Módulo regulatório — SUSEP (seguradora / previdência aberta / capitalização)"
+# Obrigações no nível de plano ancoradas na Circular SUSEP 638/2021 (política de
+# segurança cibernética e contratação de nuvem/processamento de dados) para as
+# supervisionadas da SUSEP: seguradoras, resseguradores locais, sociedades de
+# capitalização e entidades abertas de previdência complementar.
+tasks:
+  - phase_key: p1_diagnostico
+    key: susep_diagnostico
+    name: "Diagnóstico de segurança cibernética (Circular SUSEP 638/2021)"
+    description: "Avaliar a aderência à Circular SUSEP 638/2021: política de segurança cibernética, controles mínimos exigidos, plano de resposta a incidentes e requisitos de contratação de serviços de nuvem/processamento de dados."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: susep_politica_controles
+    name: "Política de segurança cibernética + controles mínimos (SUSEP)"
+    description: "Formalizar/revisar a política de segurança cibernética aprovada pela diretoria e os controles mínimos (classificação de dados, controle de acesso, criptografia, prevenção/detecção, trilhas de auditoria) e o plano de ação e resposta a incidentes exigidos pela Circular SUSEP 638/2021."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: susep_nuvem_continuidade
+    name: "Contratação de nuvem + continuidade (SUSEP 638)"
+    description: "Endereçar os requisitos de contratação de serviços de processamento/armazenamento de dados e de computação em nuvem (due diligence do prestador, cláusulas contratuais, localização de dados, subcontratação e comunicação prévia à SUSEP) e os planos de continuidade de negócios e de resposta a incidentes."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20

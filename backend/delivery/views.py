@@ -285,6 +285,7 @@ class EngagementViewSet(BaseModelViewSet):
         "bacen": "bacen-cmn-4893-2021",
         "anbima": "anbima-deveres-basicos-ciber",
         "cvm": "cvm-21-2021",
+        "susep": "susep-638-2021",
         "lgpd": "lgpd",
     }
 

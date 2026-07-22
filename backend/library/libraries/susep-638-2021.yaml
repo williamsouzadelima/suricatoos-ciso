@@ -1,0 +1,350 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:susep-638-2021
+locale: pt
+ref_id: SUSEP-638-2021
+name: "Circular SUSEP nº 638/2021 — Segurança cibernética e nuvem (SUSEP)"
+description: "Requisitos avaliáveis de segurança cibernética e de terceirização de processamento/armazenamento de dados (inclusive computação em nuvem) extraídos da Circular SUSEP nº 638, de 27/07/2021, aplicável a sociedades seguradoras, entidades abertas de previdência complementar (EAPC), sociedades de capitalização e resseguradores locais. Recorte para gap-assessment de segurança cibernética das supervisionadas da SUSEP."
+copyright: Construido a partir de conteudo publico oficial (Suricatoos). Requer validacao de compliance antes de uso regulatorio.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:susep-638-2021
+    ref_id: SUSEP-638-2021
+    name: "Circular SUSEP nº 638/2021 — Segurança cibernética e nuvem (SUSEP)"
+    description: "Requisitos avaliáveis de segurança cibernética e de terceirização de processamento/armazenamento de dados (inclusive computação em nuvem) extraídos da Circular SUSEP nº 638, de 27/07/2021, aplicável a sociedades seguradoras, entidades abertas de previdência complementar (EAPC), sociedades de capitalização e resseguradores locais. Recorte para gap-assessment de segurança cibernética das supervisionadas da SUSEP."
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+      assessable: false
+      depth: 1
+      ref_id: CAP-III
+      name: "Cap. III — Integração ao SCI/EGR e controles mínimos (Art. 3º)"
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-1
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, a"
+      name: "Segurança física"
+      description: "Adotar tratamentos e controles de segurança física de equipamentos e instalações, conforme boas práticas nacionais e internacionais."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-2
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, b"
+      name: "Controle de acesso"
+      description: "Adotar controle de acesso a sistemas e informações."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-3
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, c"
+      name: "Criptografia"
+      description: "Adotar criptografia na proteção de dados e informações."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-4
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, d"
+      name: "Proteção contra malware"
+      description: "Adotar proteção contra softwares maliciosos."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-5
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, e"
+      name: "Cópias de segurança"
+      description: "Manter cópias de segurança (backup) de dados e informações."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-6
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, f"
+      name: "Registros (logs)"
+      description: "Manter registros (logs) das atividades dos usuários, exceções e falhas."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-7
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, g"
+      name: "Proteção de redes"
+      description: "Adotar técnicas de proteção de redes e de segurança das comunicações."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-8
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, I, h"
+      name: "Desenvolvimento e aquisição de sistemas"
+      description: "Adotar controles de segurança no desenvolvimento e na aquisição de sistemas."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-9
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, II"
+      name: "Cultura e capacitação contínua"
+      description: "Promover ações de disseminação da cultura de segurança cibernética, incluindo programa de capacitação contínua de colaboradores conforme a sensibilidade das informações manipuladas."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-10
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3, § único, I"
+      name: "Risco cibernético como risco operacional"
+      description: "Considerar os riscos cibernéticos na categoria de risco operacional (de uso obrigatório) da Estrutura de Gestão de Riscos."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-0
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+      assessable: false
+      depth: 1
+      ref_id: CAP-IV
+      name: "Cap. IV — Política de segurança cibernética (Art. 4º)"
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-12
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4, I"
+      name: "Objetivos da política"
+      description: "A política de segurança cibernética deve contemplar os objetivos de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-13
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4, II"
+      name: "Compromisso da administração"
+      description: "A política deve registrar o compromisso dos órgãos de administração com a segurança cibernética e com a melhoria contínua dos processos, procedimentos e controles."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-14
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4, III, a"
+      name: "Classificação por relevância"
+      description: "Estabelecer parâmetros e diretrizes para a classificação de dados, incidentes e serviços quanto à relevância (dados/incidentes/serviços relevantes — Art. 2º)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-15
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4, III, b"
+      name: "Controles baseados na classificação"
+      description: "Estabelecer diretrizes para a implementação de processos, procedimentos e controles de segurança cibernética com base na classificação de relevância."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-16
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4, III, c"
+      name: "Diretrizes de terceirização"
+      description: "Estabelecer parâmetros e diretrizes para a terceirização de serviços de processamento e armazenamento de dados (em especial os relevantes), incluindo requisitos mínimos e alçadas para aprovação e alteração de contratos."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-17
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4, § único"
+      name: "Proporcionalidade"
+      description: "A política deve ser compatível com o porte da supervisionada, a natureza e complexidade de suas operações e o grau de exposição ao risco cibernético."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-11
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+      assessable: false
+      depth: 1
+      ref_id: CAP-V
+      name: "Cap. V — Prevenção e tratamento de incidentes (Art. 5º a 9º)"
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-19
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5, I"
+      name: "Redução proativa de vulnerabilidades"
+      description: "Manter processos, procedimentos e controles efetivos para identificar e reduzir vulnerabilidades de forma proativa."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-20
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5, II"
+      name: "Detecção, resposta e recuperação"
+      description: "Manter processos, procedimentos e controles efetivos para detectar, responder e recuperar-se de incidentes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-21
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, I"
+      name: "Monitoramento contínuo da rede"
+      description: "Realizar monitoramento contínuo da rede de comunicação, com técnicas que auxiliem na detecção de incidentes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-22
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, II"
+      name: "Avaliação por criticidade"
+      description: "Avaliar a natureza, abrangência e impacto dos incidentes detectados segundo graus de criticidade previamente estabelecidos."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-23
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, III"
+      name: "Contenção tempestiva"
+      description: "Adotar tempestivamente medidas de contenção dos efeitos do incidente (incluindo comunicação prévia com prestadores/parceiros quando pertinente — § 1º)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-24
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, IV"
+      name: "Restabelecimento seguro"
+      description: "Restabelecer os sistemas e serviços afetados retornando à condição normal de operação, de forma segura, sem abrir novas vulnerabilidades (§ 2º)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-25
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, V"
+      name: "Registro do incidente"
+      description: "Registrar os incidentes, com mecanismos de conciliação com o banco de dados de perdas operacionais (BDPO), quando existir, para incidentes que resultem em perda operacional (§ 3º)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-26
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, VI"
+      name: "Compartilhamento de informações"
+      description: "Compartilhar informações sobre incidentes relevantes com as demais supervisionadas, resguardado o sigilo de informações confidenciais e segredos comerciais."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-27
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, VII"
+      name: "Comunicação às partes afetadas"
+      description: "Comunicar-se com as partes afetadas, sobretudo os clientes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-28
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6, VIII"
+      name: "Tratamento das vulnerabilidades exploradas"
+      description: "Identificar e tratar as vulnerabilidades exploradas nos incidentes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-29
+      assessable: true
+      depth: 2
+      ref_id: "Art. 7"
+      name: "Cenários no plano de continuidade"
+      description: "Prever no plano de continuidade de negócios os cenários de ataques e eventos que possam causar danos a TI/comunicação críticos, acesso/alteração/exclusão/divulgação não autorizados de dados relevantes, ou interrupção de serviços relevantes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-30
+      assessable: true
+      depth: 2
+      ref_id: "Art. 8"
+      name: "Notificação de incidente à SUSEP (5 dias úteis)"
+      description: "Comunicar à SUSEP, em até 5 dias úteis do conhecimento, a ocorrência de incidentes relevantes, detalhando a extensão do dano e, se for o caso, as ações de regularização com responsáveis e prazos."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-31
+      assessable: true
+      depth: 2
+      ref_id: "Art. 9"
+      name: "Relatório anual de incidentes"
+      description: "Elaborar relatório anual sobre prevenção e tratamento de incidentes: incidentes relevantes (causas/efeitos/respostas), estatísticas do total de incidentes, resultados dos testes do BCP e principais vulnerabilidades e ações."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-32
+      assessable: true
+      depth: 2
+      ref_id: "Art. 9, § 2º"
+      name: "Encaminhamento do relatório"
+      description: "Encaminhar o relatório anual pelo menos aos órgãos de administração, aos Comitês de Auditoria e de Riscos (se houver) e ao diretor responsável pelos controles internos e à unidade de gestão de riscos (se houver)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-18
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+      assessable: false
+      depth: 1
+      ref_id: CAP-VI
+      name: "Cap. VI — Terceirização de dados e computação em nuvem (Art. 10 a 14)"
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-34
+      assessable: true
+      depth: 2
+      ref_id: "Art. 10, I"
+      name: "Governança de monitoramento"
+      description: "Ao terceirizar processamento/armazenamento de dados, dispor dos recursos, competências e práticas de governança necessários ao adequado monitoramento dos serviços."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-35
+      assessable: true
+      depth: 2
+      ref_id: "Art. 10, II"
+      name: "Diligência prévia de capacidade"
+      description: "Certificar-se de que os potenciais prestadores têm capacidade de cumprir as exigências do Art. 11."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-36
+      assessable: true
+      depth: 2
+      ref_id: "Art. 10, III"
+      name: "Comunicação prévia à SUSEP (30 dias)"
+      description: "Para serviços relevantes, informar à SUSEP em até 30 dias após a formalização (e nas alterações): serviços contratados, empresa contratada e subcontratadas, e países/regiões onde os dados poderão ser processados/armazenados."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-37
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11, III"
+      name: "Controles do prestador não inferiores"
+      description: "Exigir do prestador processos, procedimentos e controles de segurança cibernética não inferiores aos da própria supervisionada para o mesmo grau de sensibilidade, mediante certificação independente ou due diligence (§ 1º)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-38
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11, IV"
+      name: "Segregação de dados"
+      description: "Exigir que o prestador garanta, por controles físicos e/ou lógicos, a segregação dos dados da supervisionada e de seus clientes em relação aos dos demais clientes do prestador."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-39
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11, V"
+      name: "Notificação de subcontratação"
+      description: "Exigir que o prestador notifique a supervisionada sobre a subcontratação de serviços relevantes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-40
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11, VI"
+      name: "Transferência e exclusão na extinção"
+      description: "Exigir que, na extinção do contrato, o prestador transfira os dados ao novo prestador ou à supervisionada e os exclua após a confirmação de integridade e disponibilidade dos dados recebidos."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-41
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11, VII"
+      name: "Acesso da SUSEP"
+      description: "Exigir que o prestador não embarace a atuação da SUSEP e garanta acesso de consulta aos dados/serviços/contratos quando solicitado, certificando-se de que a legislação local não restringe esse acesso (§ 3º)."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-42
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11, § 4º"
+      name: "Cláusulas contratuais expressas"
+      description: "Fazer constar expressamente do contrato (exceto contratos de adesão) todas as exigências do Art. 11."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-43
+      assessable: true
+      depth: 2
+      ref_id: "Art. 12"
+      name: "Responsabilidade não se exime"
+      description: "A terceirização não exime a supervisionada da responsabilidade pelo cumprimento da regulamentação e pela confidencialidade, integridade e disponibilidade dos dados em poder do prestador."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-44
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13"
+      name: "Estratégias de saída"
+      description: "Definir e documentar estratégias de saída (substituição de prestador ou execução própria) para descontinuidade da prestação de serviços relevantes."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-33
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-45
+      assessable: false
+      depth: 1
+      ref_id: CAP-VII
+      name: "Cap. VII — Guarda de documentos e prazos (Art. 15 a 18)"
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-46
+      assessable: true
+      depth: 2
+      ref_id: "Art. 15"
+      name: "Guarda de documentos"
+      description: "Conservar as versões atuais e anteriores da política de segurança cibernética, do relatório anual de incidentes, dos contratos de terceirização de serviços relevantes e dos demais documentos que comprovem o atendimento à Circular."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-45
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-47
+      assessable: true
+      depth: 2
+      ref_id: "Art. 16"
+      name: "Adequação de contratos anteriores"
+      description: "Adequar até 1º de setembro de 2024 os contratos de terceirização firmados antes da vigência da Circular."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-45
+    - urn: urn:intuitem:risk:req_node:susep-638-2021:node-48
+      assessable: true
+      depth: 2
+      ref_id: "Art. 17"
+      name: "Prazos de adequação por segmento"
+      description: "Observar os prazos de adequação: segmentos S1/S2 até 30/06/2022; segmentos S3/S4 até 1º/09/2022."
+      parent_urn: urn:intuitem:risk:req_node:susep-638-2021:node-45
