@@ -1,0 +1,208 @@
+urn: urn:intuitem:risk:preset:br-ans-saude
+locale: pt
+ref_id: preset-br-ans-saude
+name: Operadoras de Saúde — Segurança da Informação (ANS + dados de saúde)
+description: Jornada guiada para operadoras de planos de saúde estruturarem um programa de segurança da informação e privacidade aderente às exigências da ANS (Padrão TISS) e à LGPD no tratamento de dados de saúde. Cobre o mapeamento de contexto e questões, os objetivos do programa, o inventário de ativos críticos, os gaps de conformidade ANS/TISS e LGPD, o inventário de tratamentos de dados sensíveis, a análise de riscos e a definição de controles — com foco em sigilo dos dados clínicos, segurança na troca TISS com a rede credenciada e continuidade do atendimento.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:ans-seguranca-saude-suplementar
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - sme
+      - large
+      - enterprise
+      industry:
+      - healthcare
+      region:
+      - br
+      goal: security-programme
+    feature_flags:
+      enable:
+      - compliance
+      - privacy
+      - tprm
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação — Segurança na Saúde Suplementar (ANS)
+      framework: urn:intuitem:risk:library:ans-seguranca-saude-suplementar
+      create_suggested_controls: true
+      ref: ans_audit
+    - type: compliance_assessment
+      name: Avaliação — LGPD (dados de saúde)
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Prontuário eletrônico e dados clínicos
+      description: Registros clínicos, resultados de exames, laudos, histórico assistencial e demais dados de saúde dos beneficiários — dados pessoais sensíveis protegidos por sigilo (LGPD art. 11). Ativo de maior criticidade em confidencialidade; sistemas de prontuário devem observar boas práticas de segurança em saúde e, quando aplicável, a certificação S-RES (SBIS/CFM).
+      asset_type: PR
+      ref: prontuario_dados_clinicos
+    - type: asset
+      name: Base de beneficiários
+      description: Cadastro dos beneficiários e dependentes (dados de identificação, vínculo, plano e dados de saúde associados), incluindo as informações enviadas à ANS pelo Sistema de Informações de Beneficiários (SIB). Ativo primário sensível, base para autorização, faturamento e relacionamento.
+      asset_type: PR
+      ref: base_beneficiarios
+    - type: asset
+      name: Sistema de autorização e faturamento TISS
+      description: Sistema de core que processa autorizações de procedimentos, guias e faturamento no Padrão TISS. Ativo de suporte crítico para a disponibilidade do atendimento e ponto central de troca de dados de saúde com a rede credenciada.
+      asset_type: SP
+      ref: sistema_autorizacao_tiss
+    - type: asset
+      name: Portal e aplicativo do beneficiário
+      description: Canais digitais de autoatendimento (carteirinha digital, autorizações, rede credenciada, reembolso, dados de saúde). Ativo de suporte exposto à internet, com autenticação de titulares e acesso a dados sensíveis.
+      asset_type: SP
+      ref: portal_app_beneficiario
+    - type: asset
+      name: Integração com a rede credenciada e prestadores
+      description: Interfaces, conectores e webservices TISS que conectam a operadora a hospitais, clínicas e laboratórios para troca de guias e informações clínicas. Ativo de suporte que concentra o risco de terceiros e a superfície de ataque das integrações.
+      asset_type: SP
+      ref: integracao_rede_credenciada
+    - type: asset
+      name: Ambiente de backup e recuperação de desastres (DR)
+      description: Infraestrutura de cópias de segurança e de recuperação que sustenta a continuidade da autorização, do faturamento e dos dados clínicos. Ativo de suporte determinante para resiliência a ransomware e a indisponibilidades.
+      asset_type: SP
+      ref: ambiente_backup_dr
+    - type: risk_scenario
+      name: Vazamento de dados clínicos
+      description: Exposição ou exfiltração não autorizada de prontuários e dados de saúde de beneficiários (por falha de configuração, credencial comprometida ou insider), resultando em quebra de sigilo, comunicação de incidente à ANPD e aos titulares e sanções regulatórias.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - prontuario_dados_clinicos
+      - base_beneficiarios
+    - type: risk_scenario
+      name: Acesso indevido a prontuário
+      description: Colaborador ou terceiro acessa prontuários e dados clínicos sem necessidade legítima (curiosidade, uso indevido ou abuso de privilégio), violando o menor privilégio e o sigilo dos dados sensíveis, sem trilha de auditoria adequada.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - prontuario_dados_clinicos
+      - sistema_autorizacao_tiss
+    - type: risk_scenario
+      name: Comprometimento da troca de dados TISS
+      description: Interceptação, adulteração ou uso indevido das comunicações TISS com a rede credenciada por falha de criptografia, ausência de certificação ICP-Brasil ou autenticação fraca, comprometendo a integridade e a confidencialidade das guias e dos dados clínicos trocados.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sistema_autorizacao_tiss
+      - integracao_rede_credenciada
+    - type: risk_scenario
+      name: Ransomware bloqueando autorizações e atendimento
+      description: Ataque de ransomware cifra sistemas de autorização, faturamento TISS e canais do beneficiário, com possível exfiltração prévia (extorsão dupla), paralisando a assistência e exigindo recuperação a partir de backups íntegros e de plano de DR testado.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sistema_autorizacao_tiss
+      - portal_app_beneficiario
+      - ambiente_backup_dr
+    - type: risk_scenario
+      name: Comprometimento via prestador ou fornecedor
+      description: Prestador da rede credenciada ou fornecedor com acesso a integrações, credenciais ou dados é comprometido e serve de vetor para atingir a operadora, expondo dados clínicos e a troca TISS — materializando risco de terceiros.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - integracao_rede_credenciada
+      - prontuario_dados_clinicos
+    - type: organisation_issue
+      name: Dados de saúde são dados pessoais sensíveis (LGPD, art. 11)
+      description: A operadora trata em larga escala dados de saúde de beneficiários, classificados como dados pessoais sensíveis pela LGPD (Lei nº 13.709/2018, art. 5º, II, e art. 11). Seu tratamento exige base legal específica — consentimento destacado ou hipóteses de tutela da saúde e de cumprimento de obrigação legal/regulatória — e é vedado o uso de dados de saúde para seleção de riscos na contratação e para a contratação ou exclusão de beneficiários (art. 11, §5). Falhas de sigilo expõem a operadora a sanções da ANPD e à responsabilização civil.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Requisitos de segurança e privacidade do Padrão TISS (ANS)
+      description: 'A ANS exige a adoção do Padrão TISS (RN nº 501/2022) na troca de informações com a rede credenciada, incluindo o Componente de Segurança e Privacidade da Informação: certificação digital ICP-Brasil, autenticação e controle de acesso, criptografia na comunicação e trilhas de auditoria. Somam-se obrigações de envio periódico e seguro de dados à ANS (ex.: Sistema de Informações de Beneficiários — SIB). O não atendimento sujeita a operadora a fiscalização e penalidades regulatórias.'
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Exposição por integração com rede credenciada e prestadores
+      description: 'A troca TISS e demais integrações com clínicas, hospitais e laboratórios ampliam a superfície de ataque e criam risco de terceiros: uma falha em prestador com acesso a APIs, credenciais ou dados clínicos pode comprometer beneficiários da operadora. A maturidade de segurança da rede credenciada é heterogênea e de difícil imposição contratual e de monitoramento.'
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Ameaça elevada de ransomware ao setor de saúde
+      description: Operadoras e serviços de saúde são alvo prioritário de ransomware e de extorsão dupla, pela criticidade da disponibilidade (autorizações e atendimento) e pela sensibilidade dos dados clínicos. Um incidente pode paralisar autorizações, o faturamento TISS e o portal do beneficiário, com risco direto à assistência e à confidencialidade de dados de saúde.
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Sistemas de core e de autorização legados
+      description: O sistema de autorização/core e as integrações TISS frequentemente rodam sobre tecnologia legada, com dívida de arquitetura, controle de acesso frágil e dificuldade de aplicar correções de segurança. Isso compromete a capacidade de segregar acessos por menor privilégio e de manter trilhas de auditoria consistentes, conforme exigido pela LGPD e pelo Padrão TISS.
+      category: technology
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Processo de resposta a incidentes imaturo frente ao prazo da ANPD
+      description: A LGPD (art. 48) e o Regulamento de Comunicação de Incidente de Segurança da ANPD (Resolução CD/ANPD nº 15/2024) exigem comunicar incidentes de segurança relevantes à ANPD e aos titulares afetados em até 3 dias úteis. Sem um processo de resposta a incidentes maduro e integrado ao Encarregado (DPO) e ao jurídico, a operadora não consegue cumprir o prazo nem produzir a documentação e as evidências exigidas.
+      category: internalProcesses
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Cultura e capacitação em privacidade e segurança
+      description: Equipes assistenciais, de autorização e de atendimento manipulam dados clínicos no dia a dia. Baixa conscientização em segurança e privacidade, uso indevido de acessos e engenharia social são vetores frequentes de acesso indevido a prontuário e de vazamento. É necessário programa contínuo de conscientização, política de mesa e tela limpas e disciplina de acesso mínimo necessário.
+      category: companyCulture
+      origin: internal
+      status: active
+    - type: organisation_objective
+      name: Conformidade com a LGPD no tratamento de dados de saúde
+      description: Garantir base legal adequada (art. 11), minimização, sigilo e atendimento aos direitos dos titulares no tratamento de dados sensíveis de saúde, com Encarregado (DPO) designado, Relatório de Impacto à Proteção de Dados (RIPD) para tratamentos de alto risco e processos definidos de atendimento a titulares e de comunicação de incidentes à ANPD.
+    - type: organisation_objective
+      name: Aderência ao Padrão TISS e às exigências de segurança da ANS
+      description: Implementar e manter o Componente de Segurança e Privacidade do Padrão TISS (RN nº 501/2022) — certificação digital ICP-Brasil, controle de acesso, criptografia na comunicação e trilhas de auditoria — e assegurar o envio tempestivo e seguro de informações à ANS.
+    - type: organisation_objective
+      name: Assegurar a disponibilidade e a continuidade do atendimento
+      description: Proteger a disponibilidade dos sistemas de autorização, do faturamento TISS e dos canais do beneficiário contra ransomware e indisponibilidades, com backup imutável, plano de continuidade de negócios e recuperação de desastres (DR) testados, evitando a interrupção da assistência aos beneficiários.
+    - type: organisation_objective
+      name: Gerir riscos de terceiros na rede credenciada e em fornecedores
+      description: Estabelecer due diligence, cláusulas contratuais de segurança e privacidade e monitoramento contínuo de prestadores e fornecedores com acesso a dados ou a integrações TISS, reduzindo o risco de comprometimento via terceiros.
+    - type: organisation_objective
+      name: Consolidar cultura de segurança e privacidade
+      description: Capacitar continuamente as equipes assistenciais, de autorização e de atendimento, com políticas claras, conscientização periódica e controles de acesso mínimo necessário, reduzindo acesso indevido a prontuário e erro humano.
+    journey:
+      steps:
+      - key: contexto_issues
+        title: Mapear o contexto e as questões da operadora
+        description: 'Registre as questões internas e externas que afetam a segurança e a privacidade: natureza sensível dos dados de saúde (LGPD art. 11), exigências do Padrão TISS/ANS, risco de terceiros na rede credenciada, ameaça de ransomware, sistemas legados, prazo de notificação de incidentes à ANPD e cultura de segurança. Este contexto orienta objetivos, riscos e controles.'
+        target_model: organisation-issues
+      - key: objetivos
+        title: Definir os objetivos do programa de segurança e privacidade
+        description: 'Estabeleça os objetivos do programa: conformidade LGPD para dados de saúde, aderência ao TISS/ANS, continuidade do atendimento, gestão de riscos de terceiros e cultura de segurança. Eles servem de referência para priorizar controles e medir a evolução da maturidade.'
+        target_model: organisation-objectives
+      - key: ativos_criticos
+        title: Inventariar os ativos primários e de suporte
+        description: Cadastre os ativos primários (prontuário e dados clínicos; base de beneficiários) e os de suporte (sistema de autorização/faturamento TISS; portal e app do beneficiário; integração com a rede credenciada; ambiente de backup/DR), classificando-os por sensibilidade e criticidade para orientar a análise de riscos.
+        target_model: assets
+      - key: gap_ans
+        title: Avaliação de conformidade — Segurança na Saúde Suplementar (ANS/TISS)
+        description: 'Realize o gap assessment contra os requisitos de segurança e privacidade do Padrão TISS (RN nº 501/2022) e demais obrigações da ANS: certificação digital ICP-Brasil, autenticação e controle de acesso, criptografia na troca de dados, trilhas de auditoria e envio seguro de informações à ANS (ex.: SIB). As boas práticas de segurança da informação em saúde (ISO 27799) e a certificação S-RES (SBIS/CFM) para sistemas de prontuário servem de referência complementar.'
+        target_model: compliance-assessments
+        target_ref: ans_audit
+      - key: gap_lgpd
+        title: Avaliação de conformidade — LGPD (dados de saúde)
+        description: 'Avalie a aderência à LGPD com foco em dados sensíveis de saúde: bases legais do art. 11, vedação ao uso de dados de saúde para seleção de riscos e para contratação/exclusão de beneficiários (art. 11, §5), medidas de segurança técnicas e administrativas (art. 46), Encarregado (art. 41), atendimento aos direitos dos titulares e processo de comunicação de incidentes à ANPD em até 3 dias úteis (art. 48 e Resolução CD/ANPD nº 15/2024).'
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: mapeamento_tratamentos
+        title: Mapear os tratamentos de dados de saúde
+        description: Inventarie os tratamentos de dados pessoais sensíveis (autorização de procedimentos, faturamento TISS, gestão de beneficiários, portal/app), registrando finalidade, base legal do art. 11, categorias de titulares e de dados, compartilhamentos com a rede credenciada e a ANS, transferências e prazos de retenção. Identifique os tratamentos de alto risco que exigem Relatório de Impacto à Proteção de Dados (RIPD).
+        target_model: processings
+      - key: analise_riscos
+        title: Analisar os riscos sobre os dados e sistemas críticos
+        description: 'Avalie os cenários de risco: vazamento de dados clínicos, acesso indevido a prontuário, comprometimento da troca TISS, ransomware bloqueando autorizações e atendimento e comprometimento via prestador ou fornecedor. Estime probabilidade e impacto (assistencial, regulatório e de privacidade) e priorize o tratamento dos riscos.'
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: controles
+        title: Definir e acompanhar os controles de tratamento
+        description: 'Selecione e implemente controles para os riscos priorizados: gestão de identidade e acesso mínimo necessário, criptografia e certificação ICP-Brasil na troca TISS, segmentação de rede, backup imutável e DR testado, prevenção de vazamento (DLP) e monitoramento, due diligence e cláusulas de segurança com prestadores e plano de resposta a incidentes integrado ao Encarregado (DPO). Acompanhe a execução por tarefas e follow-up.'
+        target_model: applied-controls

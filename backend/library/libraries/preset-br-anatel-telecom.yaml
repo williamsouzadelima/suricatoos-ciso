@@ -1,0 +1,207 @@
+urn: urn:intuitem:risk:preset:br-anatel-telecom
+locale: pt
+ref_id: preset-br-anatel-telecom
+name: Telecomunicações — Segurança Cibernética R-Ciber (Res. ANATEL 740/2020)
+description: 'Jornada guiada para prestadoras de serviços de telecomunicações estruturarem o programa de segurança cibernética exigido pelo R-Ciber (Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações, Resolução ANATEL nº 740/2020), integrado às obrigações da LGPD sobre dados de assinantes: mapeamento de contexto e ativos críticos, avaliação de conformidade regulatória, análise de riscos das infraestruturas críticas e plano de controles com acompanhamento.'
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:anatel-740-2020
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - sme
+      - large
+      - enterprise
+      industry:
+      - critical-infrastructure
+      region:
+      - br
+      goal: security-programme
+    feature_flags:
+      enable:
+      - compliance
+      - tprm
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação — Res. ANATEL 740/2020 (R-Ciber)
+      framework: urn:intuitem:risk:library:anatel-740-2020
+      create_suggested_controls: true
+      ref: anatel_audit
+    - type: compliance_assessment
+      name: Avaliação — LGPD
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Rede de acesso e núcleo (core)
+      description: 'Elementos de rede responsáveis pelo transporte, comutação e roteamento do tráfego dos assinantes: rede de acesso (rádio/fibra), núcleo de pacotes e de circuitos, sinalização (SS7/Diameter/GTP), virtualização/NFV e sistemas de gerência de rede (EMS/NMS). Ativo primário do qual a prestação do serviço depende diretamente.'
+      asset_type: PR
+      ref: asset_network_core
+    - type: asset
+      name: Infraestrutura crítica de telecomunicações
+      description: 'Ativos cuja indisponibilidade ou comprometimento provoca impacto relevante à continuidade dos serviços de telecomunicações e ao país: pontos de troca de tráfego, interconexão, DNS e roteamento (BGP), estações e centrais, enlaces de backbone e sistemas de energia e climatização de sites e data centers. Sujeita à proteção reforçada do R-Ciber.'
+      asset_type: PR
+      ref: asset_critical_infra
+    - type: asset
+      name: Dados pessoais de assinantes
+      description: Cadastro de clientes, documentos (CPF/RG), dados de contato, dados de tráfego e de conexão, registros de chamadas (CDR), localização e registros de acesso guardados nos termos do Marco Civil da Internet. Ativo primário protegido pela LGPD.
+      asset_type: PR
+      ref: asset_subscriber_data
+    - type: asset
+      name: Sistemas OSS/BSS e de suporte
+      description: 'Sistemas de suporte à operação e ao negócio: provisionamento, mediação, tarifação/billing, CRM, portais de autoatendimento e integrações. Suportam a operação e concentram acesso a dados de assinantes e a configurações de rede.'
+      asset_type: SP
+      ref: asset_oss_bss
+    - type: asset
+      name: Equipamentos de rede e CPE
+      description: Roteadores, switches, elementos de rádio, ONUs/ONTs, gateways residenciais e demais CPEs e produtos para telecomunicações fornecidos por terceiros. Sujeitos aos requisitos de segurança cibernética de produtos e à gestão de riscos de cadeia de fornecimento do R-Ciber.
+      asset_type: SP
+      ref: asset_network_equipment
+    - type: asset
+      name: Plataforma de monitoramento e resposta a incidentes (SOC)
+      description: Ferramentas e processos de detecção, correlação de eventos, gestão de vulnerabilidades e resposta a incidentes (SIEM, monitoramento de tráfego, threat intel), incluindo o fluxo de notificação de incidentes relevantes à Anatel e de comunicação à ANPD e aos titulares.
+      asset_type: SP
+      ref: asset_soc
+    - type: risk_scenario
+      name: Comprometimento da rede de acesso ou do núcleo
+      description: Atacante obtém acesso indevido a elementos do núcleo ou às interfaces de gerência da rede, permitindo interceptação de comunicações, manipulação de sinalização, fraude ou desligamento de serviços. Explora segmentação insuficiente, credenciais fracas ou vulnerabilidades não corrigidas.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_network_core
+      - asset_critical_infra
+    - type: risk_scenario
+      name: Vazamento de dados pessoais de assinantes
+      description: Exposição ou exfiltração de dados de assinantes por comprometimento de sistemas OSS/BSS, uso indevido de acessos privilegiados, APIs inseguras ou erro de configuração, gerando dever de comunicação à ANPD e aos titulares e potencial dano a grande número de pessoas.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_subscriber_data
+      - asset_oss_bss
+    - type: risk_scenario
+      name: Ataque a infraestrutura crítica de telecomunicações
+      description: Ação de ator avançado (ransomware, DDoS volumétrico, sabotagem física ou lógica) contra pontos de troca de tráfego, interconexão, DNS/roteamento ou energia de sites, com potencial de interrupção regional ou nacional de serviços essenciais.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_critical_infra
+      - asset_network_core
+    - type: risk_scenario
+      name: Equipamento comprometido na cadeia de fornecimento
+      description: Introdução de vulnerabilidade, backdoor ou firmware malicioso em equipamentos de rede ou CPE durante fabricação, distribuição ou atualização, ou fornecedor que não atende aos requisitos de segurança, transformando o produto em vetor de ataque à rede.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_network_equipment
+      - asset_network_core
+    - type: risk_scenario
+      name: Indisponibilidade de serviço de telecomunicações
+      description: Interrupção prolongada de serviço por ciberataque, falha em cascata ou incidente em sistemas de suporte, afetando comunicações inclusive de emergência e obrigações de qualidade e continuidade, com necessidade de acionamento do plano de resposta e de notificação à Anatel.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_critical_infra
+      - asset_network_core
+      - asset_soc
+    - type: organisation_issue
+      name: Sujeição ao R-Ciber (Resolução ANATEL nº 740/2020)
+      description: 'Como prestadora de serviços de telecomunicações de interesse coletivo, a organização está obrigada a cumprir o Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações (R-Ciber): instituir Política de Segurança Cibernética aprovada pela alta administração, designar responsável perante a Anatel, adotar as medidas mínimas de segurança, gerir e notificar incidentes relevantes à Anatel, atender aos requisitos de segurança de produtos e proteger as infraestruturas críticas. O descumprimento sujeita a organização a sanções administrativas.'
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Tratamento de dados pessoais de assinantes sob a LGPD
+      description: 'A operação trata em larga escala dados pessoais de assinantes (cadastro, CPF/RG, dados de contato, dados de tráfego e de conexão, localização e registros de acesso), atraindo as obrigações da Lei nº 13.709/2018 (LGPD): bases legais, princípios, segurança e prevenção, comunicação de incidentes à ANPD e aos titulares e articulação com a guarda de registros exigida pelo Marco Civil da Internet.'
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Ausência de Política de Segurança Cibernética formalizada
+      description: A organização ainda não possui Política de Segurança Cibernética com o conteúdo mínimo exigido pelo R-Ciber (objetivos, diretrizes, papéis e responsabilidades, gestão de riscos, medidas de segurança, gestão de incidentes, ciclos de avaliação de vulnerabilidades e disseminação da cultura), nem aprovação formal pela alta administração, ciclo de revisão periódica e extrato público publicado no sítio da prestadora.
+      category: internalProcesses
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Governança e responsável designado perante a Anatel
+      description: Falta estrutura de governança de segurança cibernética com a designação formal de diretor/executivo responsável pela Política perante a Anatel e definição clara de papéis e responsabilidades, o que fragiliza a prestação de contas regulatória e a tomada de decisão durante incidentes.
+      category: organisationStructure
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Superfície de ataque de rede legada e heterogênea
+      description: A convivência de tecnologias legadas (2G/3G, sinalização SS7/Diameter) com redes modernas (4G/5G, virtualização/NFV) amplia a superfície de ataque do núcleo e da rede de acesso, com segmentação insuficiente, exposição de interfaces de gerência e dificuldade de aplicar correções sem impacto na disponibilidade do serviço.
+      category: technology
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Ameaças cibernéticas dirigidas a infraestruturas críticas de telecom
+      description: Operadoras são alvo de atores avançados (grupos patrocinados por Estado, ransomware, hacktivismo e DDoS) que buscam interromper serviços essenciais, interceptar comunicações ou usar a rede como vetor de ataque. A criticidade nacional dos serviços torna a organização alvo prioritário e sujeita a exigências de proteção reforçada das infraestruturas críticas.
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Risco de cadeia de fornecimento de equipamentos de rede
+      description: A dependência de fornecedores de equipamentos de rede, CPEs e software (inclusive de origem estrangeira) cria risco de componentes comprometidos, backdoors, vulnerabilidades não corrigidas e descontinuidade. O R-Ciber exige requisitos de segurança cibernética para produtos de telecomunicações e o tratamento dos riscos associados aos fornecedores.
+      category: economic
+      origin: external
+      status: active
+    - type: organisation_objective
+      name: Alcançar e sustentar a conformidade com o R-Ciber
+      description: Implementar e manter todos os requisitos da Resolução ANATEL nº 740/2020, incluindo Política de Segurança Cibernética aprovada, responsável designado, revisão periódica e extrato público, medidas mínimas de segurança, gestão de incidentes e proteção de infraestruturas críticas, com evidências auditáveis perante a Anatel.
+    - type: organisation_objective
+      name: Proteger as infraestruturas críticas e a continuidade dos serviços
+      description: Assegurar a resiliência, disponibilidade e integridade da rede de acesso, do núcleo e das infraestruturas críticas de telecomunicações, minimizando o risco de interrupção de serviços essenciais à população e às comunicações de emergência.
+    - type: organisation_objective
+      name: Proteger os dados pessoais de assinantes
+      description: Garantir a confidencialidade, a integridade e a disponibilidade dos dados pessoais de assinantes conforme a LGPD, com bases legais adequadas, medidas de segurança e prevenção e processo estruturado de comunicação de incidentes à ANPD e aos titulares.
+    - type: organisation_objective
+      name: Detectar, tratar e notificar incidentes relevantes
+      description: Estabelecer capacidade de detecção, resposta e recuperação de incidentes cibernéticos e cumprir a obrigação de comunicar incidentes relevantes à Anatel na forma e nos prazos definidos em ato específico, com compartilhamento de informações no âmbito do GT-Ciber.
+    - type: organisation_objective
+      name: Disseminar a cultura de segurança cibernética
+      description: Promover conscientização, capacitação e responsabilização em segurança cibernética em todos os níveis da organização e junto à cadeia de fornecimento, atendendo à diretriz de disseminação da cultura prevista no R-Ciber.
+    journey:
+      steps:
+      - key: contexto_issues
+        title: Mapear o contexto e as questões da organização
+        description: 'Registre as questões internas e externas que afetam o programa de segurança cibernética: obrigações do R-Ciber e da LGPD, lacunas de governança e de política, superfície de ataque da rede legada, ameaças a infraestruturas críticas e riscos de cadeia de fornecimento. Este contexto orienta os objetivos, os riscos e os controles.'
+        target_model: organisation-issues
+      - key: objetivos
+        title: Definir os objetivos do programa
+        description: 'Formalize os objetivos de segurança e conformidade a serem perseguidos pela jornada: conformidade com o R-Ciber, proteção das infraestruturas críticas e da continuidade, proteção dos dados de assinantes, gestão e notificação de incidentes e disseminação da cultura de segurança.'
+        target_model: organisation-objectives
+      - key: ativos
+        title: Inventariar os ativos primários e de suporte
+        description: 'Cadastre e classifique os ativos no escopo: rede de acesso e núcleo, infraestrutura crítica e dados de assinantes (primários) e sistemas OSS/BSS, equipamentos/CPE e plataforma de SOC (suporte). O inventário é base para a análise de riscos e para a proteção das infraestruturas críticas.'
+        target_model: assets
+      - key: gap_anatel
+        title: Avaliar conformidade com o R-Ciber (Res. ANATEL 740/2020)
+        description: 'Execute o gap assessment contra o R-Ciber: existência e conteúdo mínimo da Política de Segurança Cibernética, aprovação pela alta administração, responsável designado, revisão periódica e extrato público; medidas mínimas de segurança; gestão e notificação de incidentes relevantes à Anatel; requisitos de segurança de produtos e cadeia de fornecimento; proteção das infraestruturas críticas; ciclos de avaliação de vulnerabilidades e disseminação da cultura.'
+        target_model: compliance-assessments
+        target_ref: anatel_audit
+      - key: gap_lgpd
+        title: Avaliar conformidade com a LGPD
+        description: 'Execute o gap assessment contra a LGPD com foco nos dados de assinantes: bases legais e princípios, segurança e prevenção (arts. 46 a 49), gestão de incidentes com comunicação à ANPD e aos titulares, atendimento aos direitos dos titulares e articulação com a guarda de registros do Marco Civil da Internet.'
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: riscos
+        title: Realizar a análise de riscos cibernéticos
+        description: Avalie os cenários de risco sobre os ativos (comprometimento de rede/núcleo, vazamento de dados de assinantes, ataque a infraestrutura crítica, equipamento comprometido na cadeia e indisponibilidade de serviço), estimando probabilidade e impacto e definindo o tratamento. Vincule os riscos às lacunas identificadas nos gaps de conformidade.
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: controles
+        title: Planejar e aplicar os controles
+        description: 'Defina o plano de controles para remediar as lacunas e tratar os riscos: política e governança, segmentação e endurecimento da rede, gestão de acessos privilegiados, criptografia e proteção de dados, gestão de vulnerabilidades e patching, monitoramento/SOC, resposta e notificação de incidentes e requisitos de segurança para fornecedores e produtos (TPRM).'
+        target_model: applied-controls
+      - key: tarefas_follow_up
+        title: Atribuir tarefas e acompanhar (follow-up)
+        description: Converta o plano em tarefas com responsáveis e prazos, priorizando a designação do diretor responsável, a aprovação e publicação do extrato da Política e a implantação do fluxo de notificação de incidentes à Anatel. Acompanhe a evolução e mantenha os ciclos periódicos de revisão e de avaliação de vulnerabilidades.
+        target_model: tasks

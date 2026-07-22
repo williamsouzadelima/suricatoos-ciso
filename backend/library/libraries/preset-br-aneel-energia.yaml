@@ -1,0 +1,219 @@
+urn: urn:intuitem:risk:preset:br-aneel-energia
+locale: pt
+ref_id: preset-br-aneel-energia
+name: Setor Elétrico — Segurança Cibernética (REN ANEEL 964/2021)
+description: Jornada guiada para agentes do setor de energia elétrica implementarem a Política de Segurança Cibernética (PSC) exigida pela REN ANEEL nº 964/2021 e a conformidade com a LGPD — do diagnóstico de lacunas à análise de riscos cibernéticos, ao plano de controles e ao acompanhamento das ações, com foco na proteção da infraestrutura crítica e do Sistema Interligado Nacional (SIN).
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:aneel-964-2021
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - sme
+      - large
+      - enterprise
+      industry:
+      - critical-infrastructure
+      region:
+      - br
+      goal: security-programme
+    feature_flags:
+      enable:
+      - compliance
+      - tprm
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação — REN ANEEL 964/2021
+      framework: urn:intuitem:risk:library:aneel-964-2021
+      create_suggested_controls: true
+      ref: aneel_audit
+    - type: compliance_assessment
+      name: Avaliação — LGPD
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Sistemas de operação e automação (SCADA/OT)
+      description: Sistemas de supervisão, controle e aquisição de dados e demais sistemas de tecnologia operacional (SCADA/OT) responsáveis pela supervisão, controle e automação da operação em tempo real dos ativos elétricos.
+      asset_type: PR
+      ref: scada_ot
+    - type: asset
+      name: Infraestrutura crítica do SIN
+      description: Infraestrutura crítica de geração, transmissão e/ou distribuição integrada ao Sistema Interligado Nacional (SIN), cuja indisponibilidade impacta diretamente o fornecimento de energia.
+      asset_type: PR
+      ref: sin_infra
+    - type: asset
+      name: Dados de consumidores
+      description: Base de dados pessoais de consumidores (cadastro, medição, consumo e faturamento) tratada pelo agente, sujeita à proteção da LGPD.
+      asset_type: PR
+      ref: consumer_data
+    - type: asset
+      name: Informações críticas da operação
+      description: Informações críticas da operação — telemetria, medição, topologia da rede, parametrização e configurações dos sistemas de controle — que exigem proteção e rastreabilidade nos termos da REN 964/2021.
+      asset_type: PR
+      ref: critical_info
+    - type: asset
+      name: Sistemas corporativos / TI
+      description: Sistemas corporativos e de TI (ERP, correio eletrônico, diretório, portais e aplicações administrativas) que apoiam os processos de negócio e fazem interface com o ambiente de automação.
+      asset_type: SP
+      ref: corp_it
+    - type: asset
+      name: Rede de automação e comunicação
+      description: Rede de automação, telecomunicações e comunicação de dados que interliga sistemas de operação, subestações, dispositivos de campo e centros de controle.
+      asset_type: SP
+      ref: automation_network
+    - type: risk_scenario
+      name: Ataque ao ambiente de operação (SCADA/OT)
+      description: Comprometimento do ambiente de operação por intrusão na rede de automação, permitindo manipulação de comandos, alteração de parâmetros ou negação de controle sobre os ativos elétricos, com potencial de dano físico e à operação em tempo real.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - scada_ot
+      - automation_network
+      - sin_infra
+    - type: risk_scenario
+      name: Indisponibilidade do serviço de energia
+      description: Interrupção do fornecimento de energia decorrente de ataque cibernético (ransomware, negação de serviço ou sabotagem lógica) que torne indisponíveis os sistemas de operação e a infraestrutura crítica, com impacto ao SIN, aos consumidores e potencial penalidade regulatória.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sin_infra
+      - scada_ot
+      - automation_network
+    - type: risk_scenario
+      name: Vazamento de dados de consumidores
+      description: Exfiltração ou exposição indevida de dados pessoais de consumidores, caracterizando incidente de segurança com dados pessoais sob a LGPD, com dever de comunicação à ANPD e aos titulares e dano reputacional ao agente.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - consumer_data
+      - corp_it
+    - type: risk_scenario
+      name: Comprometimento de infraestrutura crítica
+      description: Ataque persistente e coordenado que compromete a integridade das informações críticas e da infraestrutura do SIN, caracterizando incidente de maior impacto sujeito à notificação à equipe de coordenação setorial designada.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sin_infra
+      - scada_ot
+      - critical_info
+    - type: risk_scenario
+      name: Comprometimento via terceiro/fornecedor
+      description: Intrusão originada na cadeia de suprimentos — fornecedor, integrador ou prestador com acesso remoto ou local — que se vale da confiança concedida a terceiros para alcançar o ambiente de automação e os sistemas críticos.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - scada_ot
+      - automation_network
+      - corp_it
+    - type: organisation_issue
+      name: Obrigações da REN ANEEL nº 964/2021
+      description: A REN ANEEL nº 964/2021 obriga os agentes do setor de energia elétrica a implantar e manter uma Política de Segurança Cibernética (PSC) com conteúdo mínimo, aplicar anualmente ao menos um modelo de maturidade, identificar/avaliar/tratar riscos cibernéticos, proteger e rastrear informações críticas, estabelecer requisitos para terceiros, realizar simulações e testes de resiliência, notificar incidentes de maior impacto à equipe de coordenação setorial designada assim que tiver ciência e prestar registros à ANEEL. O descumprimento sujeita o agente a penalidades regulatórias.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Enquadramento na LGPD (dados de consumidores)
+      description: O tratamento de dados pessoais de consumidores (cadastro, medição, consumo e faturamento) sujeita o agente à Lei nº 13.709/2018 (LGPD), exigindo base legal adequada, medidas de segurança, atendimento aos direitos dos titulares e gestão de incidentes com dados pessoais, inclusive comunicação à ANPD e aos titulares quando houver risco ou dano relevante.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Legado e convergência TI/OT (SCADA sem segurança nativa)
+      description: Os sistemas de automação e controle industrial (SCADA/OT) foram concebidos priorizando disponibilidade e não possuem recursos nativos de segurança; a crescente convergência entre as redes de TI e OT amplia a superfície de ataque e expõe a operação em tempo real a ameaças originadas no ambiente corporativo.
+      category: technology
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Cenário de ameaças à infraestrutura crítica
+      description: Infraestruturas críticas do setor elétrico são alvo prioritário de atores estatais, grupos de ransomware e hacktivistas, em um contexto geopolítico que eleva o risco de ataques com potencial de interromper o fornecimento de energia e de afetar o Sistema Interligado Nacional (SIN).
+      category: political
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Gestão de riscos cibernéticos imatura
+      description: Ausência de processo formal, periódico e documentado de identificação, avaliação e tratamento de riscos cibernéticos, exigido pela REN 964/2021, o que dificulta priorizar investimentos, evidenciar due diligence perante o regulador e sustentar a evolução da maturidade.
+      category: internalProcesses
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Dependência de fornecedores e integradores com acesso ao ambiente crítico
+      description: A operação depende de fornecedores, integradores e prestadores de serviço que acessam, remota ou localmente, o ambiente de automação e os sistemas críticos, criando risco de comprometimento pela cadeia de suprimentos que precisa ser endereçado por requisitos de segurança contratuais e controles para terceiros.
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Escassez de profissionais de segurança OT
+      description: Há escassez no mercado de profissionais especializados em segurança cibernética de ambientes de tecnologia operacional (OT/SCADA), dificultando a formação, a capacitação e a retenção de equipes internas capazes de operar, monitorar e responder a incidentes no ambiente de automação.
+      category: humanResources
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Baixa priorização histórica da segurança na operação
+      description: Historicamente, as áreas de operação priorizam continuidade e desempenho em detrimento de práticas de segurança cibernética, exigindo mudança cultural, conscientização e patrocínio da alta direção para institucionalizar a segurança como valor da organização.
+      category: companyCulture
+      origin: internal
+      status: active
+    - type: organisation_objective
+      name: Implantar e manter a Política de Segurança Cibernética (PSC)
+      description: 'Formalizar, submeter à aprovação do mais alto órgão de governança (conselho de administração ou equivalente) e manter atualizada a PSC, contemplando o conteúdo mínimo exigido pela REN 964/2021: objetivos e princípios, estrutura de governança com papéis e responsabilidades, gestão de riscos, proteção e rastreabilidade das informações críticas, requisitos para terceiros, capacitação e conscientização, tratamento e resposta a incidentes e continuidade de negócios.'
+    - type: organisation_objective
+      name: Elevar a maturidade cibernética com avaliação anual
+      description: Aplicar anualmente ao menos um modelo de maturidade em segurança cibernética, registrar os resultados, definir metas de evolução e reportá-los à ANEEL, promovendo o ciclo de melhoria contínua do programa.
+    - type: organisation_objective
+      name: Assegurar a resiliência e a continuidade da operação
+      description: Garantir a continuidade e a resiliência do serviço de energia por meio de planos de continuidade de negócios, exercícios de recuperação e simulações e testes de resposta a incidentes que exercitem a capacidade de detecção, contenção e restabelecimento da operação.
+    - type: organisation_objective
+      name: Garantir a conformidade com a LGPD
+      description: Assegurar o tratamento de dados pessoais de consumidores em conformidade com a LGPD, com bases legais adequadas, medidas de segurança, rastreabilidade, atendimento aos direitos dos titulares e processo estruturado de resposta e comunicação de incidentes com dados pessoais.
+    - type: organisation_objective
+      name: Estabelecer governança e resposta a incidentes
+      description: Constituir estrutura de governança com dirigente responsável, ponto focal e papéis definidos, e capacidade de detectar, tratar e notificar tempestivamente os incidentes de maior impacto à equipe de coordenação setorial designada, assim que o agente tiver ciência.
+    - type: organisation_objective
+      name: Gerir os riscos cibernéticos de terceiros
+      description: Gerir os riscos cibernéticos decorrentes de fornecedores, integradores e prestadores com acesso a ativos críticos, por meio de requisitos de segurança contratuais, avaliação prévia e monitoramento contínuo da cadeia de suprimentos.
+    journey:
+      steps:
+      - key: contexto_organizacional
+        title: Contexto e questões organizacionais
+        description: 'Mapeie o contexto interno e externo do agente: obrigações regulatórias (REN ANEEL 964/2021 e LGPD), cenário de ameaças à infraestrutura crítica, legado e convergência TI/OT, dependência de terceiros e fatores de cultura e pessoas. Registre as questões que direcionam o programa de segurança cibernética.'
+        target_model: organisation-issues
+      - key: objetivos_programa
+        title: Objetivos do programa de segurança
+        description: 'Defina os objetivos do programa alinhados às questões e à REN 964/2021: implantar e manter a PSC, elevar a maturidade com avaliação anual, assegurar a resiliência da operação, garantir conformidade com a LGPD, estabelecer governança e resposta a incidentes e gerir riscos de terceiros.'
+        target_model: organisation-objectives
+      - key: inventario_ativos
+        title: Inventário de ativos primários e de suporte
+        description: Cadastre e classifique os ativos primários (SCADA/OT, infraestrutura crítica do SIN, dados de consumidores e informações críticas da operação) e de suporte (sistemas corporativos/TI e rede de automação/comunicação), estabelecendo a base para a proteção das informações críticas e a análise de riscos.
+        target_model: assets
+      - key: gap_aneel
+        title: Diagnóstico de conformidade — REN ANEEL 964/2021
+        description: 'Avalie o atendimento aos requisitos da REN 964/2021: existência e conteúdo mínimo da PSC; aprovação pelo conselho e designação de dirigente responsável e ponto focal; aplicação anual de modelo de maturidade; processo de identificação, avaliação e tratamento de riscos; proteção e rastreabilidade das informações críticas; requisitos de segurança para terceiros; simulações e testes de resiliência; processo de notificação de incidentes de maior impacto à coordenação setorial; e registros à ANEEL (maturidade, riscos e equipes). Identifique as lacunas.'
+        target_model: compliance-assessments
+        target_ref: aneel_audit
+      - key: gap_lgpd
+        title: Diagnóstico de conformidade — LGPD
+        description: 'Avalie a conformidade do tratamento de dados pessoais de consumidores com a LGPD: bases legais, princípios, direitos dos titulares, medidas de segurança e rastreabilidade, gestão e comunicação de incidentes com dados pessoais à ANPD e aos titulares, e registro das operações de tratamento. Identifique as lacunas.'
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: analise_riscos
+        title: Análise de riscos cibernéticos
+        description: Identifique, analise e avalie os cenários de risco cibernético sobre os ativos críticos (ataque ao SCADA/OT, indisponibilidade do serviço de energia, vazamento de dados de consumidores, comprometimento de infraestrutura crítica e comprometimento via terceiros) e defina o tratamento, conforme exigido pela REN 964/2021.
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: plano_controles
+        title: Controles e plano de tratamento
+        description: Selecione e implante controles para tratar os riscos priorizados e sanar as lacunas de conformidade — governança e PSC, proteção do ambiente OT, segmentação TI/OT, gestão de acessos e de terceiros, monitoramento e detecção, resposta a incidentes e continuidade de negócios — associando cada controle aos riscos e requisitos correspondentes.
+        target_model: applied-controls
+      - key: plano_acao
+        title: Plano de ação e acompanhamento
+        description: Transforme as lacunas e os controles pendentes em tarefas com responsáveis e prazos, acompanhando a execução do programa, a preparação dos registros à ANEEL e o ciclo anual de reavaliação de maturidade.
+        target_model: tasks

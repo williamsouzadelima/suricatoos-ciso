@@ -1,0 +1,212 @@
+urn: urn:intuitem:risk:preset:br-susep-seguros
+locale: pt
+ref_id: preset-br-susep-seguros
+name: Seguradoras — Segurança Cibernética (Circular SUSEP 638/2021)
+description: Jornada guiada para sociedades seguradoras, resseguradoras, de capitalização e entidades abertas de previdência complementar estruturarem seu programa de segurança cibernética em conformidade com a Circular SUSEP nº 638/2021 e com a LGPD — do contexto organizacional e inventário de ativos ao diagnóstico de lacunas, análise de riscos, seleção de controles e plano de ação com acompanhamento.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:susep-638-2021
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - sme
+      - large
+      - enterprise
+      industry:
+      - financial
+      region:
+      - br
+      goal: security-programme
+    feature_flags:
+      enable:
+      - compliance
+      - tprm
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação — Circular SUSEP 638/2021
+      framework: urn:intuitem:risk:library:susep-638-2021
+      create_suggested_controls: true
+      ref: susep_audit
+    - type: compliance_assessment
+      name: Avaliação — LGPD
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Sistemas de apólices e sinistros
+      description: Sistemas core de emissão e gestão de apólices, cálculo de prêmios, subscrição e regulação/pagamento de sinistros — sustentam as operações críticas da supervisionada.
+      asset_type: SP
+      ref: sistemas_apolices_sinistros
+    - type: asset
+      name: Base de segurados e beneficiários
+      description: Base de dados de segurados e beneficiários com dados pessoais e sensíveis (identificação, saúde, financeiros, biometria); ativo primário sujeito à LGPD e à classificação por relevância exigida pela Circular SUSEP 638/2021.
+      asset_type: PR
+      ref: base_segurados
+    - type: asset
+      name: Dados atuariais e de subscrição
+      description: Dados atuariais, de subscrição e de precificação de risco, incluindo modelos, tabelas e provisões técnicas; informação estratégica e regulada que embasa o resultado técnico.
+      asset_type: PR
+      ref: dados_atuariais
+    - type: asset
+      name: Canais digitais e app do segurado
+      description: Portal e aplicativo do segurado, APIs e canais digitais de venda e autoatendimento (cotação, contratação, aviso e acompanhamento de sinistro), expostos à internet.
+      asset_type: SP
+      ref: canais_digitais
+    - type: asset
+      name: Provedor de computação em nuvem
+      description: Provedores de computação em nuvem e prestadores de serviços relevantes de processamento e armazenamento de dados, sujeitos aos requisitos de contratação da Circular SUSEP 638/2021.
+      asset_type: SP
+      ref: provedor_nuvem
+    - type: asset
+      name: Infraestrutura de TI e rede corporativa
+      description: Infraestrutura de TI, rede corporativa, identidades, backups e estações de trabalho que suportam o ambiente tecnológico e os controles de segurança da supervisionada.
+      asset_type: SP
+      ref: infra_ti_rede
+    - type: risk_scenario
+      name: Vazamento de dados de segurados
+      description: Exposição ou exfiltração não autorizada de dados pessoais e sensíveis de segurados e beneficiários, configurando incidente relevante com dever de notificação à SUSEP e comunicação à ANPD/titulares, além de sanções sob a LGPD e dano reputacional.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - base_segurados
+      - dados_atuariais
+      - sistemas_apolices_sinistros
+      - canais_digitais
+    - type: risk_scenario
+      name: Fraude em sinistros e tomada de contas
+      description: Fraude na regulação de sinistros ou comprometimento de contas de segurados e corretores para pagamentos indevidos e falsificação de documentos, com impacto financeiro direto na sinistralidade e no resultado técnico.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sistemas_apolices_sinistros
+      - base_segurados
+      - canais_digitais
+    - type: risk_scenario
+      name: Indisponibilidade de serviços por incidente cibernético
+      description: Interrupção dos sistemas de apólices/sinistros e dos canais digitais por ataque (DDoS, falha ou sabotagem) afetando a emissão de apólices, o atendimento e o pagamento de sinistros, acionando o plano de continuidade de negócios.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sistemas_apolices_sinistros
+      - canais_digitais
+      - infra_ti_rede
+    - type: risk_scenario
+      name: Ransomware com sequestro de dados e paralisação
+      description: Infecção por ransomware criptografando sistemas e bases críticas, com extorsão, paralisação operacional e potencial vazamento em modelo de dupla extorsão, exigindo resposta a incidentes e recuperação a partir de backups.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - sistemas_apolices_sinistros
+      - base_segurados
+      - infra_ti_rede
+    - type: risk_scenario
+      name: Comprometimento via provedor de nuvem ou serviço relevante
+      description: Incidente originado em provedor de nuvem ou prestador de serviço relevante (má configuração, comprometimento, subcontratação não autorizada ou prestação em país sem convênio) afetando a confidencialidade, integridade ou disponibilidade dos dados hospedados.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - provedor_nuvem
+      - base_segurados
+      - dados_atuariais
+    - type: organisation_issue
+      name: Obrigações da Circular SUSEP 638/2021
+      description: A Circular SUSEP nº 638/2021 exige que sociedades seguradoras, resseguradoras, de capitalização e entidades abertas de previdência complementar implementem e mantenham política de segurança cibernética aprovada pela diretoria, plano de ação e resposta a incidentes, diretor responsável, registro/classificação e notificação de incidentes relevantes à SUSEP, requisitos para contratação de serviços relevantes de processamento/armazenamento de dados e de computação em nuvem, além de relatório anual. A não observância sujeita a supervisionada a sanções administrativas.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Tratamento de dados pessoais sensíveis de segurados
+      description: 'A operação de seguros envolve grande volume de dados pessoais e sensíveis (saúde, biometria, dados financeiros) de segurados e beneficiários, sujeitos à LGPD (Lei 13.709/2018): exige base legal adequada, medidas técnicas e administrativas de segurança (art. 46), comunicação de incidentes de segurança à ANPD e aos titulares (art. 48) e atuação do encarregado (art. 41).'
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Governança de segurança cibernética imatura
+      description: Ausência de diretor formalmente responsável pela política de segurança cibernética e pela execução do plano de ação e resposta a incidentes, bem como de estrutura de governança, papéis e responsabilidades definidos e compatíveis com o porte e o perfil de risco, conforme exigido pela Circular SUSEP 638/2021.
+      category: organisationStructure
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Dependência de provedores de nuvem e serviços relevantes de TI
+      description: Processamento e armazenamento de dados de apólices, sinistros e atuariais em provedores de computação em nuvem e prestadores terceirizados, o que exige due diligence prévia e periódica, cláusulas contratuais específicas, definição de países/região de prestação (com convênio para o exterior) e comunicação à SUSEP, nos termos da Circular 638/2021.
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Processo de resposta e notificação de incidentes incipiente
+      description: Falta de rotina estruturada para registro, classificação por relevância, análise de causa e impacto dos incidentes, retenção dos registros pelo prazo mínimo exigido e notificação tempestiva de incidentes relevantes à SUSEP e, quando aplicável, à ANPD.
+      category: internalProcesses
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Cultura de segurança cibernética a desenvolver
+      description: Necessidade de disseminar a cultura de segurança cibernética entre colaboradores, corretores e prestadores de serviço, com capacitação periódica, conforme diretriz da Circular SUSEP 638/2021, reduzindo a exposição a engenharia social, phishing e erro humano.
+      category: companyCulture
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Exposição a fraude em sinistros e crimes financeiros
+      description: O setor de seguros é alvo recorrente de fraude na regulação de sinistros e de fraudes cibernéticas (tomada de contas, falsificação de documentos), com impacto econômico direto na sinistralidade e no resultado técnico, demandando controles antifraude e trilhas de auditoria.
+      category: economic
+      origin: external
+      status: active
+    - type: organisation_objective
+      name: Instituir política de segurança cibernética aderente à SUSEP 638
+      description: 'Implementar, aprovar pela diretoria e manter atualizada a política de segurança cibernética com o conteúdo mínimo exigido: objetivos de segurança, controles (criptografia, autenticação, controle de acesso, prevenção/detecção de intrusão, proteção contra malware, rastreabilidade), classificação de dados por relevância, tratamento de incidentes e parâmetros para contratação de serviços relevantes, compatível com o porte e o perfil de risco.'
+    - type: organisation_objective
+      name: Estabelecer plano de ação e resposta a incidentes com diretor responsável
+      description: Formalizar o plano de ação e resposta a incidentes com área responsável, metas de mitigação e cronograma, designar o diretor responsável pela política e sua execução, e estruturar o registro, a classificação e a notificação de incidentes relevantes à SUSEP.
+    - type: organisation_objective
+      name: Adequar a contratação de nuvem e serviços relevantes
+      description: Implantar due diligence prévia e periódica, cláusulas contratuais (segurança, confidencialidade, acesso e auditoria pela SUSEP, subcontratação, continuidade), definição de países/região de prestação com convênio para o exterior e comunicação à SUSEP da contratação de serviços relevantes de processamento/armazenamento de dados e computação em nuvem.
+    - type: organisation_objective
+      name: Assegurar conformidade LGPD no tratamento de dados de segurados
+      description: Garantir base legal, minimização e segurança no tratamento de dados pessoais e sensíveis, atender aos direitos dos titulares, manter o encarregado (DPO), estruturar a comunicação de incidentes à ANPD e disciplinar as transferências internacionais de dados.
+    - type: organisation_objective
+      name: Fortalecer resiliência, continuidade e cultura de segurança
+      description: Assegurar a continuidade das operações críticas de emissão, atendimento e pagamento de sinistros, promover capacitação periódica e disseminação da cultura de segurança cibernética e estabelecer o compartilhamento de informações sobre incidentes relevantes.
+    journey:
+      steps:
+      - key: contexto_organizacional
+        title: Mapear o contexto e os desafios da seguradora
+        description: Registrar os fatores internos e externos que afetam a segurança cibernética da supervisionada — exigências da Circular SUSEP 638/2021 e da LGPD, dependência de nuvem e terceiros, maturidade de governança e de resposta a incidentes, cultura e exposição a fraude — como base para o programa de segurança.
+        target_model: organisation-issues
+      - key: objetivos_seguranca
+        title: Definir os objetivos do programa de segurança cibernética
+        description: 'Estabelecer os objetivos estratégicos: política aprovada pela diretoria, plano de ação e resposta a incidentes com diretor responsável, adequação da contratação de nuvem e serviços relevantes, conformidade LGPD e fortalecimento de continuidade e cultura de segurança.'
+        target_model: organisation-objectives
+      - key: inventario_ativos
+        title: Inventariar e classificar os ativos críticos
+        description: Cadastrar e classificar por relevância os ativos primários (base de segurados, dados atuariais e de subscrição) e de suporte (sistemas de apólices/sinistros, canais digitais, provedor de nuvem, infraestrutura), atendendo à exigência de classificação de dados e informações da Circular SUSEP 638/2021.
+        target_model: assets
+      - key: gap_susep_638
+        title: Diagnóstico de conformidade — Circular SUSEP 638/2021
+        description: 'Avaliar a aderência à Circular SUSEP 638/2021: conteúdo mínimo da política de segurança cibernética, plano de ação e resposta a incidentes, diretor responsável, registro/classificação e notificação de incidentes relevantes à SUSEP, requisitos para contratação de serviços relevantes e de computação em nuvem, disseminação da cultura, compartilhamento de informações e relatório anual.'
+        target_model: compliance-assessments
+        target_ref: susep_audit
+      - key: gap_lgpd
+        title: Diagnóstico de conformidade — LGPD
+        description: 'Avaliar a aderência à LGPD no tratamento de dados de segurados e beneficiários: bases legais, dados pessoais sensíveis, direitos dos titulares, medidas de segurança (art. 46), comunicação de incidentes à ANPD (art. 48), atuação do encarregado (art. 41) e transferências internacionais de dados.'
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: analise_riscos
+        title: Analisar os riscos cibernéticos
+        description: Avaliar os cenários de risco (vazamento de dados de segurados, fraude em sinistros, indisponibilidade, ransomware e comprometimento via provedor de nuvem) sobre os ativos inventariados, estimando probabilidade e impacto e priorizando o tratamento.
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: plano_controles
+        title: Selecionar e aplicar controles de segurança
+        description: Definir e implementar controles técnicos e organizacionais — criptografia, autenticação, controle de acesso, prevenção/detecção de intrusão, proteção contra malware, rastreabilidade da informação, backup, continuidade de negócios e gestão de terceiros/nuvem — para tratar os riscos e fechar as lacunas regulatórias.
+        target_model: applied-controls
+      - key: plano_acao_acompanhamento
+        title: Estruturar o plano de ação e o acompanhamento
+        description: Converter as lacunas e os riscos em tarefas com responsáveis, prazos e metas de mitigação (plano de ação e resposta a incidentes), estabelecendo o acompanhamento contínuo e a base para o relatório anual à diretoria exigido pela Circular SUSEP 638/2021.
+        target_model: tasks
