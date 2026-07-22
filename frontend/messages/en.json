@@ -5427,5 +5427,9 @@
 	"aggregateCost": "Aggregate incident cost",
 	"markSubmitted": "Mark as submitted",
 	"responseRunbook": "Response runbook",
-	"totalEstimatedCost": "Total estimated cost"
+	"totalEstimatedCost": "Total estimated cost",
+	"billable": "Billable",
+	"hoursEstimated": "estimated",
+	"incidentTimeEntry": "Time entry",
+	"incidentTimeEntries": "Time entries"
 }

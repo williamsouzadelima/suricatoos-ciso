@@ -294,6 +294,12 @@
 			urlmodel: 'regulatory-notifications',
 			icon: 'fa-solid fa-bell',
 			labelKey: 'regulatoryNotifications'
+		},
+		{
+			tabValue: 'incident-time-entries',
+			urlmodel: 'incident-time-entries',
+			icon: 'fa-solid fa-clock',
+			labelKey: 'incidentTimeEntries'
 		}
 	];
 

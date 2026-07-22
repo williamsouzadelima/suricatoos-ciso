@@ -308,6 +308,21 @@ export const URL_MODEL_MAP: ModelMap = {
 		],
 		filters: [{ field: 'folder' }, { field: 'incident' }]
 	},
+	'incident-time-entries': {
+		endpointUrl: 'delivery/incident-time-entries',
+		name: 'incidenttimeentry',
+		localName: 'incidentTimeEntry',
+		localNamePlural: 'incidentTimeEntries',
+		verboseName: 'Incident time entry',
+		verboseNamePlural: 'Incident time entries',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'applied_control', urlModel: 'applied-controls' },
+			{ field: 'user', urlModel: 'users' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'billable' }]
+	},
 	'time-entries': {
 		endpointUrl: 'delivery/time-entries',
 		name: 'timeentry',
@@ -2366,6 +2381,7 @@ export const URL_MODEL_MAP: ModelMap = {
 			{ field: 'incident', urlModel: 'incident-stakeholders' },
 			{ field: 'incident', urlModel: 'incident-response-tasks' },
 			{ field: 'incident', urlModel: 'regulatory-notifications' },
+			{ field: 'incident', urlModel: 'incident-time-entries' },
 			{ field: 'incident', urlModel: 'dora-incident-reports' },
 			{
 				field: 'incidents',

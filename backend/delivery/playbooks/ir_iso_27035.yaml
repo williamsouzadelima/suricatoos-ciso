@@ -1,0 +1,191 @@
+key: iso-27035
+name: "Runbook de Resposta a Incidentes — ISO/IEC 27035"
+description: "Playbook curado Suricatoos: 5 fases do ciclo de gestão de incidentes de segurança da informação da ISO/IEC 27035 (Planejar & Preparar → Detecção & Reporte → Avaliação & Decisão → Respostas → Lições aprendidas). Tarefas de notificação regulatória se somam pelos módulos do cliente (mod_ir_*, injetadas na fase de detecção/reporte)."
+phases:
+  - key: p1_plan_prepare
+    name: "Fase 1 · Planejar & Preparar"
+    order: 0
+    day_start: 0
+    day_end: 1
+    objective: "Confirmar a prontidão: política, equipe, ferramentas e classificação."
+    tasks:
+      - key: iso_politica
+        name: "Confirmar a política e o plano de gestão de incidentes vigentes"
+        description: "Verificar se a política, os procedimentos e o plano de resposta a incidentes estão atualizados e aplicáveis ao caso."
+        priority: 1
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+      - key: iso_equipe
+        name: "Acionar a equipe de gestão de incidentes (IRT) e os papéis"
+        description: "Mobilizar o time de resposta (IRT/CSIRT) e confirmar papéis e responsabilidades conforme o RACI."
+        priority: 1
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+      - key: iso_ferramentas
+        name: "Confirmar ferramentas, canais e contatos de escalonamento"
+        description: "Garantir acesso às ferramentas de resposta, aos canais seguros de comunicação e à árvore de contatos/escalonamento."
+        priority: 2
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+      - key: iso_classificacao
+        name: "Rever o esquema de classificação e severidade de incidentes"
+        description: "Confirmar os critérios de categorização e a escala de severidade a aplicar na avaliação."
+        priority: 2
+        effort: S
+        estimated_hours: 1
+        offset_start_days: 0
+        duration_days: 1
+  - key: p2_detection_analysis
+    name: "Fase 2 · Detecção & Reporte"
+    order: 1
+    day_start: 0
+    day_end: 2
+    objective: "Detectar, registrar e reportar o incidente; coletar e preservar evidências."
+    tasks:
+      - key: iso_deteccao
+        name: "Detectar e registrar o evento/incidente de segurança"
+        description: "Registrar formalmente o evento/incidente, com data/hora, fonte de detecção e primeiras informações."
+        priority: 1
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 0
+        duration_days: 1
+      - key: iso_reporte
+        name: "Reportar o incidente pelos canais internos definidos"
+        description: "Comunicar o incidente ao ponto focal e às áreas competentes conforme o procedimento de reporte."
+        priority: 1
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+      - key: iso_coleta
+        name: "Coletar e preservar evidências (cadeia de custódia)"
+        description: "Coletar evidências de forma íntegra e documentar a cadeia de custódia para uso posterior."
+        priority: 1
+        effort: L
+        estimated_hours: 8
+        offset_start_days: 0
+        duration_days: 2
+      - key: iso_escopo
+        name: "Levantamento inicial de escopo e ativos afetados"
+        description: "Identificar preliminarmente os sistemas, dados e ativos potencialmente afetados."
+        priority: 2
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 0
+        duration_days: 1
+  - key: p3_assessment_decision
+    name: "Fase 3 · Avaliação & Decisão"
+    order: 2
+    day_start: 1
+    day_end: 3
+    objective: "Avaliar o incidente, confirmar severidade e decidir a estratégia de resposta."
+    tasks:
+      - key: iso_avaliar
+        name: "Avaliar o incidente: escopo, impacto e categoria"
+        description: "Analisar a extensão, o impacto ao negócio e aos dados e a categoria do incidente."
+        priority: 1
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 0
+        duration_days: 2
+      - key: iso_severidade
+        name: "Confirmar a severidade e decidir sobre escalonamento/crise"
+        description: "Reavaliar a severidade e decidir se o incidente escala para crise, acionando o BCP se necessário."
+        priority: 1
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+      - key: iso_decisao
+        name: "Decidir a estratégia de resposta"
+        description: "Definir a estratégia (conter/erradicar/recuperar) e os recursos necessários."
+        priority: 1
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 1
+        duration_days: 1
+  - key: p4_responses
+    name: "Fase 4 · Respostas"
+    order: 3
+    day_start: 1
+    day_end: 7
+    objective: "Conter, erradicar, recuperar e comunicar."
+    tasks:
+      - key: iso_contencao
+        name: "Conter o incidente"
+        description: "Isolar sistemas/contas afetados e estancar a propagação (contenção de curto e longo prazo)."
+        priority: 1
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 0
+        duration_days: 2
+      - key: iso_erradicacao
+        name: "Erradicar a causa e as ameaças"
+        description: "Remover malware, persistência e credenciais comprometidas; corrigir a vulnerabilidade explorada."
+        priority: 1
+        effort: L
+        estimated_hours: 10
+        offset_start_days: 1
+        duration_days: 3
+      - key: iso_recuperacao
+        name: "Recuperar e restaurar os serviços com segurança"
+        description: "Restaurar de fontes confiáveis, validar integridade e retornar à operação normal com monitoramento reforçado."
+        priority: 1
+        effort: L
+        estimated_hours: 12
+        offset_start_days: 2
+        duration_days: 4
+      - key: iso_comunicacao
+        name: "Executar as comunicações a partes interessadas e reguladores"
+        description: "Comunicar às partes interessadas e cumprir as obrigações de notificação regulatória aplicáveis."
+        priority: 2
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 1
+        duration_days: 3
+  - key: p5_lessons
+    name: "Fase 5 · Lições aprendidas"
+    order: 4
+    day_start: 5
+    day_end: 15
+    objective: "Aprender com o incidente, consolidar o relatório e melhorar controles."
+    tasks:
+      - key: iso_analise
+        name: "Análise pós-incidente e identificação de melhorias"
+        description: "Revisar a resposta, identificar causa-raiz e oportunidades de melhoria de processos e controles."
+        priority: 1
+        effort: M
+        estimated_hours: 8
+        offset_start_days: 5
+        duration_days: 3
+      - key: iso_licoes
+        name: "Registrar lições aprendidas e atualizar políticas/controles"
+        description: "Documentar as lições e atualizar a política, os procedimentos e os controles conforme necessário."
+        priority: 1
+        effort: S
+        estimated_hours: 3
+        offset_start_days: 7
+        duration_days: 2
+      - key: iso_relatorio
+        name: "Consolidar o relatório do incidente"
+        description: "Fechar o relatório do incidente com timeline, impacto, resposta e evidências."
+        priority: 2
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 7
+        duration_days: 3
+      - key: iso_custos
+        name: "Consolidar os custos do incidente"
+        description: "Fechar o P&L: esforço, fornecedores, multas e impacto de indisponibilidade."
+        priority: 2
+        effort: S
+        estimated_hours: 3
+        offset_start_days: 7
+        duration_days: 2

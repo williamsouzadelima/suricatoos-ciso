@@ -36,6 +36,7 @@ from .models import (
     IncidentStakeholder,
     RegulatoryNotification,
     IncidentCost,
+    IncidentTimeEntry,
 )
 from .serializers import PlanTaskReadSerializer
 from .services.seeding import seed_engagement_plan
@@ -794,3 +795,8 @@ class RegulatoryNotificationViewSet(BaseModelViewSet):
 class IncidentCostViewSet(BaseModelViewSet):
     model = IncidentCost
     filterset_fields = ["folder", "incident"]
+
+
+class IncidentTimeEntryViewSet(BaseModelViewSet):
+    model = IncidentTimeEntry
+    filterset_fields = ["folder", "incident", "applied_control", "user", "billable"]

@@ -5427,5 +5427,9 @@
 	"aggregateCost": "Custo agregado de incidentes",
 	"markSubmitted": "Marcar como enviada",
 	"responseRunbook": "Runbook de resposta",
-	"totalEstimatedCost": "Custo total estimado"
+	"totalEstimatedCost": "Custo total estimado",
+	"billable": "Faturável",
+	"hoursEstimated": "estimadas",
+	"incidentTimeEntry": "Apontamento de horas",
+	"incidentTimeEntries": "Apontamentos de horas"
 }

@@ -217,8 +217,9 @@ def build_incident_pptx(incident, lang="pt"):
            "Custo determinístico: esforço + impacto de negócio + fornecedores + multas.")
     ky, kh = Inches(2.4), Inches(1.9)
     kw = (CW - Inches(0.6)) / 4
+    _basis = "apontadas" if cost.get("effort_basis") == "logged" else "estimadas"
     pnl = [
-        ("Esforço de resposta", cost["response_effort_fmt"], f"{cost['estimated_hours']:.0f}h estimadas", INDIGO),
+        ("Esforço de resposta", cost["response_effort_fmt"], f"{cost.get('effort_hours', cost['estimated_hours']):.0f}h {_basis}", INDIGO),
         ("Impacto de negócio", cost["business_impact_fmt"], f"{cost['downtime_hours']:.0f}h downtime", VIOLET),
         ("Fornecedores", cost["external_vendor_fmt"], "forense/jurídico", SKY),
         ("Multas", cost["regulatory_fines_fmt"], "regulatórias", ROSE),

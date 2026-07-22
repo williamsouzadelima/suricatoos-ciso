@@ -1460,6 +1460,13 @@ export const listViewFields = {
 			folder: DOMAIN_FILTER
 		}
 	},
+	'incident-time-entries': {
+		head: ['date', 'hours', 'appliedControl', 'user', 'domain'],
+		body: ['date', 'hours', 'applied_control', 'user', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
 	perimeters: {
 		head: ['ref_id', 'name', 'description', 'defaultAssignee', 'domain'],
 		body: ['ref_id', 'name', 'description', 'default_assignee', 'folder'],

@@ -16,6 +16,7 @@ from .views import (
     IncidentStakeholderViewSet,
     RegulatoryNotificationViewSet,
     IncidentCostViewSet,
+    IncidentTimeEntryViewSet,
 )
 
 router = DefaultRouter()
@@ -33,6 +34,7 @@ router.register(r"incident-roles", IncidentRoleViewSet, basename="incident-roles
 router.register(r"incident-stakeholders", IncidentStakeholderViewSet, basename="incident-stakeholders")
 router.register(r"regulatory-notifications", RegulatoryNotificationViewSet, basename="regulatory-notifications")
 router.register(r"incident-costs", IncidentCostViewSet, basename="incident-costs")
+router.register(r"incident-time-entries", IncidentTimeEntryViewSet, basename="incident-time-entries")
 
 urlpatterns = [
     path("", include(router.urls)),

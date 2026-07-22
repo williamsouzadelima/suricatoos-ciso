@@ -728,6 +728,42 @@ class IncidentCost(AbstractBaseModel, FolderMixin):
         return f"Cost · {self.incident.name}"
 
 
+class IncidentTimeEntry(AbstractBaseModel, FolderMixin):
+    """Apontamento de horas REAL gasto na resposta a um incidente (por pessoa/atividade).
+    Alimenta o esforço de resposta no P&L quando houver apontamento (senão usa o estimado)."""
+
+    incident = models.ForeignKey(
+        Incident, on_delete=models.CASCADE, related_name="ir_time_entries"
+    )
+    applied_control = models.ForeignKey(
+        AppliedControl,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="ir_time_entries",
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="ir_time_entries",
+    )
+    hours = models.DecimalField(max_digits=6, decimal_places=2)
+    date = models.DateField()
+    billable = models.BooleanField(default=True)
+    note = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = _("Incident time entry")
+        verbose_name_plural = _("Incident time entries")
+
+    def save(self, *args, **kwargs):
+        if self.incident_id:
+            self.folder = self.incident.folder
+        super().save(*args, **kwargs)
+
+
 auditlog.register(Engagement)
 auditlog.register(ClientIntake)
 auditlog.register(EngagementPhase)
@@ -742,3 +778,4 @@ auditlog.register(IncidentRole)
 auditlog.register(IncidentStakeholder)
 auditlog.register(RegulatoryNotification)
 auditlog.register(IncidentCost)
+auditlog.register(IncidentTimeEntry)

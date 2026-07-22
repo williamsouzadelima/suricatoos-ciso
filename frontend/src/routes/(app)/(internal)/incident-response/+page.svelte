@@ -31,6 +31,7 @@
 
 	let seeding = $state(false);
 	let resolving = $state(false);
+	let standard = $state('nist-800-61');
 
 	const selected = $derived(data.selected);
 	const notifs = $derived((selected?.notifications ?? []) as any[]);
@@ -130,6 +131,7 @@
 					<form
 						method="POST"
 						action="?/seed"
+						class="flex items-center gap-2"
 						use:enhance={() => {
 							seeding = true;
 							return async ({ update }) => {
@@ -139,7 +141,14 @@
 						}}
 					>
 						<input type="hidden" name="incident" value={selected.id} />
-						<input type="hidden" name="standard" value="nist-800-61" />
+						<select
+							name="standard"
+							bind:value={standard}
+							class="text-sm rounded-lg border border-surface-300-700 bg-surface-50-950 px-2 py-1.5"
+						>
+							<option value="nist-800-61">NIST SP 800-61</option>
+							<option value="iso-27035">ISO/IEC 27035</option>
+						</select>
 						<button class="btn btn-sm preset-filled-primary-500" disabled={seeding}>
 							{seeding ? m.loading() : m.seedRunbook()}
 						</button>
@@ -178,6 +187,11 @@
 							<div class="rounded-lg bg-surface-100-900 px-3 py-2">
 								<div class="text-lg font-bold text-indigo-500">{cost.response_effort_fmt}</div>
 								<div class="text-xs text-surface-500">{m.responseEffort()}</div>
+								<div class="text-[10px] text-surface-400">
+									{Math.round(cost.effort_hours ?? 0)}h · {cost.effort_basis === 'logged'
+										? m.hoursLogged()
+										: m.hoursEstimated()}
+								</div>
 							</div>
 							<div class="rounded-lg bg-surface-100-900 px-3 py-2">
 								<div class="text-lg font-bold text-violet-500">{cost.business_impact_fmt}</div>

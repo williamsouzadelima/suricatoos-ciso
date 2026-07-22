@@ -20,6 +20,7 @@ PLAYBOOKS_DIR = pathlib.Path(__file__).resolve().parent.parent / "playbooks"
 
 IR_TEMPLATE_FILES = {
     "nist-800-61": "ir_nist_800_61.yaml",
+    "iso-27035": "ir_iso_27035.yaml",
 }
 
 

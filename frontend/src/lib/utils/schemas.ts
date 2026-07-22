@@ -1945,6 +1945,16 @@ export const IncidentCostSchema = z.object({
 	notes: z.string().optional()
 });
 
+export const IncidentTimeEntrySchema = z.object({
+	incident: z.string(),
+	applied_control: z.string().uuid().optional().nullable(),
+	user: z.string().uuid().optional().nullable(),
+	hours: z.number(),
+	date: z.string(),
+	billable: z.boolean().optional().default(true),
+	note: z.string().optional()
+});
+
 const SCHEMA_MAP: Record<string, ZodSchema> = {
 	'business-catalogs': BusinessCatalogSchema,
 	'catalog-dependencies': CatalogDependencySchema,
@@ -1959,6 +1969,7 @@ const SCHEMA_MAP: Record<string, ZodSchema> = {
 	'incident-stakeholders': IncidentStakeholderSchema,
 	'regulatory-notifications': RegulatoryNotificationSchema,
 	'incident-costs': IncidentCostSchema,
+	'incident-time-entries': IncidentTimeEntrySchema,
 	folders: FolderSchema,
 	'folders-import': FolderImportSchema,
 	perimeters: PerimeterSchema,

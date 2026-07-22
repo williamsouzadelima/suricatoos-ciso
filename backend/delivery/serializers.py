@@ -20,6 +20,7 @@ from .models import (
     IncidentStakeholder,
     RegulatoryNotification,
     IncidentCost,
+    IncidentTimeEntry,
 )
 from .services.eisenhower import derive_eisenhower
 
@@ -286,4 +287,22 @@ class IncidentCostReadSerializer(BaseModelSerializer):
 class IncidentCostWriteSerializer(BaseModelSerializer):
     class Meta:
         model = IncidentCost
+        fields = "__all__"
+
+
+class IncidentTimeEntryReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    applied_control = FieldsRelatedField(_AC_FIELDS)
+    user = FieldsRelatedField()
+
+    class Meta:
+        model = IncidentTimeEntry
+        fields = "__all__"
+
+
+class IncidentTimeEntryWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentTimeEntry
         fields = "__all__"

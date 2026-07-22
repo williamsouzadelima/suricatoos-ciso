@@ -7,7 +7,7 @@ Composição: total = esforço de resposta + impacto de negócio + fornecedores 
 from core.utils import get_global_currency, format_currency
 from global_settings.models import GlobalSettings
 
-from delivery.models import IncidentResponseTask, BusinessCatalog
+from delivery.models import IncidentResponseTask, IncidentTimeEntry, BusinessCatalog
 from .downtime import compute_catalog_impact
 
 
@@ -31,12 +31,22 @@ def compute_incident_cost(incident, hours_series=None):
     def fmt(v):
         return format_currency(v, currency)
 
-    # 1) esforço de resposta = Σ horas estimadas das atividades × (diária global / 8)
+    # 1) esforço de resposta = horas × (diária global / 8). Usa as horas REALMENTE
+    #    apontadas (IncidentTimeEntry) se houver; senão, cai para as horas estimadas.
     hourly_rate = float(GlobalSettings.get_daily_rate()) / 8.0
     est_hours = 0.0
     for t in IncidentResponseTask.objects.filter(incident=incident):
         est_hours += _f(t.estimated_hours)
-    response_effort = est_hours * hourly_rate
+    logged_hours = 0.0
+    for te in IncidentTimeEntry.objects.filter(incident=incident):
+        logged_hours += _f(te.hours)
+    if logged_hours > 0:
+        effort_hours = logged_hours
+        effort_basis = "logged"
+    else:
+        effort_hours = est_hours
+        effort_basis = "estimated"
+    response_effort = effort_hours * hourly_rate
 
     # 2) impacto de negócio = downtime aplicado aos catálogos ligados aos ativos do incidente
     #    (mapeamento preciso via CatalogDependency.asset). Nota: se catálogos usarem moedas
@@ -78,6 +88,9 @@ def compute_incident_cost(incident, hours_series=None):
         "hourly_rate": hourly_rate,
         "hourly_rate_fmt": fmt(hourly_rate),
         "estimated_hours": est_hours,
+        "logged_hours": logged_hours,
+        "effort_hours": effort_hours,
+        "effort_basis": effort_basis,
         "downtime_hours": downtime_hours,
         "response_effort": response_effort,
         "response_effort_fmt": fmt(response_effort),

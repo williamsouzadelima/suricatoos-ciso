@@ -174,6 +174,7 @@ export const URL_MODEL = [
 	'incident-stakeholders',
 	'regulatory-notifications',
 	'incident-costs',
+	'incident-time-entries',
 ] as const;
 
 export const THIRD_PARTY_URL_MODEL = [
