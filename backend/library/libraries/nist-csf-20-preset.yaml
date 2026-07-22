@@ -54,7 +54,7 @@ objects:
           description: Lois, réglementations et obligations contractuelles imposant des exigences de cybersécurité à l'organisation.
         pt:
           name: Obrigações regulatórias e legais de conformidade
-          description: Leis, regulamentos e obrigações contratuais aplicáveis que impõem requisitos de cibersegurança à organização (por exemplo, Privacy Act, NZISM, regulamentações setoriais, SLAs contratuais).
+          description: Leis, regulamentos e obrigações contratuais aplicáveis que impõem requisitos de cibersegurança à organização (por exemplo, LGPD, Marco Civil da Internet, regulamentações setoriais como as do BACEN ou da ANPD, SLAs contratuais).
     - type: organisation_issue
       name: Evolving cyber threat landscape
       description: External threat environment including ransomware groups, nation-state actors, phishing campaigns, supply chain attacks, and emerging threats relevant to the organisation's sector and geography.
@@ -194,7 +194,7 @@ objects:
           description: Organismes de réglementation, agences gouvernementales et organisations nationales de cybersécurité imposant des obligations de conformité et des exigences de notification d’incidents.
         pt:
           name: Reguladores e Órgãos Governamentais
-          description: Órgãos reguladores, agências governamentais e organizações nacionais de cibersegurança (por exemplo, CERT NZ, ACSC, reguladores setoriais) que impõem obrigações de conformidade e requisitos de notificação de incidentes. Alinhado a GV.OC-03, RS.CO-02.
+          description: Órgãos reguladores, agências governamentais e organizações nacionais de cibersegurança (por exemplo, CERT.br, CTIR Gov, ANPD, reguladores setoriais como BACEN e ANATEL) que impõem obrigações de conformidade e requisitos de notificação de incidentes. Alinhado a GV.OC-03, RS.CO-02.
     - type: entity
       name: Customers and End Users
       description: Individuals and organisations that use the organisation's products or services and have expectations regarding the confidentiality, integrity, and availability of their data. Aligned to GV.OC-02, GV.OC-04.
@@ -253,7 +253,7 @@ objects:
         fr:
           name: Constats d’évaluation des vulnérabilités et de tests d’intrusion
         pt:
-          name: Achados de Avaliação de Vulnerabilidades e Teste de Intrusão
+          name: Achados de Avaliação de Vulnerabilidades e Teste de Invasão
     - type: findings_assessment
       name: Detection and Response Capability Findings
       category: audit
@@ -368,7 +368,7 @@ objects:
           description: Données personnelles, financières, propriété intellectuelle, données réglementées et autres actifs informationnels critiques.
         pt:
           name: Dados Sensíveis e Regulados
-          description: Informações de identificação pessoal (PII), registros financeiros, propriedade intelectual, dados regulados e outros ativos de informação críticos.
+          description: Dados pessoais (conforme a LGPD), registros financeiros, propriedade intelectual, dados regulados e outros ativos de informação críticos.
     - type: asset
       name: Operational Technology and IoT
       description: Industrial control systems, building management systems, and Internet of Things devices where applicable.

@@ -52,7 +52,7 @@ objects:
           description: Lois, réglementations et obligations contractuelles applicables imposant des exigences de sécurité de l’information à l’organisation (ex. RGPD, NIS2, réglementations sectorielles).
         pt:
           name: Requisitos regulatórios e contratuais
-          description: Leis, regulamentos e obrigações contratuais aplicáveis que impõem requisitos de segurança da informação à organização (por exemplo, GDPR, NIS2, regulamentações setoriais).
+          description: Leis, regulamentos e obrigações contratuais aplicáveis que impõem requisitos de segurança da informação à organização (por exemplo, LGPD, Marco Civil da Internet, regulamentações setoriais como as do BACEN/ANPD).
     - type: organisation_issue
       name: Cyber threat landscape
       description: External threat environment including ransomware, phishing, supply-chain attacks, and emerging threats relevant to the organisation's sector and geography.
@@ -214,7 +214,7 @@ objects:
           description: Tester les plans de continuité d’activité et de reprise après sinistre pour vérifier qu’ils répondent aux objectifs de reprise et traitent les risques actuels (Annexe A 5.30).
         pt:
           name: Teste de continuidade de negócios
-          description: Testar os planos de continuidade de negócios e de recuperação de desastres para verificar se atendem aos objetivos de recuperação e endereçam os riscos atuais (Anexo A 5.30).
+          description: Testar os planos de continuidade de negócios e de recuperação de desastres para verificar se atendem aos objetivos de recuperação e abordam os riscos atuais (Anexo A 5.30).
     - type: findings_assessment
       name: Penetration Test Findings
       category: pentest
@@ -223,7 +223,7 @@ objects:
         fr:
           name: Résultats des tests d’intrusion
         pt:
-          name: Achados de Teste de Intrusão
+          name: Achados de Teste de Invasão
     - type: metric_instance
       name: Compliance Score
       description: Overall compliance score against ISO 27001 requirements and Annex A controls.
