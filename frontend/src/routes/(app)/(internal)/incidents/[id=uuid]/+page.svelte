@@ -270,6 +270,30 @@
 			urlmodel: 'risk-scenarios',
 			icon: 'fa-solid fa-triangle-exclamation',
 			labelKey: 'riskScenarios'
+		},
+		{
+			tabValue: 'incident-roles',
+			urlmodel: 'incident-roles',
+			icon: 'fa-solid fa-users',
+			labelKey: 'incidentRoles'
+		},
+		{
+			tabValue: 'incident-stakeholders',
+			urlmodel: 'incident-stakeholders',
+			icon: 'fa-solid fa-address-book',
+			labelKey: 'incidentStakeholders'
+		},
+		{
+			tabValue: 'incident-response-tasks',
+			urlmodel: 'incident-response-tasks',
+			icon: 'fa-solid fa-diagram-project',
+			labelKey: 'incidentResponseTasks'
+		},
+		{
+			tabValue: 'regulatory-notifications',
+			urlmodel: 'regulatory-notifications',
+			icon: 'fa-solid fa-bell',
+			labelKey: 'regulatoryNotifications'
 		}
 	];
 

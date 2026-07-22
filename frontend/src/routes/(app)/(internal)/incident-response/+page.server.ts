@@ -20,7 +20,10 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 	const incidents = incRaw.results ?? incRaw ?? [];
 	const notifs = notifRaw.results ?? notifRaw ?? [];
 
-	const open = incidents.filter((i: any) => ['new', 'ongoing'].includes(i.status)).length;
+	const OPEN_STATUSES = ['new', 'ongoing', 'open', 'em andamento', 'novo', 'aberto'];
+	const open = incidents.filter((i: any) =>
+		OPEN_STATUSES.includes(String(i.status ?? '').toLowerCase())
+	).length;
 	const overdue = notifs.filter((n: any) => n.is_overdue).length;
 	const bySeverity: Record<string, number> = {};
 	for (const i of incidents) {

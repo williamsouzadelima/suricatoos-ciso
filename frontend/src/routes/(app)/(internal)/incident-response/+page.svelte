@@ -5,6 +5,8 @@
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
+	// A API de incidentes devolve severity/status como rótulos de exibição (ex.: "Major",
+	// "Ongoing"), não o valor cru — mapeamos por número E por rótulo.
 	const SEV: Record<string, { label: string; cls: string }> = {
 		'1': { label: 'Critical', cls: 'bg-red-500' },
 		'2': { label: 'Major', cls: 'bg-orange-500' },
@@ -13,7 +15,19 @@
 		'5': { label: 'Low', cls: 'bg-slate-400' },
 		'6': { label: '—', cls: 'bg-slate-300' }
 	};
-	const sev = (n: number | string) => SEV[String(n ?? 6)] ?? SEV['6'];
+	const SEV_BY_LABEL: Record<string, string> = {
+		critical: 'bg-red-500',
+		major: 'bg-orange-500',
+		moderate: 'bg-amber-500',
+		minor: 'bg-sky-500',
+		low: 'bg-slate-400'
+	};
+	const sev = (n: number | string) => {
+		const byNum = SEV[String(n)];
+		if (byNum) return byNum;
+		const key = String(n ?? '').toLowerCase();
+		return { label: String(n ?? '—'), cls: SEV_BY_LABEL[key] ?? 'bg-slate-300' };
+	};
 
 	let seeding = $state(false);
 	let resolving = $state(false);
