@@ -114,6 +114,7 @@
 	}
 
 	const REGION_FLAGS: Record<string, string> = {
+		br: '\u{1F1E7}\u{1F1F7}',
 		fr: '\u{1F1EB}\u{1F1F7}',
 		eu: '\u{1F1EA}\u{1F1FA}',
 		be: '\u{1F1E7}\u{1F1EA}',

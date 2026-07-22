@@ -1,0 +1,220 @@
+urn: urn:intuitem:risk:preset:br-bcb85-pagamento
+locale: pt
+ref_id: preset-br-bcb85-pagamento
+name: Instituição de Pagamento — Segurança Cibernética (Res. BCB 85)
+description: Jornada guiada para instituições de pagamento e demais participantes de arranjos estruturarem o programa de segurança cibernética exigido pela Resolução BCB nº 85/2021 (consolidada com as Res. BCB 368/2024, 538/2025 e 552/2026), integrando o diagnóstico de conformidade regulatória, a adequação à LGPD e a análise de riscos dos ambientes de pagamento (Pix, STR e RSFN) e da contratação de nuvem.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:bcb-85-2021
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - startup
+      - sme
+      - large
+      industry:
+      - financial
+      region:
+      - br
+      goal: security-programme
+    feature_flags:
+      enable:
+      - compliance
+      - tprm
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação — Res. BCB 85/2021
+      framework: urn:intuitem:risk:library:bcb-85-2021
+      create_suggested_controls: true
+      ref: bcb85_audit
+    - type: compliance_assessment
+      name: Avaliação — LGPD
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Ambiente Pix/STR
+      description: 'Ativo primário: processos e transações críticas de liquidação e pagamento instantâneo executados nos ambientes dedicados ao Pix e ao STR, sujeitos aos requisitos reforçados do Art. 3º-A (MFA e isolamento físico e lógico). Elemento central da operação e da confiança do arranjo.'
+      asset_type: PR
+      ref: asset_pix_str
+    - type: asset
+      name: Conta de pagamento e saldos dos clientes
+      description: 'Ativo primário: registros de contas de pagamento, saldos e movimentações financeiras dos clientes. Sua integridade e disponibilidade são essenciais à prestação do serviço e alvo direto de fraude e desfalque.'
+      asset_type: PR
+      ref: asset_conta_saldos
+    - type: asset
+      name: Dados pessoais e cadastrais de clientes
+      description: 'Ativo primário: dados pessoais, cadastrais e transacionais dos titulares de conta de pagamento, protegidos pela LGPD e pelo dever de sigilo. Exigem classificação, minimização, controle de acesso e rastreabilidade.'
+      asset_type: PR
+      ref: asset_dados_clientes
+    - type: asset
+      name: Aplicativo e gateway de pagamento
+      description: 'Ativo de suporte: aplicativos móvel/web e APIs/gateway que iniciam e processam transações e autenticam usuários. Superfície de exposição a fraude, abuso de credenciais e vulnerabilidades de aplicação, coberta pelo teste de intrusão anual.'
+      asset_type: SP
+      ref: asset_gateway
+    - type: asset
+      name: Provedor de computação em nuvem
+      description: 'Ativo de suporte: serviços de processamento e armazenamento de dados e de computação em nuvem que sustentam a operação, sujeitos aos requisitos de contratação da Res. BCB 85 (comunicação prévia ao BC, cláusulas contratuais e continuidade). Terceiro crítico no escopo de TPRM.'
+      asset_type: SP
+      ref: asset_nuvem
+    - type: asset
+      name: Conexão RSFN
+      description: 'Ativo de suporte: infraestrutura de rede e conectividade com a Rede do Sistema Financeiro Nacional (RSFN) que habilita a participação no Pix e no STR, exigindo isolamento, criptografia e monitoramento dos canais de comunicação.'
+      asset_type: SP
+      ref: asset_rsfn
+    - type: risk_scenario
+      name: Fraude no Pix
+      description: Uso indevido de credenciais, engenharia social ou malware para iniciar transações Pix fraudulentas a partir de contas legítimas, gerando perdas financeiras aos clientes, acionamento do MED e risco reputacional e regulatório.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_pix_str
+      - asset_conta_saldos
+      - asset_dados_clientes
+      - asset_gateway
+    - type: risk_scenario
+      name: Comprometimento do ambiente de pagamentos
+      description: Invasão ou movimentação lateral que alcança os ambientes de processamento de pagamentos por falha de isolamento, abuso de acesso privilegiado ou ausência de MFA, permitindo manipulação de transações e liquidações no Pix/STR — cenário mitigado pelos controles do Art. 3º-A.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_pix_str
+      - asset_gateway
+      - asset_conta_saldos
+      - asset_rsfn
+    - type: risk_scenario
+      name: Vazamento de dados de conta
+      description: Exposição não autorizada de dados pessoais, cadastrais e de saldo de clientes por falha de controle de acesso, criptografia deficiente ou incidente em fornecedor, com obrigações de comunicação à ANPD e aos titulares (LGPD) e ao Banco Central.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_clientes
+      - asset_conta_saldos
+      - asset_nuvem
+    - type: risk_scenario
+      name: Indisponibilidade do arranjo de pagamento
+      description: Interrupção da prestação de serviços de pagamento por falha na conexão RSFN, indisponibilidade de infraestrutura ou ataque de negação de serviço, comprometendo a continuidade do Pix/STR e exigindo acionamento do plano de continuidade e comunicação em situação de crise (Art. 20).
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_pix_str
+      - asset_rsfn
+      - asset_gateway
+      - asset_nuvem
+    - type: risk_scenario
+      name: Comprometimento via provedor de nuvem
+      description: Incidente de segurança originado no provedor de computação em nuvem ou em terceiro crítico (configuração indevida, acesso comprometido, falha de segregação multitenant) que propaga impacto aos dados e ambientes da instituição, evidenciando a importância das cláusulas contratuais e do monitoramento de terceiros.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_nuvem
+      - asset_dados_clientes
+      - asset_pix_str
+    - type: organisation_issue
+      name: Enquadramento regulatório e supervisão do Banco Central
+      description: 'A instituição é autorizada a funcionar e supervisionada pelo Banco Central do Brasil, sujeitando-se à Res. BCB nº 85/2021: política de segurança cibernética formalizada e aprovada pela diretoria, diretor responsável designado, plano de ação e de resposta a incidentes, relatório anual sobre a efetividade dos controles e comunicação tempestiva de incidentes. O descumprimento pode ensejar processo administrativo sancionador e restrições à autorização.'
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Requisitos reforçados para Pix e STR (Art. 3º-A)
+      description: 'Por participar da RSFN e dos arranjos Pix e STR, a instituição está sujeita ao Art. 3º-A, incluído pela Res. BCB nº 368/2024, que exige controles adicionais: autenticação multifator (MFA) para acesso aos ambientes críticos e isolamento físico e lógico dos ambientes de tecnologia da informação dedicados ao Pix e ao STR, além de monitoramento e restrição de acessos privilegiados.'
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Dependência crítica de provedores de nuvem e terceiros relevantes
+      description: 'Operações centrais rodam sobre serviços de processamento e armazenamento de dados e de computação em nuvem, cuja contratação é disciplinada pela Res. BCB nº 85/2021: comunicação prévia ao Banco Central, cláusulas contratuais que assegurem acesso do BC e do auditor aos dados, segregação lógica, requisitos de segurança e continuidade e definição de local de guarda dos dados. A concentração em poucos provedores eleva o risco de terceiros (TPRM).'
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Ecossistema de fraude em pagamentos instantâneos
+      description: O Pix é alvo constante de fraude por engenharia social, contas laranja, malware bancário e golpes de portabilidade/QR Code. A pressão do ambiente externo exige mecanismos antifraude, rastreabilidade das transações e integração com o Mecanismo Especial de Devolução (MED), impactando diretamente reputação e perdas financeiras.
+      category: social
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Escassez e retenção de profissionais de segurança cibernética
+      description: A disponibilidade limitada de especialistas em SecOps, resposta a incidentes e engenharia de segurança dificulta manter os controles mínimos e as rotinas de monitoramento 24x7 exigidos pela política, elevando a dependência de terceiros e o risco de lacunas operacionais.
+      category: humanResources
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Capacidade financeira de fintech em crescimento acelerado
+      description: O orçamento de segurança compete com iniciativas de produto e expansão. A necessidade de investir em teste de intrusão anual, isolamento de ambientes, ferramentas de detecção e capacitação precisa ser priorizada por risco frente a restrições de caixa típicas de uma instituição de pagamento em estágio inicial ou de médio porte.
+      category: financialCapacity
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Maturidade de governança e cultura de segurança
+      description: A disseminação da cultura de segurança cibernética a colaboradores, prestadores e clientes é requisito da política. Estruturas de governança ainda em consolidação e baixa maturidade de processos internos podem comprometer a classificação de dados, a segregação de funções e a efetividade do programa.
+      category: companyCulture
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Conformidade concorrente com LGPD e sigilo de dados
+      description: O tratamento de dados pessoais de clientes de conta de pagamento sujeita a instituição à LGPD (Lei nº 13.709/2018) e ao dever de sigilo, exigindo base legal, minimização, registro das operações de tratamento, resposta a incidentes com potencial de risco aos titulares e comunicação à ANPD, em coordenação com as obrigações de reporte ao Banco Central.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_objective
+      name: Formalizar e manter a política de segurança cibernética aderente à Res. BCB 85
+      description: Estabelecer, aprovar pela diretoria e revisar periodicamente a política de segurança cibernética contemplando objetivos, controles mínimos, classificação de dados, rastreabilidade, tratamento de incidentes e disseminação de cultura, com diretor responsável designado e relatório anual sobre a efetividade dos controles.
+    - type: organisation_objective
+      name: Proteger a integridade e a disponibilidade dos ambientes Pix e STR
+      description: 'Implementar os requisitos do Art. 3º-A: autenticação multifator, isolamento físico e lógico dos ambientes dedicados ao Pix e ao STR, monitoramento contínuo e controle rigoroso de acessos privilegiados, garantindo confiabilidade da conexão RSFN e a continuidade dos serviços de pagamento.'
+    - type: organisation_objective
+      name: Detectar, responder e comunicar incidentes de forma tempestiva
+      description: Manter plano de resposta a incidentes, capacidade de detecção e contenção, teste de intrusão anual (Art. 22-A) e canais para comunicação tempestiva ao Banco Central em situação de crise (Art. 20), bem como a comunicação de incidentes de dados pessoais à ANPD e aos titulares quando aplicável.
+    - type: organisation_objective
+      name: Governar riscos de nuvem e de prestadores de serviços relevantes
+      description: Aplicar due diligence, comunicação prévia ao Banco Central, cláusulas contratuais de segurança/continuidade/acesso a dados e monitoramento contínuo dos provedores de nuvem e terceiros críticos, mantendo inventário e avaliação de risco desses fornecedores.
+    - type: organisation_objective
+      name: Assegurar conformidade com a LGPD no tratamento de dados de clientes
+      description: Garantir base legal, minimização, registro das operações de tratamento, direitos dos titulares e segurança dos dados pessoais associados às contas de pagamento, integrando os deveres da LGPD ao programa de segurança cibernética e ao dever de sigilo.
+    journey:
+      steps:
+      - key: contexto_organizacional
+        title: Mapear o contexto organizacional
+        description: 'Registre as questões internas e externas que moldam o programa de segurança cibernética da instituição de pagamento: enquadramento e supervisão do Banco Central, obrigações reforçadas para Pix e STR, dependência de nuvem e terceiros, ambiente de fraude, restrições de pessoas e orçamento, cultura de segurança e conformidade concorrente com a LGPD. Este contexto fundamenta a análise de riscos e a priorização de controles.'
+        target_model: organisation-issues
+      - key: objetivos_seguranca
+        title: Definir os objetivos de segurança e privacidade
+        description: 'Estabeleça os objetivos do programa alinhados à Res. BCB 85 e à LGPD: manter a política de segurança cibernética, proteger os ambientes Pix e STR, responder e comunicar incidentes tempestivamente, governar riscos de terceiros e assegurar conformidade no tratamento de dados. Esses objetivos servem de referência para medir a efetividade dos controles no relatório anual.'
+        target_model: organisation-objectives
+      - key: mapa_ativos
+        title: Inventariar ativos primários e de suporte
+        description: Cadastre os ativos primários (ambiente Pix/STR, contas e saldos, dados de clientes) e os ativos de suporte (aplicativo/gateway, provedor de nuvem, conexão RSFN). Classifique os dados conforme a política e identifique dependências críticas para orientar a análise de riscos e o escopo do teste de intrusão anual.
+        target_model: assets
+      - key: diagnostico_bcb85
+        title: Diagnóstico de conformidade — Res. BCB 85/2021
+        description: 'Realize a avaliação de aderência à Res. BCB nº 85/2021: política formalizada e aprovada, controles mínimos (autenticação, criptografia, prevenção e detecção de intrusão, prevenção de vazamento, varredura de vulnerabilidades, proteção contra malware, controle de acesso e segregação de funções, rastreabilidade, backup), requisitos do Art. 3º-A para Pix/STR, teste de intrusão anual (Art. 22-A), comunicação de incidentes ao BC (Art. 20), diretor responsável, relatório anual, requisitos de contratação de nuvem e inclusão de PSAVs no escopo. Identifique lacunas e registre os gaps.'
+        target_model: compliance-assessments
+        target_ref: bcb85_audit
+      - key: diagnostico_lgpd
+        title: Diagnóstico de conformidade — LGPD
+        description: 'Avalie a aderência à Lei nº 13.709/2018 no tratamento de dados de clientes de conta de pagamento: base legal, minimização, transparência, direitos dos titulares, registro das operações de tratamento, medidas de segurança e resposta a incidentes com comunicação à ANPD e aos titulares. Coordene os achados com as obrigações de reporte ao Banco Central para evitar lacunas ou duplicidade.'
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: analise_riscos
+        title: Conduzir a análise de riscos
+        description: Avalie os cenários de risco sobre os ativos mapeados — fraude no Pix, comprometimento do ambiente de pagamentos, vazamento de dados de conta, indisponibilidade do arranjo e comprometimento via provedor de nuvem — estimando probabilidade e impacto e definindo o nível de risco. Vincule cada cenário aos gaps identificados nos diagnósticos regulatórios para tratamento priorizado.
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: plano_controles
+        title: Planejar e aplicar controles
+        description: 'Defina o plano de ação com os controles que endereçam os gaps e os riscos: MFA e isolamento físico e lógico dos ambientes Pix/STR, monitoramento e detecção, gestão de acessos privilegiados, criptografia, backup e continuidade, mecanismos antifraude e rastreabilidade, cláusulas e monitoramento de fornecedores de nuvem, teste de intrusão anual e resposta a incidentes. Registre responsáveis, prazos e evidências.'
+        target_model: applied-controls
+      - key: acompanhamento
+        title: Acompanhar tarefas e prazos regulatórios
+        description: 'Crie e acompanhe as tarefas recorrentes e pontuais do programa: revisão anual da política, elaboração do relatório anual do diretor responsável, execução do teste de intrusão anual, exercícios de resposta a incidentes, comunicação prévia ao BC em contratações de nuvem e reavaliação periódica de fornecedores, garantindo o follow-up contínuo das ações de tratamento.'
+        target_model: tasks

@@ -1,0 +1,213 @@
+urn: urn:intuitem:risk:preset:br-bacen-financeiro
+locale: pt
+ref_id: preset-br-bacen-financeiro
+name: Instituição Financeira — Segurança Cibernética BACEN (CMN 4.893)
+description: Jornada guiada para instituições autorizadas a funcionar pelo Banco Central implementarem e demonstrarem a conformidade do programa de segurança cibernética à Resolução CMN 4.893/2021 e à LGPD. Percorre contexto e objetivos, inventário de ativos críticos, diagnósticos de conformidade (BACEN e LGPD), análise de riscos cibernéticos, plano de ação e controles aplicados, e acompanhamento com relatório anual e notificação de incidentes relevantes.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:bacen-cmn-4893-2021
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - sme
+      - large
+      - enterprise
+      industry:
+      - financial
+      region:
+      - br
+      goal: security-programme
+    feature_flags:
+      enable:
+      - compliance
+      - tprm
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação — Res. CMN 4.893/2021 (BACEN)
+      framework: urn:intuitem:risk:library:bacen-cmn-4893-2021
+      create_suggested_controls: true
+      ref: bacen_audit
+    - type: compliance_assessment
+      name: Avaliação — LGPD
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Core bancário
+      description: Serviço e sistema central de processamento das operações bancárias — contas, transações, liquidação e registro contábil. Ativo primário essencial à prestação dos serviços financeiros e à continuidade do negócio.
+      asset_type: PR
+      ref: asset_core
+    - type: asset
+      name: Base de clientes e dados financeiros
+      description: Conjunto de dados cadastrais, transacionais e financeiros dos clientes, protegidos por sigilo bancário e pela LGPD. Ativo primário de informação, sujeito à classificação quanto à relevância exigida pela política.
+      asset_type: PR
+      ref: asset_dados_clientes
+    - type: asset
+      name: Internet e mobile banking
+      description: Canais digitais de atendimento e transação (aplicativo móvel e internet banking) que expõem os serviços a clientes e usuários; principal superfície de contato com o público e vetor de fraude.
+      asset_type: SP
+      ref: asset_ibanking
+    - type: asset
+      name: Provedor de nuvem e processamento de dados
+      description: Serviços contratados de computação em nuvem e de processamento/armazenamento de dados, eventualmente prestados no exterior e com subcontratação, sujeitos aos requisitos de contratação da Res. CMN 4.893.
+      asset_type: SP
+      ref: asset_nuvem
+    - type: asset
+      name: Rede corporativa
+      description: Infraestrutura de rede, perímetro e segmentação que conecta sistemas internos, canais e provedores; suporte aos controles de segmentação de rede e à contenção de incidentes.
+      asset_type: SP
+      ref: asset_rede
+    - type: asset
+      name: Identidades, credenciais e chaves criptográficas
+      description: Gestão de identidades e acessos (IAM), fatores de autenticação e material criptográfico que sustentam autenticação, criptografia, rastreabilidade e controle de acesso previstos na política.
+      asset_type: SP
+      ref: asset_credenciais
+    - type: risk_scenario
+      name: Comprometimento do internet/mobile banking (account takeover e fraude)
+      description: Sequestro de credenciais via phishing ou malware, exploração de vulnerabilidades nos canais digitais ou burla de autenticação permitem acesso indevido a contas, transações não autorizadas e desvio de recursos de clientes.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_ibanking
+      - asset_dados_clientes
+      - asset_credenciais
+    - type: risk_scenario
+      name: Fraude e vazamento de dados financeiros
+      description: Exfiltração ou uso indevido de dados cadastrais, transacionais e financeiros de clientes, com violação de sigilo bancário e da LGPD, exposição a fraudes e obrigação de comunicação do incidente à ANPD, aos titulares e ao Banco Central.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_clientes
+      - asset_core
+    - type: risk_scenario
+      name: Indisponibilidade de serviços por incidente cibernético (DDoS)
+      description: Ataques de negação de serviço, exploração de falhas ou sabotagem tornam indisponíveis os canais e o processamento das operações, afetando a disponibilidade dos serviços essenciais e acionando os planos de continuidade de negócios.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_ibanking
+      - asset_core
+      - asset_rede
+    - type: risk_scenario
+      name: Comprometimento via provedor de nuvem ou terceiro relevante
+      description: Incidente na cadeia de fornecimento (nuvem, processamento/armazenamento de dados ou subcontratado), inclusive em prestação no exterior, compromete a confidencialidade, a integridade ou a disponibilidade de dados e sistemas hospedados, testando as cláusulas contratuais e o acesso do Banco Central.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_nuvem
+      - asset_dados_clientes
+      - asset_core
+    - type: risk_scenario
+      name: Ransomware no core bancário
+      description: Malware de criptografia e extorsão atinge servidores do core e a rede corporativa, cifrando dados e paralisando operações; a recuperação depende de backups íntegros, segmentação de rede e do plano de resposta a incidentes.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_core
+      - asset_rede
+      - asset_dados_clientes
+    - type: organisation_issue
+      name: Resolução CMN 4.893/2021 e supervisão do BACEN
+      description: A instituição é autorizada a funcionar pelo Banco Central e está sujeita à Res. CMN 4.893/2021, que exige política de segurança cibernética com conteúdo mínimo, plano de ação e resposta a incidentes, designação de diretor responsável, registro e notificação de incidentes relevantes, testes de continuidade, relatório anual e requisitos específicos para a contratação de serviços de processamento/armazenamento de dados e de computação em nuvem. O descumprimento sujeita a instituição a sanções administrativas e à supervisão prudencial.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: LGPD e fiscalização da ANPD
+      description: 'O tratamento de dados pessoais e financeiros de clientes está sujeito à Lei nº 13.709/2018 (LGPD): bases legais, direitos dos titulares, segurança do tratamento e comunicação de incidentes à ANPD e aos titulares. No setor financeiro a LGPD convive com o sigilo bancário (LC 105/2001) e com as normas do BACEN, exigindo harmonização das obrigações.'
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Cenário de ameaças ao setor financeiro
+      description: Instituições financeiras são alvo prioritário de fraude eletrônica, phishing, malware bancário, sequestro de contas (account takeover), ransomware e ataques de indisponibilidade (DDoS), com forte motivação financeira e atuação de grupos organizados. A superfície de ataque cresce com PIX, Open Finance e a expansão dos canais digitais.
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Dependência e concentração de provedores de nuvem e terceiros
+      description: A operação depende de provedores de computação em nuvem, de processamento e armazenamento de dados e de outros prestadores relevantes, gerando risco de concentração, cadeia de subcontratação e eventual prestação de serviços no exterior — todos sujeitos aos requisitos de due diligence prévia, cláusulas contratuais mínimas e comunicação ao BACEN previstos na Res. 4.893.
+      category: technology
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Legado tecnológico do core bancário e dívida técnica
+      description: O core bancário e sistemas legados apresentam arquitetura antiga, janelas de manutenção restritas e dificuldade de aplicar correções e segmentação, elevando a exposição a vulnerabilidades e dificultando os testes e varreduras periódicas de detecção de vulnerabilidades exigidos pela política de segurança cibernética.
+      category: technology
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Cultura de segurança e conscientização
+      description: A eficácia dos controles depende do comprometimento da alta administração e da conscientização de colaboradores e prestadores. Engenharia social e erro humano permanecem vetores relevantes; a Res. 4.893 exige mecanismos de disseminação da cultura de segurança cibernética, incluindo programa de capacitação e prestação de informações a clientes e usuários.
+      category: companyCulture
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Escassez de talentos e capacitação em cibersegurança
+      description: A dificuldade de atrair e reter profissionais qualificados de segurança e de manter programas contínuos de capacitação impacta a operação do monitoramento, a resposta a incidentes e a sustentação do programa exigido pela regulação, sobretudo em instituições de menor porte.
+      category: humanResources
+      origin: internal
+      status: active
+    - type: organisation_objective
+      name: Estabelecer e manter a Política de Segurança Cibernética
+      description: 'Implementar, submeter à aprovação do conselho de administração (ou, na sua inexistência, da diretoria) e revisar no mínimo anualmente a política de segurança cibernética com o conteúdo mínimo da Res. CMN 4.893: objetivos de segurança; controles de autenticação, criptografia, prevenção e detecção de intrusão, prevenção de vazamento de informações, testes e varreduras periódicas, proteção contra malware, rastreabilidade, controle de acesso e segmentação de rede e cópias de segurança — de forma proporcional ao porte, perfil de risco e modelo de negócio.'
+    - type: organisation_objective
+      name: Assegurar resposta e notificação de incidentes relevantes
+      description: Manter plano de ação e resposta a incidentes contemplando o registro, a análise de causa e de impacto e o controle dos efeitos dos incidentes relevantes, a definição da área responsável, além da comunicação tempestiva ao Banco Central e, quando aplicável, à ANPD e aos titulares, e o compartilhamento de informações sobre incidentes.
+    - type: organisation_objective
+      name: Garantir conformidade LGPD no tratamento de dados financeiros
+      description: Assegurar bases legais adequadas, respeito aos direitos dos titulares, minimização, segurança do tratamento e resposta a incidentes envolvendo dados pessoais, harmonizando as exigências da LGPD com o sigilo bancário e com as normas do BACEN.
+    - type: organisation_objective
+      name: Gerir riscos de provedores de nuvem e terceiros
+      description: Aplicar due diligence prévia à contratação, exigir as cláusulas contratuais mínimas (indicação de países/regiões de armazenamento e processamento, segurança na transmissão e armazenamento, segregação de dados e controles de acesso, notificação de subcontratação relevante, acesso do BACEN, transferência e exclusão de dados na extinção), tratar os requisitos aplicáveis à prestação no exterior e comunicar ao BACEN a contratação de serviços relevantes.
+    - type: organisation_objective
+      name: Assegurar continuidade dos serviços financeiros críticos
+      description: Elaborar cenários de incidentes cibernéticos, executar testes de continuidade de negócios e manter capacidade de recuperação (backups íntegros, segmentação e alternativas de prestação de serviço) para preservar a disponibilidade dos serviços essenciais e evitar embaraço à atuação do Banco Central.
+    - type: organisation_objective
+      name: Disseminar cultura de segurança e capacitação
+      description: Manter programa de capacitação, avaliação periódica do pessoal, prestação de informações a clientes e usuários e comprometimento da alta administração, atendendo aos mecanismos de disseminação da cultura de segurança cibernética previstos na Res. 4.893.
+    journey:
+      steps:
+      - key: contexto_organizacional
+        title: Mapear o contexto organizacional
+        description: 'Registre as questões internas e externas que condicionam o programa de segurança cibernética: a Res. CMN 4.893/2021 e a supervisão do BACEN, a LGPD e a ANPD, o cenário de ameaças ao setor financeiro, a dependência de nuvem e terceiros, o legado do core, a cultura de segurança e a escassez de talentos. Esse contexto orienta a priorização dos controles e dos riscos.'
+        target_model: organisation-issues
+      - key: objetivos_seguranca
+        title: Definir objetivos de segurança e privacidade
+        description: Defina os objetivos que a política deve perseguir — confidencialidade, integridade e disponibilidade dos dados e dos sistemas — alinhados à Res. 4.893 e à LGPD. Esses objetivos servem de base para medir a efetividade da implementação no relatório anual.
+        target_model: organisation-objectives
+      - key: inventario_ativos
+        title: Inventariar ativos críticos
+        description: Cadastre os ativos primários (serviço de core bancário; base de clientes e dados financeiros) e os ativos de suporte (internet/mobile banking, provedor de nuvem, rede corporativa, identidades e chaves), classificando os dados e as informações quanto à relevância, conforme exige a política de segurança cibernética.
+        target_model: assets
+      - key: gap_bacen
+        title: Diagnóstico de conformidade — CMN 4.893/2021
+        description: 'Execute o diagnóstico de conformidade contra a Res. CMN 4.893/2021: conteúdo mínimo da política, aprovação pelo conselho de administração, diretor responsável, plano de ação e resposta a incidentes, registro e notificação de incidentes relevantes, cenários e testes de continuidade, relatório anual, compartilhamento de informações e os requisitos de contratação de serviços de nuvem/processamento de dados (due diligence prévia, cláusulas contratuais, prestação no País e no exterior e comunicação ao BACEN).'
+        target_model: compliance-assessments
+        target_ref: bacen_audit
+      - key: gap_lgpd
+        title: Diagnóstico de conformidade — LGPD
+        description: 'Execute o diagnóstico de conformidade com a LGPD: bases legais para o tratamento, atendimento aos direitos dos titulares, registro das operações de tratamento, segurança e resposta a incidentes com dados pessoais, harmonizando com o sigilo bancário e com as normas do BACEN.'
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: analise_riscos
+        title: Análise de riscos cibernéticos
+        description: Avalie os cenários de risco cibernético (comprometimento de canais, fraude e vazamento, indisponibilidade, incidente via nuvem/terceiro e ransomware no core) sobre os ativos inventariados, estimando probabilidade e impacto e definindo o tratamento. Esses cenários também alimentam os testes de continuidade de negócios.
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: plano_controles
+        title: Plano de ação e controles aplicados
+        description: 'Consolide o plano de ação e os controles adotados para reduzir vulnerabilidades e tratar os riscos: autenticação forte, criptografia, prevenção e detecção de intrusão, prevenção de vazamento de informações, testes e varreduras periódicas, proteção contra malware, mecanismos de rastreabilidade, controle de acesso e segmentação de rede, cópias de segurança e cláusulas e monitoramento de terceiros.'
+        target_model: applied-controls
+      - key: acompanhamento
+        title: Acompanhamento, relatório anual e follow-up
+        description: 'Estabeleça tarefas de acompanhamento e follow-up: revisão anual da política e do plano de ação e resposta a incidentes, elaboração do relatório anual (data-base 31/12, apresentação até 31/03 do ano seguinte ao comitê de risco, quando houver, e ao conselho de administração ou à diretoria), rotinas de notificação de incidentes ao BACEN e à ANPD e reavaliação periódica de fornecedores relevantes.'
+        target_model: tasks

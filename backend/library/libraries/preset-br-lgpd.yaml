@@ -1,0 +1,212 @@
+urn: urn:intuitem:risk:preset:br-lgpd
+locale: pt
+ref_id: preset-br-lgpd
+name: LGPD — Jornada de Adequação à Proteção de Dados
+description: 'Jornada guiada para adequação à Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018): do mapeamento do contexto organizacional e das operações de tratamento (ROPA) ao diagnóstico de conformidade, análise de riscos e implementação de controles. Cobre princípios (art. 6º), bases legais (art. 7º e 11), direitos dos titulares (art. 18), encarregado/DPO (art. 41), segurança (art. 46) e comunicação de incidentes à ANPD e aos titulares (art. 48).'
+version: 1
+provider: Suricatoos
+packager: suricatoos
+dependencies:
+- urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+- urn:intuitem:risk:library:lgpd
+objects:
+  preset:
+    profile:
+      company_size:
+      - sme
+      - large
+      - enterprise
+      industry:
+      - general
+      region:
+      - br
+      goal: privacy-compliance
+    feature_flags:
+      enable:
+      - compliance
+      - privacy
+      - organisation_issues
+      - organisation_objectives
+      - tasks
+      - follow_up
+    scaffolded_objects:
+    - type: risk_assessment
+      name: Análise de Riscos Cibernéticos
+      risk_matrix: urn:intuitem:risk:library:risk-matrix-5x5-iso27005
+      ref: main_ra
+    - type: compliance_assessment
+      name: Avaliação de conformidade — LGPD
+      framework: urn:intuitem:risk:library:lgpd
+      create_suggested_controls: true
+      ref: lgpd_audit
+    - type: asset
+      name: Dados pessoais de titulares
+      description: Dados pessoais que identificam ou tornam identificável a pessoa natural (art. 5º, I) — cadastrais, contato, identificadores e comportamentais de clientes, colaboradores e parceiros. Ativo primário protegido pela LGPD.
+      asset_type: PR
+      ref: asset_dados_pessoais
+    - type: asset
+      name: Dados pessoais sensíveis
+      description: Categoria especial de dados do art. 5º, II (origem racial/étnica, convicção religiosa, opinião política, saúde, vida sexual, dado genético ou biométrico), sujeita às bases legais mais restritas do art. 11. Ativo primário de maior criticidade.
+      asset_type: PR
+      ref: asset_dados_sensiveis
+    - type: asset
+      name: Sistema de CRM / relacionamento com clientes
+      description: Plataforma que armazena e trata dados cadastrais e de interação de clientes e leads. Ativo de suporte que sustenta operações de tratamento e ponto de atendimento de direitos dos titulares.
+      asset_type: SP
+      ref: asset_crm
+    - type: asset
+      name: Sistema de RH e folha de pagamento
+      description: Sistema que trata dados de colaboradores e candidatos, incluindo dados sensíveis (saúde, biometria de ponto). Ativo de suporte com elevada exposição a dados sensíveis.
+      asset_type: SP
+      ref: asset_rh
+    - type: asset
+      name: Plataforma de marketing e comunicação
+      description: Ferramentas de e-mail marketing, automação e segmentação que tratam dados de contato e comportamento, frequentemente baseadas em consentimento ou legítimo interesse. Ativo de suporte sensível à base legal e à revogação de consentimento.
+      asset_type: SP
+      ref: asset_marketing
+    - type: asset
+      name: Plataforma de e-commerce e pagamentos
+      description: Loja virtual e meios de pagamento que tratam dados cadastrais, de entrega e de transação de clientes. Ativo de suporte crítico exposto a acessos externos e a operadores (gateways, logística).
+      asset_type: SP
+      ref: asset_ecommerce
+    - type: risk_scenario
+      name: Vazamento de dados pessoais
+      description: Exposição não autorizada de dados pessoais (e possivelmente sensíveis) por ataque, falha de configuração ou perda de credenciais, gerando dano aos titulares e o dever de comunicação à ANPD e aos afetados (art. 48).
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_pessoais
+      - asset_dados_sensiveis
+      - asset_crm
+      - asset_ecommerce
+    - type: risk_scenario
+      name: Acesso indevido à base de titulares
+      description: Acesso não autorizado ou excessivo à base de dados de titulares por colaborador ou terceiro sem necessidade, violando o controle de acesso e o princípio da segurança (art. 46) e da necessidade (art. 6º, III).
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_pessoais
+      - asset_crm
+      - asset_rh
+    - type: risk_scenario
+      name: Tratamento sem base legal
+      description: 'Coleta ou uso de dados pessoais sem enquadramento em hipótese do art. 7º/11 (ex.: envio de marketing sem consentimento válido ou legítimo interesse documentado), afrontando os princípios da finalidade e da adequação.'
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_pessoais
+      - asset_marketing
+    - type: risk_scenario
+      name: Compartilhamento indevido com terceiro
+      description: Transmissão de dados a operador, parceiro ou suboperador sem base legal, sem contrato de tratamento (art. 39) ou fora da finalidade informada, incluindo transferência internacional sem amparo no art. 33.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_pessoais
+      - asset_dados_sensiveis
+      - asset_crm
+    - type: risk_scenario
+      name: Exposição indevida de dados sensíveis de RH
+      description: Uso, acesso ou divulgação indevidos de dados sensíveis de colaboradores (saúde, biometria) tratados pelo RH, sem a base legal específica do art. 11 e sem salvaguardas proporcionais ao risco elevado aos titulares.
+      risk_assessment_ref: main_ra
+      asset_refs:
+      - asset_dados_sensiveis
+      - asset_rh
+    - type: organisation_issue
+      name: Obrigações da LGPD e regulamentação da ANPD
+      description: A organização está sujeita à Lei 13.709/2018 (LGPD) e às normas da Autoridade Nacional de Proteção de Dados (ANPD), que impõem princípios (art. 6º), bases legais (art. 7º e 11), direitos dos titulares (art. 18) e deveres de segurança e governança (art. 46 a 50).
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Poder fiscalizatório e sanções administrativas da ANPD
+      description: O descumprimento da LGPD sujeita a organização às sanções do art. 52 (advertência, multa de até 2% do faturamento limitada a R$ 50 milhões por infração, publicização, bloqueio e eliminação de dados), aplicadas pela ANPD após processo administrativo.
+      category: legal
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Ausência de encarregado (DPO) e de governança em privacidade
+      description: Não há encarregado pelo tratamento de dados pessoais formalmente indicado e divulgado (art. 41), nem programa de governança em privacidade (art. 50), o que fragiliza a interlocução com titulares e com a ANPD e a prestação de contas.
+      category: organisationStructure
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Operações de tratamento não mapeadas (falta de ROPA)
+      description: A empresa não mantém o registro das operações de tratamento de dados pessoais (art. 37), o que impede demonstrar bases legais, finalidades, categorias de titulares e dados, retenção e compartilhamentos ao longo do ciclo de vida dos dados.
+      category: internalProcesses
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Baixa cultura e conscientização em proteção de dados
+      description: Colaboradores desconhecem os princípios da LGPD e as boas práticas de tratamento, elevando o risco de uso indevido, compartilhamento não autorizado e incidentes de segurança envolvendo dados pessoais.
+      category: companyCulture
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Dependência de operadores e terceiros sem contrato adequado
+      description: O tratamento é apoiado por operadores e suboperadores (nuvem, marketing, cobrança) sem cláusulas de proteção de dados que definam instruções do controlador, finalidades e a responsabilidade solidária prevista nos art. 39 e 42.
+      category: internalProcesses
+      origin: external
+      status: active
+    - type: organisation_issue
+      name: Sistemas legados sem medidas de segurança adequadas
+      description: Sistemas que tratam dados pessoais (CRM, RH, e-commerce) carecem de controles como criptografia, controle de acesso baseado em papéis e registro de logs, dificultando o cumprimento do art. 46 e a prevenção de incidentes.
+      category: technology
+      origin: internal
+      status: active
+    - type: organisation_issue
+      name: Expectativa de titulares e do mercado por transparência
+      description: Clientes, colaboradores e parceiros exigem transparência quanto ao uso dos dados e o exercício ágil de seus direitos (art. 9º e 18); falhas de atendimento comprometem a reputação, a confiança e a competitividade da organização.
+      category: social
+      origin: external
+      status: active
+    - type: organisation_objective
+      name: Fundamentar todos os tratamentos em base legal válida
+      description: Identificar e documentar, para cada operação, a base legal adequada (art. 7º para dados pessoais e art. 11 para dados pessoais sensíveis), assegurando os princípios de finalidade, adequação e necessidade/minimização (art. 6º).
+    - type: organisation_objective
+      name: Assegurar o atendimento dos direitos dos titulares
+      description: Implementar processo e canal para atender às requisições dos titulares previstas no art. 18 — confirmação, acesso, correção, anonimização/bloqueio, portabilidade, eliminação, informação sobre compartilhamentos e revogação de consentimento — em prazos adequados.
+    - type: organisation_objective
+      name: Estruturar o encarregado (DPO) e a governança em privacidade
+      description: Nomear e divulgar publicamente o encarregado (art. 41), estabelecer canal de comunicação com titulares e com a ANPD e instituir um programa de governança em privacidade e boas práticas (art. 50).
+    - type: organisation_objective
+      name: Implantar processo de resposta e comunicação de incidentes
+      description: Definir plano de resposta a incidentes de segurança com dados pessoais e a comunicação à ANPD e aos titulares afetados em prazo (art. 48; Res. CD/ANPD nº 15/2024 — 3 dias úteis a contar do conhecimento; validar prazo vigente e conteúdo mínimo da comunicação).
+    - type: organisation_objective
+      name: Reduzir riscos com medidas técnicas e administrativas de segurança
+      description: Aplicar controles proporcionais ao risco (art. 46 a 49) — criptografia, controle de acesso, pseudonimização, minimização e registro — e elaborar o Relatório de Impacto à Proteção de Dados Pessoais (RIPD) quando cabível (art. 5º, XVII, e art. 38).
+    - type: organisation_objective
+      name: Adequar transferências internacionais e compartilhamentos
+      description: 'Garantir que as transferências internacionais de dados observem as hipóteses do art. 33 e os instrumentos aprovados pela ANPD (ex.: cláusulas-padrão contratuais), e que compartilhamentos com terceiros tenham base legal, finalidade compatível e contrato adequado.'
+    journey:
+      steps:
+      - key: contexto_organizacional
+        title: Mapear o contexto organizacional
+        description: Registre as questões internas e externas que influenciam a proteção de dados — obrigações da LGPD, fiscalização e sanções da ANPD, cultura de privacidade, dependência de operadores e sistemas legados. Esse contexto fundamenta as prioridades do programa de privacidade.
+        target_model: organisation-issues
+      - key: objetivos_privacidade
+        title: Definir objetivos de privacidade e proteção de dados
+        description: 'Estabeleça os objetivos que orientarão a adequação: bases legais válidas, atendimento aos direitos dos titulares, estruturação do encarregado, resposta a incidentes e segurança dos dados, alinhados aos princípios do art. 6º da LGPD.'
+        target_model: organisation-objectives
+      - key: inventario_ativos
+        title: Inventariar dados e sistemas que tratam dados pessoais
+        description: Catalogue os ativos primários (dados pessoais e dados sensíveis) e os ativos de suporte que os tratam (CRM, RH, marketing, e-commerce). Este inventário é a base para o mapeamento de tratamentos e para a análise de riscos.
+        target_model: assets
+      - key: mapeamento_tratamentos
+        title: Mapear as operações de tratamento (ROPA)
+        description: 'Documente cada operação de tratamento (art. 37): finalidade, base legal (art. 7º/11), categorias de titulares e de dados, operadores, prazo de retenção, compartilhamentos e transferências internacionais (art. 33). Constitui o registro das operações (ROPA) e subsidia o Relatório de Impacto (RIPD).'
+        target_model: processings
+      - key: diagnostico_lgpd
+        title: Diagnóstico de conformidade com a LGPD
+        description: Avalie a aderência aos requisitos da LGPD — princípios (art. 6º), bases legais (art. 7º/11), direitos dos titulares (art. 18), encarregado (art. 41), segurança (art. 46) e comunicação de incidentes (art. 48) — e identifique as lacunas (gaps) a serem tratadas.
+        target_model: compliance-assessments
+        target_ref: lgpd_audit
+      - key: analise_riscos
+        title: Analisar riscos à proteção de dados
+        description: Avalie os cenários de risco (vazamento de dados, acesso indevido, tratamento sem base legal, compartilhamento indevido) sobre os ativos, estimando probabilidade e impacto aos titulares para priorizar os tratamentos e apoiar o RIPD (art. 38).
+        target_model: risk-assessments
+        target_ref: main_ra
+      - key: controles
+        title: Implementar medidas técnicas e administrativas
+        description: 'Defina e acompanhe os controles de segurança e governança (art. 46 a 50): criptografia, controle de acesso, minimização, pseudonimização, gestão de consentimento, contratos com operadores (art. 39) e política de privacidade, para mitigar os riscos e fechar as lacunas do diagnóstico.'
+        target_model: applied-controls
+      - key: plano_acao
+        title: Plano de ação, incidentes e acompanhamento
+        description: 'Organize as tarefas de remediação e a rotina de governança: indicação do encarregado, atendimento de direitos dos titulares e plano de resposta a incidentes com comunicação à ANPD e aos titulares (art. 48; Res. CD/ANPD nº 15/2024 — 3 dias úteis, validar prazo vigente), com prazos, responsáveis e acompanhamento (follow-up).'
+        target_model: tasks
