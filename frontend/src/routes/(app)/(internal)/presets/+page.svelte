@@ -6,8 +6,14 @@
 	import Anchor from '$lib/components/Anchor/Anchor.svelte';
 	import { goto } from '$lib/utils/breadcrumbs';
 	import { page } from '$app/stores';
+	import { getLocale } from '$paraglide/runtime';
 
 	let { data }: { data: PageData } = $props();
+
+	// Localiza name/description do preset pelo locale do usuário (o serializer entrega o
+	// dicionário `translations`); cai para o valor-base quando não há tradução.
+	const tName = (p: any) => p?.translations?.[getLocale()]?.name ?? p?.name;
+	const tDesc = (p: any) => p?.translations?.[getLocale()]?.description ?? p?.description;
 
 	const canApplyPreset = $derived(
 		Object.hasOwn($page.data.user?.permissions ?? {}, 'add_loadedlibrary')
@@ -380,11 +386,11 @@
 										class="font-semibold text-[15px] text-surface-800-200 leading-tight"
 										data-testid="preset-name-{preset.id}"
 									>
-										{preset.name}
+										{tName(preset)}
 									</h3>
-									{#if preset.description}
+									{#if tDesc(preset)}
 										<p class="text-sm text-surface-500 mt-1" class:line-clamp-2={!isExpanded}>
-											{preset.description}
+											{tDesc(preset)}
 										</p>
 									{/if}
 								</div>
@@ -438,7 +444,7 @@
 										transition-all duration-150 cursor-pointer
 										bg-violet-600 dark:bg-violet-700 text-white hover:bg-violet-700 active:bg-violet-800 shadow-sm"
 										data-testid="preset-apply-{preset.id}"
-										onclick={() => applyPreset(preset.id, preset.name)}
+										onclick={() => applyPreset(preset.id, tName(preset))}
 									>
 										<i class="fa-solid fa-play text-[10px]"></i>
 										{m.applyPreset()}
