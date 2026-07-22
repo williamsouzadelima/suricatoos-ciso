@@ -230,7 +230,8 @@ export const navData = {
 				{
 					name: 'incidentResponse',
 					fa_icon: 'fa-solid fa-shield-halved',
-					href: '/incident-response'
+					href: '/incident-response',
+					permissions: ['view_incident']
 				},
 				{
 					name: 'tasks',
