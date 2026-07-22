@@ -586,7 +586,8 @@ class IncidentRole(AbstractBaseModel, FolderMixin):
 
 
 class IncidentStakeholder(AbstractBaseModel, FolderMixin):
-    """Matriz de comunicação: quem é informado/consultado, por qual canal e cadência."""
+    """Matriz de comunicação de crise: quem informar, cargo/contato, quando/por qual canal,
+    o template da mensagem e o status da comunicação (rastreável)."""
 
     class Party(models.TextChoices):
         INTERNAL = "internal", _("Internal")
@@ -597,6 +598,19 @@ class IncidentStakeholder(AbstractBaseModel, FolderMixin):
         MEDIA = "media", _("Media / press")
         LAW_ENFORCEMENT = "law_enforcement", _("Law enforcement")
 
+    class When(models.TextChoices):
+        IMMEDIATE = "immediate", _("Immediate")
+        ON_ESCALATION = "on_escalation", _("On escalation / crisis")
+        ON_RESOLUTION = "on_resolution", _("On resolution")
+        PERIODIC = "periodic", _("Periodic")
+        ON_REQUEST = "on_request", _("On request")
+
+    class Status(models.TextChoices):
+        PENDING = "pending", _("Pending")
+        NOTIFIED = "notified", _("Notified")
+        ACKNOWLEDGED = "acknowledged", _("Acknowledged")
+        NOT_REQUIRED = "not_required", _("Not required")
+
     incident = models.ForeignKey(
         Incident, on_delete=models.CASCADE, related_name="ir_stakeholders"
     )
@@ -604,6 +618,7 @@ class IncidentStakeholder(AbstractBaseModel, FolderMixin):
     party = models.CharField(
         max_length=20, choices=Party.choices, default=Party.INTERNAL
     )
+    title = models.CharField(max_length=255, blank=True)
     actor = models.ForeignKey(
         Actor,
         on_delete=models.SET_NULL,
@@ -611,11 +626,22 @@ class IncidentStakeholder(AbstractBaseModel, FolderMixin):
         blank=True,
         related_name="ir_stakeholders",
     )
+    contact = models.CharField(max_length=255, blank=True)
     channel = models.CharField(max_length=120, blank=True)
     cadence = models.CharField(max_length=120, blank=True)
+    when_to_notify = models.CharField(
+        max_length=20, choices=When.choices, default=When.ON_ESCALATION
+    )
+    status = models.CharField(
+        max_length=20, choices=Status.choices, default=Status.PENDING
+    )
+    last_contacted_at = models.DateTimeField(null=True, blank=True)
+    message_template = models.TextField(blank=True)
+    order = models.PositiveSmallIntegerField(default=0)
     note = models.TextField(blank=True)
 
     class Meta:
+        ordering = ["order", "party"]
         verbose_name = _("Incident stakeholder")
         verbose_name_plural = _("Incident stakeholders")
 

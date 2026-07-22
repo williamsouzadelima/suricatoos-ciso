@@ -726,6 +726,35 @@ class IncidentResponsePlanViewSet(BaseModelViewSet):
             }
         )
 
+    @action(detail=False, methods=["post"], name="Seed the stakeholder matrix")
+    def seed_stakeholders(self, request, *args, **kwargs):
+        from .services.stakeholders import seed_stakeholders as _seed
+
+        inc = _accessible_incident(request, request.data.get("incident"), write=True)
+        return Response(_seed(inc))
+
+    @action(detail=False, methods=["get"], name="Stakeholder matrix of an incident")
+    def stakeholders(self, request, *args, **kwargs):
+        from .serializers import IncidentStakeholderReadSerializer
+
+        inc = _accessible_incident(request, request.query_params.get("incident"))
+        qs = inc.ir_stakeholders.all().order_by("order", "party")
+        return Response(IncidentStakeholderReadSerializer(qs, many=True).data)
+
+    @action(detail=False, methods=["post"], name="Mark a stakeholder communication status")
+    def mark_stakeholder(self, request, *args, **kwargs):
+        sid = request.data.get("stakeholder")
+        status_val = request.data.get("status", "notified")
+        if not sid:
+            raise ValidationError({"stakeholder": "obrigatório"})
+        sh = get_object_or_404(IncidentStakeholder, id=sid)
+        _accessible_incident(request, str(sh.incident_id), write=True)
+        sh.status = status_val
+        if status_val in ("notified", "acknowledged") and sh.last_contacted_at is None:
+            sh.last_contacted_at = timezone.now()
+        sh.save(update_fields=["status", "last_contacted_at"])
+        return Response({"id": str(sh.id), "status": sh.status})
+
     @action(detail=False, methods=["get"], name="Incident PIR PPTX report")
     def report_pptx(self, request, *args, **kwargs):
         from .pptx_incident import build_incident_pptx

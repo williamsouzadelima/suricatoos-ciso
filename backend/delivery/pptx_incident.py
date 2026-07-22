@@ -32,6 +32,7 @@ def build_incident_pptx(incident, lang="pt"):
         incident.ir_tasks.select_related("phase", "applied_control").all()
     )
     roles = list(incident.ir_roles.select_related("actor").all())
+    stakeholders = list(incident.ir_stakeholders.all().order_by("order", "party"))
     notifs = list(incident.ir_notifications.all().order_by("regulator"))
     timeline = list(incident.timeline_entries.all().order_by("timestamp"))
     tasks_by_phase = {}
@@ -178,6 +179,40 @@ def build_incident_pptx(incident, lang="pt"):
             text(sl, W - MX - Inches(2.2), y, Inches(2.0), Inches(0.46), r.get_raci_display(),
                  11.5, color=INDIGO, anchor=MSO_ANCHOR.MIDDLE)
             y += Inches(0.5)
+        footer(sl, page)
+
+    # ---------- S5b Matriz de comunicação (stakeholders) ----------
+    if stakeholders:
+        page += 1
+        sl = new_slide(prs)
+        header(sl, "Comunicações", "Matriz de comunicação (stakeholders)",
+               "Quem informar, quando, por qual canal e o status da comunicação.")
+        _stcolor = {"pending": AMBER, "notified": SKY, "acknowledged": EMERALD, "not_required": S400}
+        y = Inches(2.3)
+        rrect(sl, MX, y, CW, Inches(0.44), S900, radius=0.08)
+        text(sl, MX + Inches(0.2), y, Inches(4.5), Inches(0.44), "STAKEHOLDER", 10, bold=True,
+             color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, MX + Inches(5.0), y, Inches(2.6), Inches(0.44), "QUANDO", 10, bold=True,
+             color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, MX + Inches(7.8), y, Inches(2.4), Inches(0.44), "CANAL", 10, bold=True,
+             color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+        text(sl, W - MX - Inches(2.0), y, Inches(2.0), Inches(0.44), "STATUS", 10, bold=True,
+             color=WHITE, anchor=MSO_ANCHOR.MIDDLE)
+        y += Inches(0.5)
+        for i, sh in enumerate(stakeholders[:10]):
+            if i % 2 == 0:
+                rrect(sl, MX, y, CW, Inches(0.44), S100, radius=0.05)
+            text(sl, MX + Inches(0.2), y, Inches(4.7), Inches(0.44),
+                 f"{sh.name}", 10.5, bold=True, color=S700, anchor=MSO_ANCHOR.MIDDLE)
+            text(sl, MX + Inches(5.0), y, Inches(2.6), Inches(0.44),
+                 sh.get_when_to_notify_display(), 10, color=S600, anchor=MSO_ANCHOR.MIDDLE)
+            text(sl, MX + Inches(7.8), y, Inches(2.4), Inches(0.44),
+                 (sh.channel or "—")[:26], 10, color=S600, anchor=MSO_ANCHOR.MIDDLE)
+            text(sl, W - MX - Inches(2.0), y, Inches(2.0), Inches(0.44),
+                 sh.get_status_display(), 10, bold=True,
+                 color=_stcolor.get(sh.status, S400), align=PP_ALIGN.RIGHT,
+                 anchor=MSO_ANCHOR.MIDDLE)
+            y += Inches(0.48)
         footer(sl, page)
 
     # ---------- S6 Comunicações & clock regulatório ----------

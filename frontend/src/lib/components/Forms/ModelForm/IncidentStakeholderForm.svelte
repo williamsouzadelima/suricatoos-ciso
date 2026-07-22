@@ -41,6 +41,13 @@
 	bind:cachedValue={formDataCache['party']}
 	label={m.party()}
 />
+<TextField
+	{form}
+	field="title"
+	label={m.title()}
+	cacheLock={cacheLocks['title']}
+	bind:cachedValue={formDataCache['title']}
+/>
 <AutocompleteSelect
 	{form}
 	optionsEndpoint="actors"
@@ -50,6 +57,31 @@
 	cacheLock={cacheLocks['actor']}
 	bind:cachedValue={formDataCache['actor']}
 	label={m.actor()}
+/>
+<TextField
+	{form}
+	field="contact"
+	label={m.contact()}
+	cacheLock={cacheLocks['contact']}
+	bind:cachedValue={formDataCache['contact']}
+/>
+<AutocompleteSelect
+	{form}
+	field="when_to_notify"
+	options={model.selectOptions?.['when_to_notify']}
+	nullable={false}
+	cacheLock={cacheLocks['when_to_notify']}
+	bind:cachedValue={formDataCache['when_to_notify']}
+	label={m.whenToNotify()}
+/>
+<AutocompleteSelect
+	{form}
+	field="status"
+	options={model.selectOptions?.['status']}
+	nullable={false}
+	cacheLock={cacheLocks['status']}
+	bind:cachedValue={formDataCache['status']}
+	label={m.status()}
 />
 <TextField
 	{form}
@@ -64,6 +96,13 @@
 	label={m.cadence()}
 	cacheLock={cacheLocks['cadence']}
 	bind:cachedValue={formDataCache['cadence']}
+/>
+<TextField
+	{form}
+	field="message_template"
+	label={m.messageTemplate()}
+	cacheLock={cacheLocks['message_template']}
+	bind:cachedValue={formDataCache['message_template']}
 />
 <TextField
 	{form}

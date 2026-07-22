@@ -5431,5 +5431,11 @@
 	"billable": "Faturável",
 	"hoursEstimated": "estimadas",
 	"incidentTimeEntry": "Apontamento de horas",
-	"incidentTimeEntries": "Apontamentos de horas"
+	"incidentTimeEntries": "Apontamentos de horas",
+	"contact": "Contato",
+	"whenToNotify": "Quando notificar",
+	"messageTemplate": "Modelo de mensagem",
+	"seedStakeholders": "Semear matriz de stakeholders",
+	"communicationMatrix": "Matriz de comunicação",
+	"title": "Cargo / função"
 }

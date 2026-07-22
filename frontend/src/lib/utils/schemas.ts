@@ -1912,9 +1912,15 @@ export const IncidentStakeholderSchema = z.object({
 	incident: z.string(),
 	name: z.string(),
 	party: z.string().optional().default('internal'),
+	title: z.string().optional(),
 	actor: z.string().optional().nullable(),
+	contact: z.string().optional(),
 	channel: z.string().optional(),
 	cadence: z.string().optional(),
+	when_to_notify: z.string().optional().default('on_escalation'),
+	status: z.string().optional().default('pending'),
+	message_template: z.string().optional(),
+	order: z.number().optional().default(0),
 	note: z.string().optional()
 });
 

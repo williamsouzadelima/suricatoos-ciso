@@ -1440,8 +1440,8 @@ export const listViewFields = {
 		}
 	},
 	'incident-stakeholders': {
-		head: ['name', 'party', 'channel', 'domain'],
-		body: ['name', 'party', 'channel', 'folder'],
+		head: ['name', 'party', 'whenToNotify', 'status', 'domain'],
+		body: ['name', 'party', 'when_to_notify', 'status', 'folder'],
 		filters: {
 			folder: DOMAIN_FILTER
 		}

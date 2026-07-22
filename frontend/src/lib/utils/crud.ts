@@ -277,8 +277,8 @@ export const URL_MODEL_MAP: ModelMap = {
 			{ field: 'actor', urlModel: 'actors' },
 			{ field: 'folder', urlModel: 'folders' }
 		],
-		selectFields: [{ field: 'party' }],
-		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'party' }]
+		selectFields: [{ field: 'party' }, { field: 'when_to_notify' }, { field: 'status' }],
+		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'party' }, { field: 'status' }]
 	},
 	'regulatory-notifications': {
 		endpointUrl: 'delivery/regulatory-notifications',

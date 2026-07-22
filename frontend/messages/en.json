@@ -5431,5 +5431,11 @@
 	"billable": "Billable",
 	"hoursEstimated": "estimated",
 	"incidentTimeEntry": "Time entry",
-	"incidentTimeEntries": "Time entries"
+	"incidentTimeEntries": "Time entries",
+	"contact": "Contact",
+	"whenToNotify": "When to notify",
+	"messageTemplate": "Message template",
+	"seedStakeholders": "Seed stakeholder matrix",
+	"communicationMatrix": "Communication matrix",
+	"title": "Title / role"
 }

@@ -31,12 +31,21 @@
 
 	let seeding = $state(false);
 	let resolving = $state(false);
+	let seedingSt = $state(false);
 	let standard = $state('nist-800-61');
 
 	const selected = $derived(data.selected);
 	const notifs = $derived((selected?.notifications ?? []) as any[]);
 	const cost = $derived(selected?.cost);
 	const summary = $derived(selected?.summary);
+	const stakeholders = $derived((selected?.stakeholders ?? []) as any[]);
+
+	const stStatusCls: Record<string, string> = {
+		pending: 'text-amber-500',
+		notified: 'text-sky-500',
+		acknowledged: 'text-emerald-500',
+		not_required: 'text-surface-400'
+	};
 </script>
 
 <div class="p-4 space-y-6">
@@ -169,6 +178,22 @@
 							{resolving ? m.loading() : m.resolveObligations()}
 						</button>
 					</form>
+					<form
+						method="POST"
+						action="?/seedStakeholders"
+						use:enhance={() => {
+							seedingSt = true;
+							return async ({ update }) => {
+								await update();
+								seedingSt = false;
+							};
+						}}
+					>
+						<input type="hidden" name="incident" value={selected.id} />
+						<button class="btn btn-sm preset-tonal-secondary" disabled={seedingSt}>
+							{seedingSt ? m.loading() : m.seedStakeholders()}
+						</button>
+					</form>
 					<a
 						href="/incidents/{selected.id}/export/pptx"
 						class="btn btn-sm preset-tonal"
@@ -274,6 +299,60 @@
 					{:else}
 						<div class="text-sm text-surface-500">
 							Sem obrigações resolvidas. Clique em "{m.resolveObligations()}".
+						</div>
+					{/if}
+				</div>
+
+				<!-- Stakeholder matrix -->
+				<div class="mt-6">
+					<div class="text-xs font-bold uppercase tracking-wide text-surface-500 mb-2">
+						{m.communicationMatrix()}
+					</div>
+					{#if stakeholders.length}
+						<div class="overflow-x-auto">
+							<table class="w-full text-sm">
+								<thead>
+									<tr class="text-left text-xs uppercase text-surface-500 border-b border-surface-200-800">
+										<th class="py-1.5 pr-2">{m.stakeholder()}</th>
+										<th class="py-1.5 px-2">{m.party()}</th>
+										<th class="py-1.5 px-2">{m.whenToNotify()}</th>
+										<th class="py-1.5 px-2">{m.channel()}</th>
+										<th class="py-1.5 px-2">{m.status()}</th>
+										<th class="py-1.5 pl-2"></th>
+									</tr>
+								</thead>
+								<tbody>
+									{#each stakeholders as sh (sh.id)}
+										<tr class="border-b border-surface-100-900 align-top">
+											<td class="py-2 pr-2">
+												<div class="font-medium">{sh.name}</div>
+												{#if sh.title}<div class="text-xs text-surface-500">{sh.title}</div>{/if}
+											</td>
+											<td class="py-2 px-2 capitalize text-surface-600">{sh.party}</td>
+											<td class="py-2 px-2 text-surface-600">{sh.when_to_notify}</td>
+											<td class="py-2 px-2 text-surface-600">{sh.channel || '—'}</td>
+											<td class="py-2 px-2 font-semibold {stStatusCls[sh.status] ?? ''} capitalize"
+												>{sh.status}</td
+											>
+											<td class="py-2 pl-2 text-right">
+												{#if sh.status === 'pending'}
+													<form method="POST" action="?/markStakeholder" use:enhance>
+														<input type="hidden" name="stakeholder" value={sh.id} />
+														<input type="hidden" name="status" value="notified" />
+														<button class="text-xs text-indigo-500 hover:underline"
+															>{m.markSubmitted()}</button
+														>
+													</form>
+												{/if}
+											</td>
+										</tr>
+									{/each}
+								</tbody>
+							</table>
+						</div>
+					{:else}
+						<div class="text-sm text-surface-500">
+							Sem matriz de stakeholders. Clique em "{m.seedStakeholders()}".
 						</div>
 					{/if}
 				</div>

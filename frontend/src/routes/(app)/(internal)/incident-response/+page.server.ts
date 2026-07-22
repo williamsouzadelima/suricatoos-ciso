@@ -34,13 +34,14 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 	const selectedId = url.searchParams.get('incident');
 	let selected: any = null;
 	if (selectedId) {
-		const [summary, cost, notifications] = await Promise.all([
+		const [summary, cost, notifications, stakeholders] = await Promise.all([
 			j(fetch, `${BASE_API_URL}/delivery/incident-response-plans/summary/?incident=${selectedId}`, null),
 			j(fetch, `${BASE_API_URL}/delivery/incident-response-plans/cost/?incident=${selectedId}`, null),
-			j(fetch, `${BASE_API_URL}/delivery/incident-response-plans/notifications/?incident=${selectedId}`, [])
+			j(fetch, `${BASE_API_URL}/delivery/incident-response-plans/notifications/?incident=${selectedId}`, []),
+			j(fetch, `${BASE_API_URL}/delivery/incident-response-plans/stakeholders/?incident=${selectedId}`, [])
 		]);
 		const incident = incidents.find((i: any) => i.id === selectedId) ?? null;
-		selected = { id: selectedId, incident, summary, cost, notifications };
+		selected = { id: selectedId, incident, summary, cost, notifications, stakeholders };
 	}
 
 	return {
@@ -81,5 +82,34 @@ export const actions: Actions = {
 		);
 		if (!res.ok) return fail(res.status, { error: (await res.text()).slice(0, 200) });
 		return { resolved: await res.json() };
+	},
+	seedStakeholders: async ({ fetch, request }) => {
+		const fd = await request.formData();
+		const incident = fd.get('incident');
+		const res = await fetch(
+			`${BASE_API_URL}/delivery/incident-response-plans/seed_stakeholders/`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ incident })
+			}
+		);
+		if (!res.ok) return fail(res.status, { error: (await res.text()).slice(0, 200) });
+		return { seededStakeholders: await res.json() };
+	},
+	markStakeholder: async ({ fetch, request }) => {
+		const fd = await request.formData();
+		const stakeholder = fd.get('stakeholder');
+		const status = fd.get('status') || 'notified';
+		const res = await fetch(
+			`${BASE_API_URL}/delivery/incident-response-plans/mark_stakeholder/`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ stakeholder, status })
+			}
+		);
+		if (!res.ok) return fail(res.status, { error: (await res.text()).slice(0, 200) });
+		return { marked: await res.json() };
 	}
 };
