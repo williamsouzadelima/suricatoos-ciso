@@ -1,0 +1,12 @@
+key: mod-ir-cvm
+name: "IR — notificação regulatória CVM"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_cvm
+    name: "Reportar incidente à CVM conforme controles internos (Res. CVM 21/2021)"
+    description: "Tratar e reportar o incidente conforme a política e os controles internos exigidos pela CVM."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

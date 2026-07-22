@@ -166,6 +166,14 @@ export const URL_MODEL = [
 	'time-entries',
 	'business-catalogs',
 	'catalog-dependencies',
+	// vCISO incident response
+	'incident-response-plans',
+	'incident-phases',
+	'incident-response-tasks',
+	'incident-roles',
+	'incident-stakeholders',
+	'regulatory-notifications',
+	'incident-costs',
 ] as const;
 
 export const THIRD_PARTY_URL_MODEL = [

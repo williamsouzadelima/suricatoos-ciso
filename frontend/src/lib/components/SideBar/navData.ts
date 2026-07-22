@@ -228,6 +228,11 @@ export const navData = {
 					href: '/incidents'
 				},
 				{
+					name: 'incidentResponse',
+					fa_icon: 'fa-solid fa-shield-halved',
+					href: '/incident-response'
+				},
+				{
 					name: 'tasks',
 					fa_icon: 'fa-solid fa-note-sticky',
 					href: '/task-templates'

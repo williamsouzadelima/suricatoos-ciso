@@ -1,0 +1,12 @@
+key: mod-ir-ans
+name: "IR — notificação regulatória ANS/ANPD (saúde)"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_ans
+    name: "Comunicar incidente com dados de saúde (LGPD/ANPD + ANS)"
+    description: "Dados de saúde são sensíveis: seguir a comunicação LGPD/ANPD e as boas práticas da saúde suplementar."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

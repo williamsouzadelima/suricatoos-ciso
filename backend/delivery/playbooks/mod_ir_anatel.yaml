@@ -1,0 +1,12 @@
+key: mod-ir-anatel
+name: "IR — notificação regulatória ANATEL"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_anatel
+    name: "Notificar a Anatel o incidente relevante (Res. 740/2020 R-Ciber)"
+    description: "Notificar a Anatel os incidentes relevantes (forma/prazo do GT-Ciber) e sempre que houver comunicação à ANPD (art. 2º-C)."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

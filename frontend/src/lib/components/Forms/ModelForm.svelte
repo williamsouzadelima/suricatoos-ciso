@@ -21,6 +21,10 @@
 	import ValidationFlowForm from './ModelForm/ValidationFlowForm.svelte';
 	import BusinessCatalogForm from './ModelForm/BusinessCatalogForm.svelte';
 	import CatalogDependencyForm from './ModelForm/CatalogDependencyForm.svelte';
+	import IncidentRoleForm from './ModelForm/IncidentRoleForm.svelte';
+	import IncidentStakeholderForm from './ModelForm/IncidentStakeholderForm.svelte';
+	import RegulatoryNotificationForm from './ModelForm/RegulatoryNotificationForm.svelte';
+	import IncidentCostForm from './ModelForm/IncidentCostForm.svelte';
 	import ReferenceControlsForm from './ModelForm/ReferenceControlForm.svelte';
 	import EvidencesForm from './ModelForm/EvidenceForm.svelte';
 	import ComplianceAssessmentsForm from './ModelForm/ComplianceAssessmentForm.svelte';
@@ -1051,6 +1055,14 @@
 			<BusinessCatalogForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
 		{:else if URLModel === 'catalog-dependencies'}
 			<CatalogDependencyForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
+		{:else if URLModel === 'incident-roles'}
+			<IncidentRoleForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
+		{:else if URLModel === 'incident-stakeholders'}
+			<IncidentStakeholderForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
+		{:else if URLModel === 'regulatory-notifications'}
+			<RegulatoryNotificationForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
+		{:else if URLModel === 'incident-costs'}
+			<IncidentCostForm {form} {model} {cacheLocks} {formDataCache} {initialData} {object} />
 		{/if}
 		<div
 			class="flex flex-row justify-between space-x-4 sticky bottom-0 backdrop-blur-sm pt-4 pb-2 border-t border-surface-200-800"

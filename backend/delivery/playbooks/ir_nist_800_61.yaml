@@ -1,0 +1,192 @@
+key: nist-800-61
+name: "Runbook de Resposta a Incidentes — NIST SP 800-61"
+description: "Playbook curado Suricatoos: 4 fases do ciclo de vida de resposta a incidentes do NIST SP 800-61 (Preparação → Detecção & Análise → Contenção/Erradicação/Recuperação → Pós-incidente). Tarefas de notificação regulatória se somam pelos módulos do cliente (mod_ir_*)."
+phases:
+  - key: p1_preparation
+    name: "Fase 1 · Preparação & Acionamento"
+    order: 0
+    day_start: 0
+    day_end: 1
+    objective: "Acionar o time, abrir a resposta e preservar evidências antes de agir."
+    tasks:
+      - key: acionar_ic
+        name: "Acionar o Incident Commander e montar o time de resposta"
+        description: "Designar o comandante do incidente e mobilizar os papéis (técnico/forense, comunicação, jurídico/DPO, scribe) conforme o RACI."
+        priority: 1
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+      - key: war_room
+        name: "Abrir sala de crise (war room) e canais seguros de comunicação"
+        description: "Estabelecer o canal de coordenação fora de banda (não usar sistemas potencialmente comprometidos) e a cadência de status."
+        priority: 1
+        effort: S
+        estimated_hours: 1
+        offset_start_days: 0
+        duration_days: 1
+      - key: declarar_severidade
+        name: "Classificar a severidade inicial e declarar o incidente"
+        description: "Atribuir severidade (SEV1-5) com base no impacto potencial e declarar formalmente o incidente."
+        priority: 1
+        effort: S
+        estimated_hours: 1
+        offset_start_days: 0
+        duration_days: 1
+      - key: preservar_evidencia
+        name: "Preservar evidências voláteis (não desligar/alterar antes de coletar)"
+        description: "Congelar o estado: memória, conexões, logs e artefatos voláteis antes de qualquer contenção que os destrua."
+        priority: 1
+        effort: M
+        estimated_hours: 3
+        offset_start_days: 0
+        duration_days: 1
+  - key: p2_detection_analysis
+    name: "Fase 2 · Detecção & Análise"
+    order: 1
+    day_start: 0
+    day_end: 2
+    objective: "Validar o incidente, determinar escopo e impacto, coletar evidências forenses."
+    tasks:
+      - key: triagem
+        name: "Triagem e validação do indício (é incidente real?)"
+        description: "Confirmar se o alerta/indício é um incidente verdadeiro, descartando falso-positivo."
+        priority: 1
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 0
+        duration_days: 1
+      - key: escopo
+        name: "Determinar o escopo: sistemas, contas, dados e ativos afetados"
+        description: "Mapear a extensão do comprometimento — hosts, credenciais, dados e serviços impactados."
+        priority: 1
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 0
+        duration_days: 2
+      - key: ioc_timeline
+        name: "Coletar IOCs e reconstruir a linha do tempo do ataque"
+        description: "Levantar indicadores de comprometimento e a cronologia (initial access → ações → impacto)."
+        priority: 2
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 0
+        duration_days: 2
+      - key: avaliar_impacto
+        name: "Avaliar o impacto ao negócio e a dados pessoais/sensíveis"
+        description: "Estimar impacto operacional/financeiro e verificar se há dados pessoais/sensíveis envolvidos (gatilho regulatório)."
+        priority: 1
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 0
+        duration_days: 1
+      - key: forense
+        name: "Cópia forense e cadeia de custódia das evidências"
+        description: "Coletar imagens forenses íntegras (hash) e documentar a cadeia de custódia para uso jurídico/regulatório."
+        priority: 2
+        effort: L
+        estimated_hours: 8
+        offset_start_days: 1
+        duration_days: 2
+      - key: reavaliar_severidade
+        name: "Reavaliar a severidade e acionar o BCP se necessário"
+        description: "Ajustar a severidade com o escopo conhecido e ativar o plano de continuidade de negócios se aplicável."
+        priority: 1
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 0
+        duration_days: 1
+  - key: p3_containment_eradication_recovery
+    name: "Fase 3 · Contenção, Erradicação & Recuperação"
+    order: 2
+    day_start: 1
+    day_end: 7
+    objective: "Conter o avanço, remover a ameaça e restaurar os serviços com segurança."
+    tasks:
+      - key: contencao_curto
+        name: "Contenção de curto prazo (isolar hosts/contas/segmentos)"
+        description: "Isolar sistemas comprometidos, revogar credenciais e segmentar a rede para estancar a propagação."
+        priority: 1
+        effort: M
+        estimated_hours: 4
+        offset_start_days: 0
+        duration_days: 1
+      - key: contencao_longo
+        name: "Contenção de longo prazo (patch temporário, hardening)"
+        description: "Aplicar correções temporárias e endurecer o ambiente enquanto a erradicação é preparada."
+        priority: 2
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 1
+        duration_days: 2
+      - key: erradicacao
+        name: "Erradicação: remover malware, persistência e credenciais comprometidas"
+        description: "Eliminar a presença do atacante — artefatos, mecanismos de persistência e contas/credenciais comprometidas."
+        priority: 1
+        effort: L
+        estimated_hours: 10
+        offset_start_days: 1
+        duration_days: 3
+      - key: recuperacao
+        name: "Recuperação: restaurar de backup limpo e validar integridade"
+        description: "Restaurar os serviços a partir de fontes confiáveis e validar integridade antes de retornar à produção."
+        priority: 1
+        effort: L
+        estimated_hours: 12
+        offset_start_days: 2
+        duration_days: 4
+      - key: monitoramento_pos
+        name: "Monitoramento reforçado pós-recuperação"
+        description: "Vigilância elevada após o retorno para detectar reinfecção ou atividade residual do atacante."
+        priority: 2
+        effort: M
+        estimated_hours: 6
+        offset_start_days: 3
+        duration_days: 5
+  - key: p4_post_incident
+    name: "Fase 4 · Pós-incidente"
+    order: 3
+    day_start: 5
+    day_end: 15
+    objective: "Aprender com o incidente, endurecer controles e encerrar formalmente."
+    tasks:
+      - key: pir
+        name: "Elaborar o relatório pós-incidente (PIR): causa-raiz, timeline, impacto"
+        description: "Consolidar causa-raiz, linha do tempo, impacto, ações e evidências no relatório pós-incidente."
+        priority: 1
+        effort: M
+        estimated_hours: 8
+        offset_start_days: 5
+        duration_days: 3
+      - key: licoes_aprendidas
+        name: "Reunião de lições aprendidas com o time e stakeholders"
+        description: "Revisar o que funcionou e o que falhar, com o time e as partes interessadas, e registrar as lições."
+        priority: 1
+        effort: S
+        estimated_hours: 3
+        offset_start_days: 7
+        duration_days: 1
+      - key: hardening
+        name: "Plano de hardening e controles para prevenir recorrência"
+        description: "Definir e priorizar as melhorias de controle que evitam a repetição do incidente."
+        priority: 2
+        effort: M
+        estimated_hours: 8
+        offset_start_days: 7
+        duration_days: 5
+      - key: consolidar_custos
+        name: "Consolidar os custos do incidente (esforço, fornecedores, multas, downtime)"
+        description: "Fechar o P&L do incidente: esforço de resposta, fornecedores externos, multas e impacto de indisponibilidade."
+        priority: 2
+        effort: S
+        estimated_hours: 3
+        offset_start_days: 7
+        duration_days: 2
+      - key: encerramento
+        name: "Encerramento formal do incidente e atualização de indicadores"
+        description: "Encerrar o incidente formalmente, atualizar métricas (MTTD/MTTR) e comunicar o fechamento."
+        priority: 2
+        effort: S
+        estimated_hours: 2
+        offset_start_days: 10
+        duration_days: 1

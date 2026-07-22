@@ -14,9 +14,12 @@ from django.utils.text import slugify
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from django.shortcuts import get_object_or_404
+from rest_framework.exceptions import PermissionDenied, ValidationError
+
 from core.views import BaseModelViewSet as AbstractBaseModelViewSet
-from iam.models import RoleAssignment
-from core.models import Asset
+from iam.models import RoleAssignment, Folder
+from core.models import Asset, Incident
 
 from .models import (
     Engagement,
@@ -26,6 +29,13 @@ from .models import (
     TimeEntry,
     BusinessCatalog,
     CatalogDependency,
+    IncidentResponsePlan,
+    IncidentPhase,
+    IncidentResponseTask,
+    IncidentRole,
+    IncidentStakeholder,
+    RegulatoryNotification,
+    IncidentCost,
 )
 from .serializers import PlanTaskReadSerializer
 from .services.seeding import seed_engagement_plan
@@ -616,3 +626,171 @@ class BusinessCatalogViewSet(BaseModelViewSet):
 class CatalogDependencyViewSet(BaseModelViewSet):
     model = CatalogDependency
     filterset_fields = ["folder", "catalog", "asset"]
+
+
+# ---------------------------------------------------------------------------
+# Resposta a Incidentes (IR) — orquestração sobre core.Incident.
+# ---------------------------------------------------------------------------
+
+
+def _accessible_incident(request, incident_id, write=False):
+    """Resolve o core.Incident e checa acesso RBAC (view p/ leitura, change p/ mutação)."""
+    if not incident_id:
+        raise ValidationError({"incident": "obrigatório"})
+    view_ids, change_ids, _ = RoleAssignment.get_accessible_object_ids(
+        Folder.get_root_folder(), request.user, Incident
+    )
+    allowed = change_ids if write else view_ids
+    inc = get_object_or_404(Incident, id=incident_id)
+    if inc.id not in allowed:
+        raise PermissionDenied()
+    return inc
+
+
+class IncidentResponsePlanViewSet(BaseModelViewSet):
+    model = IncidentResponsePlan
+    filterset_fields = ["folder", "incident", "engagement", "standard", "status"]
+
+    @action(detail=False, methods=["get"], name="IR standard choices")
+    def standard(self, request):
+        return Response(dict(IncidentResponsePlan.Standard.choices))
+
+    @action(detail=False, methods=["post"], name="Seed the incident response runbook")
+    def seed_plan(self, request, *args, **kwargs):
+        from .services.ir_seeding import seed_incident_plan
+
+        inc = _accessible_incident(request, request.data.get("incident"), write=True)
+        standard = request.data.get("standard", "nist-800-61")
+        modules = request.data.get("modules")
+        if isinstance(modules, str):
+            modules = [m.strip() for m in modules.split(",") if m.strip()]
+        result = seed_incident_plan(inc, standard=standard, modules=modules)
+        return Response(result)
+
+    @action(detail=False, methods=["post"], name="Resolve regulatory notifications")
+    def seed_notifications(self, request, *args, **kwargs):
+        from .services.regulatory import seed_regulatory_notifications
+
+        inc = _accessible_incident(request, request.data.get("incident"), write=True)
+        return Response(seed_regulatory_notifications(inc))
+
+    @action(detail=False, methods=["get"], name="Regulatory notifications of an incident")
+    def notifications(self, request, *args, **kwargs):
+        from .serializers import RegulatoryNotificationReadSerializer
+
+        inc = _accessible_incident(request, request.query_params.get("incident"))
+        qs = RegulatoryNotification.objects.filter(incident=inc).order_by("regulator")
+        data = RegulatoryNotificationReadSerializer(qs, many=True).data
+        return Response(data)
+
+    @action(detail=False, methods=["get"], name="Incident cost (P&L)")
+    def cost(self, request, *args, **kwargs):
+        from .services.incident_cost import compute_incident_cost
+
+        inc = _accessible_incident(request, request.query_params.get("incident"))
+        return Response(compute_incident_cost(inc))
+
+    @action(detail=False, methods=["get"], name="Incident response summary")
+    def summary(self, request, *args, **kwargs):
+        from .services.incident_cost import compute_incident_cost
+
+        inc = _accessible_incident(request, request.query_params.get("incident"))
+        plan = getattr(inc, "response_plan", None)
+        phases = []
+        for ph in inc.ir_phases.all().order_by("order"):
+            phases.append(
+                {
+                    "id": str(ph.id),
+                    "name": ph.name,
+                    "order": ph.order,
+                    "tasks_count": ph.tasks.count(),
+                }
+            )
+        notifs = RegulatoryNotification.objects.filter(incident=inc)
+        cost = compute_incident_cost(inc)
+        return Response(
+            {
+                "has_plan": plan is not None,
+                "standard": plan.standard if plan else None,
+                "phases": phases,
+                "tasks_total": inc.ir_tasks.count(),
+                "roles_count": inc.ir_roles.count(),
+                "stakeholders_count": inc.ir_stakeholders.count(),
+                "notifications_total": notifs.count(),
+                "notifications_overdue": sum(1 for n in notifs if n.is_overdue),
+                "notifications_pending": notifs.filter(status="pending").count(),
+                "cost_total": cost["total"],
+                "cost_total_fmt": cost["total_fmt"],
+                "currency": cost["currency"],
+            }
+        )
+
+    @action(detail=False, methods=["get"], name="Incident PIR PPTX report")
+    def report_pptx(self, request, *args, **kwargs):
+        from .pptx_incident import build_incident_pptx
+
+        inc = _accessible_incident(request, request.query_params.get("incident"))
+        prefs = getattr(request.user, "preferences", None) or {}
+        lang = prefs.get("lang", "pt") if isinstance(prefs, dict) else "pt"
+        if lang not in ("pt", "en", "fr"):
+            lang = "pt"
+        buf = build_incident_pptx(inc, lang)
+        safe = "".join(
+            c if c.isalnum() or c in ".-_" else "_" for c in (inc.name or "incidente")
+        )
+        resp = StreamingHttpResponse(
+            FileWrapper(buf),
+            content_type=(
+                "application/vnd.openxmlformats-officedocument"
+                ".presentationml.presentation"
+            ),
+        )
+        resp["Content-Disposition"] = f'attachment; filename="pir-{safe}.pptx"'
+        return resp
+
+
+class IncidentPhaseViewSet(BaseModelViewSet):
+    model = IncidentPhase
+    filterset_fields = ["folder", "incident"]
+
+
+class IncidentResponseTaskViewSet(BaseModelViewSet):
+    model = IncidentResponseTask
+    filterset_fields = ["folder", "incident", "phase", "applied_control"]
+
+
+class IncidentRoleViewSet(BaseModelViewSet):
+    model = IncidentRole
+    filterset_fields = ["folder", "incident", "actor", "role", "raci"]
+
+    @action(detail=False, methods=["get"], name="IR role choices")
+    def choices(self, request):
+        return Response(
+            {
+                "role": dict(IncidentRole.Role.choices),
+                "raci": dict(IncidentRole.Raci.choices),
+            }
+        )
+
+
+class IncidentStakeholderViewSet(BaseModelViewSet):
+    model = IncidentStakeholder
+    filterset_fields = ["folder", "incident", "actor", "party"]
+
+    @action(detail=False, methods=["get"], name="Stakeholder party choices")
+    def party(self, request):
+        return Response(dict(IncidentStakeholder.Party.choices))
+
+
+class RegulatoryNotificationViewSet(BaseModelViewSet):
+    model = RegulatoryNotification
+    filterset_fields = ["folder", "incident", "module_key", "regulator", "status"]
+
+    @action(detail=False, methods=["get"], name="Notification status choices")
+    def statuses(self, request):
+        return Response(dict(RegulatoryNotification.Status.choices))
+
+
+class IncidentCostViewSet(BaseModelViewSet):
+    model = IncidentCost
+    filterset_fields = ["folder", "incident"]

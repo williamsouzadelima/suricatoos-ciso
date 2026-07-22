@@ -1,0 +1,12 @@
+key: mod-ir-bcb85
+name: "IR — notificação regulatória BACEN (BCB 85)"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_bcb85
+    name: "Comunicação tempestiva ao BACEN — situação de crise (Res. BCB 85 art. 20)"
+    description: "Se o incidente/interrupção configurar situação de crise (critérios documentados), comunicar tempestivamente ao Banco Central."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

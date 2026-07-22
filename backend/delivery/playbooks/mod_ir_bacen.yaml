@@ -1,0 +1,12 @@
+key: mod-ir-bacen
+name: "IR — notificação regulatória BACEN (CMN 4.893)"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_bacen
+    name: "Reportar incidente relevante ao BACEN (CMN 4.893/2021)"
+    description: "Registrar e comunicar o incidente relevante ao supervisor conforme a política e a regulamentação do Banco Central."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

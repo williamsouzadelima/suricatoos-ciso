@@ -1,0 +1,12 @@
+key: mod-ir-aneel
+name: "IR — notificação regulatória ANEEL"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_aneel
+    name: "Notificar a coordenação setorial (REN ANEEL 964/2021 art. 6º)"
+    description: "Notificar a equipe de coordenação setorial os incidentes de maior impacto, com causa/impacto/mitigação, assim que houver ciência do incidente e de sua dimensão."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

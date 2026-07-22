@@ -1,0 +1,12 @@
+key: mod-ir-susep
+name: "IR — notificação regulatória SUSEP"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_susep
+    name: "Reportar incidente à SUSEP (Circular 638/2021)"
+    description: "Registrar, responder e comunicar o incidente relevante ao supervisor conforme a política de segurança cibernética."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

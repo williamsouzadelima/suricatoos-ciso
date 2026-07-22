@@ -207,6 +207,107 @@ export const URL_MODEL_MAP: ModelMap = {
 		],
 		filters: [{ field: 'folder' }, { field: 'catalog' }]
 	},
+	'incident-response-plans': {
+		endpointUrl: 'delivery/incident-response-plans',
+		name: 'incidentresponseplan',
+		localName: 'incidentResponsePlan',
+		localNamePlural: 'incidentResponsePlans',
+		verboseName: 'Incident response plan',
+		verboseNamePlural: 'Incident response plans',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'engagement', urlModel: 'engagements', endpointUrl: 'delivery/engagements' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		selectFields: [{ field: 'standard' }, { field: 'status' }],
+		filters: [{ field: 'folder' }, { field: 'incident' }]
+	},
+	'incident-phases': {
+		endpointUrl: 'delivery/incident-phases',
+		name: 'incidentphase',
+		localName: 'incidentPhase',
+		localNamePlural: 'incidentPhases',
+		verboseName: 'Incident phase',
+		verboseNamePlural: 'Incident phases',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }, { field: 'incident' }]
+	},
+	'incident-response-tasks': {
+		endpointUrl: 'delivery/incident-response-tasks',
+		name: 'incidentresponsetask',
+		localName: 'incidentResponseTask',
+		localNamePlural: 'incidentResponseTasks',
+		verboseName: 'Incident response task',
+		verboseNamePlural: 'Incident response tasks',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'phase', urlModel: 'incident-phases', endpointUrl: 'delivery/incident-phases' },
+			{ field: 'applied_control', urlModel: 'applied-controls' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'phase' }]
+	},
+	'incident-roles': {
+		endpointUrl: 'delivery/incident-roles',
+		name: 'incidentrole',
+		localName: 'incidentRole',
+		localNamePlural: 'incidentRoles',
+		verboseName: 'Incident role',
+		verboseNamePlural: 'Incident roles',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'actor', urlModel: 'actors', urlParams: 'is_third_party=false' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		selectFields: [{ field: 'role' }, { field: 'raci' }],
+		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'role' }]
+	},
+	'incident-stakeholders': {
+		endpointUrl: 'delivery/incident-stakeholders',
+		name: 'incidentstakeholder',
+		localName: 'incidentStakeholder',
+		localNamePlural: 'incidentStakeholders',
+		verboseName: 'Incident stakeholder',
+		verboseNamePlural: 'Incident stakeholders',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'actor', urlModel: 'actors' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		selectFields: [{ field: 'party' }],
+		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'party' }]
+	},
+	'regulatory-notifications': {
+		endpointUrl: 'delivery/regulatory-notifications',
+		name: 'regulatorynotification',
+		localName: 'regulatoryNotification',
+		localNamePlural: 'regulatoryNotifications',
+		verboseName: 'Regulatory notification',
+		verboseNamePlural: 'Regulatory notifications',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'evidences', urlModel: 'evidences' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		selectFields: [{ field: 'status' }],
+		filters: [{ field: 'folder' }, { field: 'incident' }, { field: 'status' }]
+	},
+	'incident-costs': {
+		endpointUrl: 'delivery/incident-costs',
+		name: 'incidentcost',
+		localName: 'incidentCost',
+		localNamePlural: 'incidentCosts',
+		verboseName: 'Incident cost',
+		verboseNamePlural: 'Incident costs',
+		foreignKeyFields: [
+			{ field: 'incident', urlModel: 'incidents' },
+			{ field: 'folder', urlModel: 'folders' }
+		],
+		filters: [{ field: 'folder' }, { field: 'incident' }]
+	},
 	'time-entries': {
 		endpointUrl: 'delivery/time-entries',
 		name: 'timeentry',
@@ -2261,6 +2362,10 @@ export const URL_MODEL_MAP: ModelMap = {
 		],
 		reverseForeignKeyFields: [
 			{ field: 'incident', urlModel: 'timeline-entries' },
+			{ field: 'incident', urlModel: 'incident-roles' },
+			{ field: 'incident', urlModel: 'incident-stakeholders' },
+			{ field: 'incident', urlModel: 'incident-response-tasks' },
+			{ field: 'incident', urlModel: 'regulatory-notifications' },
 			{ field: 'incident', urlModel: 'dora-incident-reports' },
 			{
 				field: 'incidents',

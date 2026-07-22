@@ -1,0 +1,12 @@
+key: mod-ir-anbima
+name: "IR — notificação regulatória ANBIMA"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_anbima
+    name: "Comunicar incidente conforme Deveres Básicos ANBIMA"
+    description: "Tratar e comunicar o incidente conforme as Regras e Procedimentos de Deveres Básicos (segurança cibernética) da ANBIMA."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2

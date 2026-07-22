@@ -1411,6 +1411,55 @@ export const listViewFields = {
 			folder: DOMAIN_FILTER
 		}
 	},
+	'incident-response-plans': {
+		head: ['standard', 'status', 'incident', 'domain'],
+		body: ['standard', 'status', 'incident', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'incident-phases': {
+		head: ['name', 'order', 'incident', 'domain'],
+		body: ['name', 'order', 'incident', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'incident-response-tasks': {
+		head: ['name', 'phase', 'estimatedHours', 'domain'],
+		body: ['str', 'phase', 'estimated_hours', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'incident-roles': {
+		head: ['role', 'actor', 'raci', 'domain'],
+		body: ['role', 'actor', 'raci', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'incident-stakeholders': {
+		head: ['name', 'party', 'channel', 'domain'],
+		body: ['name', 'party', 'channel', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'regulatory-notifications': {
+		head: ['regulator', 'obligationRef', 'status', 'domain'],
+		body: ['regulator', 'obligation_ref', 'status', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
+	'incident-costs': {
+		head: ['incident', 'currency', 'domain'],
+		body: ['incident', 'currency', 'folder'],
+		filters: {
+			folder: DOMAIN_FILTER
+		}
+	},
 	perimeters: {
 		head: ['ref_id', 'name', 'description', 'defaultAssignee', 'domain'],
 		body: ['ref_id', 'name', 'description', 'default_assignee', 'folder'],

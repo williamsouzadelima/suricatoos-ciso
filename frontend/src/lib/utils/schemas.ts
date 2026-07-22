@@ -1870,6 +1870,81 @@ export const CatalogDependencySchema = z.object({
 	observation: z.string().optional()
 });
 
+// --- vCISO incident response ---
+export const IncidentResponsePlanSchema = z.object({
+	incident: z.string(),
+	engagement: z.string().optional().nullable(),
+	standard: z.string().optional().default('nist-800-61'),
+	anchor_date: z.string().optional().nullable(),
+	modules: z.array(z.string()).optional().default([]),
+	status: z.string().optional().default('active'),
+	exec_summary: z.string().optional(),
+	lessons_learned: z.string().optional()
+});
+
+export const IncidentPhaseSchema = z.object({
+	...NameDescriptionMixin,
+	incident: z.string(),
+	order: z.number().optional().default(0),
+	day_start: z.number().optional().default(0),
+	day_end: z.number().optional().default(1),
+	objective: z.string().optional()
+});
+
+export const IncidentResponseTaskSchema = z.object({
+	incident: z.string(),
+	phase: z.string(),
+	applied_control: z.string().optional().nullable(),
+	estimated_hours: z.number().optional().nullable(),
+	order: z.number().optional().default(0),
+	template_key: z.string().optional()
+});
+
+export const IncidentRoleSchema = z.object({
+	incident: z.string(),
+	actor: z.string(),
+	role: z.string(),
+	raci: z.string().optional().default('responsible'),
+	note: z.string().optional()
+});
+
+export const IncidentStakeholderSchema = z.object({
+	incident: z.string(),
+	name: z.string(),
+	party: z.string().optional().default('internal'),
+	actor: z.string().optional().nullable(),
+	channel: z.string().optional(),
+	cadence: z.string().optional(),
+	note: z.string().optional()
+});
+
+export const RegulatoryNotificationSchema = z.object({
+	incident: z.string(),
+	regulator: z.string(),
+	module_key: z.string().optional(),
+	obligation_ref: z.string().optional(),
+	deadline_hours: z.number().optional().nullable(),
+	qualitative_note: z.string().optional(),
+	triggered_at: z.string().optional().nullable(),
+	due_at: z.string().optional().nullable(),
+	status: z.string().optional().default('pending'),
+	channel: z.string().optional(),
+	template_text: z.string().optional(),
+	submitted_at: z.string().optional().nullable(),
+	evidences: z.array(z.string().uuid()).optional().default([])
+});
+
+export const IncidentCostSchema = z.object({
+	incident: z.string(),
+	currency: z.string().optional(),
+	vendor_forensics: z.number().optional().nullable(),
+	vendor_legal: z.number().optional().nullable(),
+	other_external: z.number().optional().nullable(),
+	regulatory_fines: z.number().optional().nullable(),
+	downtime_hours: z.number().optional().nullable(),
+	notes: z.string().optional()
+});
+
 const SCHEMA_MAP: Record<string, ZodSchema> = {
 	'business-catalogs': BusinessCatalogSchema,
 	'catalog-dependencies': CatalogDependencySchema,
@@ -1877,6 +1952,13 @@ const SCHEMA_MAP: Record<string, ZodSchema> = {
 	'plan-tasks': PlanTaskSchema,
 	'plan-phases': PlanPhaseSchema,
 	'client-intakes': ClientIntakeSchema,
+	'incident-response-plans': IncidentResponsePlanSchema,
+	'incident-phases': IncidentPhaseSchema,
+	'incident-response-tasks': IncidentResponseTaskSchema,
+	'incident-roles': IncidentRoleSchema,
+	'incident-stakeholders': IncidentStakeholderSchema,
+	'regulatory-notifications': RegulatoryNotificationSchema,
+	'incident-costs': IncidentCostSchema,
 	folders: FolderSchema,
 	'folders-import': FolderImportSchema,
 	perimeters: PerimeterSchema,

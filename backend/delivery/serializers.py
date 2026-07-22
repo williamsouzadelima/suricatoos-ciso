@@ -13,6 +13,13 @@ from .models import (
     TimeEntry,
     BusinessCatalog,
     CatalogDependency,
+    IncidentResponsePlan,
+    IncidentPhase,
+    IncidentResponseTask,
+    IncidentRole,
+    IncidentStakeholder,
+    RegulatoryNotification,
+    IncidentCost,
 )
 from .services.eisenhower import derive_eisenhower
 
@@ -155,4 +162,128 @@ class CatalogDependencyReadSerializer(BaseModelSerializer):
 class CatalogDependencyWriteSerializer(BaseModelSerializer):
     class Meta:
         model = CatalogDependency
+        fields = "__all__"
+
+
+# ---------- Resposta a Incidentes (IR) ----------
+class IncidentResponsePlanReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    engagement = FieldsRelatedField()
+
+    class Meta:
+        model = IncidentResponsePlan
+        fields = "__all__"
+
+
+class IncidentResponsePlanWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentResponsePlan
+        fields = "__all__"
+
+
+class IncidentPhaseReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    tasks_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = IncidentPhase
+        fields = "__all__"
+
+    def get_tasks_count(self, obj):
+        return obj.tasks.count()
+
+
+class IncidentPhaseWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentPhase
+        fields = "__all__"
+
+
+class IncidentResponseTaskReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    phase = FieldsRelatedField(["id", "name", "order"])
+    applied_control = FieldsRelatedField(_AC_FIELDS)
+
+    class Meta:
+        model = IncidentResponseTask
+        fields = "__all__"
+
+
+class IncidentResponseTaskWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentResponseTask
+        fields = "__all__"
+
+
+class IncidentRoleReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    actor = FieldsRelatedField()
+
+    class Meta:
+        model = IncidentRole
+        fields = "__all__"
+
+
+class IncidentRoleWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentRole
+        fields = "__all__"
+
+
+class IncidentStakeholderReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    actor = FieldsRelatedField()
+
+    class Meta:
+        model = IncidentStakeholder
+        fields = "__all__"
+
+
+class IncidentStakeholderWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentStakeholder
+        fields = "__all__"
+
+
+class RegulatoryNotificationReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+    evidences = FieldsRelatedField(many=True)
+    is_overdue = serializers.ReadOnlyField()
+
+    class Meta:
+        model = RegulatoryNotification
+        fields = "__all__"
+
+
+class RegulatoryNotificationWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = RegulatoryNotification
+        fields = "__all__"
+
+
+class IncidentCostReadSerializer(BaseModelSerializer):
+    str = serializers.CharField(source="__str__")
+    folder = FieldsRelatedField()
+    incident = FieldsRelatedField()
+
+    class Meta:
+        model = IncidentCost
+        fields = "__all__"
+
+
+class IncidentCostWriteSerializer(BaseModelSerializer):
+    class Meta:
+        model = IncidentCost
         fields = "__all__"

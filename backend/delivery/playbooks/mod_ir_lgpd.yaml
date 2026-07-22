@@ -1,0 +1,12 @@
+key: mod-ir-lgpd
+name: "IR — notificação regulatória LGPD/ANPD"
+tasks:
+  - phase_key: p2_detection_analysis
+    key: notif_lgpd
+    name: "Comunicar incidente à ANPD e aos titulares (LGPD)"
+    description: "Avaliar risco/dano relevante a dados pessoais e, se aplicável, comunicar à ANPD e aos titulares no prazo do Regulamento (3 dias úteis do conhecimento — validar)."
+    priority: 1
+    effort: M
+    estimated_hours: 3
+    offset_start_days: 0
+    duration_days: 2
