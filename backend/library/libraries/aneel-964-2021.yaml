@@ -1,0 +1,266 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:aneel-964-2021
+locale: pt
+ref_id: ANEEL-964-2021
+name: "REN ANEEL nº 964/2021 — Segurança Cibernética (Setor de Energia Elétrica)"
+description: "Requisitos avaliáveis da Resolução Normativa ANEEL nº 964, de 14/12/2021 (vigente desde 01/07/2022), que dispõe sobre a política de segurança cibernética (PSC) a ser adotada pelos agentes do setor de energia elétrica (geração, transmissão, distribuição, operação do sistema — ONS, comercialização e gestão de encargos). Norma principiológica e baseada em risco: não lista controles técnicos por nome (MFA, criptografia, backup) — a conformidade é avaliada por adequação e maturidade, e os controles concretos derivam das normas, padrões e boas práticas que o agente adota (Art. 3º, I). Recorte de gap-assessment sobre os Art. 3º a 9º; a proporcionalidade é qualitativa (relevância no SIN e sensibilidade dos dados), sem dispensa de agentes. Os Procedimentos de Rede do ONS e a LGPD/ANPD são camadas complementares."
+copyright: Construido a partir de conteudo publico oficial (ANEEL) por Suricatoos. Norma principiologica/baseada em risco; requer validacao de compliance antes de uso regulatorio. Procedimentos de Rede do ONS e LGPD/ANPD sao camadas complementares.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:aneel-964-2021
+    ref_id: ANEEL-964-2021
+    name: "REN ANEEL nº 964/2021 — Segurança Cibernética (Setor de Energia Elétrica)"
+    description: "Requisitos avaliáveis da Resolução Normativa ANEEL nº 964, de 14/12/2021 (vigente desde 01/07/2022), que dispõe sobre a política de segurança cibernética (PSC) a ser adotada pelos agentes do setor de energia elétrica (geração, transmissão, distribuição, operação do sistema — ONS, comercialização e gestão de encargos). Norma principiológica e baseada em risco: não lista controles técnicos por nome (MFA, criptografia, backup) — a conformidade é avaliada por adequação e maturidade, e os controles concretos derivam das normas, padrões e boas práticas que o agente adota (Art. 3º, I). Recorte de gap-assessment sobre os Art. 3º a 9º; a proporcionalidade é qualitativa (relevância no SIN e sensibilidade dos dados), sem dispensa de agentes. Os Procedimentos de Rede do ONS e a LGPD/ANPD são camadas complementares."
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+      assessable: false
+      depth: 1
+      ref_id: "CAP-I"
+      name: "Cap. I — Diretrizes gerais da segurança cibernética (Art. 3º)"
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-1
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, I"
+      name: "Adoção de normas e boas práticas"
+      description: "Adotar normas, padrões e referências de boas práticas em segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-2
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, II"
+      name: "Responsabilidade, zelo e transparência"
+      description: "Atuar em segurança cibernética com responsabilidade, zelo e transparência."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-3
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, III"
+      name: "Disseminação da cultura"
+      description: "Disseminar a cultura de segurança cibernética na organização."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-4
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, IV"
+      name: "Uso seguro de redes e serviços"
+      description: "Buscar a utilização segura das redes e dos serviços de energia elétrica."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-5
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, V"
+      name: "Ciclo identificar-proteger-detectar-responder-recuperar"
+      description: "Identificar, proteger, diagnosticar, responder e recuperar-se de incidentes cibernéticos (funções do tipo NIST CSF)."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-6
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, VI"
+      name: "Gestão de riscos cibernéticos"
+      description: "Identificar, avaliar, classificar e tratar os riscos cibernéticos na estrutura de gestão de riscos estabelecida pelo agente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-7
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, VII"
+      name: "Cooperação entre agentes"
+      description: "Buscar a cooperação entre os agentes para mitigação de riscos, respeitadas as regras de confidencialidade definidas pelo agente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-0
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+      assessable: false
+      depth: 1
+      ref_id: "CAP-II"
+      name: "Cap. II — Conteúdo mínimo da Política de Segurança Cibernética (Art. 4º)"
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-9
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, I"
+      name: "Objetivos de segurança cibernética"
+      description: "Definir os objetivos de segurança cibernética, dispondo sobre a capacidade de prevenir, detectar, responder e reduzir a vulnerabilidade a incidentes."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-10
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, II"
+      name: "Modelo de maturidade anual"
+      description: "Aplicar, com periodicidade anual, pelo menos um modelo de maturidade em segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-11
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, III"
+      name: "Classificação de dados por relevância"
+      description: "Classificar os dados e as informações quanto à sua relevância."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-12
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, IV"
+      name: "Procedimentos e controles"
+      description: "Definir procedimentos e controles para reduzir a vulnerabilidade a incidentes e atender aos objetivos de segurança."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-13
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, V"
+      name: "Proteção e rastreabilidade das informações críticas"
+      description: "Definir medidas técnicas, incluindo de rastreabilidade da informação, para garantir a segurança das informações críticas."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-14
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, VI"
+      name: "Registro e análise de incidentes de maior impacto"
+      description: "Prever o registro, a análise da causa e do impacto e o controle dos efeitos dos incidentes de maior impacto, abrangendo inclusive informações recebidas de prestadores de serviços a terceiros."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-15
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, VII"
+      name: "Controles para terceiros"
+      description: "Definir procedimentos e controles para terceiros que manuseiem dados/informações críticas ou relevantes, em níveis de complexidade, abrangência e precisão compatíveis com os do próprio agente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-16
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, VIII"
+      name: "Parâmetros de relevância dos incidentes"
+      description: "Definir os parâmetros para avaliar a relevância dos incidentes cibernéticos."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-17
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, IX"
+      name: "Disseminação da cultura de segurança"
+      description: "Prever mecanismos de disseminação da cultura: programas de capacitação e avaliação periódica de pessoal, plano de conscientização/educação de usuários e comprometimento da alta administração com a melhoria contínua."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-18
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, X"
+      name: "Simulações e testes de resiliência"
+      description: "Prever simulações de cenários e ameaças para testes de resiliência, análise de ferramentas e avaliação da capacidade e do tempo de resposta."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-19
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, XI"
+      name: "Prevenção, mitigação e recuperação de incidentes"
+      description: "Definir mecanismos para prevenir, mitigar e recuperar incidentes na rede de informação ou na rede das instalações e para impedir que os incidentes afetem a operação."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-20
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, XII"
+      name: "Procedimentos de resposta a incidentes"
+      description: "Definir os procedimentos para prevenção, tratamento e resposta a incidentes cibernéticos."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-21
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º, p.ú."
+      name: "Desenvolvimento seguro e novas tecnologias"
+      description: "Aplicar os procedimentos e controles inclusive no desenvolvimento de sistemas de informação seguros e na adoção de novas tecnologias."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-8
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+      assessable: false
+      depth: 1
+      ref_id: "CAP-III"
+      name: "Cap. III — Requisitos e governança da PSC (Art. 5º)"
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-23
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, I-II"
+      name: "Proporcionalidade ao risco"
+      description: "A PSC deve ser compatível com a relevância da instalação no contexto do SIN, a natureza e a complexidade dos serviços/atividades/processos/sistemas e com a sensibilidade dos dados sob responsabilidade do agente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-24
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, III"
+      name: "Disseminação por níveis e papéis"
+      description: "Disseminar a PSC aos profissionais e colaboradores das áreas afetas, nos diversos níveis, papéis e responsabilidades, resguardando o compartilhamento de informações críticas apenas a quem executa diretamente a política."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-25
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, IV"
+      name: "Responsabilidades e ponto focal de urgência"
+      description: "Estabelecer as responsabilidades pela aplicação da política, identificando pessoas e áreas competentes e um ponto focal para contato em situações de urgência."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-26
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, V"
+      name: "Dirigente responsável"
+      description: "Designar dirigente responsável pela política de segurança cibernética (pode acumular funções, desde que sem conflito de interesses)."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-27
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, VI"
+      name: "Aprovação pelo Conselho de Administração"
+      description: "A PSC deve ser aprovada pelo Conselho de Administração ou por órgão de deliberação colegiado equivalente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-28
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, VII"
+      name: "Revisão periódica"
+      description: "Revisar e atualizar a PSC periodicamente e sempre que necessário."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-29
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, VIII"
+      name: "Disponibilidade à ANEEL"
+      description: "Manter a PSC disponível à ANEEL sempre que solicitada, com os documentos complementares e os comprovantes de aprovação interna."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-30
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, p.ú."
+      name: "Governança de grupo econômico"
+      description: "Quando a estrutura de governança da PSC for única para o grupo econômico, identificar o agente responsável, em níveis e funções, quando aplicável."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-22
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-31
+      assessable: false
+      depth: 1
+      ref_id: "CAP-IV"
+      name: "Cap. IV — Notificação e compartilhamento de incidentes (Art. 6º, 7º)"
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-32
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6º"
+      name: "Notificação de incidentes de maior impacto"
+      description: "Notificar a equipe de coordenação setorial designada os incidentes de maior impacto que afetem substancialmente a segurança das instalações, a operação, os serviços aos usuários ou os dados, incluindo a análise da causa e do impacto e as ações de mitigação, assim que o agente tiver ciência do incidente e de sua dimensão. A notificação não exclui outras obrigações legais (ex.: LGPD/ANPD)."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-31
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-33
+      assessable: true
+      depth: 2
+      ref_id: "Art. 7º"
+      name: "Compartilhamento de informações sobre ameaças"
+      description: "Adotar procedimento de compartilhamento de informações sobre ameaças e demais informações de segurança cibernética, de forma sigilosa e não discriminatória, facultado o anonimato, não restrito às empresas do mesmo grupo societário e sem abranger informações críticas ou que comprometam a segurança do agente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-31
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-34
+      assessable: false
+      depth: 1
+      ref_id: "CAP-V"
+      name: "Cap. V — Continuidade, registros e comprovação à ANEEL (Art. 8º, 9º)"
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-35
+      assessable: true
+      depth: 2
+      ref_id: "Art. 8º"
+      name: "Responsabilidade pela segurança e continuidade"
+      description: "Assumir a responsabilidade pela segurança das instalações e pela continuidade na prestação do serviço; a adoção e a execução da PSC e demais condutas exigidas são ônus do agente."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-34
+    - urn: urn:intuitem:risk:req_node:aneel-964-2021:node-36
+      assessable: true
+      depth: 2
+      ref_id: "Art. 9º"
+      name: "Registros e comprovação à ANEEL"
+      description: "Manter registros e enviar à ANEEL ou à equipe de coordenação setorial designada, quando solicitados: os resultados dos modelos de maturidade aplicados; os riscos cibernéticos identificados e a respectiva forma de tratamento; e os dados das equipes de prevenção, tratamento e resposta a incidentes."
+      parent_urn: urn:intuitem:risk:req_node:aneel-964-2021:node-34

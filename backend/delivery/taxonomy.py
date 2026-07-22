@@ -88,7 +88,7 @@ TAXONOMY = {
         "label": "Energia & Utilities",
         "icon": "fa-bolt",
         "subsectors": [
-            {"key": "power", "label": "Energia elétrica", "modules": ["lgpd"], "regulators": ["ANEEL"]},
+            {"key": "power", "label": "Energia elétrica", "modules": ["lgpd", "aneel"], "regulators": ["ANEEL"], "norm": "REN ANEEL 964/2021"},
             {"key": "oil_gas", "label": "Óleo & gás", "modules": ["lgpd"], "regulators": ["ANP"]},
             {"key": "sanitation", "label": "Saneamento", "modules": ["lgpd"], "regulators": ["ANA"]},
             {"key": "mining", "label": "Mineração", "modules": ["lgpd"], "regulators": ["ANM"]},

@@ -1,0 +1,33 @@
+key: mod-aneel
+name: "Módulo regulatório — ANEEL (setor de energia elétrica)"
+# Segurança cibernética do setor elétrico: Resolução Normativa ANEEL nº 964/2021,
+# que estabelece os requisitos e diretrizes para a Política de Segurança Cibernética
+# (PSC) dos agentes de geração, transmissão, distribuição e comercialização.
+tasks:
+  - phase_key: p1_diagnostico
+    key: aneel_diagnostico
+    name: "Diagnóstico de segurança cibernética (REN ANEEL 964/2021)"
+    description: "Avaliar a aderência à Res. Normativa ANEEL 964/2021: existência e conteúdo mínimo da Política de Segurança Cibernética (PSC), estrutura de governança, controles mínimos, gestão/comunicação de incidentes e continuidade dos serviços de energia."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: aneel_psc_governanca
+    name: "Política de Segurança Cibernética + governança (ANEEL)"
+    description: "Formalizar/revisar a Política de Segurança Cibernética (PSC) com o conteúdo mínimo exigido, aprovada pela instância de governança, e designar o responsável/ponto focal de segurança cibernética com papéis e responsabilidades definidos."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: aneel_incidentes_continuidade
+    name: "Gestão de incidentes + continuidade dos serviços (ANEEL)"
+    description: "Endereçar o processo de gestão, registro, resposta e comunicação de incidentes de segurança cibernética, a continuidade e a resiliência dos ativos/serviços de energia elétrica e os requisitos aplicáveis às infraestruturas críticas do setor elétrico."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20
