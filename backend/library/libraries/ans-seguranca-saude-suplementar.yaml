@@ -1,0 +1,291 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:ans-seguranca-saude-suplementar
+locale: pt
+ref_id: ANS-SAUDE-SUPLEMENTAR
+name: "Framework de Gap-Assessment de Segurança e Privacidade para Operadoras de Saúde (ANS)"
+description: "Requisitos avaliáveis de segurança da informação e privacidade para operadoras de planos de saúde (ANS), combinando o Componente de Segurança e Privacidade do padrão TISS, normas ANS de governança e gestão de riscos (RN 518/2022, RN 501/2022) e a base LGPD/ANPD para dado sensível de saúde (incl. Res. CD/ANPD 15/2024, comunicação de incidentes), com a ISO 27799 como referência técnica. A ANS não possui norma de cibersegurança única consolidada — este framework combina as fontes aplicáveis; requisitos oriundos de boa prática estão explicitamente rotulados."
+copyright: Construido a partir de conteudo publico oficial (TISS/ANS, LGPD/ANPD, ISO 27799) por Suricatoos. A ANS nao possui norma cyber unica; requer validacao de compliance antes de uso regulatorio.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:ans-seguranca-saude-suplementar
+    ref_id: ANS-SAUDE-SUPLEMENTAR
+    name: "Framework de Gap-Assessment de Segurança e Privacidade para Operadoras de Saúde (ANS)"
+    description: "Requisitos avaliáveis de segurança da informação e privacidade para operadoras de planos de saúde (ANS), combinando o Componente de Segurança e Privacidade do padrão TISS, normas ANS de governança e gestão de riscos (RN 518/2022, RN 501/2022) e a base LGPD/ANPD para dado sensível de saúde (incl. Res. CD/ANPD 15/2024, comunicação de incidentes), com a ISO 27799 como referência técnica. A ANS não possui norma de cibersegurança única consolidada — este framework combina as fontes aplicáveis; requisitos oriundos de boa prática estão explicitamente rotulados."
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+      assessable: false
+      depth: 1
+      ref_id: "TISS-SEG"
+      name: "Componente de Segurança e Privacidade do Padrão TISS"
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-1
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.37/1"
+      name: "Autenticação prévia de todo usuário"
+      description: "Todo usuário deve ser identificado e autenticado antes de qualquer acesso a dados que permitam identificar o beneficiário ou a funcionalidades do sistema. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-2
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.38"
+      name: "Método de autenticação admitido"
+      description: "O método de autenticação deve ser ao menos um de: usuário+senha, certificado digital, biometria ou OTP. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-3
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.41"
+      name: "Identidade única e não-exclusão de usuário"
+      description: "Cada usuário tem identidade única vinculada a documento pessoal unívoco, com unicidade validada; usuário que já operou não pode ser excluído, apenas inativado (e inativo não acessa). Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-4
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.86"
+      name: "Segundo fator de autenticação (2Fed)"
+      description: "Quando o método for usuário+senha, aplicar segundo fator por código enviado a e-mail/celular (mín. no primeiro acesso do dia). Recomendado (vigência dez/2025)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-5
+      assessable: true
+      depth: 2
+      ref_id: "TISS Org.21-22/142"
+      name: "Certificado ICP-Brasil e assinatura XAdES"
+      description: "Uso de certificado ICP-Brasil (e-CNPJ da instituição ou e-CPF) para assinatura digital garantindo integridade, origem e não-repúdio, no padrão XAdES enveloped conforme política DOC-ICP-15.03. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-6
+      assessable: true
+      depth: 2
+      ref_id: "TISS Org.145/req.12"
+      name: "Validação de assinatura e revogação de certificado"
+      description: "Validar a assinatura na geração e na recepção, verificando a cadeia de certificação e o status de revogação via LCR (RFC 5280) ou OCSP (RFC 2560); recusar certificado revogado ou fora da validade. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-7
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.71"
+      name: "TLS mínimo 1.2 na comunicação"
+      description: "Utilizar exclusivamente o protocolo TLS em versão mínima 1.2 nas comunicações. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-8
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.46/35"
+      name: "Criptografia mínima de 256 bits em sessão e canal"
+      description: "Sessão usuário-aplicação com autenticação, integridade e confidencialidade, empregando criptografia de no mínimo 256 bits; credenciais nunca trafegam em texto claro. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-9
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.50"
+      name: "Controle de acesso baseado em papéis (RBAC)"
+      description: "Gerenciar usuários e papéis/perfis (RBAC); um usuário pode ter um ou mais papéis, e o acesso é limitado ao que o papel autoriza. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-10
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.57/58"
+      name: "Trilhas de auditoria íntegras e protegidas"
+      description: "Gerar trilhas de auditoria das ações sobre dados pessoais e sensíveis, com garantia de integridade e proteção contra acesso não autorizado. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-11
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.85"
+      name: "Log estruturado imutável por 180 dias, acessível à ANS e ao titular"
+      description: "Registrar logs completos e estruturados (usuário/sistema, data-hora, dados acessados, tipo de operação e finalidade), imutáveis e disponíveis para auditoria da ANS e do titular por no mínimo 180 dias, sem afastar prazos legais de guarda de prontuário. Obrigatório (vigência dez/2025)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-12
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.84"
+      name: "Log de acessos e tentativas por 180 dias"
+      description: "Registrar log de acessos e tentativas de acesso, com armazenamento por no mínimo 180 dias. Obrigatório (vigência dez/2025; substituiu o req.70 de 90 dias)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-13
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.73/74"
+      name: "Proteções administrativas, técnicas e físicas dos dados"
+      description: "Operadoras e prestadores devem implementar proteções administrativas, técnicas e físicas contra acesso não autorizado a dados pessoais e sensíveis identificáveis. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-14
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.77"
+      name: "Armazenamento protegido de credenciais"
+      description: "Senhas armazenadas codificadas por algoritmo criptográfico de no mínimo 256 bits; templates biométricos e sementes de OTP também protegidos. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-15
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.67/81/82"
+      name: "Política de senha forte, rotação e histórico"
+      description: "Senha com mínimo de 8 caracteres (maiúscula, minúscula, número e símbolo), troca em período menor ou igual a 90 dias, e nova senha diferente das 10 últimas. Obrigatório (81/82 vigência dez/2025)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-16
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.83/69"
+      name: "Bloqueio de sessão por inatividade e por tentativas"
+      description: "Bloqueio de sessão por inatividade em até 10 minutos com reautenticação (não desabilitável pelo usuário) e bloqueio de conta após no máximo 5 tentativas inválidas. Obrigatório (83 vigência dez/2025)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-17
+      assessable: true
+      depth: 2
+      ref_id: "TISS req.72"
+      name: "Restabelecimento de troca eletrônica em até 48h"
+      description: "Interrupção da troca eletrônica de informações deve ser resolvida em até 48 horas corridas, salvo força maior, preservando a disponibilidade dos dados. Obrigatório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-0
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+      assessable: false
+      depth: 1
+      ref_id: "ANS-RISCO"
+      name: "Governança, Gestão de Riscos e Sigilo dos Dados na Saúde Suplementar (Normas ANS)"
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-19
+      assessable: true
+      depth: 2
+      ref_id: "RN 518 Art.4-5"
+      name: "Governança corporativa formalizada"
+      description: "Adotar práticas mínimas de governança (transparência, equidade, prestação de contas e responsabilidade corporativa), com políticas formalizadas e avaliação periódica. Vinculante (fins de solvência)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-20
+      assessable: true
+      depth: 2
+      ref_id: "RN 518 Art.9,I"
+      name: "Gestão de riscos com risco cyber como risco operacional"
+      description: "Gerenciar riscos de subscrição, crédito, mercado, legal e operacional nos níveis estratégico, tático e operacional. Risco cibernético/de informação NÃO é categoria explícita na norma — deve ser mapeado como subconjunto do risco operacional."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-21
+      assessable: true
+      depth: 2
+      ref_id: "RN 518 Art.7,IV"
+      name: "Testes de segurança e conciliação em sistemas eletrônicos"
+      description: "Executar testes de segurança e conciliação para os sistemas de informação, em especial os mantidos em meio eletrônico, como controle interno de integridade. Vinculante; único dispositivo da RN 518 tangencial à segurança de sistemas."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-22
+      assessable: true
+      depth: 2
+      ref_id: "RN 501 Arts.14-22"
+      name: "Sigilo, privacidade e confidencialidade dos dados de atenção à saúde"
+      description: "Assegurar o direito individual ao sigilo, privacidade e confidencialidade dos dados de atenção à saúde; informações assistenciais identificáveis não podem ser divulgadas ou fornecidas a terceiros salvo previsão legal. Vinculante (a RN remete os controles técnicos ao Componente TISS)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-23
+      assessable: true
+      depth: 2
+      ref_id: "RN 501 Art.18"
+      name: "Disponibilidade e continuidade sem prejuízo ao atendimento"
+      description: "Interrupções de serviço não podem prejudicar o atendimento e devem garantir a segurança e a privacidade dos dados, assegurando disponibilidade/continuidade. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-24
+      assessable: true
+      depth: 2
+      ref_id: "RN 509 (PIN-SS)"
+      name: "Proteção da informação individualizada no PIN-SS"
+      description: "Disponibilizar ao beneficiário, de forma digital, dados cadastrais e histórico de utilização com proteção das informações individualizadas. Vinculante; foco em transparência, com segurança acessória."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-25
+      assessable: true
+      depth: 2
+      ref_id: "RN 623/2024"
+      name: "Rastreabilidade e retenção de registros de atendimento"
+      description: "Garantir rastreabilidade das demandas do beneficiário (número de protocolo padrão ANS, acompanhamento online) e armazenamento dos registros de solicitações por prazos definidos. Vinculante; segurança da informação é elemento acessório."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-26
+      assessable: true
+      depth: 2
+      ref_id: "RN 507/2022 alt. RN 630/2025"
+      name: "Maturidade em segurança da informação via acreditação (voluntário)"
+      description: "Programa de Acreditação de Operadoras contempla padrões para proteger confidencialidade, disponibilidade e integridade das informações em saúde. Voluntário (diferencial de maturidade, não obrigação universal; texto integral do dispositivo a verificar)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-18
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+      assessable: false
+      depth: 1
+      ref_id: "LGPD-SAUDE"
+      name: "Proteção de Dados Pessoais Sensíveis de Saúde (LGPD/ANPD + ISO 27799)"
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-28
+      assessable: true
+      depth: 2
+      ref_id: "LGPD Art.5º,II"
+      name: "Inventário e classificação de dados sensíveis de saúde"
+      description: "Dados referentes à saúde, vida sexual, genéticos ou biométricos são dados pessoais sensíveis; a operadora deve inventariar e classificar todos os fluxos que os tratam. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-29
+      assessable: true
+      depth: 2
+      ref_id: "LGPD Art.11"
+      name: "Base legal específica para tratamento de dado de saúde"
+      description: "Cada operação com dado sensível de saúde deve ter base legal do rol taxativo do art. 11 mapeada e documentada (ex.: consentimento destacado, ou tutela da saúde por profissionais/serviços de saúde), não podendo recorrer ao art. 7º. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-30
+      assessable: true
+      depth: 2
+      ref_id: "LGPD Art.11 §4º"
+      name: "Vedação de compartilhamento de dado de saúde para vantagem econômica"
+      description: "É vedada a comunicação ou uso compartilhado de dados sensíveis de saúde entre controladores com objetivo de vantagem econômica, salvo exceções de prestação de serviços de saúde/assistência. Contratos com rede credenciada, resseguro e corretoras devem ser revisados. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-31
+      assessable: true
+      depth: 2
+      ref_id: "LGPD Art.41"
+      name: "Encarregado (DPO) indicado e publicado"
+      description: "Indicar encarregado pelo tratamento de dados, com identidade e contato divulgados publicamente (preferencialmente no site); operadora ANS não se enquadra na dispensa de pequeno porte. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-32
+      assessable: true
+      depth: 2
+      ref_id: "LGPD Art.46"
+      name: "Medidas de segurança técnicas e administrativas (by design)"
+      description: "Adotar medidas de segurança técnicas e administrativas aptas a proteger os dados contra acessos não autorizados e situações acidentais/ilícitas, observadas desde a concepção até a execução. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-33
+      assessable: true
+      depth: 2
+      ref_id: "LGPD Art.38"
+      name: "Relatório de Impacto (RIPD/DPIA) para dado sensível em larga escala"
+      description: "Elaborar RIPD descrevendo tipos de dados, metodologia de coleta/segurança e medidas de mitigação de risco; a ANPD pode determinar sua elaboração, inclusive para dados sensíveis. Vinculante quando requisitado; boa prática para tratamento em larga escala."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-34
+      assessable: true
+      depth: 2
+      ref_id: "Res. ANPD 15/2024 Art.5º"
+      name: "Critério de risco ou dano relevante (dado de saúde = gatilho)"
+      description: "Avaliar se o incidente afeta significativamente direitos fundamentais e envolve categoria qualificada; dado pessoal sensível (saúde) satisfaz o critério, disparando o dever de comunicação. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-35
+      assessable: true
+      depth: 2
+      ref_id: "Res. ANPD 15/2024 Art.6º"
+      name: "Notificação de incidente à ANPD em 3 dias úteis"
+      description: "Comunicar incidente à ANPD em até 3 dias úteis do conhecimento, via formulário eletrônico pelo encarregado, com o conteúdo mínimo dos incisos I-XII (natureza dos dados, nº de titulares, medidas, causa-raiz etc.). Vinculante (via ANPD, não ANS)."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-36
+      assessable: true
+      depth: 2
+      ref_id: "Res. ANPD 15/2024 Art.9º"
+      name: "Notificação individualizada ao titular em 3 dias úteis"
+      description: "Comunicar o titular em até 3 dias úteis, em linguagem simples, de forma direta e individualizada (ou divulgação pública por no mínimo 3 meses se inviável), informando natureza dos dados, riscos e medidas de mitigação. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-37
+      assessable: true
+      depth: 2
+      ref_id: "Res. ANPD 15/2024 Art.10"
+      name: "Registro de incidentes retido por no mínimo 5 anos"
+      description: "Manter registro de todos os incidentes (mesmo os não comunicados) por no mínimo 5 anos, contendo data, circunstâncias, natureza dos dados, nº de titulares, avaliação de risco e medidas adotadas. Vinculante."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-38
+      assessable: true
+      depth: 2
+      ref_id: "boa prática (Guia ANPD 2021)"
+      name: "Controles técnicos de segurança operacionalizando o art. 46"
+      description: "Implementar PSI, MFA em bases com dados pessoais, criptografia/pseudonimização, backups, hardening, TLS/HTTPS, firewall/WAF, patching, antimalware e treinamento. Boa prática (Guia ANPD) que operacionaliza o dever legal do art. 46."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27
+    - urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-39
+      assessable: true
+      depth: 2
+      ref_id: "boa prática (ISO 27799)"
+      name: "SGSI setorial alinhado à ISO 27799/27002"
+      description: "Mapear e implementar controles de segurança da informação especializados para dados de saúde (confidencialidade, integridade e disponibilidade) conforme ABNT NBR ISO 27799:2019 sobre ISO/IEC 27002. Boa prática (ISO 27799), norma não-certificável, referência técnica."
+      parent_urn: urn:intuitem:risk:req_node:ans-seguranca-saude-suplementar:node-27

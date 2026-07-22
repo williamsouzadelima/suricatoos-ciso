@@ -23,7 +23,8 @@
 		{ key: 'bacen', label: 'BACEN' },
 		{ key: 'anbima', label: 'ANBIMA (Deveres Básicos)' },
 		{ key: 'cvm', label: 'CVM 21' },
-		{ key: 'susep', label: 'SUSEP 638' }
+		{ key: 'susep', label: 'SUSEP 638' },
+		{ key: 'ans', label: 'ANS / TISS' }
 	];
 
 	const taxonomy = $derived((data.taxonomy ?? {}) as Record<string, any>);

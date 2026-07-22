@@ -44,7 +44,7 @@ TAXONOMY = {
         "label": "Saúde",
         "icon": "fa-heart-pulse",
         "subsectors": [
-            {"key": "health_plan", "label": "Operadora de saúde", "modules": ["lgpd"], "regulators": ["ANS"]},
+            {"key": "health_plan", "label": "Operadora de saúde", "modules": ["lgpd", "ans"], "regulators": ["ANS"]},
             {"key": "hospital", "label": "Hospital", "modules": ["lgpd"], "regulators": ["ANVISA"]},
             {"key": "clinic", "label": "Clínica / consultório", "modules": ["lgpd"], "regulators": []},
             {"key": "lab", "label": "Laboratório / diagnóstico", "modules": ["lgpd"], "regulators": ["ANVISA"]},

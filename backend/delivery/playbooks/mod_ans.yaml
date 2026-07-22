@@ -1,0 +1,34 @@
+key: mod-ans
+name: "Módulo regulatório — ANS (operadora de saúde suplementar)"
+# Segurança da informação e privacidade na saúde suplementar: Componente de Segurança
+# e Privacidade do padrão TISS (ANS), normas ANS de gestão de riscos e a base LGPD/ANPD
+# para dado sensível de saúde. A ANS não tem uma resolução única de cibersegurança —
+# este módulo combina as fontes aplicáveis à operadora.
+tasks:
+  - phase_key: p1_diagnostico
+    key: ans_diagnostico
+    name: "Diagnóstico de segurança e privacidade (ANS / TISS / LGPD saúde)"
+    description: "Avaliar a aderência aos requisitos de segurança e privacidade da saúde suplementar: Componente de Segurança e Privacidade do padrão TISS, normas ANS de gestão de riscos e base LGPD/ANPD para dado sensível de saúde."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: ans_seguranca_privacidade
+    name: "Segurança e privacidade do dado de saúde (TISS + LGPD)"
+    description: "Formalizar/revisar os controles de segurança e privacidade exigidos pelo TISS (autenticação, transmissão segura/criptografia, controle de acesso, trilhas de auditoria, sigilo) e a base LGPD para dado sensível de saúde (base legal, encarregado, medidas de segurança)."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: ans_continuidade_incidentes
+    name: "Gestão de riscos, continuidade e incidentes (ANS)"
+    description: "Endereçar a gestão de riscos corporativos da operadora, o plano de continuidade e o processo de resposta e notificação de incidentes (à ANPD e às partes afetadas), com guarda documental dos dados de saúde conforme os prazos aplicáveis."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20

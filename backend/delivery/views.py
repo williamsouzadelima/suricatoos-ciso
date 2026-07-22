@@ -286,6 +286,7 @@ class EngagementViewSet(BaseModelViewSet):
         "anbima": "anbima-deveres-basicos-ciber",
         "cvm": "cvm-21-2021",
         "susep": "susep-638-2021",
+        "ans": "ans-seguranca-saude-suplementar",
         "lgpd": "lgpd",
     }
 
