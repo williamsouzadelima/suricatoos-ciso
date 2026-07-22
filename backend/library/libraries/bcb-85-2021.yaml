@@ -1,0 +1,302 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:bcb-85-2021
+locale: pt
+ref_id: BCB-85-2021
+name: "Res. BCB nº 85/2021 — Segurança Cibernética e Nuvem (Instituições de Pagamento)"
+description: "Requisitos avaliáveis da Resolução BCB nº 85, de 08/04/2021, que dispõe sobre a política de segurança cibernética e sobre os requisitos para a contratação de serviços de processamento e armazenamento de dados e de computação em nuvem observados pelas instituições autorizadas pelo Banco Central do Brasil não sujeitas à Res. CMN 4.893/2021. Reflete a redação vigente em jul/2026, consolidada com as alterações das Res. BCB 368/2024 (escopo do Art. 1º: instituição de pagamento, CTVM, DTVM e corretora de câmbio; revogação do Art. 24), 538/2025 (Art. 3º-A RSFN/Pix/STR, Art. 22-A testes de intrusão, Art. 22-B) e 552/2026 (inclusão das PSAVs). A literalidade verbatim de alguns dispositivos inseridos/ajustados pelas Res. 368/2024 e 538/2025 deve ser conferida na versão consolidada oficial do BCB antes de uso regulatório."
+copyright: Construido a partir de conteudo publico oficial (Banco Central do Brasil) por Suricatoos. Reflete a redacao vigente (consolidada c/ Res. BCB 368/2024, 538/2025 e 552/2026); requer validacao de compliance e conferencia da versao consolidada oficial antes de uso regulatorio.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:bcb-85-2021
+    ref_id: BCB-85-2021
+    name: "Res. BCB nº 85/2021 — Segurança Cibernética e Nuvem (Instituições de Pagamento)"
+    description: "Requisitos avaliáveis da Resolução BCB nº 85, de 08/04/2021, que dispõe sobre a política de segurança cibernética e sobre os requisitos para a contratação de serviços de processamento e armazenamento de dados e de computação em nuvem observados pelas instituições autorizadas pelo Banco Central do Brasil não sujeitas à Res. CMN 4.893/2021. Reflete a redação vigente em jul/2026, consolidada com as alterações das Res. BCB 368/2024 (escopo do Art. 1º: instituição de pagamento, CTVM, DTVM e corretora de câmbio; revogação do Art. 24), 538/2025 (Art. 3º-A RSFN/Pix/STR, Art. 22-A testes de intrusão, Art. 22-B) e 552/2026 (inclusão das PSAVs). A literalidade verbatim de alguns dispositivos inseridos/ajustados pelas Res. 368/2024 e 538/2025 deve ser conferida na versão consolidada oficial do BCB antes de uso regulatório."
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-0
+      assessable: false
+      depth: 1
+      ref_id: "CAP-I"
+      name: "Cap. I — Objeto, aplicabilidade e proporcionalidade (Art. 1º, 2º)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-1
+      assessable: true
+      depth: 2
+      ref_id: "Art. 2º"
+      name: "Existência da política"
+      description: "Implementar e manter política de segurança cibernética formulada segundo princípios e diretrizes que assegurem a confidencialidade, a integridade e a disponibilidade dos dados e dos sistemas de informação utilizados."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-0
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-2
+      assessable: true
+      depth: 2
+      ref_id: "Art. 2º, § 1º"
+      name: "Proporcionalidade da política"
+      description: "A política deve ser compatível com: o porte, o perfil de risco e o modelo de negócio; a natureza das operações e a complexidade dos produtos, serviços, atividades e processos; e a sensibilidade dos dados e informações sob responsabilidade da instituição."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-0
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-3
+      assessable: true
+      depth: 2
+      ref_id: "Art. 2º, §§ 2º-3º"
+      name: "Política única de conglomerado"
+      description: "Instituição de conglomerado prudencial pode adotar a política única do conglomerado, desde que compatível; a opção por não constituir política própria deve ser formalizada em reunião do conselho de administração (ou, na ausência, da diretoria/alta administração)."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-0
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+      assessable: false
+      depth: 1
+      ref_id: "CAP-II"
+      name: "Cap. II — Conteúdo mínimo da política de segurança cibernética (Art. 3º)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-5
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, I"
+      name: "Objetivos de segurança"
+      description: "Definir na política os objetivos de segurança cibernética, considerando a capacidade da instituição de prevenir, detectar e reduzir a vulnerabilidade a incidentes (§ 1º)."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-6
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, II"
+      name: "Procedimentos e controles"
+      description: "Definir os procedimentos e controles adotados para reduzir a vulnerabilidade a incidentes e atender aos objetivos de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-7
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, § 2º"
+      name: "Controles mínimos"
+      description: "Os procedimentos e controles devem contemplar, no mínimo: autenticação; criptografia; prevenção e detecção de intrusão; prevenção de vazamento de informações; realização periódica de testes e varreduras para detecção de vulnerabilidades; proteção contra software malicioso; mecanismos de rastreabilidade; controles de acesso e segmentação da rede; e manutenção de cópias de segurança (backups)."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-8
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, § 3º"
+      name: "Desenvolvimento seguro e novas tecnologias"
+      description: "Aplicar os procedimentos e controles ao desenvolvimento de sistemas de informação seguros e à adoção de novas tecnologias."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-9
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, III"
+      name: "Proteção das informações sensíveis"
+      description: "Prever controles específicos, inclusive de rastreabilidade da informação, que busquem assegurar a segurança das informações sensíveis."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-10
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, IV"
+      name: "Registro e análise de incidentes"
+      description: "Prever o registro, a análise da causa e do impacto e o controle dos efeitos dos incidentes relevantes, contemplando também as informações recebidas de prestadores de serviços terceiros (§ 4º)."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-11
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, V"
+      name: "Diretrizes (continuidade, terceiros, classificação, relevância)"
+      description: "Definir diretrizes para: elaboração de cenários de incidentes nos testes de continuidade; procedimentos e controles de prevenção/tratamento de incidentes por prestadores terceiros (compatíveis com os da instituição, § 5º); classificação dos dados quanto à relevância; e parâmetros para avaliar a relevância dos incidentes."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-12
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, VI"
+      name: "Disseminação da cultura de segurança"
+      description: "Prever mecanismos de disseminação da cultura de segurança cibernética: capacitação e avaliação periódica de funcionários; orientação a clientes e usuários sobre precauções; e comprometimento da alta administração com a melhoria contínua."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-13
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º, VII"
+      name: "Compartilhamento de informações"
+      description: "Prever iniciativas de compartilhamento de informações sobre os incidentes relevantes com as demais instituições de pagamento e autorizadas pelo BCB."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-4
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-14
+      assessable: false
+      depth: 1
+      ref_id: "CAP-III"
+      name: "Cap. III — Requisitos técnicos RSFN/Pix/STR e antifraude (Art. 3º-A — Res. BCB 538/2025)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-15
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º-A, I"
+      name: "Segurança na comunicação eletrônica na RSFN"
+      description: "Adotar os requisitos adicionais de segurança para a comunicação eletrônica de dados na Rede do Sistema Financeiro Nacional (RSFN), incluindo autenticação multifator para acessos administrativos, isolamento físico e lógico dos ambientes do Pix e do STR, monitoramento de credenciais e certificados e validação da integridade fim a fim das transações. (Verificar a literalidade dos subitens na versão consolidada oficial.)"
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-14
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-16
+      assessable: true
+      depth: 2
+      ref_id: "Art. 3º-A, II"
+      name: "Prevenção a fraudes na conexão ao SMF"
+      description: "Adotar controles de prevenção, detecção e resposta a fraudes para a conexão como participante do Sistema de Mensageria Financeira (SMF), de forma compatível com a regulação em vigor e os requisitos técnicos da RSFN."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-14
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-17
+      assessable: false
+      depth: 1
+      ref_id: "CAP-IV"
+      name: "Cap. IV — Divulgação, aprovação, revisão e governança (Art. 4º, 5º, 7º, 9º, 10)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-18
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º"
+      name: "Divulgação interna e a terceiros"
+      description: "Divulgar a política a funcionários e a prestadores de serviços terceiros, em linguagem clara e acessível e em nível de detalhe compatível com as funções e com a sensibilidade das informações."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-17
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-19
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º"
+      name: "Resumo público da política"
+      description: "Divulgar ao público um resumo contendo as linhas gerais da política de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-17
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-20
+      assessable: true
+      depth: 2
+      ref_id: "Art. 7º"
+      name: "Diretor responsável"
+      description: "Indicar diretor responsável pela política de segurança cibernética e pela execução do plano de ação e resposta a incidentes (pode exercer outras funções, exceto as que configurem conflito de interesses)."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-17
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-21
+      assessable: true
+      depth: 2
+      ref_id: "Art. 9º"
+      name: "Aprovação pela alta administração"
+      description: "A política e o plano de ação e resposta a incidentes devem ser aprovados pelo conselho de administração ou, na sua ausência, pela diretoria da instituição."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-17
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-22
+      assessable: true
+      depth: 2
+      ref_id: "Art. 10"
+      name: "Documentação e revisão anual"
+      description: "Documentar a política e o plano de ação e resposta a incidentes e revisá-los no mínimo anualmente."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-17
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-23
+      assessable: false
+      depth: 1
+      ref_id: "CAP-V"
+      name: "Cap. V — Plano de resposta a incidentes e continuidade (Art. 6º, 19, 20, 21)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-24
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6º"
+      name: "Plano de ação e resposta a incidentes"
+      description: "Estabelecer plano de ação e resposta a incidentes abrangendo, no mínimo: ações para ajustar as estruturas organizacional e operacional; as rotinas, procedimentos, controles e tecnologias de prevenção e resposta; e a área responsável pelo registro e controle dos efeitos de incidentes relevantes."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-23
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-25
+      assessable: true
+      depth: 2
+      ref_id: "Art. 19"
+      name: "Continuidade — políticas"
+      description: "As políticas de gerenciamento de risco devem contemplar o tratamento dos incidentes relevantes, os procedimentos em caso de interrupção de serviços relevantes contratados (com cenários de substituição do prestador e retomada da operação) e os cenários de incidentes considerados nos testes de continuidade."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-23
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-26
+      assessable: true
+      depth: 2
+      ref_id: "Art. 20"
+      name: "Continuidade — procedimentos e crise"
+      description: "Os procedimentos de gerenciamento de risco devem contemplar a mitigação dos efeitos de incidentes relevantes e de interrupções, o prazo de retomada/normalização e a comunicação tempestiva ao BCB de incidentes e interrupções que configurem situação de crise; a instituição deve estabelecer e documentar os critérios que configuram a situação de crise (parágrafo único)."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-23
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-27
+      assessable: true
+      depth: 2
+      ref_id: "Art. 21"
+      name: "Acompanhamento e controle da eficácia"
+      description: "Estabelecer mecanismos de acompanhamento e controle da eficácia da política, do plano e dos requisitos de contratação: processos, testes e trilhas de auditoria; métricas e indicadores; identificação e correção de deficiências; considerando as notificações de subcontratação (art. 17, VI) e submetidos a testes periódicos pela auditoria interna, quando aplicável."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-23
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-28
+      assessable: false
+      depth: 1
+      ref_id: "CAP-VI"
+      name: "Cap. VI — Testes de intrusão (Art. 22-A — Res. BCB 538/2025)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-29
+      assessable: true
+      depth: 2
+      ref_id: "Art. 22-A"
+      name: "Testes de intrusão (pentest) anuais"
+      description: "Realizar testes de intrusão com periodicidade mínima anual, executados com independência e imparcialidade por pessoa ou empresa especializada contratada (sem prejuízo de testes por equipes próprias), com resultados documentados, incluindo as vulnerabilidades identificadas e os planos de ação para correção."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-28
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-30
+      assessable: false
+      depth: 1
+      ref_id: "CAP-VII"
+      name: "Cap. VII — Compartilhamento, relatório anual e guarda de documentos (Art. 22, 8º, 23)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-31
+      assessable: true
+      depth: 2
+      ref_id: "Art. 22"
+      name: "Iniciativas de compartilhamento de informações"
+      description: "Desenvolver iniciativas de compartilhamento de informações sobre os incidentes relevantes (resguardados o sigilo e a livre concorrência), abrangendo as informações recebidas de prestadores terceiros e disponibilizando-as ao Banco Central do Brasil."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-30
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-32
+      assessable: true
+      depth: 2
+      ref_id: "Art. 8º"
+      name: "Relatório anual de incidentes"
+      description: "Elaborar relatório anual sobre a implementação do plano de ação e resposta a incidentes (data-base 31 de dezembro), contendo a efetividade das ações, o resumo dos resultados, os incidentes relevantes ocorridos e os resultados dos testes de continuidade, submetido ao conselho de administração (ou diretoria) até 31 de março do ano seguinte."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-30
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-33
+      assessable: true
+      depth: 2
+      ref_id: "Art. 23"
+      name: "Guarda de documentos por 5 anos"
+      description: "Manter à disposição do Banco Central, pelo prazo de cinco anos, os documentos relativos à política, ata da opção de conglomerado, plano de resposta, relatório anual, procedimentos de contratação, documentação de serviços no exterior, contratos, dados dos mecanismos de acompanhamento e critérios de situação de crise."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-30
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+      assessable: false
+      depth: 1
+      ref_id: "CAP-VIII"
+      name: "Cap. VIII — Contratação de processamento de dados e nuvem (Art. 11-17, 22-B, 25)"
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-35
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11"
+      name: "Terceirização no gerenciamento de risco"
+      description: "Assegurar que as políticas, estratégias e estruturas de gerenciamento de risco — especialmente os critérios de decisão sobre terceirização — contemplem a contratação de serviços relevantes de processamento/armazenamento de dados e de computação em nuvem, no País ou no exterior."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-36
+      assessable: true
+      depth: 2
+      ref_id: "Art. 12"
+      name: "Procedimentos prévios à contratação"
+      description: "Adotar, previamente à contratação de serviços relevantes, procedimentos que contemplem práticas de governança e gestão proporcionais ao risco e a verificação da capacidade do prestador (conformidade legal, acesso da instituição aos dados, confidencialidade/integridade/disponibilidade/recuperação, certificações, acesso a relatórios de auditoria independente, monitoramento, segregação dos dados e controles de acesso), documentando o processo e mantendo recursos e competências para a gestão."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-37
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14"
+      name: "Responsabilidade da contratante"
+      description: "Responsabilizar-se pela confiabilidade, integridade, disponibilidade, segurança e confidencialidade dos serviços contratados, bem como pela conformidade com a legislação e a regulamentação em vigor."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-38
+      assessable: true
+      depth: 2
+      ref_id: "Art. 15"
+      name: "Comunicação prévia ao BCB"
+      description: "Comunicar previamente ao Banco Central a contratação de serviços relevantes (nome do prestador, serviços a contratar e, no exterior, países e regiões), em até 10 dias após a contratação, bem como as alterações contratuais que modifiquem essas informações, em até 10 dias após a alteração."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-39
+      assessable: true
+      depth: 2
+      ref_id: "Art. 16"
+      name: "Serviços prestados no exterior"
+      description: "Na contratação no exterior, assegurar convênio de troca de informações entre o BCB e as autoridades supervisoras, que a prestação não prejudique o funcionamento da instituição nem a atuação do BCB, a definição prévia dos países/regiões e alternativas de continuidade; na ausência de convênio, solicitar autorização ao BCB com antecedência mínima de 60 dias, documentando a comprovação."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-40
+      assessable: true
+      depth: 2
+      ref_id: "Art. 17"
+      name: "Cláusulas contratuais obrigatórias"
+      description: "Prever no contrato: indicação de países/regiões; medidas de segurança na transmissão e armazenamento; manutenção da segregação e dos controles de acesso; na extinção, transferência e posterior eliminação dos dados; acesso da contratante às informações/certificações/relatórios; notificação de subcontratação de serviços relevantes; acesso do BCB; adoção de medidas por determinação do BCB; informação permanente sobre limitações; e, em regime de resolução, acesso pleno e aviso prévio mínimo de 30 dias para interrupção."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-41
+      assessable: true
+      depth: 2
+      ref_id: "Art. 22-B"
+      name: "Serviço de comunicação na RSFN é relevante"
+      description: "Considerar o serviço de comunicação eletrônica de dados na RSFN como serviço relevante para fins dos requisitos de contratação de processamento/armazenamento de dados e de computação em nuvem, inclusive quanto aos prestadores que forneçam processamento de mensagens no SFN e no SPB. (Res. BCB 538/2025.)"
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34
+    - urn: urn:intuitem:risk:req_node:bcb-85-2021:node-42
+      assessable: true
+      depth: 2
+      ref_id: "Art. 25"
+      name: "Poder de veto/restrição do BCB"
+      description: "Considerar que o Banco Central pode, a qualquer tempo, vedar ou impor restrições à contratação de serviços de processamento/armazenamento de dados e de computação em nuvem em caso de descumprimento, estabelecendo prazo para adequação dos serviços e contratos."
+      parent_urn: urn:intuitem:risk:req_node:bcb-85-2021:node-34

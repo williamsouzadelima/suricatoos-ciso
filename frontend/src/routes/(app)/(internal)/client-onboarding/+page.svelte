@@ -25,7 +25,8 @@
 		{ key: 'cvm', label: 'CVM 21' },
 		{ key: 'susep', label: 'SUSEP 638' },
 		{ key: 'ans', label: 'ANS / TISS' },
-		{ key: 'anatel', label: 'ANATEL 740' }
+		{ key: 'anatel', label: 'ANATEL 740' },
+		{ key: 'bcb85', label: 'BCB 85 (IP)' }
 	];
 
 	const taxonomy = $derived((data.taxonomy ?? {}) as Record<string, any>);

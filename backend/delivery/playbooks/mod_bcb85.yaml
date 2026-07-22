@@ -1,0 +1,33 @@
+key: mod-bcb85
+name: "Módulo regulatório — BACEN Res. BCB 85/2021 (instituição de pagamento)"
+# Política de segurança cibernética e contratação de nuvem/processamento de dados
+# das instituições de pagamento e demais instituições autorizadas pelo BC não sujeitas
+# à Res. CMN 4.893/2021 (Res. BCB nº 85, de 08/04/2021).
+tasks:
+  - phase_key: p1_diagnostico
+    key: bcb85_diagnostico
+    name: "Diagnóstico de segurança cibernética (Res. BCB 85/2021)"
+    description: "Avaliar a aderência à Res. BCB 85/2021: política de segurança cibernética, controles mínimos, prevenção e resposta a incidentes, notificação ao Banco Central e requisitos de contratação de serviços de nuvem/processamento de dados."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: bcb85_politica_controles
+    name: "Política de segurança cibernética + controles (BCB 85)"
+    description: "Formalizar/revisar a política de segurança cibernética aprovada pela diretoria, os controles de prevenção e tratamento de incidentes e o plano de ação e resposta exigidos pela Res. BCB 85/2021, com o diretor responsável designado."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: bcb85_nuvem_continuidade
+    name: "Contratação de nuvem + continuidade (BCB 85)"
+    description: "Endereçar os requisitos de contratação de serviços de processamento/armazenamento de dados e computação em nuvem (comunicação prévia ao BC, exigências contratuais, localização de dados, subcontratação, estratégia de saída) e a continuidade e o relatório anual de incidentes."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20

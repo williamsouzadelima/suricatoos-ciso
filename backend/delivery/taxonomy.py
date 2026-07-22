@@ -20,7 +20,7 @@ TAXONOMY = {
             {"key": "bank_investment", "label": "Banco de investimento", "modules": ["lgpd", "bacen", "cvm"], "regulators": ["BACEN", "CVM"], "norm": "Res. CMN 4.893/2021"},
             {"key": "credit_union", "label": "Cooperativa de crédito", "modules": ["lgpd", "bacen"], "regulators": ["BACEN"], "norm": "Res. CMN 4.893/2021"},
             {"key": "credit_finance", "label": "Financeira / crédito (SCFI)", "modules": ["lgpd", "bacen"], "regulators": ["BACEN"], "norm": "Res. CMN 4.893/2021"},
-            {"key": "payment_institution", "label": "Instituição de pagamento / adquirência", "modules": ["lgpd", "bacen"], "regulators": ["BACEN"], "norm": "Res. BCB 85/2021"},
+            {"key": "payment_institution", "label": "Instituição de pagamento / adquirência", "modules": ["lgpd", "bcb85"], "regulators": ["BACEN"], "norm": "Res. BCB 85/2021"},
             {"key": "fintech_credit", "label": "Fintech de crédito (SCD / SEP)", "modules": ["lgpd", "bacen"], "regulators": ["BACEN"], "norm": "Res. CMN 4.656/2018 · 4.893/2021"},
             {"key": "consortium", "label": "Administradora de consórcio", "modules": ["lgpd", "bacen"], "regulators": ["BACEN"], "norm": "Lei 11.795/2008 · Res. CMN 4.893/2021"},
             {"key": "fx", "label": "Câmbio / corretora de câmbio", "modules": ["lgpd", "bacen"], "regulators": ["BACEN"], "norm": "Lei 14.286/2021 · Res. CMN 4.893/2021"},
