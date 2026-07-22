@@ -57,7 +57,7 @@ TAXONOMY = {
         "icon": "fa-microchip",
         "subsectors": [
             {"key": "saas", "label": "SaaS / software", "modules": ["lgpd"], "regulators": []},
-            {"key": "telecom", "label": "Telecom", "modules": ["lgpd"], "regulators": ["ANATEL"], "norm": "Res. ANATEL 740/2020"},
+            {"key": "telecom", "label": "Telecom", "modules": ["lgpd", "anatel"], "regulators": ["ANATEL"], "norm": "Res. ANATEL 740/2020"},
             {"key": "cloud_dc", "label": "Cloud / data center", "modules": ["lgpd"], "regulators": []},
             {"key": "platform", "label": "Marketplace / plataforma digital", "modules": ["lgpd"], "regulators": []},
             {"key": "cybersec", "label": "Cibersegurança", "modules": ["lgpd"], "regulators": []},

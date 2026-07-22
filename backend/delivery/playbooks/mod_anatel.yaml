@@ -1,0 +1,34 @@
+key: mod-anatel
+name: "Módulo regulatório — ANATEL (setor de telecomunicações)"
+# Segurança cibernética no setor de telecomunicações: Resolução ANATEL nº 740/2020,
+# que aprova o Regulamento de Segurança Cibernética Aplicada ao Setor de
+# Telecomunicações (R-Ciber) — política, medidas mínimas, gestão e notificação de
+# incidentes e requisitos aplicáveis a equipamentos/cadeia de fornecimento.
+tasks:
+  - phase_key: p1_diagnostico
+    key: anatel_diagnostico
+    name: "Diagnóstico de segurança cibernética (R-Ciber / Res. ANATEL 740/2020)"
+    description: "Avaliar a aderência ao Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações (Res. ANATEL 740/2020): política de segurança cibernética, medidas mínimas, gestão e notificação de incidentes e requisitos de equipamentos/cadeia de fornecimento."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 6
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: anatel_politica_medidas
+    name: "Política de segurança cibernética + medidas mínimas (ANATEL)"
+    description: "Formalizar/revisar a política de segurança cibernética com o conteúdo mínimo exigido pelo R-Ciber e implementar as medidas e requisitos mínimos de segurança (gestão de vulnerabilidades, boas práticas, proteção de redes) aplicáveis à prestadora."
+    priority: 1
+    effort: M
+    estimated_hours: 16
+    offset_start_days: 38
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: anatel_incidentes_cadeia
+    name: "Gestão/notificação de incidentes + cadeia de fornecimento (ANATEL)"
+    description: "Endereçar o processo de tratamento e notificação de incidentes de segurança cibernética à Anatel e os requisitos aplicáveis a equipamentos/produtos de telecomunicações e à cadeia de fornecimento, com governança e disseminação da cultura de segurança."
+    priority: 2
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 72
+    duration_days: 20

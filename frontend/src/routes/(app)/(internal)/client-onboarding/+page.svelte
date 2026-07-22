@@ -24,7 +24,8 @@
 		{ key: 'anbima', label: 'ANBIMA (Deveres Básicos)' },
 		{ key: 'cvm', label: 'CVM 21' },
 		{ key: 'susep', label: 'SUSEP 638' },
-		{ key: 'ans', label: 'ANS / TISS' }
+		{ key: 'ans', label: 'ANS / TISS' },
+		{ key: 'anatel', label: 'ANATEL 740' }
 	];
 
 	const taxonomy = $derived((data.taxonomy ?? {}) as Record<string, any>);

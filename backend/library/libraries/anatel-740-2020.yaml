@@ -1,0 +1,308 @@
+convert_library_version: 'v2 ; Compat Mode: [0] {[v2.1] (DEFAULT) Don''t use any Compatibility Mode}'
+urn: urn:intuitem:risk:library:anatel-740-2020
+locale: pt
+ref_id: ANATEL-740-2020
+name: "Res. ANATEL nº 740/2020 — R-Ciber (Segurança Cibernética no Setor de Telecomunicações)"
+description: "Requisitos avaliáveis do Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações (R-Ciber), aprovado pela Resolução ANATEL nº 740, de 21/12/2020 (texto consolidado com as alterações da Res. 767/2024). Recorte para gap-assessment de prestadoras de serviços de telecomunicações de interesse coletivo (exceto Pequeno Porte; princípios e diretrizes aplicam-se a todas). Onde a norma delega a forma e o prazo concretos ao GT-Ciber, isso é sinalizado. As definições do Art. 3 foram revogadas pela Res. 779/2025 e não constam."
+copyright: Construido a partir de conteudo publico oficial (Anatel) por Suricatoos. Requer validacao de compliance antes de uso regulatorio; prazos/formatos concretos dependem de atos do GT-Ciber.
+version: 1
+provider: Suricatoos
+packager: suricatoos
+objects:
+  framework:
+    urn: urn:intuitem:risk:framework:anatel-740-2020
+    ref_id: ANATEL-740-2020
+    name: "Res. ANATEL nº 740/2020 — R-Ciber (Segurança Cibernética no Setor de Telecomunicações)"
+    description: "Requisitos avaliáveis do Regulamento de Segurança Cibernética Aplicada ao Setor de Telecomunicações (R-Ciber), aprovado pela Resolução ANATEL nº 740, de 21/12/2020 (texto consolidado com as alterações da Res. 767/2024). Recorte para gap-assessment de prestadoras de serviços de telecomunicações de interesse coletivo (exceto Pequeno Porte; princípios e diretrizes aplicam-se a todas). Onde a norma delega a forma e o prazo concretos ao GT-Ciber, isso é sinalizado. As definições do Art. 3 foram revogadas pela Res. 779/2025 e não constam."
+    requirement_nodes:
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-0
+      assessable: false
+      depth: 1
+      ref_id: "CAP-II"
+      name: "Cap. II — Princípios e Diretrizes (piso universal — Art. 4º e 5º)"
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-1
+      assessable: true
+      depth: 2
+      ref_id: "Art. 4º"
+      name: "Princípios de segurança cibernética"
+      description: "Assegurar nas condutas e procedimentos os princípios: autenticidade, confidencialidade, disponibilidade, diversidade, integridade, interoperabilidade, prioridade, responsabilidade e transparência."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-0
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-2
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, I"
+      name: "Adoção de normas e boas práticas"
+      description: "Adotar normas/padrões (nacionais ou internacionais) e boas práticas de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-0
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-3
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, III"
+      name: "Disseminação da cultura"
+      description: "Disseminar a cultura de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-0
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-4
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, V"
+      name: "Ciclo identificar-proteger-detectar-responder-recuperar"
+      description: "Identificar, proteger, diagnosticar, responder e recuperar-se de incidentes de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-0
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-5
+      assessable: true
+      depth: 2
+      ref_id: "Art. 5º, VIII"
+      name: "Security e privacy by design"
+      description: "Incentivar security by design e privacy by design no desenvolvimento e na aquisição de produtos e serviços."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-0
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+      assessable: false
+      depth: 1
+      ref_id: "CAP-III"
+      name: "Cap. III — Política de Segurança Cibernética: governança (Art. 6º, 13, 15, 16)"
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-7
+      assessable: true
+      depth: 2
+      ref_id: "Art. 6º"
+      name: "Existência da Política"
+      description: "Elaborar, implementar e manter uma Política de Segurança Cibernética."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-8
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, I"
+      name: "Proporcionalidade da Política"
+      description: "A Política deve ser compatível com a base de clientes, a natureza e a complexidade dos produtos, serviços, atividades, processos e sistemas."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-9
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, II"
+      name: "Disseminação interna"
+      description: "Disseminar a Política aos profissionais e colaboradores das áreas afetas, resguardadas as informações sensíveis."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-10
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, III"
+      name: "Estrutura responsável e ponto focal"
+      description: "Estabelecer estrutura interna responsável, identificando pessoas/áreas e um ponto focal para urgências."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-11
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, IV"
+      name: "Diretor responsável"
+      description: "Designar diretor responsável pela Política (pode acumular funções, sem conflito de interesses)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-12
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, V"
+      name: "Aprovação pelo conselho"
+      description: "A Política deve ser aprovada pelo conselho de administração ou órgão colegiado equivalente."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-13
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, VI"
+      name: "Revisão periódica"
+      description: "Atualizar e revisar a Política periodicamente e sempre que necessário."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-14
+      assessable: true
+      depth: 2
+      ref_id: "Art. 13, VII"
+      name: "Disponibilidade à Anatel"
+      description: "Manter a Política disponível à Anatel sempre que solicitada, com documentos e comprovantes de aprovação interna."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-15
+      assessable: true
+      depth: 2
+      ref_id: "Art. 15"
+      name: "Extrato público da Política"
+      description: "Publicar na página da Internet, em linguagem compreensível, extrato da Política com as informações não sensíveis (forma definida pelo GT-Ciber)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-16
+      assessable: true
+      depth: 2
+      ref_id: "Art. 16"
+      name: "Relatório anual à Anatel"
+      description: "Apresentar à Anatel, anualmente ou sempre que solicitado, relatório de acompanhamento da execução da Política (forma definida pelo GT-Ciber)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-6
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+      assessable: false
+      depth: 1
+      ref_id: "CAP-IV"
+      name: "Cap. IV — Conteúdo mínimo da Política (Art. 14)"
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-18
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, I"
+      name: "Objetivos de segurança"
+      description: "Definir os objetivos de segurança cibernética da empresa."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-19
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, II"
+      name: "Normas e boas práticas adotadas"
+      description: "Indicar as normas/padrões (nacionais ou internacionais) e boas práticas adotadas."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-20
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, III"
+      name: "Cultura e capacitação interna"
+      description: "Prever procedimentos para disseminação da cultura e capacitação interna."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-21
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, IV"
+      name: "Conscientização dos usuários"
+      description: "Prever plano de ação para conscientização e educação dos usuários."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-22
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, V"
+      name: "Armazenamento seguro dos dados"
+      description: "Prever procedimentos de armazenamento seguro dos dados dos usuários, conforme a legislação."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-23
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, VI"
+      name: "Identificação de vulnerabilidades, ameaças e riscos"
+      description: "Prever procedimentos/controles para identificação e análise de vulnerabilidades, ameaças e riscos à segurança cibernética, às infraestruturas críticas e à continuidade dos serviços."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-24
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, VII"
+      name: "Mapeamento de riscos"
+      description: "Mapear os riscos de incidentes e eventos que afetem a segurança do armazenamento dos dados."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-25
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, VIII"
+      name: "Hierarquia das infraestruturas críticas"
+      description: "Definir a hierarquia das infraestruturas críticas de telecomunicações."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-26
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, VIII-A"
+      name: "Contratação de nuvem e processamento de dados"
+      description: "Tratar os aspectos de segurança da contratação de processamento/armazenamento de dados e computação em nuvem: capacidade do fornecedor, mapeamento de riscos, controles de mitigação e a complexidade da gestão de incidentes quando os dados estiverem no exterior."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-27
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, IX"
+      name: "Mitigação de vulnerabilidades"
+      description: "Prever procedimentos/controles para mitigar as vulnerabilidades identificadas (incisos VI, VII, VIII e VIII-A)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-28
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, X"
+      name: "Dependência de fornecedores"
+      description: "Avaliar o grau de dependência de fornecedores (inclusive de processamento/armazenamento e nuvem) e prever impactos operacionais e financeiros."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-29
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, XI"
+      name: "Plano de resposta a incidentes"
+      description: "Definir o plano de resposta a incidentes, com ações, recursos e responsabilidades."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-30
+      assessable: true
+      depth: 2
+      ref_id: "Art. 14, XII"
+      name: "Compartilhamento de informações"
+      description: "Prever procedimentos de compartilhamento de informações sobre incidentes relevantes e demais informações de segurança cibernética."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-17
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+      assessable: false
+      depth: 1
+      ref_id: "CAP-V"
+      name: "Cap. V — Medidas mínimas, incidentes e infraestruturas críticas (Art. 7º-11, 17-20, 2º-C)"
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-32
+      assessable: true
+      depth: 2
+      ref_id: "Art. 7º"
+      name: "Cadeia de fornecedores auditada"
+      description: "Usar produtos/equipamentos de fornecedores que possuam política de segurança cibernética compatível com o Regulamento e realizem auditoria independente periódica, com resultados disponíveis à Anatel quando requisitados (facultada dispensa de startups, com responsabilização da prestadora)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-33
+      assessable: true
+      depth: 2
+      ref_id: "Art. 8º"
+      name: "Troca de senha padrão em comodato"
+      description: "Alterar a configuração padrão de autenticação (senha padrão) dos equipamentos fornecidos em comodato aos usuários (rol de equipamentos e forma definidos pelo GT-Ciber)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-34
+      assessable: true
+      depth: 2
+      ref_id: "Art. 9º / 17"
+      name: "Notificação de incidentes relevantes à Anatel"
+      description: "Notificar a Anatel e comunicar às demais prestadoras e aos usuários (conforme o caso) os incidentes relevantes que afetem substancialmente a segurança das redes e dos dados, incluindo análise de causa, impacto e ações de mitigação (forma e prazo definidos por ato do GT-Ciber)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-35
+      assessable: true
+      depth: 2
+      ref_id: "Art. 2º-C"
+      name: "Notificação à Anatel espelhando dever com a ANPD"
+      description: "Notificar a Anatel sempre que for exigida a comunicação de incidente de segurança à ANPD (LGPD/regulamentação aplicável)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-36
+      assessable: true
+      depth: 2
+      ref_id: "Art. 18"
+      name: "Compartilhamento sigiloso e não discriminatório"
+      description: "Adotar procedimento de compartilhamento de informações sobre incidentes relevantes de forma sigilosa e não discriminatória, facultado o anonimato."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-37
+      assessable: true
+      depth: 2
+      ref_id: "Art. 10 / 19"
+      name: "Ciclos de avaliação de vulnerabilidades"
+      description: "Realizar ciclos de avaliação de vulnerabilidades por entidade aferidora ou empresa capacitada e independente, submetendo os resultados à Anatel de forma sigilosa (periodicidade definida pelo GT-Ciber)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-38
+      assessable: true
+      depth: 2
+      ref_id: "Art. 11 / 20"
+      name: "Informações de infraestruturas críticas"
+      description: "Enviar à Anatel informações sobre as infraestruturas críticas de telecomunicações, abrangendo no mínimo dados de rede e o mapeamento geográfico das estruturas físicas e rotas."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-31
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-39
+      assessable: false
+      depth: 1
+      ref_id: "CAP-VI"
+      name: "Cap. VI — Homologação, responsabilidade e prazos (Art. 22, 26, 27)"
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-40
+      assessable: true
+      depth: 2
+      ref_id: "Art. 22"
+      name: "Segurança na homologação de produtos"
+      description: "Considerar os aspectos de segurança cibernética na avaliação de conformidade e homologação de produtos/equipamentos de telecomunicações."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-39
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-41
+      assessable: true
+      depth: 2
+      ref_id: "Art. 26"
+      name: "Responsabilidade integral pelos ônus"
+      description: "A prestadora é integralmente responsável pelos ônus decorrentes da adoção e execução da Política e demais condutas exigidas."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-39
+    - urn: urn:intuitem:risk:req_node:anatel-740-2020:node-42
+      assessable: true
+      depth: 2
+      ref_id: "Art. 27"
+      name: "Prazo de adequação"
+      description: "Adequar-se ao Regulamento em até 180 dias da entrada em vigor (1 ano para as entidades do art. 2º-B, contado da portaria específica)."
+      parent_urn: urn:intuitem:risk:req_node:anatel-740-2020:node-39

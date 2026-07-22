@@ -287,6 +287,7 @@ class EngagementViewSet(BaseModelViewSet):
         "cvm": "cvm-21-2021",
         "susep": "susep-638-2021",
         "ans": "ans-seguranca-saude-suplementar",
+        "anatel": "anatel-740-2020",
         "lgpd": "lgpd",
     }
 
