@@ -35,7 +35,7 @@
 					</div>
 					<h1
 						class="mt-2 text-3xl font-bold leading-tight sm:text-4xl"
-						style="font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
+						style="font-family: 'Geist', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
 					>
 						{safeTranslate('engagements')}
 					</h1>
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="text-center">
-					<div class="text-5xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+					<div class="text-5xl font-bold" style="font-family: 'Geist', sans-serif;">
 						{total}
 					</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Engajamentos</div>
@@ -67,19 +67,19 @@
 			</div>
 			<div class="relative mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-4">
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{active}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{active}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Ativos</div>
 				</div>
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{onboarding}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{onboarding}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Onboarding</div>
 				</div>
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{clients}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{clients}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Clientes</div>
 				</div>
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{contractedFmt}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{contractedFmt}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Horas contratadas</div>
 				</div>
 			</div>

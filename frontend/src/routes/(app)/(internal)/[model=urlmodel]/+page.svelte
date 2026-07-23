@@ -242,7 +242,7 @@
 					</div>
 					<h1
 						class="mt-2 text-3xl font-bold leading-tight sm:text-4xl"
-						style="font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
+						style="font-family: 'Geist', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
 					>
 						Catálogos de negócio
 					</h1>
@@ -260,7 +260,7 @@
 					</div>
 				</div>
 				<div class="text-center">
-					<div class="text-5xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+					<div class="text-5xl font-bold" style="font-family: 'Geist', sans-serif;">
 						{catHero?.count ?? '—'}
 					</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Catálogos</div>
@@ -269,7 +269,7 @@
 			<div class="relative mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-4">
 				{#each [['critical', 'Crítico'], ['high', 'Alto'], ['medium', 'Médio'], ['low', 'Baixo']] as [k, lbl]}
 					<div class="bg-white/[0.04] px-4 py-3">
-						<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+						<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">
 							{catHero?.byCrit?.[k] ?? 0}
 						</div>
 						<div class="text-xs uppercase tracking-wide text-white/70">{lbl}</div>
@@ -297,7 +297,7 @@
 					</div>
 					<h1
 						class="mt-2 text-3xl font-bold leading-tight sm:text-4xl"
-						style="font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
+						style="font-family: 'Geist', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
 					>
 						Dependências tecnológicas
 					</h1>
@@ -314,7 +314,7 @@
 					</div>
 				</div>
 				<div class="text-center">
-					<div class="text-5xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+					<div class="text-5xl font-bold" style="font-family: 'Geist', sans-serif;">
 						{depHero?.count ?? '—'}
 					</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Dependências</div>
@@ -322,15 +322,15 @@
 			</div>
 			<div class="relative mt-5 grid grid-cols-1 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-3">
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{depHero?.catalogs ?? 0}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{depHero?.catalogs ?? 0}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Catálogos cobertos</div>
 				</div>
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{depHero?.withAsset ?? 0}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{depHero?.withAsset ?? 0}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Com ativo vinculado</div>
 				</div>
 				<div class="bg-white/[0.04] px-4 py-3">
-					<div class="text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">{(depHero?.count ?? 0) - (depHero?.withAsset ?? 0)}</div>
+					<div class="text-2xl font-bold" style="font-family: 'Geist', sans-serif;">{(depHero?.count ?? 0) - (depHero?.withAsset ?? 0)}</div>
 					<div class="text-xs uppercase tracking-wide text-white/70">Sem ativo</div>
 				</div>
 			</div>

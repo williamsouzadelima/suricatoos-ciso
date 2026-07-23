@@ -42,7 +42,7 @@
 					</div>
 					<h1
 						class="mt-2 text-3xl font-bold leading-tight sm:text-4xl"
-						style="font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
+						style="font-family: 'Geist', ui-sans-serif, sans-serif; letter-spacing: -0.02em;"
 					>
 						{cat?.name}
 					</h1>
@@ -79,7 +79,7 @@
 						<div class="text-xs font-semibold uppercase tracking-wide text-white/70">
 							{safeTranslate('totalLossPerHour')}
 						</div>
-						<div class="text-4xl font-bold sm:text-5xl" style="font-family: 'Bricolage Grotesque', sans-serif;">
+						<div class="text-4xl font-bold sm:text-5xl" style="font-family: 'Geist', sans-serif;">
 							{imp.total_hourly_fmt}
 						</div>
 						<div class="mt-1 text-xs text-white/60">
@@ -95,7 +95,7 @@
 							<div class="flex items-center gap-2 text-xs uppercase tracking-wide text-white/70">
 								<i class="fa-solid {p.icon}"></i>{safeTranslate(p.label)}
 							</div>
-							<div class="mt-1 text-2xl font-bold" style="font-family: 'Bricolage Grotesque', sans-serif;">
+							<div class="mt-1 text-2xl font-bold" style="font-family: 'Geist', sans-serif;">
 								{p.value}
 							</div>
 						</div>

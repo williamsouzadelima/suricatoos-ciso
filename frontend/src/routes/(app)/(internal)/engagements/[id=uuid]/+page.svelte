@@ -430,7 +430,7 @@
 		color: rgba(255, 255, 255, 0.72);
 	}
 	.st-hero-title {
-		font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+		font-family: 'Geist', ui-sans-serif, sans-serif;
 		font-size: clamp(1.9rem, 4vw, 2.7rem);
 		font-weight: 700;
 		letter-spacing: -0.02em;
@@ -512,7 +512,7 @@
 		text-align: center;
 	}
 	.st-gauge-num {
-		font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+		font-family: 'Geist', ui-sans-serif, sans-serif;
 		font-size: 1.7rem;
 		font-weight: 700;
 		line-height: 1;
@@ -538,7 +538,7 @@
 		padding: 1.05rem 1.3rem;
 	}
 	.st-kpi-num {
-		font-family: 'Bricolage Grotesque', ui-sans-serif, sans-serif;
+		font-family: 'Geist', ui-sans-serif, sans-serif;
 		font-size: 1.65rem;
 		font-weight: 700;
 		line-height: 1;
