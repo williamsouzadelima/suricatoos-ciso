@@ -15,9 +15,7 @@
 		return p === href || (href !== '/' && p.startsWith(href + '/'));
 	}
 	let classesActive = $derived((href: string) =>
-		isActive(href)
-			? 'border-primary-500 bg-primary-100-900 text-primary-800-200 font-medium'
-			: 'border-transparent hover:bg-primary-50-950 text-surface-950-50 '
+		isActive(href) ? 'ds-nav-link ds-nav-active' : 'ds-nav-link'
 	);
 </script>
 

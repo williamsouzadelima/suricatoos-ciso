@@ -17,7 +17,7 @@
 	--base-letter-spacing: 0em;
 	--heading-font-color: inherit;
 	--heading-font-color-dark: inherit;
-	--heading-font-family: 'Bricolage Grotesque', 'Geist', ui-sans-serif, sans-serif;
+	--heading-font-family: 'Space Grotesk', 'Geist', ui-sans-serif, sans-serif;
 	--heading-font-weight: bold;
 	--heading-font-style: normal;
 	--heading-letter-spacing: -0.02em;
@@ -35,7 +35,7 @@
 	--anchor-text-decoration-focus: none;
 	/* ─── layout ──────────────────────────────────────────────────── */
 	--spacing: 0.25rem;
-	--radius-base: 0.5rem;
+	--radius-base: 0.25rem;
 	--radius-container: 0.5rem;
 	--default-border-width: 1px;
 	--default-divide-width: 1px;
@@ -43,18 +43,32 @@
 	--body-background-color: var(--color-surface-50);
 	--body-background-color-dark: var(--color-surface-950);
 
+	/* ─── Clean (Arcobi) — brand shell tokens (independentes de tema).
+	   NB: nomes herdados; valores repropostos → grafite + azul + branco (sem latão). ── */
+	--ds-indigo:      #17181c;   /* grafite quase-preto: sidebar / masthead escuro */
+	--ds-indigo-deep: #0e0f12;
+	--ds-indigo-soft: #26272e;   /* item elevado no grafite */
+	--ds-brass:       #256dff;   /* ACENTO = azul elétrico (barras ativas, kicker, selos) */
+	--ds-brass-soft:  #6a9bff;
+	--ds-paper:       #ffffff;
+	--ds-card:        #ffffff;
+	--ds-spark:       #256dff;   /* foco */
+	--ds-on-indigo:       #eceef2;  /* texto claro no grafite */
+	--ds-on-indigo-muted: #9aa0aa;
+	--ds-hairline:    #e4e7ec   /* warm hairline (light) */
+
 	/* ─── primary — Electric Indigo ───────────────────────────────── */
-	--color-primary-50:   oklch(96.5% 0.025 280deg);
-	--color-primary-100:  oklch(92.0% 0.050 280deg);
-	--color-primary-200:  oklch(86.0% 0.090 280deg);
-	--color-primary-300:  oklch(79.0% 0.135 280deg);
-	--color-primary-400:  oklch(71.5% 0.210 283deg);
-	--color-primary-500:  oklch(60.0% 0.262 283deg);
-	--color-primary-600:  oklch(52.0% 0.225 280deg);
-	--color-primary-700:  oklch(44.5% 0.195 280deg);
-	--color-primary-800:  oklch(38.0% 0.165 280deg);
-	--color-primary-900:  oklch(30.5% 0.130 280deg);
-	--color-primary-950:  oklch(22.0% 0.100 280deg);
+	--color-primary-50:   oklch(96.5% 0.018 262deg);
+	--color-primary-100:  oklch(92.5% 0.038 262deg);
+	--color-primary-200:  oklch(86.5% 0.075 262deg);
+	--color-primary-300:  oklch(78.0% 0.115 263deg);
+	--color-primary-400:  oklch(68.0% 0.170 264deg);
+	--color-primary-500:  oklch(58.5% 0.225 264deg);
+	--color-primary-600:  oklch(52.5% 0.215 264deg);
+	--color-primary-700:  oklch(44.5% 0.180 264deg);
+	--color-primary-800:  oklch(37.0% 0.145 265deg);
+	--color-primary-900:  oklch(31.0% 0.115 266deg);
+	--color-primary-950:  oklch(23.0% 0.085 267deg);
 	--color-primary-contrast-dark: var(--color-primary-950);
 	--color-primary-contrast-light: var(--color-primary-50);
 	--color-primary-contrast-50:  var(--color-primary-contrast-dark);
@@ -70,17 +84,17 @@
 	--color-primary-contrast-950: var(--color-primary-contrast-light);
 
 	/* ─── secondary — Sapphire Blue ──────────────────────────────── */
-	--color-secondary-50:   oklch(97.0% 0.020 255deg);
-	--color-secondary-100:  oklch(93.0% 0.040 255deg);
-	--color-secondary-200:  oklch(87.0% 0.090 255deg);
-	--color-secondary-300:  oklch(80.0% 0.130 255deg);
-	--color-secondary-400:  oklch(70.5% 0.185 255deg);
-	--color-secondary-500:  oklch(59.0% 0.225 255deg);
-	--color-secondary-600:  oklch(52.5% 0.205 255deg);
-	--color-secondary-700:  oklch(45.5% 0.180 255deg);
-	--color-secondary-800:  oklch(38.5% 0.155 255deg);
-	--color-secondary-900:  oklch(31.5% 0.125 255deg);
-	--color-secondary-950:  oklch(23.0% 0.095 255deg);
+	--color-secondary-50:   oklch(97.0% 0.020 280deg);
+	--color-secondary-100:  oklch(93.5% 0.045 280deg);
+	--color-secondary-200:  oklch(88.0% 0.085 280deg);
+	--color-secondary-300:  oklch(80.5% 0.135 280deg);
+	--color-secondary-400:  oklch(68.5% 0.200 281deg);
+	--color-secondary-500:  oklch(56.0% 0.245 281deg);
+	--color-secondary-600:  oklch(49.5% 0.230 281deg);
+	--color-secondary-700:  oklch(43.0% 0.205 281deg);
+	--color-secondary-800:  oklch(36.5% 0.175 282deg);
+	--color-secondary-900:  oklch(30.0% 0.145 283deg);
+	--color-secondary-950:  oklch(22.5% 0.110 284deg);
 	--color-secondary-contrast-dark: var(--color-secondary-950);
 	--color-secondary-contrast-light: var(--color-secondary-50);
 	--color-secondary-contrast-50:  var(--color-secondary-contrast-dark);
@@ -96,17 +110,17 @@
 	--color-secondary-contrast-950: var(--color-secondary-contrast-light);
 
 	/* ─── tertiary — Warm Amber ───────────────────────────────────── */
-	--color-tertiary-50:   oklch(98.0% 0.020 72deg);
-	--color-tertiary-100:  oklch(95.0% 0.050 72deg);
-	--color-tertiary-200:  oklch(91.0% 0.090 72deg);
-	--color-tertiary-300:  oklch(86.0% 0.130 72deg);
-	--color-tertiary-400:  oklch(81.0% 0.165 72deg);
-	--color-tertiary-500:  oklch(74.5% 0.175 72deg);
-	--color-tertiary-600:  oklch(67.5% 0.165 72deg);
-	--color-tertiary-700:  oklch(60.5% 0.150 72deg);
-	--color-tertiary-800:  oklch(53.0% 0.130 72deg);
-	--color-tertiary-900:  oklch(44.5% 0.110 72deg);
-	--color-tertiary-950:  oklch(36.0% 0.090 72deg);
+	--color-tertiary-50:   oklch(96.5% 0.018 262deg);
+	--color-tertiary-100:  oklch(92.5% 0.038 262deg);
+	--color-tertiary-200:  oklch(86.5% 0.075 262deg);
+	--color-tertiary-300:  oklch(78.0% 0.115 263deg);
+	--color-tertiary-400:  oklch(68.0% 0.170 264deg);
+	--color-tertiary-500:  oklch(58.5% 0.225 264deg);
+	--color-tertiary-600:  oklch(52.5% 0.215 264deg);
+	--color-tertiary-700:  oklch(44.5% 0.180 264deg);
+	--color-tertiary-800:  oklch(37.0% 0.145 265deg);
+	--color-tertiary-900:  oklch(31.0% 0.115 266deg);
+	--color-tertiary-950:  oklch(23.0% 0.085 267deg);
 	--color-tertiary-contrast-dark: var(--color-tertiary-950);
 	--color-tertiary-contrast-light: var(--color-tertiary-50);
 	--color-tertiary-contrast-50:  var(--color-tertiary-contrast-dark);
@@ -122,17 +136,17 @@
 	--color-tertiary-contrast-950: var(--color-tertiary-contrast-light);
 
 	/* ─── success — Emerald ───────────────────────────────────────── */
-	--color-success-50:   oklch(97.0% 0.035 152deg);
-	--color-success-100:  oklch(93.0% 0.070 152deg);
-	--color-success-200:  oklch(88.5% 0.110 152deg);
-	--color-success-300:  oklch(83.5% 0.145 152deg);
-	--color-success-400:  oklch(78.5% 0.175 152deg);
-	--color-success-500:  oklch(73.0% 0.190 152deg);
-	--color-success-600:  oklch(66.5% 0.180 152deg);
-	--color-success-700:  oklch(60.0% 0.165 152deg);
-	--color-success-800:  oklch(53.5% 0.145 152deg);
-	--color-success-900:  oklch(46.5% 0.125 152deg);
-	--color-success-950:  oklch(39.5% 0.105 152deg);
+	--color-success-50:   oklch(96.5% 0.030 158deg);
+	--color-success-100:  oklch(92.5% 0.058 157deg);
+	--color-success-200:  oklch(86.5% 0.090 156deg);
+	--color-success-300:  oklch(78.5% 0.115 155deg);
+	--color-success-400:  oklch(67.0% 0.130 155deg);
+	--color-success-500:  oklch(58.0% 0.130 154deg);
+	--color-success-600:  oklch(51.5% 0.120 154deg);
+	--color-success-700:  oklch(45.0% 0.105 154deg);
+	--color-success-800:  oklch(38.5% 0.090 153deg);
+	--color-success-900:  oklch(32.5% 0.075 153deg);
+	--color-success-950:  oklch(27.0% 0.060 152deg);
 	--color-success-contrast-dark: var(--color-success-950);
 	--color-success-contrast-light: var(--color-success-50);
 	--color-success-contrast-50:  var(--color-success-contrast-dark);
@@ -148,17 +162,17 @@
 	--color-success-contrast-950: var(--color-success-contrast-light);
 
 	/* ─── warning — Amber ─────────────────────────────────────────── */
-	--color-warning-50:   oklch(97.5% 0.030 86deg);
-	--color-warning-100:  oklch(94.5% 0.065 86deg);
-	--color-warning-200:  oklch(91.0% 0.105 86deg);
-	--color-warning-300:  oklch(87.5% 0.135 86deg);
-	--color-warning-400:  oklch(84.0% 0.155 86deg);
-	--color-warning-500:  oklch(80.0% 0.165 86deg);
-	--color-warning-600:  oklch(73.5% 0.155 86deg);
-	--color-warning-700:  oklch(67.0% 0.145 86deg);
-	--color-warning-800:  oklch(60.0% 0.130 86deg);
-	--color-warning-900:  oklch(53.5% 0.115 86deg);
-	--color-warning-950:  oklch(46.5% 0.095 86deg);
+	--color-warning-50:   oklch(97.0% 0.030 78deg);
+	--color-warning-100:  oklch(93.5% 0.060 76deg);
+	--color-warning-200:  oklch(88.0% 0.095 74deg);
+	--color-warning-300:  oklch(82.0% 0.120 72deg);
+	--color-warning-400:  oklch(75.5% 0.135 71deg);
+	--color-warning-500:  oklch(69.0% 0.140 70deg);
+	--color-warning-600:  oklch(62.0% 0.135 69deg);
+	--color-warning-700:  oklch(54.5% 0.120 68deg);
+	--color-warning-800:  oklch(47.0% 0.105 67deg);
+	--color-warning-900:  oklch(40.5% 0.090 66deg);
+	--color-warning-950:  oklch(34.0% 0.075 65deg);
 	--color-warning-contrast-dark: var(--color-warning-950);
 	--color-warning-contrast-light: var(--color-warning-50);
 	--color-warning-contrast-50:  var(--color-warning-contrast-dark);
@@ -174,17 +188,17 @@
 	--color-warning-contrast-950: var(--color-warning-contrast-light);
 
 	/* ─── error — Crimson ─────────────────────────────────────────── */
-	--color-error-50:   oklch(95.0% 0.025 18deg);
-	--color-error-100:  oklch(89.0% 0.055 18deg);
-	--color-error-200:  oklch(82.5% 0.095 18deg);
-	--color-error-300:  oklch(76.0% 0.140 20deg);
-	--color-error-400:  oklch(70.0% 0.185 22deg);
-	--color-error-500:  oklch(62.0% 0.225 22deg);
-	--color-error-600:  oklch(56.5% 0.205 22deg);
-	--color-error-700:  oklch(51.0% 0.185 22deg);
-	--color-error-800:  oklch(45.5% 0.165 22deg);
-	--color-error-900:  oklch(40.0% 0.145 22deg);
-	--color-error-950:  oklch(33.5% 0.120 22deg);
+	--color-error-50:   oklch(95.5% 0.022 22deg);
+	--color-error-100:  oklch(90.0% 0.050 23deg);
+	--color-error-200:  oklch(83.0% 0.090 24deg);
+	--color-error-300:  oklch(74.5% 0.135 25deg);
+	--color-error-400:  oklch(64.0% 0.175 26deg);
+	--color-error-500:  oklch(55.0% 0.195 26deg);
+	--color-error-600:  oklch(50.0% 0.190 26deg);
+	--color-error-700:  oklch(44.5% 0.170 26deg);
+	--color-error-800:  oklch(39.0% 0.150 25deg);
+	--color-error-900:  oklch(34.0% 0.128 25deg);
+	--color-error-950:  oklch(28.5% 0.105 24deg);
 	--color-error-contrast-dark: var(--color-error-950);
 	--color-error-contrast-light: var(--color-error-50);
 	--color-error-contrast-50:  var(--color-error-contrast-dark);
@@ -200,17 +214,17 @@
 	--color-error-contrast-950: var(--color-error-contrast-light);
 
 	/* ─── surface — Cool Slate with indigo undertone ──────────────── */
-	--color-surface-50:   oklch(98.5% 0.003 248deg);
-	--color-surface-100:  oklch(97.0% 0.006 248deg);
-	--color-surface-200:  oklch(93.0% 0.013 255deg);
-	--color-surface-300:  oklch(87.0% 0.022 252deg);
-	--color-surface-400:  oklch(70.0% 0.040 256deg);
-	--color-surface-500:  oklch(55.0% 0.046 257deg);
-	--color-surface-600:  oklch(44.5% 0.043 257deg);
-	--color-surface-700:  oklch(37.0% 0.044 257deg);
-	--color-surface-800:  oklch(28.0% 0.041 260deg);
-	--color-surface-900:  oklch(21.0% 0.042 265deg);
-	--color-surface-950:  oklch(13.0% 0.042 265deg);
+	--color-surface-50:   oklch(100% 0 0deg);
+	--color-surface-100:  oklch(98.0% 0.002 250deg);
+	--color-surface-200:  oklch(94.5% 0.004 250deg);
+	--color-surface-300:  oklch(89.5% 0.006 252deg);
+	--color-surface-400:  oklch(77.0% 0.010 254deg);
+	--color-surface-500:  oklch(62.0% 0.012 256deg);
+	--color-surface-600:  oklch(50.0% 0.014 258deg);
+	--color-surface-700:  oklch(40.0% 0.014 260deg);
+	--color-surface-800:  oklch(27.0% 0.012 262deg);
+	--color-surface-900:  oklch(18.5% 0.010 264deg);
+	--color-surface-950:  oklch(13.0% 0.010 266deg);
 	--color-surface-contrast-dark: var(--color-surface-950);
 	--color-surface-contrast-light: var(--color-surface-50);
 	--color-surface-contrast-50:  var(--color-surface-contrast-dark);
@@ -229,28 +243,25 @@
 /* Dark mode: deepen surfaces with stronger indigo tint for premium feel.
    Primary brightens to electric indigo on dark. Semantics softened slightly. */
 [data-theme='cisotheme'].dark {
-	/* Deep indigo-black surfaces — visually distinct from grey dark themes */
-	--color-surface-700: oklch(30.0% 0.025 270deg);
-	--color-surface-800: oklch(22.0% 0.022 272deg);
-	--color-surface-900: oklch(16.0% 0.020 274deg);
-	--color-surface-950: oklch(10.5% 0.018 276deg);
+	/* Grafite/branco no escuro */
+	--color-surface-700: oklch(40.0% 0.014 260deg);
+	--color-surface-800: oklch(24.0% 0.012 262deg);
+	--color-surface-900: oklch(16.0% 0.010 264deg);
+	--color-surface-950: oklch(10.5% 0.010 266deg);
 
-	/* Electric indigo pops on dark surfaces */
 	--anchor-font-color-dark: var(--color-primary-400);
-	--color-primary-300: oklch(81.0% 0.135 280deg);
-	--color-primary-400: oklch(74.5% 0.230 283deg);
-	--color-primary-500: oklch(66.0% 0.278 283deg);
-	--color-primary-600: oklch(57.5% 0.240 280deg);
+	--color-primary-400: oklch(72.0% 0.170 264deg);
+	--color-primary-500: oklch(64.0% 0.210 264deg);
+	--color-primary-600: oklch(57.0% 0.205 264deg);
 
-	/* Amber stays warm and vivid on dark */
-	--color-tertiary-400: oklch(82.0% 0.175 72deg);
-	--color-tertiary-500: oklch(76.5% 0.185 72deg);
-	--color-tertiary-600: oklch(69.5% 0.175 72deg);
+	--color-success-500: oklch(64.0% 0.130 154deg);
+	--color-warning-500: oklch(72.0% 0.135 70deg);
+	--color-error-500:   oklch(58.0% 0.180 26deg);
 
-	/* Soften semantic ramps slightly on dark backgrounds */
-	--color-success-500: oklch(73.0% 0.155 152deg);
-	--color-success-600: oklch(66.5% 0.145 152deg);
-	--color-warning-500: oklch(80.0% 0.135 86deg);
-	--color-error-500:   oklch(62.0% 0.185 22deg);
-	--color-error-600:   oklch(56.5% 0.170 22deg);
+	/* shell escuro: grafite mantém; superfícies/hairline escurecem */
+	--ds-hairline: #2a2d33;
+	--ds-paper:    #17181c;
+	--ds-card:     #1c1e24;
 }
+
+

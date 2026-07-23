@@ -70,7 +70,7 @@
 			<i class="fa-solid fa-right-to-bracket"></i>
 		</div>
 		<h3
-			class="font-bold leading-tight tracking-tight md:text-2xl bg-linear-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent"
+			class="font-semibold leading-tight tracking-tight md:text-3xl text-primary-700-300"
 		>
 			{m.logIntoYourAccount()}
 		</h3>
@@ -115,7 +115,7 @@
 				<hr class="w-64 items-center bg-surface-200-800 border-0" />
 			</div>
 			<button
-				class="btn bg-linear-to-l from-violet-800 to-violet-400 text-white font-semibold w-1/2"
+				class="btn border border-primary-600 text-primary-700-300 hover:bg-primary-50-950 font-semibold w-1/2"
 				onclick={() =>
 					redirectToProvider(
 						data.SSOInfo.sp_entity_id,
