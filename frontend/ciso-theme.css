@@ -17,7 +17,7 @@
 	--base-letter-spacing: 0em;
 	--heading-font-color: inherit;
 	--heading-font-color-dark: inherit;
-	--heading-font-family: 'Space Grotesk', 'Geist', ui-sans-serif, sans-serif;
+	--heading-font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
 	--heading-font-weight: bold;
 	--heading-font-style: normal;
 	--heading-letter-spacing: -0.02em;
