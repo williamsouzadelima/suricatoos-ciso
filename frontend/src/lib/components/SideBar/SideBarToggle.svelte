@@ -10,7 +10,7 @@
 	}
 
 	let classesSidebarOpenButton = $derived((open: boolean) =>
-		open ? 'left-[15.3rem]' : 'rotate-180 left-5'
+		open ? 'left-[15.3rem]' : 'rotate-180 left-[3.9rem]'
 	);
 </script>
 

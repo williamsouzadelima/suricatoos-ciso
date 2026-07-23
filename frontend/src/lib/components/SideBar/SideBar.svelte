@@ -309,7 +309,30 @@
 		}
 	});
 
-	let classesSidebarOpen = $derived((open: boolean) => (open ? '' : '-ml-56 pointer-events-none'));
+	// Menu recolhido = rail de ícones: revela o conteúdo de TODOS os grupos do accordion.
+	// O atributo `hidden` do Zag tem !important de UA e não cede a CSS, então removemos via DOM;
+	// um MutationObserver reaplica se o Zag voltar a esconder. Ao expandir, restaura o `hidden`
+	// nos grupos fechados para o accordion voltar ao normal.
+	$effect(() => {
+		if (open) return;
+		const aside = document.querySelector('.sidebar aside');
+		if (!aside) return;
+		const reveal = () =>
+			aside
+				.querySelectorAll("[data-part='item-content'][hidden]")
+				.forEach((c) => c.removeAttribute('hidden'));
+		reveal();
+		const obs = new MutationObserver(reveal);
+		obs.observe(aside, { subtree: true, attributes: true, attributeFilter: ['hidden'] });
+		return () => {
+			obs.disconnect();
+			aside
+				.querySelectorAll("[data-part='item-content'][data-state='closed']")
+				.forEach((c) => c.setAttribute('hidden', ''));
+		};
+	});
+
+	let classesSidebarOpen = $derived((open: boolean) => (open ? '' : 'sb-rail'));
 </script>
 
 <div data-testid="sidebar" class="sidebar">
