@@ -1,0 +1,247 @@
+key: mod-tech-ops
+name: "Módulo técnico/operacional — stack Galápagos (OpenVAS, Wazuh, Security Onion, FortiGate, ZTNA, Defender, Kaseya, M365, GLPI, Veeam, AWS Backup)"
+# Camada técnica/operacional do plano vCISO, hands-on sobre o stack real do cliente.
+# Complementa a camada GRC (não duplica). Fases: p1_diagnostico (0-30) / p2_quickwins (31-60) / p3_execucao (61-100).
+# Mapeamento por atividade: regulatório do cliente (CVM 21 / ANBIMA / LGPD) sobre baseline técnica (CIS v8 / ISO 27001:2022 / NIST CSF 2.0).
+tasks:
+
+  # ─── 1. Gestão de Vulnerabilidades — OpenVAS (+ GLPI, Kaseya) ─────────────────
+  - phase_key: p1_diagnostico
+    key: techops_vuln_deploy
+    name: "Implantar OpenVAS + scans autenticados de baseline"
+    description: "Implantar/validar o OpenVAS, montar o inventário de alvos (a partir do GLPI/Kaseya) e executar os primeiros scans AUTENTICADOS de baseline em servidores, endpoints e serviços expostos. Mapeia: CIS 7 (Continuous Vulnerability Management) · ISO 27001:2022 A.8.8 · NIST CSF ID.RA."
+    priority: 1
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 3
+    duration_days: 12
+  - phase_key: p2_quickwins
+    key: techops_vuln_priorizacao
+    name: "Priorização de vulnerabilidades + fluxo scan→GLPI→Kaseya + SLA"
+    description: "Definir a política de priorização (CVSS + exposição e criticidade do ativo) e o fluxo de remediação: achado do OpenVAS → ticket no GLPI → correção via Kaseya RMM, com SLA por severidade e re-scan de confirmação. Mapeia: CIS 7 · ISO 27001:2022 A.8.8 · CVM 21 (gestão de riscos/vulnerabilidades)."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 34
+    duration_days: 14
+  - phase_key: p3_execucao
+    key: techops_vuln_externo
+    name: "Scans de superfície externa + relatório de tendência"
+    description: "Executar scans de rede externa/superfície de ataque e produzir relatório executivo de tendência (redução de exposição no tempo) para o comitê/portfólio. Mapeia: NIST CSF ID.RA · ANBIMA (deveres básicos de cibersegurança)."
+    priority: 2
+    effort: S
+    estimated_hours: 8
+    offset_start_days: 64
+    duration_days: 12
+  - phase_key: p3_execucao
+    key: techops_vuln_operacao
+    name: "Operação contínua de gestão de vulnerabilidades (cadências)"
+    description: "Estabelecer a operação recorrente: scan autenticado SEMANAL, scan externo MENSAL, revisão de exceções MENSAL e re-scan pós-remediação. Controle de operação contínua (cadência na descrição). Mapeia: CIS 7 · ISO 27001:2022 A.8.8."
+    priority: 2
+    effort: S
+    estimated_hours: 6
+    offset_start_days: 88
+    duration_days: 10
+
+  # ─── 2. SOC / Detecção & Monitoramento — Wazuh · Security Onion · Defender ────
+  - phase_key: p1_diagnostico
+    key: techops_soc_agentes
+    name: "Rollout Wazuh + sensores Security Onion + fontes de log"
+    description: "Implantar agentes Wazuh (servidores e endpoints) e sensores Security Onion (Zeek/Suricata) nos pontos de rede; integrar as fontes de log mínimas — FortiGate, Microsoft 365/Entra ID, Microsoft Defender e AD — para o Wazuh (SIEM único). Mapeia: CIS 8 (Audit Log Management) · ISO 27001:2022 A.8.15/A.8.16 · NIST CSF DE.CM."
+    priority: 1
+    effort: L
+    estimated_hours: 16
+    offset_start_days: 5
+    duration_days: 18
+  - phase_key: p2_quickwins
+    key: techops_soc_casosuso
+    name: "Casos de uso de detecção (MITRE ATT&CK) + tuning + alerta"
+    description: "Definir e implementar casos de uso de detecção priorizados (abuso de autenticação, exfiltração, malware, alterações privilegiadas), mapeados a MITRE ATT&CK; criar regras/decoders no Wazuh, reduzir falso-positivo e estabelecer o fluxo de alerta/on-call. Mapeia: CIS 8/13 · NIST CSF DE.AE · CVM 21 (monitoramento e controles internos)."
+    priority: 1
+    effort: L
+    estimated_hours: 18
+    offset_start_days: 33
+    duration_days: 20
+  - phase_key: p3_execucao
+    key: techops_soc_hunting
+    name: "Threat hunting + cobertura MITRE + retenção de logs (LGPD)"
+    description: "Iniciar threat hunting (Security Onion), medir a cobertura MITRE ATT&CK das detecções e definir a retenção/proteção dos logs conforme requisitos regulatórios e de proteção de dados. Mapeia: NIST CSF DE.CM · ISO 27001:2022 A.8.16 · LGPD (segurança e registro das operações de tratamento)."
+    priority: 2
+    effort: M
+    estimated_hours: 14
+    offset_start_days: 63
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: techops_soc_operacao
+    name: "Operação do SOC (triagem diária, hunting, relatório)"
+    description: "Estabelecer a operação recorrente do SOC: triagem de alertas DIÁRIA, threat hunting QUINZENAL, revisão de regras/cobertura MENSAL e relatório de SOC MENSAL para o vCISO. Controle de operação contínua. Mapeia: CIS 8 · NIST CSF DE.CM/RS.AN."
+    priority: 2
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 85
+    duration_days: 14
+
+  # ─── 3. Rede & Perímetro / Zero Trust — FortiGate · ZTNA Fortinet ─────────────
+  - phase_key: p1_diagnostico
+    key: techops_rede_fortigate
+    name: "Hardening FortiGate (políticas, segmentação, logs→Wazuh)"
+    description: "Revisar e endurecer as políticas do FortiGate: regras de firewall, segmentação de rede, MFA para administração, e envio de logs para o Wazuh; registrar a baseline de configuração. Mapeia: CIS 4/12 · ISO 27001:2022 A.8.20/A.8.22 · NIST CSF PR.AA/PR.IR."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 8
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: techops_rede_ips_ztna
+    name: "IPS/AV/web-filter + piloto ZTNA (acesso por identidade)"
+    description: "Ativar/afinar IPS, AV e web-filter no FortiGate com bloqueio geográfico/IoC; desenhar e pilotar o ZTNA Fortinet (acesso por identidade e aplicação, com MFA e verificação de postura do dispositivo). Mapeia: CIS 6/12 · NIST CSF PR.AA · CVM 21 (controle de acesso)."
+    priority: 1
+    effort: L
+    estimated_hours: 16
+    offset_start_days: 40
+    duration_days: 18
+  - phase_key: p3_execucao
+    key: techops_rede_ztna_expand
+    name: "Expansão ZTNA + micro-segmentação + operação de rede"
+    description: "Expandir o ZTNA para substituir a VPN legada, aplicar micro-segmentação aos ativos críticos e revisar a exposição externa. Operação recorrente: revisão de regras de firewall TRIMESTRAL, revisão de acessos ZTNA MENSAL e atualização de assinaturas IPS CONTÍNUA. Mapeia: ISO 27001:2022 A.8.20 · NIST CSF PR.IR · ANBIMA."
+    priority: 2
+    effort: L
+    estimated_hours: 16
+    offset_start_days: 66
+    duration_days: 20
+
+  # ─── 4. Endpoint & Gestão de Patches — Defender (EDR/ASR) · Kaseya RMM ────────
+  - phase_key: p1_diagnostico
+    key: techops_endpoint_cobertura
+    name: "Cobertura Kaseya + Microsoft Defender EDR em 100%"
+    description: "Garantir inventário e cobertura de todos os endpoints/servidores no Kaseya RMM e o Microsoft Defender EDR ativo em 100% (proteção contra adulteração e modo de bloqueio do EDR). Mapeia: CIS 1/10 · ISO 27001:2022 A.8.1 · NIST CSF ID.AM/PR.PS."
+    priority: 1
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 6
+    duration_days: 12
+  - phase_key: p2_quickwins
+    key: techops_endpoint_patch
+    name: "Baseline de hardening (CIS/ASR) + política de patch via Kaseya"
+    description: "Aplicar baseline de hardening (benchmarks CIS + regras ASR do Defender) via Kaseya e implantar a política de gestão de patches (SO + terceiros) com SLA por criticidade. Mapeia: CIS 4/7 · ISO 27001:2022 A.8.8/A.8.9 · CVM 21."
+    priority: 1
+    effort: M
+    estimated_hours: 14
+    offset_start_days: 36
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: techops_endpoint_asr_resp
+    name: "ASR completo + resposta EDR no runbook de IR + operação"
+    description: "Ativar o conjunto completo de regras ASR, integrar a resposta do EDR (isolamento de host) ao runbook de resposta a incidentes e reportar conformidade de patch. Operação recorrente: patch MENSAL (janela) + emergencial, verificação de cobertura EDR SEMANAL. Mapeia: CIS 10 · NIST CSF PR.PS/RS.MI."
+    priority: 2
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 62
+    duration_days: 16
+
+  # ─── 5. Identidade & Nuvem — Microsoft 365 / Entra ID / Defender for O365 ─────
+  - phase_key: p1_diagnostico
+    key: techops_ident_mfa_ca
+    name: "MFA 100% + Conditional Access + PIM + auditoria M365→Wazuh"
+    description: "Aplicar MFA a 100% das contas, implantar políticas de Conditional Access (bloqueio de legacy auth e por risco), revisar administradores/PIM e enviar os logs de auditoria do M365/Entra ID para o Wazuh. Mapeia: CIS 5/6 · ISO 27001:2022 A.5.15/A.8.5 · NIST CSF PR.AA · CVM 21 (controle de acesso)."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 4
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: techops_ident_securescore
+    name: "Hardening Secure Score + Defender for O365 + SPF/DKIM/DMARC"
+    description: "Elevar o Microsoft Secure Score priorizando ganhos rápidos; configurar o Defender for Office 365 (anti-phishing, Safe Links, Safe Attachments) e implantar a baseline de e-mail (SPF/DKIM/DMARC). Mapeia: CIS 9 · ISO 27001:2022 A.8.23 · ANBIMA."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 37
+    duration_days: 16
+  - phase_key: p3_execucao
+    key: techops_ident_dlp
+    name: "DLP/rotulagem de dados de clientes + revisão OAuth + operação"
+    description: "Implantar DLP e rotulagem de informação sensível (dados de clientes/investidores) e revisar compartilhamentos externos e aplicativos OAuth. Operação recorrente: revisão de acessos privilegiados MENSAL, revisão do Secure Score MENSAL e simulação de phishing TRIMESTRAL. Mapeia: CIS 3 · ISO 27001:2022 A.5.12/A.8.12 · LGPD (proteção de dados pessoais)."
+    priority: 2
+    effort: M
+    estimated_hours: 14
+    offset_start_days: 68
+    duration_days: 18
+
+  # ─── 6. Gestão de Ativos & ITSM — GLPI ───────────────────────────────────────
+  - phase_key: p1_diagnostico
+    key: techops_itsm_cmdb
+    name: "CMDB/inventário no GLPI reconciliado (Kaseya/Defender)"
+    description: "Estabelecer o CMDB/inventário no GLPI como fonte da verdade de ativos, reconciliado com Kaseya e Defender, e classificar os ativos por criticidade. Mapeia: CIS 1/2 · ISO 27001:2022 A.5.9 · NIST CSF ID.AM."
+    priority: 1
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 10
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: techops_itsm_tickets
+    name: "Fluxo de tickets de remediação + gestão de mudança (GLPI)"
+    description: "Padronizar no GLPI o fluxo de tickets de remediação (vulnerabilidade, incidente, patch), o catálogo de serviços e a gestão de mudanças, integrando com o SOC e a gestão de vulnerabilidades. Mapeia: ISO 27001:2022 A.8.32 · NIST CSF PR.PS · CVM 21 (controles internos)."
+    priority: 2
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 44
+    duration_days: 14
+  - phase_key: p3_execucao
+    key: techops_itsm_metricas
+    name: "Métricas/SLA de ITSM + operação (conciliação, mudanças)"
+    description: "Instituir métricas e SLA (MTTR de remediação, backlog) e integrar com o clock regulatório de incidentes. Operação recorrente: conciliação de inventário MENSAL, revisão de mudanças CONTÍNUA e relatório de SLA MENSAL. Mapeia: NIST CSF ID.IM · ANBIMA."
+    priority: 2
+    effort: S
+    estimated_hours: 8
+    offset_start_days: 72
+    duration_days: 16
+
+  # ─── 7. Backup, Resiliência & DR — Veeam · AWS Backup ────────────────────────
+  - phase_key: p1_diagnostico
+    key: techops_backup_321
+    name: "3-2-1 + Veeam imutável/air-gap + AWS Backup (Vault Lock)"
+    description: "Revisar/desenhar a estratégia 3-2-1: Veeam com repositório IMUTÁVEL/air-gap (VMs e cargas on-prem) e AWS Backup para as cargas na AWS com Vault Lock e cópia cross-region. Mapeia: CIS 11 (Data Recovery) · ISO 27001:2022 A.8.13 · NIST CSF PR.DS/RC.RP."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 12
+    duration_days: 14
+  - phase_key: p2_quickwins
+    key: techops_backup_rtorpo
+    name: "RTO/RPO por ativo crítico + testes de restore"
+    description: "Definir RTO/RPO por ativo crítico (Asset/Wealth Management, Investment Banking, sites), executar testes de restore amostrais e garantir cifragem e retenção adequadas. Mapeia: CIS 11 · ISO 27001:2022 A.8.13 · CVM 21 (continuidade) · LGPD (disponibilidade dos dados)."
+    priority: 1
+    effort: M
+    estimated_hours: 12
+    offset_start_days: 46
+    duration_days: 14
+  - phase_key: p3_execucao
+    key: techops_backup_drdrill
+    name: "DR drill (failover/restore ensaiado) + runbook + operação"
+    description: "Executar um DR drill (failover/restore ensaiado) alinhado ao PCN/DR do plano GRC, documentar o runbook de recuperação e reportar. Operação recorrente: verificação de jobs DIÁRIA, teste de restore MENSAL, DR drill SEMESTRAL e revisão de imutabilidade TRIMESTRAL. Mapeia: NIST CSF RC.RP · ISO 27001:2022 A.5.29/A.8.14 · ANBIMA (continuidade)."
+    priority: 1
+    effort: L
+    estimated_hours: 16
+    offset_start_days: 74
+    duration_days: 20
+
+  # ─── Transversal — integração de logs & métricas ─────────────────────────────
+  - phase_key: p2_quickwins
+    key: techops_log_integracao
+    name: "Mapa de integração de logs — todas as fontes → Wazuh"
+    description: "Consolidar todas as fontes de telemetria (FortiGate, ZTNA, M365/Entra, Defender, OpenVAS, Kaseya, AD, Veeam/AWS) no Wazuh como SIEM único, com normalização e parsing validados. Mapeia: CIS 8 · ISO 27001:2022 A.8.15 · NIST CSF DE.CM."
+    priority: 2
+    effort: M
+    estimated_hours: 10
+    offset_start_days: 50
+    duration_days: 10
+  - phase_key: p3_execucao
+    key: techops_kpis
+    name: "Painel de KPIs técnicos de segurança"
+    description: "Montar o painel de KPIs técnicos para o vCISO: MTTR de vulnerabilidades, cobertura de EDR e de MITRE ATT&CK, % de patch no prazo, sucesso de restore e evolução do Secure Score. Mapeia: NIST CSF ID.IM/GV · CVM 21 (reporte à gestão)."
+    priority: 2
+    effort: S
+    estimated_hours: 8
+    offset_start_days: 90
+    duration_days: 10
